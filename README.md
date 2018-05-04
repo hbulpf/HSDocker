@@ -1,5 +1,5 @@
 # 容器化 Hadoop Spark 实战 #
-## 一、整体思路##
+## 一、整体思路 ##
 1. 研究Springboot部署微服务的过程；研究Kubernetes（简称K8S）,Mesos调度容器的过程。最终实现基于Springboot,Docker,K8S,Mesos等开源工具快速搭建一套微服务架构的容器群。
 2. 研发基于daocloud等开源工具建立支持容器的可视化管理和监控的系统。
 3. 熟悉Hadoop，Spark集群的搭建过程，并抽取关键的配置参数作为大数据平台容器的启动参数。
