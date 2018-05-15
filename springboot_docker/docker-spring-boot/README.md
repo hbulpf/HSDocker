@@ -1,4 +1,4 @@
-#基于Docker构建发布一个简单的Spring Boot应用#
+# 基于Docker构建发布一个简单的Spring Boot应用 #
 ##环境配置##
 > * JDK1.8
 > * Maven
