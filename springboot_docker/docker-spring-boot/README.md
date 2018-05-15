@@ -97,7 +97,7 @@
 </project>
 ```
 
-注意：
+注意：  
      Maven内置变量说明： 
      ${basedir} 项目根目录  
      ${project.build.directory} 构建目录，缺省为target  
@@ -132,7 +132,7 @@
     }
 ```
 
-注意：
+注意：  
     @SpringBootApplication 表示是SpringBoot应用  
     @RestController 表示以Restful风格返回  
     @RequestMapping(value = "/",method = RequestMethod.GET) 表示请求映射
@@ -152,8 +152,8 @@
 
 ![打包项目](pics/7.jpg)
 
-说明：
-打包项目，也可以使用其他方式：在项目根目录
+说明：  
+打包项目，也可以使用其他方式：在项目根目录  
 编译生成jar包, 保存到target文件夹内
 
 ```shell
