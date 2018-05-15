@@ -1,13 +1,13 @@
-#基于Docker构建发布一个简单的Spring Boot应用
-##环境配置
+#基于Docker构建发布一个简单的Spring Boot应用#
+##环境配置##
 > * JDK1.8
 > * Maven
 > * IDEAJ
 > * CentOS7
 > * Docker1.7+
-##搭建过程
+##搭建过程##
 
-###1. 使用IDEAJ快速生成以第一个Spring Boot Demo
+###1. 使用IDEAJ快速生成以第一个Spring Boot Demo###
 	（1）新建spring demo 工程
 ![新建spring demo 工程](pics/1.jpg)
 
@@ -19,7 +19,7 @@
 	
 	（4）设置项目名称
 ![设置项目名称](pics/4.jpg)
-###2.修改pom.xml
+###2.修改pom.xml###
 修改pom.xml文件如下：
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -104,7 +104,7 @@
 > 	     ${project.packaging} 打包类型，缺省为jar
 > 	     ${project.xxx} 当前pom文件的任意节点的内容
 
-###3.编写简单的Springboot主应用HelloWorld代码
+###3.编写简单的Springboot主应用HelloWorld代码###
 修改 src\main\java\com\waylau\docker_spring_boot\DockerSpringBootApplication.java
 
 ```java
@@ -136,14 +136,15 @@
 > 	@RequestMapping(value = "/",method = RequestMethod.GET) 表示请求映射
 
 
-###4.项目运行与打包
-####（1）编译项目
+###4.项目运行与打包###
+####（1）编译项目####
 ![编译项目](pics/5.jpg)
 
-####（2）运行项目:运行项目后，在浏览器里输入：http://localhost:8080/ ，看到如下结果：
+####（2）运行项目####
+运行项目后，在浏览器里输入：http://localhost:8080/ ，看到如下结果：
 ![运行项目](pics/6.jpg)
 
-####（3）打包项目
+####（3）打包项目####
 ![打包项目](pics/7.jpg)
 
 说明：
@@ -263,7 +264,7 @@ $ docker run -p 8080:8080 -t waylau/docker-spring-boot
 
 ![运行项目](pics/6.jpg)
 
-##源码下载
+##源码下载##
 
-## 参考
+## 参考 ## 
 1. [用 Docker 构建、运行、发布一个 Spring Boot 应用. https://yq.aliyun.com/articles/47344](https://yq.aliyun.com/articles/47344)
