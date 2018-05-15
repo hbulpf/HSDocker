@@ -8,16 +8,16 @@
  ## 搭建过程 ## 
 
  ### 1. 使用IDEAJ快速生成以第一个Spring Boot Demo ###
-	（1）新建spring demo 工程
+ ####（1）新建spring demo 工程 ####
 ![新建spring demo 工程](pics/1.jpg)
 
-	（2）设置springboot demo参数
+ ####（2）设置springboot demo参数 ####
 ![设置springboot demo参数](pics/2.jpg)
 
-	（3）设置springboot项目类型
+ ####（3）设置springboot项目类型 ####
 ![设置springboot项目类型](pics/3.jpg)
 	
-	（4）设置项目名称
+ ####（4）设置项目名称 ####
 ![设置项目名称](pics/4.jpg)
  ### 2.修改pom.xml ###
 修改pom.xml文件如下：
