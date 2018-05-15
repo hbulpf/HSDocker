@@ -7,17 +7,17 @@
 > * Docker1.7+
  ## 搭建过程 ## 
 
- ### 1. 使用IDEAJ快速生成以第一个Spring Boot Demo ###
- ####（1）新建spring demo 工程 ####
+### 1. 使用IDEAJ快速生成以第一个Spring Boot Demo ###
+####（1）新建spring demo 工程 ####
 ![新建spring demo 工程](pics/1.jpg)
 
- ####（2）设置springboot demo参数 ####
+####（2）设置springboot demo参数 ####
 ![设置springboot demo参数](pics/2.jpg)
 
- ####（3）设置springboot项目类型 ####
+####（3）设置springboot项目类型 ####
 ![设置springboot项目类型](pics/3.jpg)
 	
- ####（4）设置项目名称 ####
+####（4）设置项目名称 ####
 ![设置项目名称](pics/4.jpg)
  ### 2.修改pom.xml ###
 修改pom.xml文件如下：
@@ -96,13 +96,13 @@
 ```
 
 注意：
-> 	 Maven内置变量说明： 
-> 	     ${basedir} 项目根目录
-> 	     ${project.build.directory} 构建目录，缺省为target
-> 	     ${project.build.outputDirectory} 构建过程输出目录，缺省为target/classes
-> 	     ${project.build.finalName} 产出物名称，缺省为${project.artifactId}-${project.version}
-> 	     ${project.packaging} 打包类型，缺省为jar
-> 	     ${project.xxx} 当前pom文件的任意节点的内容
+     Maven内置变量说明： 
+     ${basedir} 项目根目录
+     ${project.build.directory} 构建目录，缺省为target
+     ${project.build.outputDirectory} 构建过程输出目录，缺省为target/classes
+     ${project.build.finalName} 产出物名称，缺省为${project.artifactId}-${project.version}
+     ${project.packaging} 打包类型，缺省为jar
+     ${project.xxx} 当前pom文件的任意节点的内容
 
  ### 3.编写简单的Springboot主应用HelloWorld代码  ###
 修改 src\main\java\com\waylau\docker_spring_boot\DockerSpringBootApplication.java
@@ -131,9 +131,9 @@
 ```
 
 注意：
->     @SpringBootApplication 表示是SpringBoot应用,
->     @RestController 表示以Restful风格返回,
->     @RequestMapping(value = "/",method = RequestMethod.GET) 表示请求映射
+    @SpringBootApplication 表示是SpringBoot应用,
+    @RestController 表示以Restful风格返回,
+    @RequestMapping(value = "/",method = RequestMethod.GET) 表示请求映射
 
 
 ### 4.项目运行与打包  ###
