@@ -8,18 +8,20 @@
  ## 搭建过程 ## 
 
 ### 1. 使用IDEAJ快速生成以第一个Spring Boot Demo ###
-####（1）新建spring demo 工程 ####
+
+#### （1）新建spring demo 工程  ####
 ![新建spring demo 工程](pics/1.jpg)
 
-####（2）设置springboot demo参数 ####
+#### （2）设置springboot demo参数  ####
 ![设置springboot demo参数](pics/2.jpg)
 
-####（3）设置springboot项目类型 ####
+#### （3）设置springboot项目类型  ####
 ![设置springboot项目类型](pics/3.jpg)
 	
-####（4）设置项目名称 ####
+#### （4）设置项目名称  ####
 ![设置项目名称](pics/4.jpg)
- ### 2.修改pom.xml ###
+
+### 2.修改pom.xml ###
 修改pom.xml文件如下：
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -97,11 +99,11 @@
 
 注意：
      Maven内置变量说明： 
-     ${basedir} 项目根目录
-     ${project.build.directory} 构建目录，缺省为target
-     ${project.build.outputDirectory} 构建过程输出目录，缺省为target/classes
-     ${project.build.finalName} 产出物名称，缺省为${project.artifactId}-${project.version}
-     ${project.packaging} 打包类型，缺省为jar
+     ${basedir} 项目根目录  
+     ${project.build.directory} 构建目录，缺省为target  
+     ${project.build.outputDirectory} 构建过程输出目录，缺省为target/classes  
+     ${project.build.finalName} 产出物名称，缺省为${project.artifactId}-${project.version}  
+     ${project.packaging} 打包类型，缺省为jar  
      ${project.xxx} 当前pom文件的任意节点的内容
 
  ### 3.编写简单的Springboot主应用HelloWorld代码  ###
@@ -131,8 +133,8 @@
 ```
 
 注意：
-    @SpringBootApplication 表示是SpringBoot应用,
-    @RestController 表示以Restful风格返回,
+    @SpringBootApplication 表示是SpringBoot应用  
+    @RestController 表示以Restful风格返回  
     @RequestMapping(value = "/",method = RequestMethod.GET) 表示请求映射
 
 
@@ -165,8 +167,7 @@ $ java -jar target/docker-spring-boot-1.0.0.jar
 ```
 
 ```shell
->>
-  .   ____          _            __ _ _
+   ____          _            __ _ _
  /\\ / __
 _'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
@@ -201,7 +202,7 @@ _'_ __ _ _(_)_ __  __ _ \ \ \ \
 2018-05-14 00:18:50.775  INFO 4152 --- [           main] c.w.d.DockerSpringBootApplication        : Started DockerSpringBootApplication in 5.5 seconds (JVM running for 6.762)
 ```
 
- ## #5.使用docker容器部署项目
+### 5.使用docker容器部署项目 ###
 创建文件 `src/main/docker/Dockerfile`:
 
 ```dockerfile
@@ -228,7 +229,6 @@ $ docker run -p 8080:8080 -t waylau/docker-spring-boot
 ```
 
 ```shell
->>
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
