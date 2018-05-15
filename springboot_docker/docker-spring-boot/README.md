@@ -131,20 +131,23 @@
 ```
 
 注意：
-> 	@SpringBootApplication 表示是SpringBoot应用,
->   @RestController 表示以Restful风格返回,
-> 	@RequestMapping(value = "/",method = RequestMethod.GET) 表示请求映射
+>     @SpringBootApplication 表示是SpringBoot应用,
+>     @RestController 表示以Restful风格返回,
+>     @RequestMapping(value = "/",method = RequestMethod.GET) 表示请求映射
 
 
 ### 4.项目运行与打包  ###
 #### （1）编译项目 #### 
+
 ![编译项目](pics/5.jpg)
 
 #### （2）运行项目  #### 
 运行项目后，在浏览器里输入：http://localhost:8080/ ，看到如下结果：
+
 ![运行项目](pics/6.jpg)
 
 #### （3）打包项目  #### 
+
 ![打包项目](pics/7.jpg)
 
 说明：
@@ -260,6 +263,7 @@ $ docker run -p 8080:8080 -t waylau/docker-spring-boot
 2018-05-14 00:18:50.759  INFO 4152 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2018-05-14 00:18:50.775  INFO 4152 --- [           main] c.w.d.DockerSpringBootApplication        : Started DockerSpringBootApplication in 5.5 seconds (JVM running for 6.762)
 ```
+
 在本地浏览器中输入 http://localhost:8080/ 可以看到运行效果
 
 ![运行项目](pics/6.jpg)
