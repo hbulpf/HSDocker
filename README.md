@@ -1,4 +1,4 @@
-﻿# 容器化 Hadoop Spark 实战 #
+# 容器化 Hadoop Spark 实战 #
 ## 一、整体思路 ##
 1. 研究Springboot部署微服务的过程；研究Kubernetes（简称K8S）,Mesos调度容器的过程。最终实现基于Springboot,Docker,K8S,Mesos等开源工具快速搭建一套微服务架构的容器群。
 2. 研发基于daocloud等开源工具建立支持容器的可视化管理和监控的系统。
@@ -24,8 +24,11 @@
 
 ## 四、 容器化大数据平台实验 ###
 
-@[https://github.com/hbulpf/HSDocker](https://github.com/hbulpf/HSDocker)
 
-## contributors
 
-@**chellyk**:[https://github.com/chellyk](https://github.com/chellyk)
+## 贡献者 ##
+
+@**chellyk**:[https://github.com/chellyk](https://github.com/chellyk) 
+@**RunAtWorld**:[http://www.github.com/RunAtWorld](http://www.github.com/RunAtWorld)
+
+**github :** [https://github.com/hbulpf/HSDocker](https://github.com/hbulpf/HSDocker)
