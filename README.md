@@ -84,6 +84,6 @@
 
 ## 贡献者 ##
 
-@[**chellyk**](https://github.com/chellyk) @[**RunAtWorld**](http://www.github.com/RunAtWorld)
+@[**chellyk**](https://github.com/chellyk) @[**RunAtWorld**](http://www.github.com/RunAtWorld) @[**icepoint666**](https://www.github.com/icepoint666)
 
 **Find Us on Github :** [https://github.com/hbulpf/HSDocker](https://github.com/hbulpf/HSDocker)
