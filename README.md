@@ -81,6 +81,13 @@
    
 	> [https://github.com/big-data-europe](https://github.com/big-data-europe)  
 	> Integrating Big Data, software & communicaties for addressing Europe's societal challenges
+	
+-   容器调度相关 
+	* **[kubernetes](https://https://github.com/kubernetes/kubernetes)**  
+
+- 	容器化机器学习 
+   * **[kubeflow](https://github.com/kubeflow/kubeflow)**  
+
 
 ## 贡献者 ##
 
