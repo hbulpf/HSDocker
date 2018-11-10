@@ -1,0 +1,266 @@
+﻿# Docker-hadoop-demo2解析
+
+## Dockerfile解析
+了解其一键自动部署hadoop集群的过程，除了几个脚本文件，首先我们应理解Dockerfile中的镜像定制内容。
+
+```
+FROM ubuntu:14.04
+
+MAINTAINER KiwenLau <421372907@qq.com>
+
+WORKDIR /root
+
+# install openssh-server, openjdk and wget
+RUN apt-get update && apt-get install -y openssh-server openjdk-7-jdk wget
+
+# install hadoop 2.7.2
+RUN wget https://github.com/kiwenlau/compile-hadoop/releases/download/2.7.2/hadoop-2.7.2.tar.gz && \
+    tar -xzvf hadoop-2.7.2.tar.gz && \
+    mv hadoop-2.7.2 /usr/local/hadoop && \
+    rm hadoop-2.7.2.tar.gz
+
+# set environment variable
+ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 
+ENV HADOOP_HOME=/usr/local/hadoop 
+ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin 
+
+# ssh without key
+RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+RUN mkdir -p ~/hdfs/namenode && \ 
+    mkdir -p ~/hdfs/datanode && \
+    mkdir $HADOOP_HOME/logs
+
+COPY config/* /tmp/
+
+RUN mv /tmp/ssh_config ~/.ssh/config && \
+    mv /tmp/hadoop-env.sh /usr/local/hadoop/etc/hadoop/hadoop-env.sh && \
+    mv /tmp/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml && \ 
+    mv /tmp/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml && \
+    mv /tmp/mapred-site.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml && \
+    mv /tmp/yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml && \
+    mv /tmp/slaves $HADOOP_HOME/etc/hadoop/slaves && \
+    mv /tmp/start-hadoop.sh ~/start-hadoop.sh && \
+    mv /tmp/run-wordcount.sh ~/run-wordcount.sh
+
+RUN chmod +x ~/start-hadoop.sh && \
+    chmod +x ~/run-wordcount.sh && \
+    chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \
+    chmod +x $HADOOP_HOME/sbin/start-yarn.sh 
+
+# format namenode
+RUN /usr/local/hadoop/bin/hdfs namenode -format
+
+CMD [ "sh", "-c", "service ssh start; bash"]
+
+```
+
+**FROM** : 指定底层镜像，这里使用的是ubuntu:14.04
+
+**WORKDIR** : 指定工作目录。（Dockerfile构建中，每一个Run都是启动一个容器，执行命令，每一层之间互不影响。使用 WORKDIR 指令可以指定工作目录（或者称为当前目录），以后各层的当前目录就被改为指定的目录，如该目录不存在，WORKDIR 会帮你建立目录）
+
+前两层**RUN**: 分别是下载安装jdk，从自己的github仓库中拉取hadoop安装包并解压。
+
+**ENV**:配置环境变量。
+
+第三层**RUN**:免密ssh
+```
+RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+**ssh-keygen -t rsa -f ~/.ssh/id_rsa -P ''**  
+**ssh-keygen** 用于生成密钥  
+**-t** :指定要创建的密钥类型，这里是rsa  
+**-f** :指定用来保存密钥的文件名,这里其实没有必要，ssh-keygen -t rsa后本来就会生成公钥存储于~/.ssh/id_rsa中。  
+**-P** :-P表示密码，-P '' 就表示空密码，也可以不用-P参数，这样就要三次回车，用-P就一次回车
+
+**cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys**  
+**cat** 不多说了，实际就是查看刚生成的公钥  
+重点提下 **“>>"** 将内容追加至文件中，实际就是我们通过cat查看刚生成的密钥，之后通过>>将密钥追加保存于authorized_keys文件中。
+
+下一层**RUN**: 创建文件夹，实际上是创建对应于hadoop配置文件中指定的工作目录，这里创建不创建没有影响。
+
+**COPY**和之后的两层**RUN**: 要启动hadoop集群，在下载完镜像后，有一步操作是:
+
+    git clone https://github.com/kiwenlau/hadoop-cluster-docker
+    
+实际上下载的就是各项启动脚本和Dockerfile，而**config**文件夹中的就是hadoop所需的配置文件。
+
+这里稍微提下**COPY**：COPY 指令将从构建上下文目录中 <源路径> 的文件/目录复制到新的一层的镜像内的 <目标路径> 位置。在这里**源路径**是相对于构建镜像的目录。**目标路径**可以是容器内的绝对路径，也可以是相对于工作目录的相对路径。
+
+在这里我们将**config**文件下的全部配置文件及两个hadoop使用的脚本拷贝至容器**/tmp/**目录下。
+
+后面的两层**RUN**不多赘述：转移hadoop配置文件到对应路径下，转移脚本到/root目录下。给脚本文件添加权限。
+
+最后一层**RUN**：hadoop格式化操作，启动hadoop前必须的步骤。
+
+**总结一下：这一系列的操作实际上都是为了完成hadoop的部署（包装安装，配置文件及格式化），免密ssh登录。**
+
+##脚本解析
+##start-container.sh
+```
+#!/bin/bash
+
+# the default node number is 3
+N=${1:-3}
+
+
+# start hadoop master container
+sudo docker rm -f hadoop-master &> /dev/null
+echo "start hadoop-master container..."
+sudo docker run -itd \
+                --net=hadoop \
+                -p 50070:50070 \
+                -p 8088:8088 \
+                --name hadoop-master \
+                --hostname hadoop-master \
+                kiwenlau/hadoop:1.0 &> /dev/null
+
+
+# start hadoop slave container
+i=1
+while [ $i -lt $N ]
+do
+	sudo docker rm -f hadoop-slave$i &> /dev/null
+	echo "start hadoop-slave$i container..."
+	sudo docker run -itd \
+	                --net=hadoop \
+	                --name hadoop-slave$i \
+	                --hostname hadoop-slave$i \
+	                kiwenlau/hadoop:1.0 &> /dev/null
+	i=$(( $i + 1 ))
+done 
+
+# get into hadoop master container
+sudo docker exec -it hadoop-master bash
+
+```
+
+脚本语法不多提，重点是理解脚本运行的每一步。
+
+首先对于master容器，开始先**docker rm -f**删除正在运行的master容器确保运行脚本时不会重复生成容器。
+
+这里复习下**docker run**运行时的各项参数：
+**-itd**: **-i** 以交互模式运行容器，通常与**-t**同时使用;**-t**为容器重新分配一个伪输入终端，通常与**-i**同时使用；**-d**后台运行容器，并返回容器ID；
+
+**--net**: **--net="bridge"**: 指定容器的网络连接类型，支持 bridge/host/none/container: 四种类型
+
+容器中可以运行一些网络应用，要让外部也可以访问这些应用，可以通过 **-P** 或 **-p** 参数来指定端口映射.  
+**-P(大写）**:使用**-P**标记时，Docker会随机映射一个 49000~49900 的端口到内部容器开放的网络端口  
+**-p（小写）**:**-p**则可以指定要映射的端口，并且，在一个指定端口上只可以绑定一个容器。支持的格式有 **ip:hostPort:containerPort** | **ip::containerPort** | **hostPort:containerPort**
+
+**ip:hostPort:containerPort** ： 映射到指定地址的指定端口  
+**ip::containerPort** ：映射到指定地址的任意端口  
+**hostPort:containerPort** ： 映射所有接口地址  
+在脚本中是 **-p 50070:50070**   **-p 8088:8088** 即将本地的50070端口映射到容器的50070端口，将本地的8088端口映射到容器的8088端口供外部访问。
+
+**--name** 指定容器名  
+**--hostname** 指定主机名  
+最后加上镜像名：kiwenlau/hadoop:1.0
+
+对于Slave容器，其实也类似。如果有正在运行的Slave容器，先删除，再根据N值的大小循环创建，因为不需要供外部访问，所以没有创建Master容器时的端口映射部分。
+
+最后**sudo docker exec -it hadoop-master bash**进入Master容器内部，准备接下来的启动hadoop脚本。
+
+##resize-cluster.sh
+重新设定hadoop集群大小的启动脚本  
+把握关键点，其实改变hadoop集群大小最关键的部分只是更新**slaves**文件的内容(slaves文件中保存各个datanode的主机名）
+```
+#!/bin/bash
+
+# N is the node number of hadoop cluster
+N=$1
+
+if [ $# = 0 ]
+then
+	echo "Please specify the node number of hadoop cluster!"
+	exit 1
+fi
+
+# change slaves file
+i=1
+rm config/slaves
+while [ $i -lt $N ]
+do
+	echo "hadoop-slave$i" >> config/slaves
+	((i++))
+done 
+
+echo ""
+
+echo -e "\nbuild docker hadoop image\n"
+
+# rebuild kiwenlau/hadoop image
+sudo docker build -t kiwenlau/hadoop:1.0 .
+
+echo ""
+```
+
+重点看这部分内容
+```
+# change slaves file
+i=1
+rm config/slaves
+while [ $i -lt $N ]
+do
+    echo "hadoop-slave$i" >> config/slaves
+    ((i++))
+done 
+```
+```rm config/slaves``` 删除原有的slaves文件
+```echo "hadoop-slave$i" >> config/slaves``` 根据N的大小将主机名写入新的slaves文件中
+
+例如我们如果指定N值为5  ``sudo ./resize-cluster.sh 5``
+节点数为5,slave节点占4个，我们要做的就是将hadoop-slave1,hadoop-slave2,hadoop-slave3,hadoop-slave4 写入slaves文件中
+
+最后需要rebuild一次镜像，因为Dockerfile中包含将配置文件拷贝至容器内部的步骤
+
+##start-hadoop.sh
+
+    #!/bin/bash
+    
+    echo -e "\n"
+        
+    $HADOOP_HOME/sbin/start-dfs.sh
+        
+    echo -e "\n"
+        
+    $HADOOP_HOME/sbin/start-yarn.sh
+        
+    echo -e "\n"
+
+到指定路径下启动HDFS和yarn，直接启动同路径下的start-all.sh应该也是可以的
+
+##run-worldcount.sh
+    #!/bin/bash
+    
+    # test the hadoop cluster by running wordcount 
+    
+    # create input files 
+    mkdir input
+    echo "Hello Docker" >input/file2.txt
+    echo "Hello Hadoop" >input/file1.txt
+    
+    # create input directory on HDFS
+    hadoop fs -mkdir -p input
+    
+    # put input files to HDFS
+    hdfs dfs -put ./input/* input
+    
+    # run wordcount 
+    hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/sources/hadoop-mapreduce-examples-2.7.2-sources.jar org.apache.hadoop.examples.WordCount input output
+    
+    # print the input files
+    echo -e "\ninput file1.txt:"
+    hdfs dfs -cat input/file1.txt
+    
+    echo -e "\ninput file2.txt:"
+    hdfs dfs -cat input/file2.txt
+    
+    # print the output of wordcount
+    echo -e "\nwordcount output:"
+    hdfs dfs -cat output/part-r-00000
+
+对应注释其实很好理解，创建测试文件file1,file2。在HDFS上创建好input文件夹，把测试文件拷贝过去。使用mapreduce, wordcount是自带的测试实例，运行对应jar包， input作为输入， 输出结果存储于**output/part-r-00000**。
