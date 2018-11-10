@@ -1,1 +1,0 @@
-KUBE_PROXY_ARGS="--master=http://52.83.92.216:8080 --logtostderr=false --log-dir=/var/log/kubernetes --v=2"
