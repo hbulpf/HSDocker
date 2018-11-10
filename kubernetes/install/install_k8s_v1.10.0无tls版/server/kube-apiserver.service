@@ -1,0 +1,15 @@
+[Unit]
+Description=Kube API  Server
+After=etcd.service
+Wants=etcd.service
+ 
+[Service]
+Type=notify
+EnvironmentFile=/etc/kubernetes/apiserver
+ExecStart=/usr/local/bin/kube-apiserver $KUBE_API_ARGS
+Restart=on-failure
+LimitNOFILE=65536
+ 
+[Install]
+WantedBy=multi-user.target
+

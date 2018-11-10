@@ -1,0 +1,1 @@
+KUBE_SCHEDULER_ARGS="--master=http://127.0.0.1:8080 --logtostderr=false --log-dir=/var/log/kubernetes --v=2"

@@ -1,0 +1,1 @@
+KUBE_API_ARGS="--etcd-servers=http://127.0.0.1:2379 --insecure-bind-address=0.0.0.0 --insecure-port=8080 --service-cluster-ip-range=170.170.0.0/16 --service-node-port-range=1-65535 --admission-control=NamespaceLifecycle,LimitRanger,ResourceQuota --logtostderr=false --log-dir=/home/k8s/log/kubenetes --v=2"
