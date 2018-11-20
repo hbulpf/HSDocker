@@ -1,5 +1,56 @@
-﻿# 实验归纳  
+﻿# 大数据系列实验
 
+### 1. 实验开发环境 
+1. jdk1.7.0_79 
+1. hadoop2.7.1 
+1. Eclipse oxegen
+2. eclipse-hadoop-plugin（基于Eclipse的Hadoop插件）
+1. bigdata相关插件（包含Hadoop、HBase、 Hive、Spark、Scala、Storm、ZooKeeper、Redis、MongoDB、LevelDB在内的大数据组件。）
+>     下载地址： 
+>     链接：https://pan.baidu.com/s/1OriXAXZENZyO-YdFrJrFEw
+>     密码：kn7j
+
+### 2. 实验列表
+1. [实验1_基本操作](./实验1_基本操作.md)
+1. [实验2_HDFS_部署HDFS](./实验2_HDFS_部署HDFS.md)
+1. [实验3_HDFS_读写HDFS文件](./实验3_HDFS_读写HDFS文件.md)
+1. [实验4_YARN_部署YARN集群](./实验4_YARN_部署YARN集群.md)
+1. [实验5_MapReduce_单词计数](./实验5_MapReduce_单词计数.md)
+1. [实验6_MapReduce_二次排序](./实验6_MapReduce_二次排序.md)
+1. [实验8_MapReduce_Join操作](./实验8_MapReduce_Join操作.md)
+1. [实验9_MapReduce_分布式缓存](./实验9_MapReduce_分布式缓存.md)
+1. [实验10_Hive_部署Hive](./实验10_Hive_部署Hive.md)
+1. [实验11_Hive_新建Hive表](./实验11_Hive_新建Hive表.md)
+1. [实验12_Hive_Hive分区](./实验12_Hive_Hive分区.md)
+1. [实验13_Spark_部署Spark集群](./实验13_Spark_部署Spark集群.md)
+1. [实验14_Spark_SparkWordCount](./实验14_Spark_SparkWordCount.md)
+1. [实验15_Spark_RDD综合实验](./实验15_Spark_RDD综合实验.md)
+1. [实验16_Spark_Spark综例](./实验16_Spark_Spark综例.md)
+1. [实验17_Spark_Spark_SQL](./实验17_Spark_Spark_SQL.md)
+1. [实验18_Spark_Spark_Streaming](./实验18_Spark_Spark_Streaming.md)
+1. [实验19_Spark_GraphX](./实验19_Spark_GraphX.md)
+1. [实验20_部署ZooKeeper](./实验20_部署ZooKeeper.md)
+1. [实验21_ZooKeeper进程协作](./实验21_ZooKeeper进程协作.md)
+1. [实验22_部署HBase](./实验22_部署HBase.md)
+1. [实验23_新建HBase表](./实验23_新建HBase表.md)
+1. [实验24_部署Storm](./实验24_部署Storm.md)
+1. [实验25_实时WordCountTopology](./实验25_实时WordCountTopology.md)
+1. [实验26_文件数据Flume至HDFS](./实验26_文件数据Flume至HDFS.md)
+1. [实验27_Kafka订阅推送示例](./实验27_Kafka订阅推送示例.md)
+1. [实验28_Pig版WordCount](./实验28_Pig版WordCount.md)
+1. [实验29_Redis部署与简单使用](./实验29_Redis部署与简单使用.md)
+1. [实验30_MapReduce与Spark读写Redis](./实验30_MapReduce与Spark读写Redis.md)
+1. [实验31_MongoDB](./实验31_MongoDB.md)
+1. [实验32_LevelDB读写](./实验32_LevelDB读写.md)
+1. [实验33?Mahout_K-means](./实验33?Mahout_K-means.md)
+1. [实验34_Spark实现K-Means](./实验34_Spark实现K-Means.md)
+1. [实验35_Spark实现SVM](./实验35_Spark实现SVM.md)
+1. [实验36_Spark实现FP-Growth](./实验36_Spark实现FP-Growth.md)
+1. [实验39_推荐系统](./实验39_推荐系统.md)
+1. [实验40_综合实战环境大数据](./实验40_综合实战环境大数据.md)
+1. [实验42_贷款风险评估](./实验42_贷款风险评估.md)
+
+# 实验过程中的问题
 ## 1.实验镜像使用
 实验过程中主要制作了两个镜像:  
 
@@ -23,15 +74,15 @@ demo_4 storm镜像:
 实验过程中使用过的hadoop生态圈的组件像是Hive,HBase还没有集成进这些镜像里，到时若需要使用可改进这些镜像。  
 
 ## 2.提醒  
-我个人在实验过程中是demo2,demo3,demo4镜像都有拿来做实验的。  
+在实验过程中是demo2,demo3,demo4镜像都有拿来做实验的。  
 
-实验1~12 当时我都是在demo2上完成的，但是demo2 JDK版本比较旧，然后也没安装vim(vi特别不好用), 推荐的话还是用demo3去完成实验。  
+实验1~12 当时都是在demo2上完成的，但是demo2 JDK版本比较旧，然后也没安装vim(vi特别不好用), 推荐的话还是用demo3去完成实验。  
 
 实验13~19 做到这里要频繁使用spark，就编写了Dockerfile 写了demo3的镜像，可以直接用。  
 
 实验24~25 用到storm，可以直接使用demo4完成实验。  
 
-其他一些部件，像是Hive,HBase,Flume,Karfa,Pig,MongoDB等我都只是在demo3镜像创建的集群的master节点上安装并实验了一遍，并没有保留或写成Dockerfile(之后如果有需要的话可以完善Dockerfile)。
+其他一些部件，像是Hive,HBase,Flume,Karfa,Pig,MongoDB等都只是在demo3镜像创建的集群的master节点上安装并实验了一遍，并没有保留或写成Dockerfile(之后如果有需要的话可以完善Dockerfile)。
 
 ## 3.实验中遇到的问题  
 
@@ -89,11 +140,13 @@ Redis实验，安装需要用make命令进行编译。实验不复杂。
 ### **实验33~36:**  
 都涉及到机器学习。
 实验33 Mahout 是通过hadoop进行一些机器学习任务。 
-实验34~36 是spark 自带的机器学习库Mllib，机器学习部分我了解得不多，所以只是按实验操作实验了一遍，具体效果不清楚。  
+实验34~36 是spark 自带的机器学习库Mllib，机器学习部分了解得不多，所以只是按实验操作实验了一遍，具体效果不清楚。  
 
+### **实验37~42:**  
+综合试验
 
-
-
+----
+>以上实验都在容器中进行
 
 
 
