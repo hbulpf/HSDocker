@@ -19,6 +19,10 @@
 1. [使用Hadoop-2.7.2在Docker中部署Hadoop集群](./hadoopspark/demo_1-HadoopClusterRaw)
 2. [基于Docker搭建定制版Hadoop集群](./hadoopspark/demo_2-docker-cluster)
 
+
+### 4. Hadoop on Kubernetes
+1. [将hadoop集群部署到 Kubernetes 上](./apps/hadoop_on_k8s/)
+
 ## 四、 深度学习
 ### 1. 基本实验
 ### 2. 容器化深度学习
@@ -47,6 +51,6 @@
 
 ## 贡献者
 
-@[**chellyk**](https://github.com/chellyk) @[**RunAtWorld**](http://www.github.com/RunAtWorld) @[**icepoint666**](https://www.github.com/icepoint666) @[**Missice**](https://github.com/Missice)  
+@[**chellyk**](https://github.com/chellyk) @[**RunAtWorld**](http://www.github.com/RunAtWorld) @[**icepoint666**](https://www.github.com/icepoint666) 
 GitHub : [https://github.com/hbulpf/HSDocker](https://github.com/hbulpf/HSDocker)
 
