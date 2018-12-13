@@ -54,7 +54,25 @@ scp /etc/hosts hadoop-slave-1:/etc/hosts
 hadoop-slave-0
 hadoop-slave-1 
 ```
-6. 在在hadoop-master所在的 pod启动hadoop集群
+6. 在hadoop-master所在的 pod启动hadoop集群
 ```
 ./start-hadoop.sh
 ```  
+
+## 创建Spark集群  
+1. 重复创建hadoop集群里的1~5步骤  
+2. 启动HDFS（spark的存储选择使用HDFS）  
+```
+/usr/local/hadoop/sbin/start-dfs.sh
+```  
+3. 修改hadoop-master所在的pod的`/usr/local/spark/conf/slaves`文件,将内容改为  
+```
+hadoop-slave-0
+hadoop-slave-1 
+```  
+4. 在master所在pod启动spark集群  
+```
+./start-spark.sh
+```  
+5. Spark的具体使用请见大数据实验13~19.
+
