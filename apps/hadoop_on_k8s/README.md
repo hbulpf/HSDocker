@@ -74,5 +74,5 @@ hadoop-slave-1
 ```
 ./start-spark.sh
 ```  
-5. Spark的具体使用请见[大数据实验](hsdocker/experiments)
+5. Spark的具体使用请见[大数据实验](../experiments)
 
