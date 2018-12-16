@@ -34,5 +34,5 @@ spec:
     spec:
       containers:
         - name: hadoop-slave
-          image: 192.168.56.1:5000/chellyk-spark:latest
+          image: 192.168.56.1:5000/chellyk-hadoop:latest
           imagePullPolicy: Always
