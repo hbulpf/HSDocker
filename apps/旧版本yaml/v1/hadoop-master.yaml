@@ -7,5 +7,5 @@ metadata:
 spec:
   containers:
     - name: hadoop-master
-      image: chellyk-spark2
+      image: 192.168.56.1:5000/chellyk-hadoop:latest
       imagePullPolicy: Never
