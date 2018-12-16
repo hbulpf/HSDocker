@@ -41,4 +41,4 @@ RUN chmod +x ~/start-hadoop.sh && \
 # format namenode
 RUN /usr/local/hadoop/bin/hdfs namenode -format
 
-CMD [ "sh", "-c", "service ssh start; bash"]
+CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
