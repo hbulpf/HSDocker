@@ -14,11 +14,11 @@ docker pull 192.168.56.1:5000/chellyk-spark:latest
 
 ## 创建Spark集群  
 在k8s集群中,使用 yaml 文件创建集群
-1. 使用 [spark-master.yaml](./spark-master.yaml) 创建 hadoop-master 节点
+1. 使用 [spark-master.yaml](./spark-master.yaml) 创建 spark-master 节点
 ```
 kubectl create -f ./spark-master.yaml
 ```
-2. 使用 [spark-slave.yaml](./spark-slave.yaml) 创建 hadoop-slave 节点
+2. 使用 [spark-slave.yaml](./spark-slave.yaml) 创建 spark-slave 节点
 ```
 kubectl create -f ./spark-slave.yaml  
 ```
