@@ -9,7 +9,7 @@ spec:
     - port: 50070
       name: name-node
     - port: 8080
-     name: spark-master
+      name: spark-master
   selector:
     app: hadoop-master
   type: NodePort
