@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: hadoop-slave1
-      image: chellyk-spark2
+      image: 192.168.56.1:5000/chellyk-hadoop:latest
       imagePullPolicy: Never
 ---
 apiVersion: v1
@@ -19,5 +19,5 @@ metadata:
 spec:
   containers:
     - name: hadoop-slave2
-      image: chellyk-spark2
+      image: 192.168.56.1:5000/chellyk-hadoop:latest
       imagePullPolicy: Never
