@@ -21,6 +21,7 @@ kubectl create -f ./hadoop-master.yaml
 2. 使用 [sparkp-slave.yaml](./hadoop-slave.yaml) 创建 hadoop-slave 节点
 ```
 kubectl create -f ./hadoop-slave.yaml  
+```
 
 3. 在各个hadoop节点所在的pod启动ssh
 ```
