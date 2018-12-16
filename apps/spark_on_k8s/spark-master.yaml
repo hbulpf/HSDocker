@@ -22,6 +22,6 @@ metadata:
     app: spark-master
 spec:
   containers:
-    - image: 192.168.56.1:5000/chellyk-hadoop:latest
+    - image: 192.168.56.1:5000/chellyk-spark:latest
       name: spark-master
       imagePullPolicy: Always
