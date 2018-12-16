@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hadoop-dn-service
+  name: spark-slave-service
   labels:
-    app: hadoop-dn
+    app: spark-slave
 spec:
   ports:
     - port: 9000
@@ -14,25 +14,25 @@ spec:
       name: data-node-http
   clusterIP: None
   selector:
-    app: hadoop-slave
+    app: spark-slave
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: hadoop-slave
+  name: spark-slave
 spec:
   replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: hadoop-slave
-  serviceName: hadoop-dn-service
+      app: spark-slave
+  serviceName: spark-slave-service
   template:
     metadata:
       labels:
-        app: hadoop-slave
+        app: spark-slave
     spec:
       containers:
-        - name: hadoop-slave
-          image: 192.168.56.1:5000/chellyk-hadoop:latest
+        - name: spark-slave
+          image: 192.168.56.1:5000/chellyk-spark:latest
           imagePullPolicy: Always
