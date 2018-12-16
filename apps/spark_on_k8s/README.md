@@ -12,16 +12,15 @@ docker pull 192.168.56.1:5000/chellyk-hadoop:latest
 docker pull 192.168.56.1:5000/chellyk-spark:latest  
 ```
 
-## 创建Hadoop 集群
+## 创建Spark集群  
 在k8s集群中,使用 yaml 文件创建集群
-1. 使用 [hadoop-master.yaml](./hadoop-master.yaml) 创建 hadoop-master 节点
+1. 使用 [spark-master.yaml](./hadoop-master.yaml) 创建 hadoop-master 节点
 ```
 kubectl create -f ./hadoop-master.yaml
 ```
-2. 使用 [hadoop-slave.yaml](./hadoop-slave.yaml) 创建 hadoop-slave 节点
+2. 使用 [sparkp-slave.yaml](./hadoop-slave.yaml) 创建 hadoop-slave 节点
 ```
 kubectl create -f ./hadoop-slave.yaml  
-```
 
 3. 在各个hadoop节点所在的pod启动ssh
 ```
@@ -49,30 +48,19 @@ kubectl exec -it hadoop-master bash
 scp /etc/hosts hadoop-slave-0:/etc/hosts
 scp /etc/hosts hadoop-slave-1:/etc/hosts
 ```
-5. 修改hadoop-master所在的 pod的 `/usr/local/hadoop/etc/hadoop/slaves`文件,将内容改为 
-```
-hadoop-slave-0
-hadoop-slave-1 
-```
-6. 在hadoop-master所在的 pod启动hadoop集群
-```
-./start-hadoop.sh
-```  
 
-## 创建Spark集群  
-1. 重复创建hadoop集群里的1~5步骤  
-2. 启动HDFS（spark的存储选择使用HDFS）  
+5. 启动HDFS（spark的存储选择使用HDFS）  
 ```
 /usr/local/hadoop/sbin/start-dfs.sh
 ```  
-3. 修改hadoop-master所在的pod的`/usr/local/spark/conf/slaves`文件,将内容改为  
+6. 修改hadoop-master所在的pod的`/usr/local/spark/conf/slaves`文件,将内容改为  
 ```
 hadoop-slave-0
 hadoop-slave-1 
 ```  
-4. 在master所在pod启动spark集群  
+7. 在master所在pod启动spark集群  
 ```
 ./start-spark.sh
 ```  
-5. Spark的具体使用请见[大数据实验13-19](../experiments)
+8. Spark的具体使用请见[大数据实验13-19](../experiments)
 
