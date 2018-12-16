@@ -128,6 +128,7 @@ spec:
 
 
 ## 3.v3
-在v2的基础上，slave节点的部署选择使用StatefulSets. 新增web-service, 通过Nodeport的方式让外部能够访问hadoop,spark集群的web界面
-
+在v2的基础上，slave节点的部署选择使用StatefulSets. 新增web-service, 通过Nodeport的方式让外部能够访问hadoop,spark集群的web界面。补上了spark集群的相关yaml。
+[hadoop相关yaml](./hadoop_on_k8s)  
+[spark相关yaml](./spark_on_k8s)
 
