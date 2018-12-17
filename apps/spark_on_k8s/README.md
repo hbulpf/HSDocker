@@ -3,12 +3,10 @@
 ## 获取docker镜像
 docker镜像已上传至本地Docker Registry:
 ```
-192.168.56.1:5000/chellyk-hadoop:latest  
 192.168.56.1:5000/chellyk-spark:latest  
 ```
 获取方式
 ```
-docker pull 192.168.56.1:5000/chellyk-hadoop:latest  
 docker pull 192.168.56.1:5000/chellyk-spark:latest  
 ```
 
@@ -27,10 +25,8 @@ kubectl create -f ./spark-slave.yaml
 ```
 kubectl exec -it spark-master bash
 service ssh start
-
 kubectl exec -it spark-slave-0 bash
 service ssh start
-
 kubectl exec -it spark-slave-1 bash
 service ssh start  
 ```
