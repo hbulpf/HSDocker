@@ -12,13 +12,13 @@ docker pull 192.168.56.1:5000/chellyk-hadoop:latest
 
 ## 创建Hadoop 集群
 在k8s集群中,使用 yaml 文件创建集群
-1. 使用 [hadoop-master.yaml](./v3/hadoop-master.yaml) 创建 hadoop-master 节点
+1. 使用 [hadoop-master.yaml](./hadoop-master.yaml) 创建 hadoop-master 节点
 ```
-kubectl create -f ./v3/hadoop-master.yaml
+kubectl create -f ./hadoop-master.yaml
 ```
-2. 使用 [hadoop-slave.yaml](./v3/hadoop-slave.yaml) 创建 hadoop-slave 节点
+2. 使用 [hadoop-slave.yaml](./hadoop-slave.yaml) 创建 hadoop-slave 节点
 ```
-kubectl create -f ./v3/hadoop-slave.yaml  
+kubectl create -f ./hadoop-slave.yaml  
 ```
 
 3. 在各个hadoop节点所在的pod启动ssh
