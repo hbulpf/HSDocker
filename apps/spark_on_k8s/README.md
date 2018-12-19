@@ -32,7 +32,6 @@ service ssh start
 ```
 
 4. 修改 hosts  
-
 查看各spark节点的ip
 ```
 kubectl get pod -o wide
@@ -42,15 +41,19 @@ kubectl get pod -o wide
 ##1.进入 spark-master所在的 pod
 kubectl exec -it spark-master bash
 ##2.修改/etc/hosts文件  
+echo "172.30.8.4 spark-slave-0" >> /etc/hosts
+echo "172.30.7.4 spark-slave-1" >> /etc/hosts
 ##3.将/hosts文件分发到slave节点
 scp /etc/hosts spark-slave-0:/etc/hosts
 scp /etc/hosts spark-slave-1:/etc/hosts
 ```
 
-5. 修改spark-master所在的pod的`/usr/local/hadoop/etc/hadoop/slaves`文件,将内容改为  
+5. 修改spark-master所在的pod的`/usr/local/hadoop/etc/hadoop/slaves`文件
 ```
+cat <<EOF > /usr/local/hadoop/etc/hadoop/slaves
 spark-slave-0
 spark-slave-1 
+EOF
 ```  
 6. 启动HDFS（spark的存储选择使用HDFS）  
 ```

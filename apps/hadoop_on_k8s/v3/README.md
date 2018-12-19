@@ -41,14 +41,18 @@ kubectl get pod -o wide
 ##1.进入 hadoop-master所在的 pod
 kubectl exec -it hadoop-master bash
 ##2.修改/etc/hosts文件  
+echo "172.30.8.4 hadoop-slave-0" >> /etc/hosts
+echo "172.30.7.4 hadoop-slave-1" >> /etc/hosts
 ##3.将/hosts文件分发到slave节点
 scp /etc/hosts hadoop-slave-0:/etc/hosts
 scp /etc/hosts hadoop-slave-1:/etc/hosts
 ```
 5. 修改hadoop-master所在的 pod的 `/usr/local/hadoop/etc/hadoop/slaves`文件,将内容改为 
 ```
+cat <<EOF >/usr/local/hadoop/etc/hadoop/slaves
 hadoop-slave-0
 hadoop-slave-1 
+EOF
 ```
 6. 在hadoop-master所在的 pod启动hadoop集群
 ```
