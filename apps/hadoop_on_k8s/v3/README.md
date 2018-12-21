@@ -27,7 +27,7 @@ kubectl get pod -o wide
 ```
 在hadoop-master所在的 pod 修改hadoop节点的IP
 ```
-##1.进入 hadoop-master所在的 pod
+##1.进入 master所在的 pod
 kubectl exec -it master bash
 ##2.修改/etc/hosts文件  
 echo "172.30.8.4 slave-0" >> /etc/hosts
