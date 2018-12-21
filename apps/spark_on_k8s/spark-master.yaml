@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: spark-master
+  name: master
   labels:
     app: spark-master
 spec:
