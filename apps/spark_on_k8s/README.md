@@ -26,7 +26,7 @@ kubectl create -f ./spark-slave.yaml
 ```
 kubectl get pod -o wide
 ```
-在spark-master所在的 pod 修改hadoop节点的IP
+在spark-master所在的 pod 修改spark节点的IP
 ```
 ##1.进入 master所在的 pod
 kubectl exec -it master bash
