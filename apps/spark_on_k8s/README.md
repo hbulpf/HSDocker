@@ -1,7 +1,7 @@
 # Spark On K8S 部署
 
 ## 获取docker镜像
-docker镜像已上传至本地Docker Registry:
+[Spark Docker镜像](../../hadoopspark/demo_5-new_images/spark/) 已上传至本地Docker Registry:
 ```
 192.168.56.1:5000/chellyk-spark:latest  
 ```

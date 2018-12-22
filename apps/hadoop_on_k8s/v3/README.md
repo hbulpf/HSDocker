@@ -1,7 +1,7 @@
 # Hadoop On K8S 部署 (v3)
 
 ## 获取docker镜像
-docker镜像已上传至本地Docker Registry:
+[Hadoop Docker镜像](../../../hadoopspark/demo_5-new_images/hadoop/)已上传至本地Docker Registry:
 ```
 192.168.56.1:5000/chellyk-hadoop:latest  
 ```
