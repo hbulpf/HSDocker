@@ -9,7 +9,7 @@
 
 ```shell
 $ yum list installed | grep docker
-
+```
 如果存在docker-ce而且不是17.03版本，移除掉
 
 ```shell
