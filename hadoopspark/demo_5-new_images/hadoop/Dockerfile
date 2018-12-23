@@ -8,10 +8,10 @@ RUN apt-get update && apt-get install -y openssh-server wget openjdk-8-jdk vim
 COPY mirror/* /tmp/
 COPY hadoop/* /tmp/
 
-# install hadoop 2.7.2
-RUN tar -xzvf /tmp/hadoop-2.7.2.tar.gz && \
-    mv hadoop-2.7.2 /usr/local/hadoop && \
-    rm /tmp/hadoop-2.7.2.tar.gz
+# install hadoop 2.7.7
+RUN tar -xzvf /tmp/hadoop-2.7.7.tar.gz && \
+    mv hadoop-2.7.7 /usr/local/hadoop && \
+    rm /tmp/hadoop-2.7.7.tar.gz
 
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin 
