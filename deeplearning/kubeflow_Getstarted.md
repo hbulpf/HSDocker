@@ -4,13 +4,14 @@
 
 ### 1. 启动docker
 **安装docker**
+
 注意安装版本docker-ce 17.03
 
-先查看已经安装的docker安装版本
 ```shell
 $ yum list installed | grep docker
 
 如果存在docker-ce而且不是17.03版本，移除掉
+
 ```shell
 $ yum -y remove docker*
 $ yum -y remove containerd.io.x86_64
@@ -45,6 +46,7 @@ $ sudo systemctl restart docker
 运行minikube启动脚本
 
 **minikube.sh**
+
 ```shell
 BASE_DIR=.tools/k8s
 MINIKUBE_VERSION=v0.28.0
@@ -73,6 +75,7 @@ sudo -E ${MINIKUBE_BIN} start --registry-mirror=https://registry.docker-cn.com \
 ```
 
 ### 3. 安装kubectl
+
 ```shell
 $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 $ yum list kubectl –showduplicates
@@ -86,6 +89,7 @@ $ kubectl version
 ```
 
 查看minikube是否成功启动
+
 ```shell
 $ kubectl cluster-info
 ```
