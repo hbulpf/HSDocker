@@ -1,6 +1,6 @@
 ﻿# 使用说明
 
-**mirror文件夹存放spark-2.1.0安装包
+**mirror文件夹存放spark-2.1.0安装包  
 spark文件夹存放spark相关配置文件**  
 
 ### ！构建spark镜像前先确保构建好前一个hadoop镜像
