@@ -1,6 +1,6 @@
 ﻿# 使用说明
 
-**mirror文件夹存放hadoop-2.7.2安装包  
+**mirror文件夹存放hadoop-2.7.7安装包  
 hadoop文件夹存放hadoop相关配置文件**
 
 ## 1.拷贝整个目录
