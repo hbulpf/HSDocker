@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: hadoop-master
+  name: master
   labels:
     app: hadoop-master
 spec:

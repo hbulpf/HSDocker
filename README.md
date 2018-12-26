@@ -21,7 +21,8 @@
 
 
 ### 4. Hadoop on Kubernetes
-1. [将hadoop集群部署到 Kubernetes 上](./apps/hadoop_on_k8s/)
+1. [ Hadoop集群 部署到 Kubernetes 上](./apps/hadoop_on_k8s/)
+1. [ Spark集群 部署到 Kubernetes 上](./apps/spark_on_k8s/)
 
 ## 四、 深度学习
 ### 1. 基本实验
