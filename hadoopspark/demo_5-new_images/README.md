@@ -21,4 +21,14 @@ spark文件夹包含spark配置文件，安装包和镜像Dockerfile.
 docker build -t 镜像名 .
 ```
 
+## 四. hbase镜像
+Hbase文件夹包含hbase配置文件，安装包和镜像Dockerfile.
+**构建基于前一个spark镜像**
+
+使用方法:  
+```
+#在Dockerfile所在目录  
+docker build -t 镜像名 .
+```
+
 
