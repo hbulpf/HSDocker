@@ -1,7 +1,7 @@
 # HBase On K8S 部署
 
 ## 获取docker镜像
-[HBase Docker镜像](../../hadoopspark/demo_5-new_images/spark/) 已上传至本地Docker Registry:
+[HBase Docker镜像](../../hadoopspark/demo_5-new_images/hbase/) 已上传至本地Docker Registry:
 ```
 192.168.56.1:5000/chellyk-hbase:latest  
 ```
