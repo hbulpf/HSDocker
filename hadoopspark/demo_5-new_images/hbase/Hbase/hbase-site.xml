@@ -23,7 +23,7 @@
 <configuration>
  <property>
   <name>hbase.rootdir</name>
-  <value>hdfs://hadoop-master:9000/hbase</value>
+  <value>hdfs://master:9000/hbase</value>
  </property>
  <property>
   <name>hbase.cluster.distributed</name>
@@ -31,7 +31,7 @@
  </property>
  <property>
   <name>hbase.zookeeper.quorum</name>
-  <value>hadoop-master,hadoop-slave1,hadoop-slave2</value>
+  <value>master,slave-0,slave-1</value>
  </property>
  <property>
   <name>hbase.tmp.dir</name>
