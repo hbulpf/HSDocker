@@ -1,5 +1,4 @@
-FROM chellyk-spark
-
+FROM chellyk-hbase
 COPY hive/* /tmp/
 
 RUN tar -zxvf /tmp/apache-hive-1.2.2-bin.tar.gz && \
