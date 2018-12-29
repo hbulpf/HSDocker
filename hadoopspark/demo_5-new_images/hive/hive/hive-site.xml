@@ -380,7 +380,7 @@
   </property>
   <property>
     <name>javax.jdo.option.ConnectionPassword</name>
-    <value>hadoop</value>
+    <value>root</value>
     <description>password to use against metastore database</description>
   </property>
   <property>
