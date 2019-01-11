@@ -1,9 +1,7 @@
-# Kubeflow文档
+# Kubeflow
 
-> Kubeflow，顾名思义，是Kubernetes + Tensorflow，是Google为了支持自家的Tensorflow的部署而开发出的开源平台，当然它同时也支持Pytorch和基于Python的SKlearn等其它机器学习的引擎。
-
-> KubeFlow支持实现从JupyterHub模型开发，TFJob模型训练到TF-serving，Seldon预测端到端的解决方案。
-
+> Kubeflow，顾名思义，是Kubernetes + Tensorflow，是Google为了支持自家的Tensorflow的部署而开发出的开源平台，当然它同时也支持Pytorch和基于Python的SKlearn等其它机器学习的引擎。   
+> KubeFlow支持实现从JupyterHub模型开发，TFJob模型训练到TF-serving，Seldon预测端到端的解决方案。   
 > KubeFlow需要用户精通Kubernetes，比如写一个TFJob的部署yaml文件。
 
 Kukeflow主要提供在生产系统中简单的大规模部署机器学习的模型的功能，利用Kubernetes，它可以做到：
@@ -13,30 +11,30 @@ Kukeflow主要提供在生产系统中简单的大规模部署机器学习的模
 
 ### 1.背景
 
-Kubernetes 本来是一个用来管理无状态应用的容器平台，但是在近两年，有越来越多的公司用它来运行各种各样的工作负载，尤其是机器学习炼丹。各种 AI 公司或者互联网公司的 AI 部门都会尝试在 Kubernetes 上运行 TensorFlow，Caffe，MXNet 等等分布式学习的任务，这为 Kubernetes 带来了新的挑战。
+Kubernetes 本来是一个用来管理无状态应用的容器平台，但是在近两年，有越来越多的公司用它来运行各种各样的工作负载，尤其是机器学习。各种 AI 公司或者互联网公司的 AI 部门都会尝试在 Kubernetes 上运行 TensorFlow，Caffe，MXNet 等等分布式学习的任务，这为 Kubernetes 带来了新的挑战。
 
 首先，分布式的机器学习任务一般会涉及参数服务器（以下称为 PS）和工作节点（以下成为 worker）两种不同的工作类型。而且不同领域的学习任务对 PS 和 worker 有不同的需求，这体现在 Kubernetes 中就是配置难的问题。以 TensorFlow 为例，TensorFlow 的分布式学习任务通常会启动多个 PS 和多个 worker，而且在 TensorFlow 提供的最佳实践中，每个 worker 和 PS 要求传入不同的命令行参数。举例说明：
 ```shell
-    # On ps0.example.com:
-    $ python trainer.py \
-         --ps_hosts=ps0.example.com:2222,ps1.example.com:2222 \
-         --worker_hosts=worker0.example.com:2222,worker1.example.com:2222 \
-         --job_name=ps --task_index=0
-    # On ps1.example.com:
-    $ python trainer.py \
-         --ps_hosts=ps0.example.com:2222,ps1.example.com:2222 \
-         --worker_hosts=worker0.example.com:2222,worker1.example.com:2222 \
-         --job_name=ps --task_index=1
-    # On worker0.example.com:
-    $ python trainer.py \
-         --ps_hosts=ps0.example.com:2222,ps1.example.com:2222 \
-         --worker_hosts=worker0.example.com:2222,worker1.example.com:2222 \
-         --job_name=worker --task_index=0
-    # On worker1.example.com:
-    $ python trainer.py \
-         --ps_hosts=ps0.example.com:2222,ps1.example.com:2222 \
-         --worker_hosts=worker0.example.com:2222,worker1.example.com:2222 \
-         --job_name=worker --task_index=1
+# On ps0.example.com:
+$ python trainer.py \
+     --ps_hosts=ps0.example.com:2222,ps1.example.com:2222 \
+     --worker_hosts=worker0.example.com:2222,worker1.example.com:2222 \
+     --job_name=ps --task_index=0
+# On ps1.example.com:
+$ python trainer.py \
+     --ps_hosts=ps0.example.com:2222,ps1.example.com:2222 \
+     --worker_hosts=worker0.example.com:2222,worker1.example.com:2222 \
+     --job_name=ps --task_index=1
+# On worker0.example.com:
+$ python trainer.py \
+     --ps_hosts=ps0.example.com:2222,ps1.example.com:2222 \
+     --worker_hosts=worker0.example.com:2222,worker1.example.com:2222 \
+     --job_name=worker --task_index=0
+# On worker1.example.com:
+$ python trainer.py \
+     --ps_hosts=ps0.example.com:2222,ps1.example.com:2222 \
+     --worker_hosts=worker0.example.com:2222,worker1.example.com:2222 \
+     --job_name=worker --task_index=1
     
 ```
 其中需要的参数有四个，一个是所有的 PS 的网络地址（主机名-端口），以及所有的 worker 的网络地址。另外是 job 的类型，分为 PS 与 worker 两种。最后是任务的 index，从 0 开始递增。因此在此例中，用户需要写至少四个 pod 的配置文件，以及四个 service 的配置文件，使得 PS 跟 worker 可以互相访问，况且这只是一个机器学习任务。如果大规模地在 Kubernetes 上运行 TensorFlow 分布式任务，可以预见繁杂的配置将成为机器学习工程师们新的负担。
@@ -128,6 +126,7 @@ Requirements:
 而后者则会在本地的虚拟机里创建出 Kubernetes 集群。
 
 如果你已经成功地创建了一个 Kubernetes 集群，那么接下来就是在这一集群上创建 Kubeflow 所有的组件，这一步需要用到 ksonnet，一个简化应用在 Kubernetes 上的分发与部署的命令行工具，它会帮助你创建 Kubeflow 所需组件。在安装了 ksonnet 后，接下来只需要运行下面的命令，就可以完成 Kubeflow 的部署。
+
 ```shell
     # Initialize a ksonnet APP
     APP_NAME=my-kubeflow
@@ -145,8 +144,9 @@ Requirements:
     kubectl create namespace ${NAMESPACE}
     ks generate core kubeflow-core --name=kubeflow-core --namespace=${NAMESPACE}
     ks apply default -c kubeflow-core
-    
 ```
+[更详细的部署文档](./getstarted.md)
+
 ### 5.Demo
 
 下面的yaml配置是Kubeflow提供的一个CNN Benchmarks的例子：
@@ -212,11 +212,8 @@ Requirements:
     # 查看运行日志
     kubectl logs mycnnjob-[ps|worker]-0 -n <ns>
 ```
-参考链接：
 
-1. Kubeflow 安利：在 Kubernetes 上进行机器学习
-   https://zhuanlan.zhihu.com/p/3358363
-2. 轻松扩展你的机器学习能力 ： Kubeflow
-   https://my.oschina.net/taogang/blog/2052152
-3. Get started with kubeflow
-   https://www.kubeflow.org/docs/started/getting-started/
+### 参考链接：
+1. Kubeflow 安利：在 Kubernetes 上进行机器学习 . https://zhuanlan.zhihu.com/p/3358363
+2. 轻松扩展你的机器学习能力Kubeflow  .  https://my.oschina.net/taogang/blog/2052152
+3. Get started with kubeflow . https://www.kubeflow.org/docs/started/getting-started/
