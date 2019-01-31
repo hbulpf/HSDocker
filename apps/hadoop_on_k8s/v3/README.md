@@ -3,11 +3,11 @@
 ## 获取docker镜像
 [Hadoop Docker镜像](../../../hadoopspark/demo_5-new_images/hadoop/)已上传至本地Docker Registry:
 ```
-192.168.56.1:5000/chellyk-hadoop:latest  
+202.116.46.215/hsdocker2019/chellyk-hadoop:latest  
 ```
 获取方式
 ```
-docker pull 192.168.56.1:5000/chellyk-hadoop:latest  
+docker pull 202.116.46.215/hsdocker2019/chellyk-hadoop:latest  
 ```
 
 ## 创建Hadoop 集群
