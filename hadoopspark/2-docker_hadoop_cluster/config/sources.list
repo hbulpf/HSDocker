@@ -1,0 +1,33 @@
+#aliyun
+deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse  
+deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse  
+deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse  
+deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse  
+deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse  
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse  
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse  
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse  
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse  
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+
+#163
+deb http://mirrors.163.com/ubuntu/ wily main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ wily-security main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ wily-updates main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ wily-proposed main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ wily-backports main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ wily main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ wily-security main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ wily-updates main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ wily-proposed main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ wily-backports main restricted universe multiverse
+
+#tsinghua
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
