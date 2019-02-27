@@ -25,3 +25,4 @@ spec:
     - image: 202.116.46.215/hsdocker2019/chellyk-hadoop:latest
       name: hadoop-master
       imagePullPolicy: Always
+
