@@ -35,4 +35,4 @@ spec:
       containers:
         - name: hadoop-slave
           image: 202.116.46.215/hsdocker2019/hs_hadoop:v1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
