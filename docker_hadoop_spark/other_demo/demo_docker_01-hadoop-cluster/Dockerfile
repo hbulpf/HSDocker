@@ -1,11 +1,11 @@
-FROM ubuntu:14.04
+FROM ubuntu:17.10
 
 MAINTAINER KiwenLau <421372907@qq.com>
 
 WORKDIR /root
 
 # install openssh-server, openjdk and wget
-# RUN apt-get update && apt-get install -y openssh-server openjdk-7-jdk wget
+RUN apt-get update && apt-get install -y openssh-server openjdk-7-jdk wget
 
 # install hadoop 2.7.2
 RUN wget https://github.com/kiwenlau/compile-hadoop/releases/download/2.7.2/hadoop-2.7.2.tar.gz && \
