@@ -17,7 +17,6 @@ docker build -t hs_spark:v1.0 .
 ## 三. [制作 HBase 镜像](./03_build_hbase/)
 HBase 镜像构建 **基于前面的  Spark 镜像**,在 HBase 镜像的 [Dockerfile](./03_build_hbase/Dockerfile) 文件所在目录  
 ```
-#在Dockerfile所在目录  
 docker build -t hs_hbase:v1.0 .
 ```
 
