@@ -10,7 +10,7 @@ spark文件夹存放spark相关配置文件**
 
 ## 2.获取spark2.1.0安装包    
 ```
-wget -o mirror/spark-2.1.0-bin-without-hadoop.tgz https://archive.apache.org/dist/spark/spark-2.1.0/spark-2.1.0-bin-without-hadoop.tgz
+wget -O download/spark-2.1.0-bin-without-hadoop.tgz https://archive.apache.org/dist/spark/spark-2.1.0/spark-2.1.0-bin-without-hadoop.tgz
 ```   
 会下载spark安装包并存储在mirror文件夹下
 

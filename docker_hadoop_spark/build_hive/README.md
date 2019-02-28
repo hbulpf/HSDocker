@@ -9,7 +9,7 @@
 
 ## 2.获取hbase-1.2.6安装包    
 ```
-wget -o hive/apache-hive-1.2.2-bin.tar.gz https://www-eu.apache.org/dist/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz
+wget -O download/apache-hive-1.2.2-bin.tar.gz https://www-eu.apache.org/dist/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz
 ```   
 会下载hive安装包并存储在hive文件夹下
 

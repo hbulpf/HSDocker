@@ -9,7 +9,7 @@
 
 ## 2.获取hbase-1.2.6安装包    
 ```
-wget -o Hbase/hbase-1.2.6-bin.tar.gz http://archive.apache.org/dist/hbase/1.2.6/hbase-1.2.6-bin.tar.gz
+wget -O download/hbase-1.2.6-bin.tar.gz http://archive.apache.org/dist/hbase/1.2.6/hbase-1.2.6-bin.tar.gz
 ```   
 会下载hbase安装包并存储在Hbase文件夹下
 
