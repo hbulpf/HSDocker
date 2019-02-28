@@ -1,4 +1,4 @@
-FROM hs_spark:v1.0 .
+FROM hs_spark:v1.0
 
 COPY Hbase/* /tmp/
 
