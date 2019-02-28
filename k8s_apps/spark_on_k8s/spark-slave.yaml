@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-slave-service
+  labels:
+    app: spark-slave
+spec:
+  ports:
+    - port: 9000
+      name: hdfs
+    - port: 50010
+      name: data-node-trans
+    - port: 50075
+      name: data-node-http
+  clusterIP: None
+  selector:
+    app: spark-slave
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: slave
+spec:
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: spark-slave
+  serviceName: spark-slave-service
+  template:
+    metadata:
+      labels:
+        app: spark-slave
+    spec:
+      containers:
+        - name: spark-slave
+          image: 192.168.56.1:5000/chellyk-spark:latest
+          imagePullPolicy: Always

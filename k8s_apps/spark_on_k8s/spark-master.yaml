@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-master-service
+  labels:
+    app: spark-master
+spec:
+  ports:
+    - port: 9000
+      name: hdfs
+    - port: 50070
+      name: name-node
+  clusterIP: None
+  selector:
+    app: spark-master
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: master
+  labels:
+    app: spark-master
+spec:
+  containers:
+    - image: 192.168.56.1:5000/chellyk-spark:latest
+      name: spark-master
+      imagePullPolicy: Always
