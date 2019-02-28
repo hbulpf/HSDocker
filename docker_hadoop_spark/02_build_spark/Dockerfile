@@ -1,4 +1,4 @@
-FROM chellyk-hadoop
+FROM hs_hadoop:v1.0
 
 COPY mirror/*  /tmp/
 COPY spark/*  /tmp/

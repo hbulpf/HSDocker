@@ -1,4 +1,4 @@
-FROM chellyk-hbase
+FROM hs_hbase:v1.0 .
 COPY hive/* /tmp/
 
 RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-hive-1.2.2-bin.tar.gz -O /tmp/apache-hive-1.2.2-bin.tar.gz && \

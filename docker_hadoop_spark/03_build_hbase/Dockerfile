@@ -1,4 +1,4 @@
-FROM chellyk-spark
+FROM hs_spark:v1.0 .
 
 COPY Hbase/* /tmp/
 

@@ -1,37 +1,29 @@
 ﻿**构建 大数据组件 镜像**
 
-## 一. 制作hadoop镜像
-hadoop文件夹包含hadoop配置文件，安装包和镜像Dockerfile.
-
+## 一. [制作 Hadoop 镜像](./01_build_hadoop/)
+在 Hadoop 镜像的 [Dockerfile](./01_build_hadoop/Dockerfile) 所在目录  
 ```
-#在Dockerfile所在目录  
 docker build -t hs_hadoop:v1.0 .
 ```
 
-## 二. 制作spark镜像
-spark文件夹包含spark配置文件，安装包和镜像Dockerfile.
-**构建基于前一个hadoop镜像**
+## 二. [制作 Spark 镜像](./02_build_spark/)
+
+Spark 镜像构建 **基于前面的 Hadoop 镜像**,在 Spark 镜像的 [Dockerfile](./02_build_spark/Dockerfile) 文件所在目录  
  
 ```
-#在Dockerfile所在目录  
 docker build -t hs_spark:v1.0 .
 ```
 
-## 三. 制作hbase镜像
-Hbase文件夹包含hbase配置文件，安装包和镜像Dockerfile.
-**构建基于前一个spark镜像**
-
+## 三. [制作 HBase 镜像](./03_build_hbase/)
+HBase 镜像构建 **基于前面的  Spark 镜像**,在 HBase 镜像的 [Dockerfile](./03_build_hbase/Dockerfile) 文件所在目录  
 ```
 #在Dockerfile所在目录  
 docker build -t hs_hbase:v1.0 .
 ```
 
-## 四. 制作hive镜像
-hive文件夹包含hive配置文件，安装包和镜像Dockerfile.
-**构建基于前一个hbase镜像**
-
+## 四. [制作 Hive 镜像](./04_build_hive/)
+Hive 镜像构建 **基于前面的  HBase 镜像**,在 Hive 镜像的 [Dockerfile](04_build_hive/Dockerfile) 文件所在目录  
 ```
-#在Dockerfile所在目录  
 docker build -t hs_hive:v1.0  .
 ```
 
