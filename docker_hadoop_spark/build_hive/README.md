@@ -1,24 +1,18 @@
-﻿# 使用说明
+﻿**构建 hive-1.2.2 镜像**
 
-**hive文件夹存放hive安装包和相关配置文件**  
+>构建hive镜像前先确保构建好前一个hbase镜像
 
-### ！构建hive镜像前先确保构建好前一个hbase镜像
+## 1.构建镜像
+在 [Dockerfile](./Dockerfile) 所在目录下:  
+```
+docker build -t hs_hive:v1.0  .
+```
 
-## 1.拷贝整个目录
-将整个目录包括hive文件夹及Dockerfile
-
-## 2.获取hbase-1.2.6安装包    
+## 2.获取 hive-1.2.2 安装包    
 ```
 wget -O download/apache-hive-1.2.2-bin.tar.gz https://www-eu.apache.org/dist/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz
 ```   
-会下载hive安装包并存储在hive文件夹下
-
-## 3.构建镜像
-在Dockerfile所在目录下:  
-```
-docker build -t <镜像名> .
-```
-
+会下载 hive-1.2.2 安装包并存储在 download 文件夹下
 
 
 
