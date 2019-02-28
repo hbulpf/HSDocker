@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y openssh-server wget openjdk-8-jdk vim
 COPY hadoop/* /tmp/
 
 # install hadoop 2.7.7
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/hadoop-2.7.7.tar.gz -O /tmp/hadoop-2.7.7.tar.gz && \
+RUN wget http://50125.hnbdata.cn:81/common/hsdocker/hadoop-2.7.7.tar.gz -q -O /tmp/hadoop-2.7.7.tar.gz && \
 	tar -xzvf /tmp/hadoop-2.7.7.tar.gz && \
     mv hadoop-2.7.7 /usr/local/hadoop && \
     rm /tmp/hadoop-2.7.7.tar.gz

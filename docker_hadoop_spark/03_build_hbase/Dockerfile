@@ -2,7 +2,7 @@ FROM hs_spark:v1.0 .
 
 COPY Hbase/* /tmp/
 
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/hbase-1.2.6-bin.tar.gz -O /tmp/hbase-1.2.6-bin.tar.gz && \
+RUN wget http://50125.hnbdata.cn:81/common/hsdocker/hbase-1.2.6-bin.tar.gz -q -O /tmp/hbase-1.2.6-bin.tar.gz && \
 	tar -zxvf /tmp/hbase-1.2.6-bin.tar.gz && \
     mv hbase-1.2.6 /usr/local/hbase && \
     rm /tmp/hbase-1.2.6-bin.tar.gz

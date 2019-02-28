@@ -1,10 +1,9 @@
 FROM hs_hadoop:v1.0
 
-COPY mirror/*  /tmp/
 COPY spark/*  /tmp/
 
 #install spark
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/spark-2.1.0-bin-without-hadoop.tgz -O /tmp/spark-2.1.0-bin-without-hadoop.tgz && \
+RUN wget http://50125.hnbdata.cn:81/common/hsdocker/spark-2.1.0-bin-without-hadoop.tgz -q -O /tmp/spark-2.1.0-bin-without-hadoop.tgz && \
 	tar -xzvf /tmp/spark-2.1.0-bin-without-hadoop.tgz &&\
     mv spark-2.1.0-bin-without-hadoop /usr/local/spark &&\
     rm /tmp/spark-2.1.0-bin-without-hadoop.tgz
