@@ -1,7 +1,4 @@
 ﻿# 实验二 HDFS实验：部署HDFS
-
-**学习前确保学习过docker-hadoop集群demo2并能成功创建多节点的hadoop集群**
-
 ## 2.1  实验目的
 1． 理解HDFS存在的原因；  
 2． 理解HDFS体系架构；  
