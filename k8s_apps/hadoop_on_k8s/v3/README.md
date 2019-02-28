@@ -1,13 +1,10 @@
 # Hadoop On K8S 部署 (v3)
 
-## 获取docker镜像
-[Hadoop Docker镜像](../../../hadoopspark/demo_5-new_images/hadoop/)已上传至本地Docker Registry:
+## 获取 Hadoop 镜像
+从Harbor上拉取 Hadoop 镜像 `202.116.46.215/hsdocker2019/hs_hadoop:latest`   
+拉取方式
 ```
-202.116.46.215/hsdocker2019/chellyk-hadoop:latest  
-```
-获取方式
-```
-docker pull 202.116.46.215/hsdocker2019/chellyk-hadoop:latest  
+docker pull 202.116.46.215/hsdocker2019/hs_hadoop:latest  
 ```
 
 ## 创建Hadoop 集群
