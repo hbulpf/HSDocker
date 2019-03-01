@@ -4,17 +4,18 @@ WORKDIR /root
 
 RUN apt-get update && apt-get install -y python2.7 openssh-server wget vim openjdk-8-jdk
 
-COPY mirror/* /tmp/
 COPY zookeeper/* /tmp/
 COPY storm/* /tmp/
 
 #install zookeeper
-RUN tar -xzvf /tmp/zookeeper-3.4.10.tar.gz &&\
+RUN wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz -q -O /tmp/zookeeper-3.4.10.tar.gz &&\
+    tar -xzvf /tmp/zookeeper-3.4.10.tar.gz &&\
     mv zookeeper-3.4.10 /usr/local/zookeeper &&\
     rm /tmp/zookeeper-3.4.10.tar.gz 
 
 #install storm
-RUN tar -zxvf /tmp/apache-storm-1.1.0.tar.gz  &&\
+RUN wget https://archive.apache.org/dist/storm/apache-storm-1.1.0/apache-storm-1.1.0.tar.gz -q -O /tmp/apache-storm-1.1.0.tar.gz &&\
+    tar -zxvf /tmp/apache-storm-1.1.0.tar.gz  &&\
     mv apache-storm-1.1.0  /usr/local/storm && \
     rm /tmp/apache-storm-1.1.0.tar.gz
 
