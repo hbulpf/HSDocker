@@ -26,4 +26,11 @@ Hive 镜像构建 **基于前面的  HBase 镜像**,在 Hive 镜像的 [Dockerfi
 docker build -t hs_hive:v1.0  .
 ```
 
+## 五. [制作 Storm 镜像](./05_build_storm-zookeeper/)
+该镜像与前面的四个镜像无关，可直接构建,在 Hive 镜像的 [Dockerfile](05_build_storm-zookeeper/Dockerfile) 文件所在目录  
+```
+docker build -t hs_storm:v1.0  .
+```
+
+
 
