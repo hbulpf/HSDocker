@@ -53,7 +53,7 @@ yarn-site.xml是YARN守护进程的配置文件。第一句配置了节点管理
 
 ### 4.4.2 统一启动YARN
 确认已经配置Slaves文件，启动HDFS后，运行yarn启动脚本
-``root@hadoop-master:/usr/local/hadoop/sbin# ./start-yarn.sh``
+`root@hadoop-master:/usr/local/hadoop/sbin# ./start-yarn.sh`
 
 ### 4.4.3 验证YARN启动成功
 在各个节点通过jps命令查看YARN服务是否已启动。  

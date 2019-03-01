@@ -27,10 +27,10 @@
 Spark Streaming的编程和Spark的编程如出一辙，对于编程的理解也非常类似。**对于Spark来说，编程就是对于RDD的操作**；而**对于Spark Streaming来说，就是对DStream的操作**。下面将通过一个大家熟悉的WordCount的例子来说明Spark Streaming中的输入操作、转换操作和输出操作。  
 
 Spark Streaming初始化：在开始进行DStream操作之前，需要对Spark Streaming进行**初始化生成StreamingContext**。参数中比较重要的是第一个和第三个，**第一个参数是指定Spark Streaming运行的集群地址**，而**第三个参数是指定Spark Streaming运行时的batch窗口大小**。在这个例子中就是将1秒钟的输入数据进行一次Spark Job处理。  
-``val ssc = new StreamingContext("Spark://…", "WordCount", Seconds(1), [Homes], [Jars])``  
+`val ssc = new StreamingContext("Spark://…", "WordCount", Seconds(1), [Homes], [Jars])``  
 
 Spark Streaming的输入操作：目前Spark Streaming已支持了丰富的输入接口，大致分为两类：**一类是磁盘输入**，如以batch size作为时间间隔监控HDFS文件系统的某个目录，将目录中内容的变化作为Spark Streaming的输入；**另一类就是网络流的方式**，目前支持Kafka、Flume、Twitter和TCP socket。在WordCount例子中，假定通过网络socket作为输入流，监听某个特定的端口，最后得出输入DStream（lines）。  
-``val lines = ssc.socketTextStream("localhost",8888)``  
+`val lines = ssc.socketTextStream("localhost",8888)``  
 
 Spark Streaming的转换操作：与Spark RDD的操作极为类似，Spark Streaming也就是**通过转换操作将一个或多个DStream转换成新的DStream**。常用的操作包括map、filter、flatmap和join，以及需要进行shuffle操作的groupByKey/reduceByKey等。在WordCount例子中，我们首先需要将DStream(lines)切分成单词，然后将相同单词的数量进行叠加, 最终得到的wordCounts就是每一个batch size的（单词，数量）中间结果。  
 ```
@@ -39,17 +39,17 @@ val wordCounts = words.map(x => (x, 1)).reduceByKey(_ + _)
 ```  
 
 另外，Spark Streaming有特定的窗口操作，**窗口操作涉及两个参数：一个是滑动窗口的宽度（Window Duration）；另一个是窗口滑动的频率（Slide Duration），这两个参数必须是batch size的倍数**。例如以过去5秒钟为一个输入窗口，每1秒统计一下WordCount，那么我们会将过去5秒钟的每一秒钟的WordCount都进行统计，然后进行叠加，得出这个窗口中的单词统计。  
-``val wordCounts = words.map(x => (x, 1)).reduceByKeyAndWindow(_ + _, Seconds(5s)，seconds(1))``  
+`val wordCounts = words.map(x => (x, 1)).reduceByKeyAndWindow(_ + _, Seconds(5s)，seconds(1))``  
 
 但上面这种方式还不够高效。如果我们以增量的方式来计算就更加高效，例如，计算t+4秒这个时刻过去5秒窗口的WordCount，那么我们可以将t+3时刻过去5秒的统计量加上[t+3，t+4]的统计量，在减去[t-2，t-1]的统计量，这种方法可以复用中间三秒的统计量，提高统计的效率。如图18-4所示：  
-``val wordCounts = words.map(x => (x, 1)).reduceByKeyAndWindow(_ + _, _ - _, Seconds(5s)，seconds(1))``  
+`val wordCounts = words.map(x => (x, 1)).reduceByKeyAndWindow(_ + _, _ - _, Seconds(5s)，seconds(1))``  
 ![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex18/4.jpg)  
 
 Spark Streaming的输出操作：对于输出操作，Spark提供了将数据打印到屏幕及输入到文件中。在WordCount中我们将DStream wordCounts输入到HDFS文件中。  
-``wordCounts = saveAsHadoopFiles("WordCount")``  
+`wordCounts = saveAsHadoopFiles("WordCount")``  
 
 Spark Streaming启动：经过上述的操作，Spark Streaming还没有进行工作，我们还需要调用Start操作，Spark Streaming才开始监听相应的端口，然后收取数据，并进行统计。  
-``ssc.start()``  
+`ssc.start()``  
 
 ### 18.3.3 Spark Streaming典型案例
 在互联网应用中，网站流量统计作为一种常用的应用模式，需要在不同粒度上对不同数据进行统计，既有实时性的需求，又需要涉及到聚合、去重、连接等较为复杂的统计需求。传统上，若是使用Hadoop MapReduce框架，虽然可以容易地实现较为复杂的统计需求，但实时性却无法得到保证；反之若是采用Storm这样的流式框架，实时性虽可以得到保证，但需求的实现复杂度也大大提高了。Spark Streaming在两者之间找到了一个平衡点，能够以准实时的方式容易地实现较为复杂的统计需求。 下面介绍一下使用Kafka和Spark Streaming搭建实时流量统计框架。  

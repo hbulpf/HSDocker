@@ -15,7 +15,7 @@ Classpath设置的目的，在于告诉Java执行环境，**在哪些目录下�
 Java执行环境本身就是一个平台，执行于这个平台上的程序是已编译完成的Java程序(后面会介绍到Java程序编译完成之后，会以.class文件存在)。如果将Java执行环境比喻为操作系统，如果设置Path变量是为了让操作系统找到指定的工具程序(以Windows来说就是找到.exe文件)，则设置Classpath的目的就是让Java执行环境找到指定的Java程序(也就是.class文件)。
 
 上一节的实验中，我们修改/etc/profile时其实已经一并设置了Classpath，之后我们可以通过实例来看效果。
-``export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*``
+`export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*``
 
 ## 3.4 实验步骤
 ### 3.4.1 编写HDFS写程序

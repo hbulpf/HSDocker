@@ -239,7 +239,7 @@ WriteResult({ "nRemoved" : 31 })
 #### 31.4.4.9 删除Collection  
 ```
 > db.weather.drop();
-2018-08-13T02:48:32.107+0000 I COMMAND  [conn1] CMD: drop test.weather
+2018-08-13T02:48:32.107+0000 I COMMAND  [conn1] `: drop test.weather
 2018-08-13T02:48:32.108+0000 I STORAGE  [conn1] Finishing collection drop for test.weather (dcec9972-a8b6-4e6b-b1c6-14b2aef33589).
 true
 ```

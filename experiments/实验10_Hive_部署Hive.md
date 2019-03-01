@@ -38,7 +38,7 @@ Hive架构与基本组成如图10-1所示：
 **远程模式**：hive服务和metastore在不同的进程内，可能是不同的机器，连接远程的mysql并不能称之为“远程模式”，是否远程指的是metastore和hive服务是否在同一进程内，换句话说，“远”指的是metastore和hive服务离得“远”。
 
 ### 10.4.1 下载hive并解压:
-``wget http://mirrors.hust.edu.cn/apache/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz``
+`wget http://mirrors.hust.edu.cn/apache/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz`
 
 ```
 root@hadoop-master:~# wget http://mirrors.hust.edu.cn/apache/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz
@@ -54,7 +54,7 @@ root@hadoop-master:~# mv apache-hive-1.2.2-bin /usr/local/hive
 export HIVE_HOME=/usr/local/hive
 export PATH=$PATH:$HIVE_HOME/bin
 ```
-``source /etc/profile``使修改生效
+`source /etc/profile`使修改生效
 
 ### 10.4.3 修改Hive配置文件:  
 切换到**HIVE_HOME/conf**目录下，执行以下命令：

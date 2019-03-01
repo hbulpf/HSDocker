@@ -172,7 +172,7 @@ Key: 5: Value: org.apache.mahout.clustering.iterator.ClusterWritable@1ead6e20
 Count: 6
 ```  
 
-``mahout seqdumper -i /user/root/output/clusters-1/part-r-00000 -o ~/result``  
+`mahout seqdumper -i /user/root/output/clusters-1/part-r-00000 -o ~/result`  
 -i 指定输入路径  -o 指定输出路径  
 
 

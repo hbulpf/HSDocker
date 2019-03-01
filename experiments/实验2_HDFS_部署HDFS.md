@@ -27,8 +27,8 @@ HDFS开放文件系统的命名空间以便用户以文件形式存储数据，�
 
 ### 2.3.3 HDFS基本命令
 HDFS基本命令格式如下：
-``hadoop fs -cmd args``
-其中，**cmd**为具体的操作，**args**为参数。
+`hadoop fs -` args`
+其中，**`**为具体的操作，**args**为参数。
 部分HDFS命令示例如下：
 ```
 hadoop fs -mkdir /user/trunk          #建立目录/user/trunk
@@ -54,9 +54,6 @@ HDFS在使用过程中有以下限制：
 **HDFS更加适合写入一次，读取多次的应用场景**。
 
 ## 2.4 实验步骤
-
-demo2的hadoop集群，配置文件均已复制到各个节点，master节点上也有启动脚本可以直接一键启动HDFS，Yarn.
-为方便学习文档中还是补充常规配置时的过程.
 
 部署HDFS的步骤如下：  
 1． 配置Hadoop的安装环境；  
@@ -100,25 +97,28 @@ capacity-scheduler.xml      httpfs-env.sh            mapred-env.sh
 configuration.xsl           httpfs-log4j.properties  mapred-queues.xml.template
 container-executor.cfg      httpfs-signature.secret  mapred-site.xml
 core-site.xml               httpfs-site.xml          mapred-site.xml.template
-hadoop-env.cmd              kms-acls.xml             slaves
+hadoop-env.`              kms-acls.xml             slaves
 hadoop-env.sh               kms-env.sh               ssl-client.xml.example
 hadoop-metrics.properties   kms-log4j.properties     ssl-server.xml.example
-hadoop-metrics2.properties  kms-site.xml             yarn-env.cmd
+hadoop-metrics2.properties  kms-site.xml             yarn-env.`
 hadoop-policy.xml           log4j.properties         yarn-env.sh
-hdfs-site.xml               mapred-env.cmd           yarn-site.xml
+hdfs-site.xml               mapred-env.`           yarn-site.xml
 ```
 
 为了配置HDFS，我们需要修改两个配置文件：**hadoop-env.sh**和**core-site.xml**  
 
-1.**设置JDK安装目录**  
-编辑文件“/usr/local/hadoop/etc/hadoop/hadoop-env.sh”，找到如下一行：  
-``export JAVA_HOME=${JAVA_HOME}``  
-将这行内容修改为：  
-``export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64``  
-这里的**“/usr/lib/jvm/java-7-openjdk-amd64”**就是JDK安装位置，如果不同，请根据实际情况更改。  
-  
-这里我们演示一遍**demo2**中的操作(实际已经配置好，演示以便学习):  
-(1)寻找jdk路径
+1、 **设置JDK安装目录**  
+编辑文件 `/usr/local/hadoop/etc/hadoop/hadoop-env.sh`，找到如下一行
+```
+export JAVA_HOME=${JAVA_HOME}
+```
+将这行内容修改为： 
+``` 
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+```
+这里的 `/usr/lib/jvm/java-7-openjdk-amd64`就是JDK安装位置，如果不同，请根据实际情况更改。  
+
+(1) 寻找jdk路径
 ```
 root@hadoop-master:/usr/local/hadoop/etc/hadoop# find / -name java
 /etc/alternatives/java
@@ -133,14 +133,15 @@ root@hadoop-master:/usr/lib/jvm/java-7-openjdk-amd64# ls
 ASSEMBLY_EXCEPTION  bin   include  lib  src.zip
 THIRD_PARTY_README  docs  jre      man
 ```
-**/usr/lib/jvm/java-7-openjdk-amd64** 即jdk路径
-``vi hadoop-env.sh``  
-(2)编辑hadoop-env.sh,修改为  
-``export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64``
+`/usr/lib/jvm/java-7-openjdk-amd64` 即jdk路径
 
-2.**指定HDFS主节点**
-编辑文件**/usr/local/hadoop/etc/hadoop/core-site.xml**
-``vi core-site.xml``
+(2) 编辑hadoop-env.sh, `vi hadoop-env.sh`   
+
+`export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64`
+
+2、 **指定HDFS主节点**  
+编辑文件 `/usr/local/hadoop/etc/hadoop/core-site.xml`  
+`vi core-site.xml`
 修改文件内容如下：
 ```xml
 <?xml version="1.0"?>
@@ -149,46 +150,69 @@ THIRD_PARTY_README  docs  jre      man
         <name>fs.defaultFS</name>
         <value>hdfs://hadoop-master:9000/</value>
     </property>
+    <property>
+          <name>io.file.buffer.size</name>
+          <value>131072</value>
+    <description> 设置缓存大小 </description>
+    </property>
+    <property>
+           <name>hadoop.tmp.dir</name>
+           <value>file:/tmp/hd2.7</value>
+           <description> 存放临时文件的目录 </description>
+    </property> 
+    <property>
+      <name>hadoop.security.authorization</name>
+      <value>false</value>
+    </property>         
 </configuration>
 ```
-实际内容是指定namenode,即demo2里我们启动的**hadoop-master**容器。一般配置中需要将修改后的配置文件通过**scp命令**拷贝至集群每个节点，因为demo2里在启动容器时已经配置好相应的配置文件，这里就不再操作。
+实际内容是指定namenode,。一般配置中需要将修改后的配置文件通过**scp命令**拷贝至集群每个节点。
 
+```
+scp /etc/hosts hadoop-slave1:/etc/hosts
+scp /etc/hosts hadoop-slave2:/etc/hosts
+```
 ### 2.4.4 启动HDFS
-demo2里由于已经完成各项配置,**start-hadoop.sh**可一键启动包括HDFS,yarn在内的各项进程。
+**start-hadoop.sh**可一键启动包括HDFS,yarn在内的各项进程。
 ```
 root@hadoop-master:~# ls
 hdfs  run-wordcount.sh  start-hadoop.sh
 ```
+将修改后的配置文件拷贝至各节点后，
 
-接下来的说明是常规配置时，在完成将修改后的配置文件拷贝至各节点后的操作:  
 (1)在master节点上格式化主节点:  
-``[root@master ~]# hdfs  namenode  -format``  
+```
+[root@master ~]# hdfs  namenode  -format
+```
+
 (2)配置slaves文件，将localhost修改为slave1~2：  
+
 ```
 [root@master ~]# vi /usr/local/hadoop/etc/hadoop/slaves
 hadoop-slave1
 hadoop-slave2
 ```
 slaves文件指定**datanode**,内容根据集群中slave节点的数量填上各个slave节点的主机名。
+
 (3)统一启动HDFS：
 ```
 root@hadoop-master:/usr/local/hadoop/sbin# ls
-distribute-exclude.sh    start-all.cmd        stop-balancer.sh
-hadoop-daemon.sh         start-all.sh         stop-dfs.cmd
+distribute-exclude.sh    start-all.`        stop-balancer.sh
+hadoop-daemon.sh         start-all.sh         stop-dfs.`
 hadoop-daemons.sh        start-balancer.sh    stop-dfs.sh
-hdfs-config.cmd          start-dfs.cmd        stop-secure-dns.sh
-hdfs-config.sh           start-dfs.sh         stop-yarn.cmd
+hdfs-config.`          start-dfs.`        stop-secure-dns.sh
+hdfs-config.sh           start-dfs.sh         stop-yarn.`
 httpfs.sh                start-secure-dns.sh  stop-yarn.sh
-kms.sh                   start-yarn.cmd       yarn-daemon.sh
+kms.sh                   start-yarn.`       yarn-daemon.sh
 mr-jobhistory-daemon.sh  start-yarn.sh        yarn-daemons.sh
-refresh-namenodes.sh     stop-all.cmd
+refresh-namenodes.sh     stop-all.`
 slaves.sh                stop-all.sh
 root@hadoop-master:/usr/local/hadoop/sbin# ./start-dfs.sh 
 ```
 
 ### 2.4.5 通过查看进程的方式验证HDFS启动成功
 通过jps命令查看各节点是否启动相应服务：  
-master:
+master上:
 ```
 root@hadoop-master:~# jps
 374 SecondaryNameNode
@@ -196,24 +220,25 @@ root@hadoop-master:~# jps
 543 ResourceManager
 1044 Jps
 ```
-(看到NameNode,SecondaryNameNode,Jps即成功启动，有ResourceManager是因为一键启动脚本启动了yarn)
+>看到NameNode,SecondaryNameNode,Jps即成功启动，有ResourceManager是因为一键启动脚本启动了yarn
 
-slave:
+slave上:
 ```
 root@hadoop-slave1:~# jps
 372 Jps
 71 DataNode
 182 NodeManager
 ```
-(看到DataNode,Jps即成功启动，有NodeManager是因为一键启动脚本启动了yarn)
+>看到DataNode,Jps即成功启动，有NodeManager是因为一键启动脚本启动了yarn
 
 ### 2.4.6 在master节点上尝试上传文件
+
 在master节点上使用hadoop命令会报错
 ```
 root@hadoop-master:~# hadoop fs -ls
 -bash: hadoop: command not found
 ```
-原因是没有配置环境变量,编辑**/etc/profile**配置环境变量(该配置也包括了对java Classpath的配置，下一个实验有讲）  
+原因是没有配置 hadoop 环境变量,编辑 `/etc/profile` 配置环境变量(该配置也包括了对java Classpath的配置）  
 在文件末尾添加:
 ```xml
 JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64/
@@ -225,9 +250,9 @@ export PATH=$PATH:$HADOOP_HOME/bin
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib:$HADOOP_HOME/lib/native"
 ```
-修改后``source /etc/profile``即可正常使用hadoop命令
+修改后 `source /etc/profile` 生效环境变量可正常使用hadoop命令
 
-上传文件：
+上传文件测试：
 ```
 root@hadoop-master:~# ls
 hdfs  input.txt  run-wordcount.sh  start-hadoop.sh
@@ -241,13 +266,6 @@ root@hadoop-master:~# hadoop fs -cat /input.txt
 test
 ```
 
-
-
-
-
-
-
-
-
+更多
 
 

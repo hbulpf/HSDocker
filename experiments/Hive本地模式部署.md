@@ -185,13 +185,13 @@ I、修改属性hive.querylog.location属性。
 ```
 
 (2)配置hive的log4j配置文件  
-``root@hadoop-master:/usr/local/hive/conf# cp hive-log4j.properties.template hive-log4j.properties``  
+`root@hadoop-master:/usr/local/hive/conf# cp hive-log4j.properties.template hive-log4j.properties`  
 
 (3)将MySQL的**JDBC驱动包**拷贝到hive的安装目录中。
 [驱动包下载][1] 
 [1]: https://downloads.mysql.com/archives/c-j/  
 这次我下的是5.1.32的版本，下载的压缩包解压后能找到jar包，将jar包拷贝至/usr/local/hive/lib目录下：  
-``sudo docker cp mysql-connector-java-5.1.32-bin.jar hadoop-master:/usr/local/hive/lib``1  
+`sudo docker cp mysql-connector-java-5.1.32-bin.jar hadoop-master:/usr/local/hive/lib`1  
 这里我是主机将jar包拷贝至master节点  
 
 (4)将hive下的jline-2.12.jar拷贝至**/usr/local/hadoop/share/hadoop/yarn/lib**目录下:  

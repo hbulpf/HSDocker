@@ -39,7 +39,7 @@ Scala把Erlang风格的基于actor的并发带进了JVM。开发者可以利用S
 ### 16.3.2 Spark Shell
 该命令用于以交互式方式编写并执行Spark App，且书写语法为Scala。  
 下面的示例命令用于进入交互式执行器，进入执行器后，即可使用Scala语句以交互式方式编写并执行Spark-App。  
-``[root@client spark]# bin/spark-shell --master spark://master:7077``  
+``[root@client spark]# bin/spark-shell --master spark://master:7077`  
 在该示例中，**写明“--master spark://master:7077”的目的是使Spark Shell进入集群模式**，若不写明，则Spark Shell会默认进入单机模式。  
 由于Spark使用Scala开发，而**Scala实际上在JVM中执行**，因此，我们搭建好Spark环境后，无需另外安装Scala组件。 
 

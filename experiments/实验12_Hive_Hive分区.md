@@ -85,7 +85,7 @@ drwxr-xr-x   - root supergroup      0 2018-07-10 11:23 /user/hive/warehouse/part
 2015-06-01  fff 2015
 2015-07-01  ggg 2015
 ```
-上传数据到HDFS:``root@hadoop-master:~# hadoop fs -put parthive.txt / ``
+上传数据到HDFS:``root@hadoop-master:~# hadoop fs -put parthive.txt / `
 导入数据:  
 ```
 hive> load data inpath '/parthive.txt' into table parthive partition(year='2015');

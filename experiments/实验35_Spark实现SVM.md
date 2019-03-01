@@ -46,7 +46,7 @@ Found 1 items
 ```  
 
 ### 35.4.2 训练SVM模型  
-首先,进入Spark Shell接口:``spark-shell --master spark://hadoop-master:7077``  
+首先,进入Spark Shell接口:``spark-shell --master spark://hadoop-master:7077`  
 
 进入Spark Shell命令行执行环境后，依次输入下述代码，即完成模型训练:  
 ```

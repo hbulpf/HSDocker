@@ -70,7 +70,7 @@ root@hadoop-master:/usr/local/redis# make install
 (输出会有很多，已省略)  
 
 接着编辑/usr/local/redis/redis.conf文件,  
-找到``bind 127.0.0.1``  将其改为本机ip``bind 172.19.0.2`` (172.19.0.2是我的master节点的ip)  
+找到`bind 127.0.0.1`  将其改为本机ip`bind 172.19.0.2` (172.19.0.2是我的master节点的ip)  
 
 最后，使用“redis-server”命令**（启动脚本在src目录下），指定上述配置文件，启动Redis:  
 ```

@@ -16,7 +16,7 @@ Storm集群和Hadoop集群表面上看很类似。但是Hadoop上运行的是Map
 一个topology会一直运行直到你手动kill掉，Storm自动重新分配执行失败的任务， 并且Storm可以保证你不会有数据丢失（如果开启了高可靠性的话）。如果一些机器意外停机它上面的所有任务会被转移到其他机器上。  
 
 运行一个topology很简单。首先，把你所有的代码以及所依赖的jar打进一个jar包。然后运行类似下面的这个命令:  
-``storm jar all-my-code.jar backtype.storm.MyTopology arg1 arg2``  
+`storm jar all-my-code.jar backtype.storm.MyTopology arg1 arg2`  
 这个命令会运行主类: backtype.strom.MyTopology, 参数是arg1, arg2。这个类的main函数定义这个topology并且把它提交给Nimbus。storm jar负责连接到Nimbus并且上传jar包。  
 
 Topology的定义是一个Thrift结构，并且Nimbus就是一个Thrift服务，你可以提交由任何语言创建的topology。上面的方面是用JVM-based语言提交的最简单的方法。  
@@ -180,10 +180,10 @@ public class WordCountTopo {
 ![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex25/Screenshot%20from%202018-08-03%2015-27-40.png)  
 
 然后，将Storm代码打成wordCount-Storm.jar(打包的时候不要包含导入的任何jar，不然会报错的，将无法运行，即：wordCount-Storm.jar中只包含上面三个类的代码)上传到主节点的**/usr/local/storm/bin目录下**，在主节点进入Storm安装目录的bin下面用以下命令提交任务：  
-``./storm jar wordCount-Storm.jar cproc.word.WordCountTopo wordCount``
+``./storm jar wordCount-Storm.jar cproc.word.WordCountTopo wordCount`
 
 使用以下命令结束storm任务:  
-``./storm kill wordCount ``
+``./storm kill wordCount `
 
 ## 25.5 实验结果  
 提交任务:  

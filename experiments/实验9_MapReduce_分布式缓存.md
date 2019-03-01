@@ -122,7 +122,7 @@ public static void main(String[] args) throws Exception {
 创建BigAndSmallTable.java，复制代码并编译。　
 
 打包成jar包:  
-``root@hadoop-master:~/experiment8# jar -cvf BigAndSmallTable.jar *.class``
+`root@hadoop-master:~/experiment8# jar -cvf BigAndSmallTable.jar *.class`
 
 ### 9.3.4 执行代码
 ```
