@@ -1,5 +1,7 @@
 ﻿# 构建车牌识别镜像
 
+## !!现在存在问题，在apt-get install libopencv-dev过程中会报错强制中断
+
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
