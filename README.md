@@ -4,10 +4,14 @@
 2. 研发基于daocloud等开源工具建立支持容器的可视化管理和监控的系统。
 3. 熟悉Hadoop，Spark集群的搭建过程，并抽取关键的配置参数作为大数据平台容器的启动参数。
 4. 实现基于容器的自定义大数据平台管理与监控系统。其核心功能为：
-	- 基本的容器监控与管理系统，
+	- 基本的容器监控与管理系统：
+        - Kubernetes DashBoard : [内网访问](https://50126.hnbdata.cn:8343)  [外网访问](https://frp.hnbdata.cn:26343)
+        - Kubernetes集群与应用监控 : [内网访问](http://50126.hnbdata.cn:8081)  [外网访问](http://frp.hnbdata.cn:26381) 管理员/密码: admin/admin
 	- 支持半自动化的大数据集群搭建,
 	- 封装hadoop和spark大数据平台组件并能组装为大数据集群
 	- 大数据集群的较强的动态伸缩能力
+
+
 
 ## 二、大数据实验
 ### 1. springboot与docker
