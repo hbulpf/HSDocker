@@ -4,51 +4,53 @@
 基于MapReduce思想，编写WordCount程序。
 
 ## 5.2 实验要求  
-1． 理解MapReduce编程思想；  
-2． 会编写MapReduce版本WordCount；  
+1． 理解 MapReduce 编程思想；  
+2． 会编写 MapReduce 版本WordCount；  
 3． 会执行该程序；  
 4． 自行分析执行过程。
 
 ## 5.3 实验原理
-MapReduce是一种计算模型，简单的说就是**将大批量的工作（数据）分解（MAP）执行，然后再将结果合并成最终结果（REDUCE）**。这样做的好处是可以在任务被分解后，可以通过大量机器进行并行计算，减少整个操作的时间。
+MapReduce是一种计算模型，简单的说就是**将大批量的工作(数据)分解(Map)执行，然后再将结果合并成最终结果(Reduce)**。这样做的好处是可以在任务被分解后通过大量机器进行并行计算，减少整个操作的时间。
 
-适用范围：数据量大，但是数据种类小可以放入内存。
+**适用范围**：数据量大，但是数据种类小可以放入内存。
 
-基本原理及要点：将数据交给不同的机器去处理，数据划分，结果归约。
+**基本原理及要点**：将数据交给不同的机器去处理，数据划分，结果归约。
 
-理解MapReduce和Yarn：在新版Hadoop中，Yarn作为一个资源管理调度框架，是Hadoop下MapReduce程序运行的生存环境。其实MapRuduce除了可以运行Yarn框架下，也可以运行在诸如Mesos，Corona之类的调度框架上，使用不同的调度框架，需要针对Hadoop做不同的适配。
+**理解MapReduce和Yarn**：在新版Hadoop中，Yarn作为一个资源管理调度框架，是Hadoop下MapReduce程序运行的生存环境。其实MapRuduce除了可以运行在Yarn框架下，也可以运行在诸如Mesos，Corona之类的调度框架上，使用不同的调度框架，需要针对Hadoop做不同的适配。
 
 一个完整的MapReduce程序在Yarn中执行过程如下：  
-（1）ResourcManager JobClient向ResourcManager提交一个job。  
-（2）ResourcManager向Scheduler请求一个供MRAppMaster运行的container，然后启动它。  
-（3）MRAppMaster启动起来后向ResourcManager注册。  
-（4）ResourcManagerJobClient向ResourcManager获取到MRAppMaster相关的信息，然后直接与MRAppMaster进行通信。  
-（5）MRAppMaster算splits并为所有的map构造资源请求。  
-（6）MRAppMaster做一些必要的MR OutputCommitter的准备工作。  
-（7）MRAppMaster向RM(Scheduler)发起资源请求，得到一组供map/reduce task运行的container，然后与NodeManager一起对每一个container执行一些必要的任务，包括资源本地化等。  
-（8）MRAppMaster 监视运行着的task 直到完成，当task失败时，申请新的container运行失败的task。  
-（9）当每个map/reduce task完成后，MRAppMaster运行MR OutputCommitter的cleanup 代码，也就是进行一些收尾工作。  
-（10）当所有的map/reduce完成后，MRAppMaster运行OutputCommitter的必要的job commit或者abort APIs。  
-（11）MRAppMaster退出。
+(1) ResourcManager JobClient 向 ResourcManager 提交一个job。  
+(2) ResourcManager 向 Scheduler 请求一个供 MRAppMaster 运行的 container，然后启动它。  
+(3) MRAppMaster 启动起来后向 ResourcManager注册。  
+(4) ResourcManagerJobClient 向 ResourcManager 获取到 MRAppMaster 相关的信息，然后直接与 MRAppMaster 进行通信。  
+(5) MRAppMaster 算 splits 并为所有的 map 构造资源请求。  
+(6) MRAppMaster 做一些必要的 MR OutputCommitter 的准备工作。  
+(7) MRAppMaster 向 RM(Scheduler) 发起资源请求，得到一组供 map/reduce task 运行的 container，然后与 NodeManager 一起对每一个 container 执行一些必要的任务，包括资源本地化等。  
+(8) MRAppMaster 监视运行着的 task 直到完成，当 task 失败时，申请新的 container 运行失败的 task。  
+(9) 当每个 map/reduce task 完成后，MRAppMaster 运行 MROutputCommitter 的 cleanup 代码，也就是进行一些收尾工作。  
+(10) 当所有的 map/reduce s完成后，MRAppMaster 运行 OutputCommitter 的必要的 job commit 或者 abort APIs 。  
+(11) MRAppMaster退出。
 
 ### 5.3.1 MapReduce编程
-编写在Hadoop中依赖Yarn框架执行的MapReduce程序，并不需要自己开发MRAppMaster和YARNRunner，因为Hadoop已经默认提供通用的YARNRunner和MRAppMaster程序， 大部分情况下只需要编写相应的Map处理和Reduce处理过程的业务程序即可。
+编写在 Hadoop 中依赖 Yarn 框架执行的 MapReduce 程序，并不需要自己开发 MRAppMaster 和 YARNRunner ，因为 Hadoop 已经默认提供通用的 YARNRunner 和 MRAppMaster 程序，大部分情况下只需要编写相应的 Map 处理和 Reduce 处理过程的业务程序即可。
 
-编写一个MapReduce程序并不复杂，关键点在于掌握分布式的编程思想和方法，主要将计算过程分为以下五个步骤：  
-（1）迭代。遍历输入数据，并将之解析成key/value对。  
-（2）将输入key/value对映射(map)成另外一些key/value对。  
-（3）依据key对中间数据进行分组(grouping)。  
-（4）以组为单位对数据进行归约(reduce)。  
-（5）迭代。将最终产生的key/value对保存到输出文件中。
+编写一个MapReduce程序并不复杂，主要将计算过程分为以下五个步骤：  
+(1)迭代。遍历输入数据，并将之解析成 key/value 对。  
+(2)将输入 key/value 对映射(map)成另外一些 key/value 对。  
+(3)依据 key 对中间数据进行分组(grouping)。  
+(4)以组为单位对数据进行归约(reduce)。  
+(5)迭代。将最终产生的key/value对保存到输出文件中。
 
 ### 5.3.2 Java API解析
-（1）InputFormat：用于描述输入数据的格式，常用的为TextInputFormat提供如下两个功能：
-数据切分： 按照某个策略将输入数据切分成若干个split，以便确定Map Task个数以及对应的split。
-为Mapper提供数据：给定某个split，能将其解析成一个个key/value对。  
-（2）OutputFormat：用于描述输出数据的格式，它能够将用户提供的key/value对写入特定格式的文件中。  
-（3）Mapper/Reducer: Mapper/Reducer中封装了应用程序的数据处理逻辑。  
-（4）Writable:Hadoop自定义的序列化接口。实现该类的接口可以用作MapReduce过程中的value数据使用。  
-（5）WritableComparable：在Writable基础上继承了Comparable接口，实现该类的接口可以用作MapReduce过程中的key数据使用。（因为key包含了比较排序的操作）。
+(1)InputFormat：用于描述输入数据的格式，常用的为 TextInputFormat 提供如下两个功能：
+```
+    1. 数据切分: 按照某个策略将输入数据切分成若干个split，以便确定 Map Task 个数以及对应的split。
+    2. 为 Mapper 提供数据: 给定某个split，能将其解析成一个个key/value对。
+```  
+(2)OutputFormat：用于描述输出数据的格式，它能够将用户提供的 key/value 对写入特定格式的文件中。  
+(3)Mapper/Reducer: Mapper/Reducer中封装了应用程序的数据处理逻辑。  
+(4)Writable:Hadoop自定义的序列化接口。实现该类的接口可以用作MapReduce过程中的value数据使用。  
+(5)WritableComparable：在Writable基础上继承了Comparable接口，实现该类的接口可以用作MapReduce过程中的key数据使用。(因为key包含了比较排序的操作)。
 
 ## 5.4 实验步骤
 本实验主要分为，确认前期准备，编写MapReduce程序，打包提交代码。查看运行结果这几个步骤，详细如下：
