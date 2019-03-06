@@ -6,7 +6,7 @@
 3．学会在Spark Shell中运行Scala程序。
 
 ## 16.2 实验要求
-实验结束后，能够编写Scala代码解决一下问题，并能够自行分析执行过程。  
+实验结束后，能够编写Scala代码解决以下问题，并能够自行分析执行过程。  
 有三个RDD，要求统计rawRDDA中“aa”、“bb”两个单词出现的次数；要求对去重后的rawRDDA再去掉rawRDDB中的内容；最后将上述两个结果合并成同一个文件然后存入HDFS中。
 
 ## 16.3 实验原理
@@ -39,8 +39,9 @@ Scala把Erlang风格的基于actor的并发带进了JVM。开发者可以利用S
 ### 16.3.2 Spark Shell
 该命令用于以交互式方式编写并执行Spark App，且书写语法为Scala。  
 下面的示例命令用于进入交互式执行器，进入执行器后，即可使用Scala语句以交互式方式编写并执行Spark-App。  
-``[root@client spark]# bin/spark-shell --master spark://master:7077`  
-在该示例中，**写明“--master spark://master:7077”的目的是使Spark Shell进入集群模式**，若不写明，则Spark Shell会默认进入单机模式。  
+`[root@client spark]# bin/spark-shell --master spark://master:7077`
+
+在该示例中，**写明 `--master spark://master:7077` 的目的是使Spark Shell进入集群模式**，若不写明，则Spark Shell会默认进入单机模式。  
 由于Spark使用Scala开发，而**Scala实际上在JVM中执行**，因此，我们搭建好Spark环境后，无需另外安装Scala组件。 
 
 ## 16.4 实验步骤

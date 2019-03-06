@@ -50,7 +50,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode)
 ### 13.4.3 安装scala
 首先要明确,JDK,hadoop,scala,spark之前的版本肯定存在**版本兼容问题**，hadoop是2.7.2的版本，不算太新也不算太旧，在网上找了spark2.1的版本（2016年发布）的安装文档，对应使用的scala版本是2.12.2.
 
-安装过程跟JDK相似，[下载tar包](https://www.scala-lang.org/download/all.html)，解压，注册环境变量。
+安装过程跟JDK相似，[下载tar包](https://www.scala-lang.org/download/all.html)，解压，导入环境变量。
 ```
 vim /etc/profile
 ```
@@ -60,7 +60,9 @@ vim /etc/profile
 export SCALA_HOME=/usr/local/scala
 export PATH=$PATH:$SCALA_HOME/bin
 ```  
-`source /etc/profile` ， 输入命令scala检测是否成功安装  
+`source /etc/profile` ，生效环境变量。
+
+输入命令scala检测是否成功安装  
 ```
 root@master:~# scala
 Welcome to Scala 2.12.2 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_171).
@@ -109,13 +111,16 @@ slave1
 slave2
 ```
 
-最后我们添加spark的环境变量, vim  /etc/profile  
+添加spark的环境变量, `vim  /etc/profile` 
 ```
 export SPARK_HOME=/usr/local/spark
 export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 ```  
-source /etc/profile  
 
+`source /etc/profile`  ，生效环境变量。
+
+在 `spark-conf.sh` 中导入 `JAVA_HOME`
+在 `spark-env.sh` 中导入 `HAOOP_CONF_DIR`
 ### 13.4.5 启动并测试spark
 在启动spark之前，先确保启动了hadoop，进入/usr/local/spark/sbin目录下启动脚本:  
 ```
@@ -175,8 +180,8 @@ Type :help for more information.
 scala> 
 ```
 
-Master节点ip为172.19.0.2,主机浏览器访问172.19.0.2:8080访问web界面:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex13/Screenshot%20from%202018-07-19%2015-37-13.png)  
+Master节点ip为 172.19.0.2 ,主机浏览器访问 172.19.0.2:8080 访问web界面:  
+![图](./images/sparkM_UI.png)  
 
 ## 13.5 实验结果
 最后我们使用spark-shell测试一个wordcount:  

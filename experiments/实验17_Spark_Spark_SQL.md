@@ -10,7 +10,7 @@
 3．练习怎么向Spark SQL中导入数据。
 
 ## 17.3 实验原理
-Spark SQL用于以交互式方式编写并执行Spark SQL，且书写语法为类SQL，同Spark Shell一样，启动时写明“--master spark://master:7077”则进入集群模式，否则默认进入单机模式。由于默认安装的Spark已经包含了Spark SQL，故无需安装其它组件，直接执行即可。  
+Spark SQL用于以交互式方式编写并执行Spark SQL，且书写语法为类SQL，同Spark Shell一样，启动时写明 `--master spark://master:7077` 进入集群模式，否则默认进入单机模式。由于默认安装的Spark已经包含了Spark SQL，故无需安装其它组件，直接执行即可。  
 
 Spark SQL使得运行SQL和HiveQL查询十分简单。Spark SQL能够轻易地定位相应的表和元数据。Spark SQL为Spark提供了查询结构化数据的能力，查询时既可以使用SQL也可以使用人们熟知的DataFrame API（RDD）。Spark SQL支持多语言编程包括Java、Scala、Python及R，开发人员可以根据自身喜好进行选择。  
 
