@@ -80,12 +80,12 @@ NOTICE.txt   bin         include  libexec  sbin
 ### 2.4.2 确认各节点之间可SSH免密登录
 使用ssh工具登录到各个节点，执行命令ssh 主机名，确认每个均可SSH免密登录。**(demo2里创建了bridge连接各个容器，每个节点也各自生成了密钥，是可以通过ssh互通的)**
 ```
-root@master:/usr/local/hadoop# ssh hadoop-slave1
-Warning: Permanently added 'hadoop-slave1,172.19.0.3' (ECDSA) to the list of known hosts.
+root@master:/usr/local/hadoop# ssh slave1
+Warning: Permanently added 'slave1,172.19.0.3' (ECDSA) to the list of known hosts.
 Welcome to Ubuntu 14.04.4 LTS (GNU/Linux 4.13.0-39-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com/
-root@hadoop-slave1:~# 
+root@slave1:~# 
 ```
 
 ### 2.4.3  修改HDFS配置文件
@@ -169,8 +169,8 @@ THIRD_PARTY_README  docs  jre      man
 实际内容是指定namenode,。一般配置中需要将修改后的配置文件通过**scp命令**拷贝至集群每个节点。
 
 ```
-scp /etc/hosts hadoop-slave1:/etc/hosts
-scp /etc/hosts hadoop-slave2:/etc/hosts
+scp /etc/hosts slave1:/etc/hosts
+scp /etc/hosts slave2:/etc/hosts
 ```
 ### 2.4.4 启动HDFS
 **start-hadoop.sh**可一键启动包括HDFS,yarn在内的各项进程。
@@ -189,8 +189,8 @@ hdfs  run-wordcount.sh  start-hadoop.sh
 
 ```
 [root@master ~]# vi /usr/local/hadoop/etc/hadoop/slaves
-hadoop-slave1
-hadoop-slave2
+slave1
+slave2
 ```
 slaves文件指定**datanode**,内容根据集群中slave节点的数量填上各个slave节点的主机名。
 
@@ -224,7 +224,7 @@ root@master:~# jps
 
 slave上:
 ```
-root@hadoop-slave1:~# jps
+root@slave1:~# jps
 372 Jps
 71 DataNode
 182 NodeManager

@@ -65,7 +65,7 @@ public class Main {
         //获得HBase连接
         Configuration configuration = HBaseConfiguration.create();
         Connection connection;
-        configuration.set("hbase.zookeeper.quorum", "master:2181,hadoop-slave1:2181,hadoop-slave2:2181");
+        configuration.set("hbase.zookeeper.quorum", "master:2181,slave1:2181,slave2:2181");
         configuration.set("zookeeper.znode.parent", "/hbase");
 
         try{

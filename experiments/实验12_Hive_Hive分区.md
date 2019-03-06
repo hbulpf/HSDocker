@@ -4,10 +4,10 @@
 掌握Hive分区的用法，加深对Hive分区概念的理解，了解Hive表在HDFS的存储目录结构。
 
 ## 12.2 实验要求
-创建一个Hive分区表；根据数据年份创建year=2014和year=2015两个分区；将2015年的数据导入到year=2015的分区；在Hive界面用条件year=2015查询2015年的数据。
+创建一个Hive分区表；根据数据年份创建 year=2014 和 year=2015 两个分区；将2015年的数据导入到 year=2015 的分区；在Hive界面用条件 year=2015 查询2015年的数据。
 
 ## 12.3 实验原理
-分区(Partition)对应于数据库中的分区(Partition)列的密集索引，但是Hive中分区(Partition)的组织方式和数据库中的很不相同。在Hive中，**表中的一个分区(Partition)对应于表下的一个目录**，所有的分区(Partition)的数据都存储在对应的目录中。例如：pvs表中包含ds和ctry两个分区(Partition)，则对应于 ds = 20090801, ctry = US的HDFS子目录为：/wh/pvs/ds=20090801/ctry=US；对应于 ds = 20090801, ctry = CA的HDFS子目录为；/wh/pvs/ds=20090801/ctry=CA。
+分区(Partition)对应于数据库中的分区(Partition)列的密集索引，但是Hive中分区(Partition)的组织方式和数据库中的很不相同。在Hive中，**表中的一个分区(Partition)对应于表下的一个目录**，所有的分区(Partition)的数据都存储在对应的目录中。例如：pvs 表中包含 ds 和 ctry 两个分区(Partition)，则对应于 ds = 20090801, ctry = US的 HDFS 子目录为：/wh/pvs/ds=20090801/ctry=US；对应于 ds = 20090801, ctry = CA的HDFS子目录为；/wh/pvs/ds=20090801/ctry=CA。
 
 外部表(External Table)指向已经在HDFS中存在的数据，可以创建分区(Partition)。它和Table在元数据的组织上是相同的，而实际数据的存储则有较大的差异。  
 
@@ -30,7 +30,7 @@ Time taken: 0.022 seconds
 
 在命令端创建Hive分区表:  
 ```
-hive> create table parthive(createdate string, value string)partitioned by(year string) row format delimited fields terminated by "\t";
+hive> create table parthive(createdate string, value string) partitioned by(year string) row format delimited fields terminated by "\t";
 OK
 Time taken: 0.238 seconds
 hive> show tables;
@@ -85,7 +85,7 @@ drwxr-xr-x   - root supergroup      0 2018-07-10 11:23 /user/hive/warehouse/part
 2015-06-01  fff 2015
 2015-07-01  ggg 2015
 ```
-上传数据到HDFS:``root@master:~# hadoop fs -put parthive.txt / `
+上传数据到HDFS:`root@master:~# hadoop fs -put parthive.txt / `
 导入数据:  
 ```
 hive> load data inpath '/parthive.txt' into table parthive partition(year='2015');
@@ -136,4 +136,4 @@ OK
 7
 Time taken: 18.684 seconds, Fetched: 1 row(s)
 ```
-直接翻译成了一个mapreduce任务，得出最终结果7。
+输出表明Hive将处理过程翻译成了一个mapreduce任务，得出最终结果。

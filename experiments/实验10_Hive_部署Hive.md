@@ -25,10 +25,12 @@ Hive本质上相当于一个MapReduce和HDFS的翻译终端，用户提交Hive�
 
 由上述执行过程可知，Hive的核心是其运行时环境，该环境能够将类SQL语句编译成MapReduce。  
 
-Hive构建在基于静态批处理的Hadoop之上，Hadoop通常都有较高的延迟并且在作业提交和调度的时候需要大量的开销。因此，Hive并不能够在大规模数据集上实现低延迟快速的查询，例如，Hive在几百MB的数据集上执行查询一般有分钟级的时间延迟。因此，**Hive并不适合那些需要低延迟的应用**，例如，联机事务处理（OLTP）。Hive查询操作过程严格遵守Hadoop MapReduce的作业执行模型，Hive将用户的HiveQL 语句通过解释器转换为MapReduce作业提交到Hadoop集群上，Hadoop监控作业执行过程，然后返回作业执行结果给用户。Hive并非为联机事务处理而设计，Hive并不提供实时的查询和基于行级的数据更新操作。**Hive的最佳使用场合是大数据集的批处理作业**，例如，网络日志分析。  
+Hive构建在基于静态批处理的Hadoop之上，Hadoop通常都有较高的延迟并且在作业提交和调度的时候需要大量的开销。因此，Hive并不能够在大规模数据集上实现低延迟快速的查询，例如，Hive在几百MB的数据集上执行查询一般有分钟级的时间延迟。因此，**Hive并不适合那些需要低延迟的应用**，例如，联机事务处理（OLTP）。
+
+Hive查询操作过程严格遵守Hadoop MapReduce的作业执行模型，Hive将用户的HiveQL 语句通过解释器转换为MapReduce作业提交到Hadoop集群上，Hadoop监控作业执行过程，然后返回作业执行结果给用户。Hive并非为联机事务处理而设计，Hive并不提供实时的查询和基于行级的数据更新操作。**Hive的最佳使用场合是大数据集的批处理作业**，例如，网络日志分析。  
 
 Hive架构与基本组成如图10-1所示：  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex10/1.jpg)
+![图](./images/10-1.jpg)
 
 ## 10.4 实验步骤
 相对于其他组件，Hive部署要复杂得多，按metastore存储位置的不同，其部署模式分为**内嵌模式**、**本地模式**和**完全远程模式**三种。当使用完全模式时，可以**提供很多用户同时访问并操作Hive**，并且此模式还提供各类接口（BeeLine，CLI，甚至是Pig），这里我们以内嵌模式为例。
@@ -49,7 +51,9 @@ apache-hive-1.2.2-bin.tar.gz  run-wordcount.sh
 root@master:~# mv apache-hive-1.2.2-bin /usr/local/hive
 ```
 
-### 10.4.2 设定HIVE_HOME环境变量,修改/etc/profile:  
+### 10.4.2 设定HIVE_HOME环境变量
+
+修改/etc/profile:  
 ```
 export HIVE_HOME=/usr/local/hive
 export PATH=$PATH:$HIVE_HOME/bin

@@ -76,8 +76,8 @@ clientPort=2181
 # Set to "0" to disable auto purge feature
 #autopurge.purgeInterval=1
 server.1=master:2888:3888
-server.2=hadoop-slave1:2888:3888
-server.3=hadoop-slave2:2888:3888
+server.2=slave1:2888:3888
+server.3=slave2:2888:3888
 ```
 
 要修改的不多，就是指定dataDir路径跟添加最后的三个server.id,这个id(即1,2,3)很关键，后面会用上。  
@@ -92,19 +92,19 @@ root@master:/usr/local/zookeeper/data# cat myid
 
 这只是完成了master容器的zookeeper配置，通过scp命令将zookeeper整个目录传入slave1跟slave2容器并修改各自的myid文件为对应的id。
 ```
-root@master:/usr/local# scp -r /usr/local/zookeeper hadoop-slave1:/usr/local
-root@master:/usr/local# scp -r /usr/local/zookeeper hadoop-slave2:/usr/local
+root@master:/usr/local# scp -r /usr/local/zookeeper slave1:/usr/local
+root@master:/usr/local# scp -r /usr/local/zookeeper slave2:/usr/local
 ```
 
 登录slave节点修改myid文件:  
 ```
-root@master:/usr/local# ssh hadoop-slave1
-root@hadoop-slave1:~# cd /usr/local/zookeeper/data
-root@hadoop-slave1:/usr/local/zookeeper/data# vim myid
+root@master:/usr/local# ssh slave1
+root@slave1:~# cd /usr/local/zookeeper/data
+root@slave1:/usr/local/zookeeper/data# vim myid
 
-root@hadoop-slave1:/usr/local/zookeeper/data# ssh hadoop-slave2
-root@hadoop-slave2:~# cd /usr/local/zookeeper/data
-root@hadoop-slave2:/usr/local/zookeeper/data# vim myid 
+root@slave1:/usr/local/zookeeper/data# ssh slave2
+root@slave2:~# cd /usr/local/zookeeper/data
+root@slave2:/usr/local/zookeeper/data# vim myid 
 ```  
 
 ### 20.4.4 启动zookeeper集群
@@ -125,23 +125,23 @@ ZooKeeper JMX enabled by default
 Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
 Mode: follower
 
-root@hadoop-slave1:/usr/local/zookeeper/bin# ./zkServer.sh status
+root@slave1:/usr/local/zookeeper/bin# ./zkServer.sh status
 ZooKeeper JMX enabled by default
 Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
 Mode: leader
 
-root@hadoop-slave2:/usr/local/zookeeper/bin# ./zkServer.sh status
+root@slave2:/usr/local/zookeeper/bin# ./zkServer.sh status
 ZooKeeper JMX enabled by default
 Using config: /usr/local/zookeeper/bin/../conf/zoo.cfg
 Mode: follower
 ```
 
-可看到最终是hadoop-slave1节点为leader。
+可看到最终是slave1节点为leader。
 
 ## 20.5 基本操作  
 在其中一台机器上执行客户端脚本,这里我们选择master节点:  
 ```
-root@master:/usr/local/zookeeper/bin# ./zkCli.sh -server master:2181,hadoop-slave1:2181,hadoop-slave2:2181
+root@master:/usr/local/zookeeper/bin# ./zkCli.sh -server master:2181,slave1:2181,slave2:2181
 ```
 后面出现一大串，成功进入客户端后可输入其他指令。
 
@@ -149,13 +149,13 @@ root@master:/usr/local/zookeeper/bin# ./zkCli.sh -server master:2181,hadoop-slav
 ```
 create /testZK ""
 Created /testZK
-[zk: master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 1] ls /
+[zk: master:2181,slave1:2181,slave2:2181(CONNECTED) 1] ls /
 [zookeeper, testZK]
 ```
 
 向/testZk目录写数据：  
 ```
-[zk: master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 2] set /testZK 'aaa'
+[zk: master:2181,slave1:2181,slave2:2181(CONNECTED) 2] set /testZK 'aaa'
 cZxid = 0x100000002
 ctime = Fri Jul 27 07:59:30 UTC 2018
 mZxid = 0x100000003
@@ -171,7 +171,7 @@ numChildren = 0
 
 读取/testZk目录数据：  
 ```
-[zk: master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 4] get /testZK
+[zk: master:2181,slave1:2181,slave2:2181(CONNECTED) 4] get /testZK
 aaa
 cZxid = 0x100000002
 ctime = Fri Jul 27 07:59:30 UTC 2018
@@ -188,14 +188,14 @@ numChildren = 0
 
 删除/testZk目录：  
 ```
-[zk: master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 5] rmr /testZK
-[zk: master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 6] ls /
+[zk: master:2181,slave1:2181,slave2:2181(CONNECTED) 5] rmr /testZK
+[zk: master:2181,slave1:2181,slave2:2181(CONNECTED) 6] ls /
 [zookeeper]
 ```  
 
 在客户端shell下用quit命令退出客户端：  
 ```
-[zk: master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 7] quit
+[zk: master:2181,slave1:2181,slave2:2181(CONNECTED) 7] quit
 Quitting...
 2018-07-27 08:03:50,654 [myid:] - INFO  [main:ZooKeeper@684] - Session: 0x364daa6c2520000 closed
 2018-07-27 08:03:50,657 [myid:] - INFO  [main-EventThread:ClientCnxn$EventThread@519] - EventThread shut down for session: 0x364daa6c2520000

@@ -1,21 +1,21 @@
 ﻿# 实验十一 Hive实验：新建Hive表
 ## 11.1 实验目的
-1.学会创建Hive的表；  
-2.显示Hive中的所有表；  
-3.显示Hive中表的列项；  
-4.修改Hive中的表并能够删除Hive中的表。
+1. 学会创建Hive的表；  
+2. 显示Hive中的所有表；  
+3. 显示Hive中表的列项；  
+4. 修改Hive中的表并能够删除Hive中的表。
 
 ## 11.2 实验要求
-1.要求实验结束时；  
-2.每位学生均能够完成Hive的DDL操作；  
-3.能够在Hive中新建，显示，修改和删除表等功能。
+1. 要求实验结束时；  
+2. 每位学生均能够完成Hive的DDL操作；  
+3. 能够在Hive中新建，显示，修改和删除表等功能。
 
 ## 11.3 实验原理
 Hive没有专门的数据存储格式，也没有为数据建立索引，用户可以非常自由的组织Hive中的表，只需要在创建表的时候告诉Hive数据中的列分隔符和行分隔符，Hive就可以解析数据。  
 
 Hive中所有的数据都存储在HDFS中，Hive中包含以下数据模型：**表(Table)，外部表(External Table)，分区(Partition)，桶(Bucket)**。  
 
-Hive中Table和数据库中Table在概念上是类似的，**每一个Table在Hive中都有一个相应的目录存储数据**。例如，一个表pvs，它在HDFS 中的路径为：/wh/pvs，其中，wh是在hive-site.xml中由${hive.metastore.warehouse.dir}指定的数据仓库的目录，所有的Table数据（不包括External Table)都保存在这个目录中。
+Hive中Table和数据库中Table在概念上是类似的，**每一个Table在Hive中都有一个相应的目录存储数据**。例如，一个表pvs，它在HDFS 中的路径为：/wh/pvs，其中，wh是在 hive-site.xml 中由 `${hive.metastore.warehouse.dir}` 指定的数据仓库的目录，所有的Table数据（不包括External Table)都保存在这个目录中。
 
 ## 11.4 实验步骤
 
@@ -36,7 +36,7 @@ OK
 Time taken: 1.096 seconds
 ```
 
-创建一个有两个实体列和一个（虚拟）分区字段的invites表：  
+创建一个有两个实体列和一个（虚拟）分区字段的 invites 表：  
 ```
 hive> CREATE TABLE invites(foo INT, bar STRING) PARTITIONED BY(ds STRING);
 OK
@@ -78,7 +78,7 @@ Time taken: 0.195 seconds, Fetched: 8 row(s)
 ```
 
 ### 11.4.5 更改表
-修改表events名为3koobecaf (自行创建任意类型events表)：
+修改表 events 名为 3koobecaf (自行创建任意类型events表)：
 ```
 hive> create table events(foo int, bar int);
 OK
@@ -94,7 +94,7 @@ pokes
 Time taken: 0.018 seconds, Fetched: 3 row(s)
 ```
 
-将pokes表新增一列(列名为new_col,类型为int):
+将 pokes 表新增一列(列名为new_col,类型为int):
 ```
 hive> alter table pokes add columns(new_col int);
 OK
@@ -107,7 +107,7 @@ new_col             	int
 Time taken: 0.064 seconds, Fetched: 3 row(s)
 ```
 
-将invites表新增一列（列名为new_col2，类型为INT），同时增加注释“a comment”：  
+将 invites 表新增一列（列名为new_col2，类型为INT），同时增加注释“a comment”：  
 ```
 hive> alter table invites add columns(new_col2 int comment 'a comment');
 OK
@@ -126,7 +126,7 @@ ds                  	string
 Time taken: 0.068 seconds, Fetched: 9 row(s)
 ```
 
-替换invites表所有列名（数据不动):  
+替换 invites 表所有列名（数据不动):  
 ```
 hive> alter table invites replace columns(foo int, bar string, baz int comment 'baz replaces new_col2');
 OK
@@ -144,11 +144,11 @@ ds                  	string
 ds                  	string              	                    
 Time taken: 0.057 seconds, Fetched: 9 row(s)
 ```
-可以看到new_col2被替换成了baz
+可以看到 new_col2 被替换成了 baz
 
 
 ### 11.4.6 删除表（或列）
-删除invites表bar 和 baz 两列：
+删除 invites 表 bar 和 baz 两列：
 ```
 hive> alter table invites replace columns(foo int comment'only keep the first column');
 OK

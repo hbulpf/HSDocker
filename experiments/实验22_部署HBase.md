@@ -24,8 +24,8 @@ HBase依赖于HDFS和Zookeeper, 这次实验直接使用spark集成集群安装H
 ykk@ykk-TN15S:~/team/docker-hadoop/hadoop-cluster-docker$ ./start-container.sh 
 [sudo] password for ykk: 
 start master container...
-start hadoop-slave1 container...
-start hadoop-slave2 container...
+start slave1 container...
+start slave2 container...
 
 root@master:~# ./start-hadoop.sh 
 ```  
@@ -47,8 +47,8 @@ export PATH=$PATH:$HBASE_HOME/bin
 
 修改hosts文件: vi /etc/hosts:  
 ```
-172.19.0.3      hadoop-slave1
-172.19.0.4      hadoop-slave2
+172.19.0.3      slave1
+172.19.0.4      slave2
 ```  
 末尾添加,ip根据实际情况决定。
 
@@ -78,7 +78,7 @@ export HBASE_MANAGES_ZK=true
  </property>
  <property>
   <name>hbase.zookeeper.quorum</name>
-  <value>master,hadoop-slave1,hadoop-slave2</value>
+  <value>master,slave1,slave2</value>
   <!-- 指定的主机均会启动Zookeeper的进程 -->
  </property>
   <name>hbase.tmp.dir</name>
@@ -90,31 +90,31 @@ export HBASE_MANAGES_ZK=true
 
 (3)**regionservers**:  去掉localhost,添加slave节点主机名
 ```
-hadoop-slave1
-hadoop-slave2
+slave1
+slave2
 ```
 
-通过scp命令将hbase传至hadoop-slave1和hadoop-slave2节点:  
+通过scp命令将hbase传至slave1和slave2节点:  
 ```
-root@master:~# scp -r /usr/local/hbase hadoop-slave1:/usr/local/
-root@master:~# scp -r /usr/local/hbase hadoop-slave2:/usr/local/
+root@master:~# scp -r /usr/local/hbase slave1:/usr/local/
+root@master:~# scp -r /usr/local/hbase slave2:/usr/local/
 ```
 
 ## 22.4.3 启动HBase:  
 进入/usr/local/hbase/bin目录,**启动脚本start-hbase.sh**
 ```
 root@master:/usr/local/hbase/bin# ./start-hbase.sh 
-hadoop-slave2: Warning: Permanently added 'hadoop-slave2,172.19.0.4' (ECDSA) to the list of known hosts.
+slave2: Warning: Permanently added 'slave2,172.19.0.4' (ECDSA) to the list of known hosts.
 master: Warning: Permanently added 'master,172.19.0.2' (ECDSA) to the list of known hosts.
-hadoop-slave1: Warning: Permanently added 'hadoop-slave1,172.19.0.3' (ECDSA) to the list of known hosts.
+slave1: Warning: Permanently added 'slave1,172.19.0.3' (ECDSA) to the list of known hosts.
 master: starting zookeeper, logging to /usr/local/hbase/bin/../logs/hbase-root-zookeeper-master.out
-hadoop-slave2: starting zookeeper, logging to /usr/local/hbase/bin/../logs/hbase-root-zookeeper-hadoop-slave2.out
-hadoop-slave1: starting zookeeper, logging to /usr/local/hbase/bin/../logs/hbase-root-zookeeper-hadoop-slave1.out
+slave2: starting zookeeper, logging to /usr/local/hbase/bin/../logs/hbase-root-zookeeper-slave2.out
+slave1: starting zookeeper, logging to /usr/local/hbase/bin/../logs/hbase-root-zookeeper-slave1.out
 starting master, logging to /usr/local/hbase/logs/hbase-root-master-master.out
-hadoop-slave2: Warning: Permanently added 'hadoop-slave2,172.19.0.4' (ECDSA) to the list of known hosts.
-hadoop-slave1: Warning: Permanently added 'hadoop-slave1,172.19.0.3' (ECDSA) to the list of known hosts.
-hadoop-slave1: starting regionserver, logging to /usr/local/hbase/bin/../logs/hbase-root-regionserver-hadoop-slave1.out
-hadoop-slave2: starting regionserver, logging to /usr/local/hbase/bin/../logs/hbase-root-regionserver-hadoop-slave2.out
+slave2: Warning: Permanently added 'slave2,172.19.0.4' (ECDSA) to the list of known hosts.
+slave1: Warning: Permanently added 'slave1,172.19.0.3' (ECDSA) to the list of known hosts.
+slave1: starting regionserver, logging to /usr/local/hbase/bin/../logs/hbase-root-regionserver-slave1.out
+slave2: starting regionserver, logging to /usr/local/hbase/bin/../logs/hbase-root-regionserver-slave2.out
 ```  
 
 通过jps命令查看是否成功启动:  
@@ -133,7 +133,7 @@ root@master:/usr/local/hbase/bin# jps
 
 slave节点:  
 ```
-root@hadoop-slave1:~# jps
+root@slave1:~# jps
 1356 HQuorumPeer
 1468 HRegionServer
 72 DataNode
@@ -189,8 +189,8 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 172.19.0.2      master
-172.19.0.3      hadoop-slave1
-172.19.0.4      hadoop-slave2
+172.19.0.3      slave1
+172.19.0.4      slave2
 ```
 
 创建表:  

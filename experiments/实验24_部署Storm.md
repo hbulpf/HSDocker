@@ -40,8 +40,8 @@ Storm简介：**Storm是一个分布式的、高容错的基于数据流的实�
 ########### These MUST be filled in for a storm configuration
  storm.zookeeper.servers:
      - "master"
-     - "hadoop-slave1"
-     - "hadoop-slave2"
+     - "slave1"
+     - "slave2"
 # 
  nimbus.seeds: ["master"]
 # 
@@ -52,8 +52,8 @@ Storm简介：**Storm是一个分布式的、高容错的基于数据流的实�
 
 通过scp命令拷贝至slave节点:  
 ```
-root@master:~# scp -r /usr/local/storm hadoop-slave1:/usr/local/
-root@master:~# scp -r /usr/local/storm hadoop-slave2:/usr/local/
+root@master:~# scp -r /usr/local/storm slave1:/usr/local/
+root@master:~# scp -r /usr/local/storm slave2:/usr/local/
 ```  
 
 启动storm:(首先要先启动好zookeeper)  
@@ -67,7 +67,7 @@ root@master:/usr/local/storm/bin# ./storm ui >/dev/null 2>&1 &
 
 在slave节点: 进入bin目录:  
 ```
-root@hadoop-slave1:/usr/local/storm/bin# ./storm supervisor >/dev/null 2>&1 &
+root@slave1:/usr/local/storm/bin# ./storm supervisor >/dev/null 2>&1 &
 ```  
 **启动supervisor服务**
 
@@ -85,7 +85,7 @@ root@master:/usr/local/storm/bin# jps
 
 slave:  
 ```
-root@hadoop-slave1:/usr/local/storm/bin# jps  
+root@slave1:/usr/local/storm/bin# jps  
 70 QuorumPeerMain
 123 Supervisor
 332 Jps

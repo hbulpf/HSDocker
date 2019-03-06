@@ -51,43 +51,11 @@
 1. [实验42_贷款风险评估](./实验42_贷款风险评估.md)
 
 # 实验过程中的问题
-## 1.实验镜像使用
-实验过程中主要制作了两个镜像:  
 
-demo_3 hadoop-spark集成镜像:  
-1.JDK 1.8  
-2.hadoop 2.7.2  
-3.scala 2.12.2  
-4.spark 2.1.0 
-
-镜像大小:1.99G
-使用方法: /etc/profile文件已经修改，启动集群后最好先source /etc/profile，然后根据需要启动hadoop或spark  
-
-demo_4 storm镜像:  
-1.JDK 1.8  
-2.zookeeper 3.4.10  
-3.storm 1.1.0  
-
-镜像大小:1.17G
-使用方法: 启动脚本都已经放在根目录，先启动zookeeper，再启动storm  
-
-实验过程中使用过的hadoop生态圈的组件像是Hive,HBase还没有集成进这些镜像里，到时若需要使用可改进这些镜像。  
-
-## 2.提醒  
-在实验过程中是demo2,demo3,demo4镜像都有拿来做实验的。  
-
-实验1~12 当时都是在demo2上完成的，但是demo2 JDK版本比较旧，然后也没安装vim(vi特别不好用), 推荐的话还是用demo3去完成实验。  
-
-实验13~19 做到这里要频繁使用spark，就编写了Dockerfile 写了demo3的镜像，可以直接用。  
-
-实验24~25 用到storm，可以直接使用demo4完成实验。  
-
-其他一些部件，像是Hive,HBase,Flume,Karfa,Pig,MongoDB等都只是在demo3镜像创建的集群的master节点上安装并实验了一遍，并没有保留或写成Dockerfile(之后如果有需要的话可以完善Dockerfile)。
-
-## 3.实验中遇到的问题  
+## 实验中遇到的问题  
 
 ### **实验1~4:**   
-比较基础，没有太大问题，比较不好理解的是实验4的Distributed shell  
+Hadoop基础实验，没有太大问题，比较不好理解的是实验4的 Distributed shell 
 
 ### **实验5~9:**  
 都是mapreduce实验，都是需要实际进行代码编写,如果用javac命令进行编译要注意修改/etc/profile的CLASSPATH部分，实验中也有讲到。  
@@ -97,7 +65,7 @@ hadoop-common-2.7.2.jar, hadoop-mapreduce-client-core-2.7.2.jar
 **common jar包在/usr/local/hadoop/share/hadoop/common/目录下  
 mapreduce jar包在/usr/local/hadoop/share/hadoop/mapreduce/目录下**  
 
-代码上的话实验6跟实验8代码比较难理解，实验8实验结果也一直有乱码出现(个人觉得代码上应该是没有错误的)  
+>代码上的话实验6跟实验8代码比较难理解，实验8实验结果也一直有乱码出现(个人觉得代码上应该是没有错误的)  
 
 ### **实验10~12:**   
 Hive实验部分,主要是安装部署和一些基本操作。  
@@ -123,8 +91,7 @@ zookeeper的安装部署和一些基本操作，实验内容比较简单。
 HBase实验，实验内容比较简单，就是安装部署和一些简单使用，**唯一要注意的比较奇怪的点是在实验22里使用HBase Shell时如果事先没有修改/etc/hosts文件添加主机域名的映射会无法正常使用**。  
 
 ### **实验24~25:**  
-Storm实验，因为storm跟hadoop,spark没有什么关系，所以单独制作了镜像demo4。  
-实验内容也不是很复杂，跟着实验去做即可。  
+Storm实验，因为storm跟hadoop,spark没有什么关系，所以单独制作了镜像demo4。 实验内容也不是很复杂。  
 
 ### **实验26~28:**  
 都是一些组件的安装部署和简单使用。  

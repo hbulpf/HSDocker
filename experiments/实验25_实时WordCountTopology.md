@@ -216,9 +216,9 @@ Running: /usr/local/java/bin/java -client -Ddaemon.name= -Dstorm.options= -Dstor
 
 Storm任务执行时，可以查看Storm 日志文件，日志里面打印了统计的单词结果，**运行日志保存在worker.log里，该文件只存在于从节点**，进入从节点的**/usr/local/storm/logs/workers-artifacts/wordCount-1-1533279993/6700**目录:  
 ```
-root@hadoop-slave1:/usr/local/storm/logs/workers-artifacts/wordCount-1-1533279993/6700# ls
+root@slave1:/usr/local/storm/logs/workers-artifacts/wordCount-1-1533279993/6700# ls
 gc.log.0.current  worker.log  worker.log.err  worker.log.metrics  worker.log.out  worker.pid  worker.yaml
-root@hadoop-slave1:/usr/local/storm/logs/workers-artifacts/wordCount-1-1533279993/6700# cat worker.log
+root@slave1:/usr/local/storm/logs/workers-artifacts/wordCount-1-1533279993/6700# cat worker.log
 ```  
 
 以下是部分结果:  

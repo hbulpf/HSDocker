@@ -74,7 +74,7 @@ root@master:~# jps
 
 **slave**:
 ```
-root@hadoop-slave1:~# jps
+root@slave1:~# jps
 71 DataNode
 182 NodeManager
 499 Jps
