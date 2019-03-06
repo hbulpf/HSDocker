@@ -68,14 +68,14 @@ sudo apt-get install make
 
 完成后解压tar包至/usr/local/leveldb目录，执行make命令:  
 ```
-root@hadoop-master:/usr/local/leveldb# ls
+root@master:/usr/local/leveldb# ls
 AUTHORS  CONTRIBUTING.md  LICENSE  Makefile  NEWS  README.md  TODO  build_detect_platform  db  doc  helpers  include  issues  port  table  util
-root@hadoop-master:/usr/local/leveldb# make
+root@master:/usr/local/leveldb# make
 ```  
 
 编译完成后:  
 ```
-root@hadoop-master:/usr/local/leveldb# ls
+root@master:/usr/local/leveldb# ls
 AUTHORS          LICENSE   NEWS       TODO             build_detect_platform  doc      include  out-shared  port   util
 CONTRIBUTING.md  Makefile  README.md  build_config.mk  db                     helpers  issues   out-static  table
 ```  
@@ -107,20 +107,20 @@ ls /usr/lib/libleveldb.so*
 ```  
 
 ``` 
-root@hadoop-master:/usr/local/leveldb/out-shared# ls /usr/lib/libleveldb.so*
+root@master:/usr/local/leveldb/out-shared# ls /usr/lib/libleveldb.so*
 /usr/lib/libleveldb.so  /usr/lib/libleveldb.so.1  /usr/lib/libleveldb.so.1.20
 ```
   
 ### 32.4.2 使用leveldb  
 在leveldb安装目录下创建一个code的文件夹作为代码编写的目录  
 ```
-root@hadoop-master:/usr/local/leveldb# mkdir code
-root@hadoop-master:/usr/local/leveldb# cd code/
+root@master:/usr/local/leveldb# mkdir code
+root@master:/usr/local/leveldb# cd code/
 ```
 
 利用vim编写leveldb.cpp代码:  
 ```
-root@hadoop-master:/usr/local/leveldb/code# vim leveldb.cpp
+root@master:/usr/local/leveldb/code# vim leveldb.cpp
 ```  
 
 完整代码:  
@@ -164,11 +164,11 @@ int main(void)
 
 编写完代码后编译:  
 ```
-root@hadoop-master:/usr/local/leveldb/code# g++ -o leveldb leveldb.cpp ../out-static/libleveldb.a -lpthread -I../include
+root@master:/usr/local/leveldb/code# g++ -o leveldb leveldb.cpp ../out-static/libleveldb.a -lpthread -I../include
 ```
 编译完后会生成文件leveldb:  
 ```
-root@hadoop-master:/usr/local/leveldb/code# ls
+root@master:/usr/local/leveldb/code# ls
 leveldb  leveldb.cpp 
 ```
 
@@ -216,12 +216,12 @@ delete db;
 ## 32.5 实验结果  
 输入 ./leveldb 运行程序查看结果:  
 ```
-root@hadoop-master:/usr/local/leveldb/code# ./leveldb 
+root@master:/usr/local/leveldb/code# ./leveldb 
 value :clearday
 weather NotFound: 
-root@hadoop-master:/usr/local/leveldb/code# ls
+root@master:/usr/local/leveldb/code# ls
 leveldb  leveldb.cpp  test_level_db
-root@hadoop-master:/usr/local/leveldb/code# ls test_level_db/
+root@master:/usr/local/leveldb/code# ls test_level_db/
 000003.log  CURRENT  LOCK  LOG  MANIFEST-000002
 ```
 

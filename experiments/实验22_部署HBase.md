@@ -23,11 +23,11 @@ HBase依赖于HDFS和Zookeeper, 这次实验直接使用spark集成集群安装H
 ```
 ykk@ykk-TN15S:~/team/docker-hadoop/hadoop-cluster-docker$ ./start-container.sh 
 [sudo] password for ykk: 
-start hadoop-master container...
+start master container...
 start hadoop-slave1 container...
 start hadoop-slave2 container...
 
-root@hadoop-master:~# ./start-hadoop.sh 
+root@master:~# ./start-hadoop.sh 
 ```  
 
 ### 22.4.2 安装部署HBase
@@ -35,8 +35,8 @@ root@hadoop-master:~# ./start-hadoop.sh
 
 解压tar包至目录/usr/local/hbase:  
 ```
-root@hadoop-master:~# tar -zxvf hbase-1.2.6-bin.tar.gz
-root@hadoop-master:~# mv hbase-1.2.6 /usr/local/
+root@master:~# tar -zxvf hbase-1.2.6-bin.tar.gz
+root@master:~# mv hbase-1.2.6 /usr/local/
 ```
 
 添加环境变量: vi /etc/profile
@@ -68,7 +68,7 @@ export HBASE_MANAGES_ZK=true
 <configuration>
  <property>
   <name>hbase.rootdir</name>
-  <value>hdfs://hadoop-master:9000/hbase</value>
+  <value>hdfs://master:9000/hbase</value>
   <!-- 端口要和Hadoop的fs.defaultFS端口一致-->
  </property>
  <property>
@@ -78,7 +78,7 @@ export HBASE_MANAGES_ZK=true
  </property>
  <property>
   <name>hbase.zookeeper.quorum</name>
-  <value>hadoop-master,hadoop-slave1,hadoop-slave2</value>
+  <value>master,hadoop-slave1,hadoop-slave2</value>
   <!-- 指定的主机均会启动Zookeeper的进程 -->
  </property>
   <name>hbase.tmp.dir</name>
@@ -96,21 +96,21 @@ hadoop-slave2
 
 通过scp命令将hbase传至hadoop-slave1和hadoop-slave2节点:  
 ```
-root@hadoop-master:~# scp -r /usr/local/hbase hadoop-slave1:/usr/local/
-root@hadoop-master:~# scp -r /usr/local/hbase hadoop-slave2:/usr/local/
+root@master:~# scp -r /usr/local/hbase hadoop-slave1:/usr/local/
+root@master:~# scp -r /usr/local/hbase hadoop-slave2:/usr/local/
 ```
 
 ## 22.4.3 启动HBase:  
 进入/usr/local/hbase/bin目录,**启动脚本start-hbase.sh**
 ```
-root@hadoop-master:/usr/local/hbase/bin# ./start-hbase.sh 
+root@master:/usr/local/hbase/bin# ./start-hbase.sh 
 hadoop-slave2: Warning: Permanently added 'hadoop-slave2,172.19.0.4' (ECDSA) to the list of known hosts.
-hadoop-master: Warning: Permanently added 'hadoop-master,172.19.0.2' (ECDSA) to the list of known hosts.
+master: Warning: Permanently added 'master,172.19.0.2' (ECDSA) to the list of known hosts.
 hadoop-slave1: Warning: Permanently added 'hadoop-slave1,172.19.0.3' (ECDSA) to the list of known hosts.
-hadoop-master: starting zookeeper, logging to /usr/local/hbase/bin/../logs/hbase-root-zookeeper-hadoop-master.out
+master: starting zookeeper, logging to /usr/local/hbase/bin/../logs/hbase-root-zookeeper-master.out
 hadoop-slave2: starting zookeeper, logging to /usr/local/hbase/bin/../logs/hbase-root-zookeeper-hadoop-slave2.out
 hadoop-slave1: starting zookeeper, logging to /usr/local/hbase/bin/../logs/hbase-root-zookeeper-hadoop-slave1.out
-starting master, logging to /usr/local/hbase/logs/hbase-root-master-hadoop-master.out
+starting master, logging to /usr/local/hbase/logs/hbase-root-master-master.out
 hadoop-slave2: Warning: Permanently added 'hadoop-slave2,172.19.0.4' (ECDSA) to the list of known hosts.
 hadoop-slave1: Warning: Permanently added 'hadoop-slave1,172.19.0.3' (ECDSA) to the list of known hosts.
 hadoop-slave1: starting regionserver, logging to /usr/local/hbase/bin/../logs/hbase-root-regionserver-hadoop-slave1.out
@@ -121,7 +121,7 @@ hadoop-slave2: starting regionserver, logging to /usr/local/hbase/bin/../logs/hb
 
 对于master节点:  
 ```
-root@hadoop-master:/usr/local/hbase/bin# jps
+root@master:/usr/local/hbase/bin# jps
 4798 HMaster
 4720 HQuorumPeer
 175 NameNode
@@ -143,14 +143,14 @@ root@hadoop-slave1:~# jps
 可看到成功启动HRegionServer和HQuorumPeer  
 
 
-打开主机浏览器,hadoop-master节点的ip为172.19.0.2,输入**172.19.0.2:16010**即可进入HBase web界面:  
+打开主机浏览器,master节点的ip为172.19.0.2,输入**172.19.0.2:16010**即可进入HBase web界面:  
 ![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex22/Screenshot%20from%202018-07-30%2011-17-33.png)  
 
 
 ### 22.4.4 HBase shell  
 安装完成后，我们可进入hbase shell测试一些简单命令:  
 ```
-root@hadoop-master:/usr/local/hbase/bin# ./hbase shell
+root@master:/usr/local/hbase/bin# ./hbase shell
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/usr/local/hbase/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
 SLF4J: Found binding in [jar:file:/usr/local/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
@@ -188,7 +188,7 @@ fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
-172.19.0.2      hadoop-master
+172.19.0.2      master
 172.19.0.3      hadoop-slave1
 172.19.0.4      hadoop-slave2
 ```

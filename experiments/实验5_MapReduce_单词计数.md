@@ -35,40 +35,31 @@ MapReduce是一种计算模型，简单的说就是**将大批量的工作(数�
 编写在 Hadoop 中依赖 Yarn 框架执行的 MapReduce 程序，并不需要自己开发 MRAppMaster 和 YARNRunner ，因为 Hadoop 已经默认提供通用的 YARNRunner 和 MRAppMaster 程序，大部分情况下只需要编写相应的 Map 处理和 Reduce 处理过程的业务程序即可。
 
 编写一个MapReduce程序并不复杂，主要将计算过程分为以下五个步骤：  
-(1)迭代。遍历输入数据，并将之解析成 key/value 对。  
-(2)将输入 key/value 对映射(map)成另外一些 key/value 对。  
-(3)依据 key 对中间数据进行分组(grouping)。  
-(4)以组为单位对数据进行归约(reduce)。  
-(5)迭代。将最终产生的key/value对保存到输出文件中。
+(1) 迭代。遍历输入数据，并将之解析成 key/value 对。  
+(2) 将输入 key/value 对映射(map)成另外一些 key/value 对。  
+(3) 依据 key 对中间数据进行分组(grouping)。  
+(4) 以组为单位对数据进行归约(reduce)。  
+(5) 迭代。将最终产生的key/value对保存到输出文件中。
 
 ### 5.3.2 Java API解析
-(1)InputFormat：用于描述输入数据的格式，常用的为 TextInputFormat 提供如下两个功能：
+(1) InputFormat：用于描述输入数据的格式，常用的为 TextInputFormat 提供如下两个功能：
 ```
     1. 数据切分: 按照某个策略将输入数据切分成若干个split，以便确定 Map Task 个数以及对应的split。
-    2. 为 Mapper 提供数据: 给定某个split，能将其解析成一个个key/value对。
+    2. 为 Mapper 提供数据: 给定某个split，能将其解析成一个个 key/value 对。
 ```  
-(2)OutputFormat：用于描述输出数据的格式，它能够将用户提供的 key/value 对写入特定格式的文件中。  
-(3)Mapper/Reducer: Mapper/Reducer中封装了应用程序的数据处理逻辑。  
-(4)Writable:Hadoop自定义的序列化接口。实现该类的接口可以用作MapReduce过程中的value数据使用。  
-(5)WritableComparable：在Writable基础上继承了Comparable接口，实现该类的接口可以用作MapReduce过程中的key数据使用。(因为key包含了比较排序的操作)。
+(2) OutputFormat：用于描述输出数据的格式，它能够将用户提供的 key/value 对写入特定格式的文件中。  
+(3) Mapper/Reducer: Mapper/Reducer中封装了应用程序的数据处理逻辑。  
+(4) Writable: Hadoop自定义的序列化接口。实现该类的接口可以用作 MapReduce 过程中的 value 数据使用。  
+(5) WritableComparable：在Writable基础上继承了Comparable 接口，实现该类的接口可以用作MapReduce过程中的key数据使用。(因为key包含了比较排序的操作)。
 
 ## 5.4 实验步骤
 本实验主要分为，确认前期准备，编写MapReduce程序，打包提交代码。查看运行结果这几个步骤，详细如下：
 
 ### 5.4.1 启动Hadoop
-启动demo2的hadoop集群
-```
-ykk@ykk-TN15S:~/team/docker-hadoop/hadoop-cluster-docker$ ./start-container.sh 
-[sudo] password for ykk: 
-start hadoop-master container...
-start hadoop-slave1 container...
-start hadoop-slave2 container...
-root@hadoop-master:~# ./start-hadoop.sh 
-```
+启动Hadoop集群后检查服务是否启动
 
-检查服务是否启动
 ```
-root@hadoop-master:~# jps
+root@master:~# jps
 374 SecondaryNameNode
 173 NameNode
 543 ResourceManager
@@ -77,35 +68,23 @@ root@hadoop-master:~# jps
 成功启动
 
 ### 5.4.2  上传数据文件到HDFS
-**使用hadoop命令时确保已经修改/etc/profile的环境变量，之前的实验有提到过，重新运行demo2集群的话要重新修改，若是接着之前的实验就可以省略此处**
+上传WordCount的测试文件
 ```
-JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64/
-export HADOOP_HOME=/usr/local/hadoop
-export JRE_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64/jre
-export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
-export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*
-export PATH=$PATH:$HADOOP_HOME/bin
-export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib:$HADOOP_HOME/lib/native"
-```
-
-接着随意上传个WordCount的测试文件
-```
-root@hadoop-master:/# cd /usr/local/hadoop
-root@hadoop-master:/usr/local/hadoop# ls
+root@master:/# cd /usr/local/hadoop
+root@master:/usr/local/hadoop# ls
 LICENSE.txt  README.txt  etc      lib      logs  share
 NOTICE.txt   bin         include  libexec  sbin
 ```
 不妨就上传README.txt
 ```
-root@hadoop-master:/usr/local/hadoop# hadoop fs -put README.txt /
-root@hadoop-master:/usr/local/hadoop# hadoop fs -ls /
+root@master:/usr/local/hadoop# hadoop fs -put README.txt /
+root@master:/usr/local/hadoop# hadoop fs -ls /
 Found 1 items
 -rw-r--r--   2 root supergroup       1366 2018-06-30 07:57 /README.txt
 ```
 
 ### 5.4.3 编写MapReduce程序
-主要编写Map和Reduce类，其中Map过程需要继承org.apache.hadoop.mapreduce包中Mapper类，并重写其map方法；Reduce过程需要继承org.apache.hadoop.mapreduce包中Reduce类，并重写其reduce方法
+主要编写Map和Reduce类，其中Map过程需要继承 `org.apache.hadoop.mapreduce` 包中 `Mapper` 类，并重写其 map 方法；Reduce过程需要继承 `org.apache.hadoop.mapreduce` 包中 `Reduce` 类，并重写其 reduce 方法
 ```java
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -178,13 +157,13 @@ public class WordCount {
 
 编写WorldCount.java
 ```
-root@hadoop-master:~# mkdir mapreduce
-root@hadoop-master:~# cd mapreduce/
-root@hadoop-master:~/mapreduce# vi WordCount.java
+root@master:~# mkdir mapreduce
+root@master:~# cd mapreduce/
+root@master:~/mapreduce# vi WordCount.java
 ```
 复制上面的代码,编译：
 ```
-root@hadoop-master:~/mapreduce# javac WordCount.java 
+root@master:~/mapreduce# javac WordCount.java 
 WorldCount.java:15: error: class WordCount is public, should be declared in a file named WordCount.java
 public class WordCount {
        ^
@@ -203,13 +182,13 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 ```
-这涉及到前面几节讲过的**Classpath**的问题，解决的办法是修改/etc/profile,添加内容至Classpath
+这涉及到前面几节讲过的**Classpath**的问题，解决的办法是修改 `/etc/profile` ,添加内容至Classpath
 ```
 JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64/
 export HADOOP_HOME=/usr/local/hadoop
 export JRE_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64/jre
 export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
-export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$HADOOP_HOME/share/hadoop/commonn
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$HADOOP_HOME/share/hadoop/common
 /*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/ha
 doop-mapreduce-client-core-2.7.2.jar
 export PATH=$PATH:$HADOOP_HOME/bin
@@ -219,14 +198,14 @@ export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib:$HADOOP_HOME/lib/native
 ```
 
 就是在CLASSPATH末尾添加一行  
-**$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.2.jar**
+`$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.2.jar`
 
 再次编译:
 ```
-root@hadoop-master:~/mapreduce# javac WordCount.java 
+root@master:~/mapreduce# javac WordCount.java 
 Note: WordCount.java uses or overrides a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
-root@hadoop-master:~/mapreduce# ls
+root@master:~/mapreduce# ls
 WordCount$IntSumReducer.class    WordCount.class
 WordCount$TokenizerMapper.class  WordCount.java
 ```
@@ -234,12 +213,12 @@ javac命令的两行note可以不用管，现在编译可以正常通过
 
 ### 5.4.4 打包成jar包并运行
 ```
-root@hadoop-master:~/mapreduce# jar -cvf WordCount.jar ./WordCount*.class
+root@master:~/mapreduce# jar -cvf WordCount.jar ./WordCount*.class
 added manifest
 adding: WordCount$IntSumReducer.class(in = 1739) (out= 739)(deflated 57%)
 adding: WordCount$TokenizerMapper.class(in = 1736) (out= 754)(deflated 56%)
 adding: WordCount.class(in = 1830) (out= 987)(deflated 46%)
-root@hadoop-master:~/mapreduce# ls
+root@master:~/mapreduce# ls
 WordCount$IntSumReducer.class    WordCount.class  WordCount.java
 WordCount$TokenizerMapper.class  WordCount.jar
 ```
@@ -248,13 +227,13 @@ WordCount$TokenizerMapper.class  WordCount.jar
 ```hadoop jar WordCount.jar WordCount /README.txt /output```
 
 ```
-root@hadoop-master:~/mapreduce# hadoop jar WordCount.jar WordCount /README.txt /output
-18/06/30 08:17:59 INFO client.RMProxy: Connecting to ResourceManager at hadoop-master/172.19.0.2:8032
+root@master:~/mapreduce# hadoop jar WordCount.jar WordCount /README.txt /output
+18/06/30 08:17:59 INFO client.RMProxy: Connecting to ResourceManager at master/172.19.0.2:8032
 18/06/30 08:17:59 INFO input.FileInputFormat: Total input paths to process : 1
 18/06/30 08:18:00 INFO mapreduce.JobSubmitter: number of splits:1
 18/06/30 08:18:00 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1530344396199_0001
 18/06/30 08:18:00 INFO impl.YarnClientImpl: Submitted application application_1530344396199_0001
-18/06/30 08:18:00 INFO mapreduce.Job: The url to track the job: http://hadoop-master:8088/proxy/application_1530344396199_0001/
+18/06/30 08:18:00 INFO mapreduce.Job: The url to track the job: http://master:8088/proxy/application_1530344396199_0001/
 18/06/30 08:18:00 INFO mapreduce.Job: Running job: job_1530344396199_0001
 18/06/30 08:18:08 INFO mapreduce.Job: Job job_1530344396199_0001 running in uber mode : false
 18/06/30 08:18:08 INFO mapreduce.Job:  map 0% reduce 0%
@@ -322,11 +301,11 @@ root@hadoop-master:~/mapreduce# hadoop jar WordCount.jar WordCount /README.txt /
 ## 5.5 实验结果
 reduce结果储存在HDFS的/output目录下的**part-r-00000**文件中
 ```
-root@hadoop-master:~/mapreduce# hadoop fs -ls /output
+root@master:~/mapreduce# hadoop fs -ls /output
 Found 2 items
 -rw-r--r--   2 root supergroup          0 2018-06-30 08:18 /output/_SUCCESS
 -rw-r--r--   2 root supergroup       1306 2018-06-30 08:18 /output/part-r-00000
-root@hadoop-master:~/mapreduce# hadoop fs -cat /output/part-r-00000
+root@master:~/mapreduce# hadoop fs -cat /output/part-r-00000
 (BIS),	1
 (ECCN)	1
 (TSU)	1
@@ -461,13 +440,3 @@ your	1
 ```
 
 至此就完成了编写WordCount的实验。
-
-
-
-
-
-
-
-
-
-

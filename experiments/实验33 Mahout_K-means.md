@@ -77,10 +77,10 @@ K-means聚类算法的优点主要集中在:
 
 网上的教程比较多是0.9版本的，这次下载的是0.9版本的。解压至/usr/local/mahout目录下即可:  
 ```
-root@hadoop-master:~# tar -zxvf mahout-distribution-0.9.tar.gz
-root@hadoop-master:~# mv mahout-distribution-0.9 /usr/local/mahout  
-root@hadoop-master:~# cd /usr/local/mahout/
-root@hadoop-master:/usr/local/mahout# ls
+root@master:~# tar -zxvf mahout-distribution-0.9.tar.gz
+root@master:~# mv mahout-distribution-0.9 /usr/local/mahout  
+root@master:~# cd /usr/local/mahout/
+root@master:/usr/local/mahout# ls
 LICENSE.txt  bin   examples                 mahout-core-0.9.jar          mahout-integration-0.9.jar
 NOTICE.txt   conf  lib                      mahout-examples-0.9-job.jar  mahout-math-0.9.jar
 README.txt   docs  mahout-core-0.9-job.jar  mahout-examples-0.9.jar
@@ -99,7 +99,7 @@ export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$HADOOP_HOME/share/hadoop/common
 
 输入命令 mahout -help查看安装是否成功:  
 ```
-root@hadoop-master:~# mahout -help
+root@master:~# mahout -help
 ```  
 成功则可看到提供的各种算法。
 
@@ -109,21 +109,21 @@ root@hadoop-master:~# mahout -help
 
 下载数据集，创建HDFS目录，上传:  
 ```  
-root@hadoop-master:/usr/local/mahout# wget http://archive.ics.uci.edu/ml/databases/synthetic_control/synthetic_control.data
-root@hadoop-master:/usr/local/mahout# hadoop fs -mkdir -p /user/root/testdata  
-root@hadoop-master:/usr/local/mahout# hadoop fs -put ~/synthetic_control.data /user/root/testdata
+root@master:/usr/local/mahout# wget http://archive.ics.uci.edu/ml/databases/synthetic_control/synthetic_control.data
+root@master:/usr/local/mahout# hadoop fs -mkdir -p /user/root/testdata  
+root@master:/usr/local/mahout# hadoop fs -put ~/synthetic_control.data /user/root/testdata
 ```  
 
 ### 33.4.3 提交Mahout的K-means程序  
 进入mahout的安装目录执行:  
 ```
-root@hadoop-master:/usr/local/mahout# hadoop jar mahout-examples-0.9-job.jar org.apache.mahout.clustering.syntheticcontrol.kmeans.Job
+root@master:/usr/local/mahout# hadoop jar mahout-examples-0.9-job.jar org.apache.mahout.clustering.syntheticcontrol.kmeans.Job
 ```
 算法的执行过程需要几分钟时间,分成了11个mapreduce任务  
 
 ## 33.5 实验结果  
 ```  
-root@hadoop-master:/usr/local/mahout# hadoop fs -ls /user/root/output
+root@master:/usr/local/mahout# hadoop fs -ls /user/root/output
 Found 15 items
 -rw-r--r--   2 root supergroup        194 2018-08-14 03:56 /user/root/output/_policy
 drwxr-xr-x   - root supergroup          0 2018-08-14 03:56 /user/root/output/clusteredPoints
@@ -140,7 +140,7 @@ drwxr-xr-x   - root supergroup          0 2018-08-14 03:55 /user/root/output/clu
 drwxr-xr-x   - root supergroup          0 2018-08-14 03:55 /user/root/output/clusters-9
 drwxr-xr-x   - root supergroup          0 2018-08-14 03:52 /user/root/output/data
 drwxr-xr-x   - root supergroup          0 2018-08-14 03:52 /user/root/output/random-seeds  
-root@hadoop-master:/usr/local/mahout# hadoop fs -ls /user/root/output/clusters-1
+root@master:/usr/local/mahout# hadoop fs -ls /user/root/output/clusters-1
 Found 3 items
 -rw-r--r--   2 root supergroup          0 2018-08-14 03:53 /user/root/output/clusters-1/_SUCCESS
 -rw-r--r--   2 root supergroup        194 2018-08-14 03:53 /user/root/output/clusters-1/_policy
@@ -149,7 +149,7 @@ Found 3 items
 
 这时直接查看part-r-00000里的结果会出现大堆乱码:  
 ```
-root@hadoop-master:/usr/local/mahout# hadoop fs -cat /user/root/output/clusters-1/p*
+root@master:/usr/local/mahout# hadoop fs -cat /user/root/output/clusters-1/p*
 SEQ org.apache.hadoop.io.IntWritable5org.apache.mahout.clustering.iterator.ClusterWritable��Q%��k8y�$�D��0�+org.apache.mahout.clustering.kmeans.Kluster:org.apache.mahout.common.distance.EuclideanDistanceMeasure
 
 �nJ@="#|{/3@.͞F��$@=H_�{��                         <<@?P}��@=�Yq:�"@;Ӑ����@=�~��� @>r�0�?�@?�G�5@=};�@=�6Je�@>?�Qo�@;�f����@>�
@@ -159,8 +159,8 @@ SEQ org.apache.hadoop.io.IntWritable5org.apache.mahout.clustering.iterator.Clus
 
 解决办法是将其转换成可读模式:  
 ```
-root@hadoop-master:/usr/local/mahout/bin# mahout seqdumper -i /user/root/output/clusters-1/part-r-00000 -o ~/result  
-root@hadoop-master:/usr/local/mahout/bin# cat ~/result 
+root@master:/usr/local/mahout/bin# mahout seqdumper -i /user/root/output/clusters-1/part-r-00000 -o ~/result  
+root@master:/usr/local/mahout/bin# cat ~/result 
 Input Path: /user/root/output/clusters-1/part-r-00000
 Key class: class org.apache.hadoop.io.IntWritable Value Class: class org.apache.mahout.clustering.iterator.ClusterWritable
 Key: 0: Value: org.apache.mahout.clustering.iterator.ClusterWritable@1ead6e20

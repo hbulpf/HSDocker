@@ -186,7 +186,7 @@ object GraphXExample {
 ### 19.4.5 提交任务
 按照上个实验里相同的方式打包成jar包，传到master节点  
 ```
-root@hadoop-master:~# spark-submit --class test.GraphXExample sparkgraphx.jar 
+root@master:~# spark-submit --class test.GraphXExample sparkgraphx.jar 
 java.lang.ClassNotFoundException: test.GraphXExample
 	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)

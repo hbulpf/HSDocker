@@ -28,7 +28,7 @@ RDD在任何时候都不需要被“物化”（进行实际的变换并最终�
 
 ## 15.4 实验步骤  
 
-启动spark-shell,需要注意实验需要以本地模式启动,直接输入命令spark-shell，如果以集群模式启动，有可能无法查看输出结果。(集群模式即后面带有--master spark://hadoop-master:7077)
+启动spark-shell,需要注意实验需要以本地模式启动,直接输入命令spark-shell，如果以集群模式启动，有可能无法查看输出结果。(集群模式即后面带有--master spark://master:7077)
 
 ### 15.4.1 distinct 去除RDD内的重复数据
 ```

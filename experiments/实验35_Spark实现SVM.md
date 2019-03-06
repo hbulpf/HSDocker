@@ -28,7 +28,7 @@
 ### 35.4.1 准备数据集  
 网上翻博客时才知道spark其实自带有mllib的一些测试集，都存放在/usr/local/spark/data/mllib目录下。  
 ```  
-root@hadoop-master:/usr/local/spark/data/mllib# ls
+root@master:/usr/local/spark/data/mllib# ls
 als                sample_binary_classification_data.txt       sample_libsvm_data.txt
 gmm_data.txt       sample_fpgrowth.txt                         sample_linear_regression_data.txt
 kmeans_data.txt    sample_isotonic_regression_libsvm_data.txt  sample_movielens_data.txt
@@ -39,14 +39,14 @@ ridge-data         sample_lda_libsvm_data.txt                  streaming_kmeans_
 
 这次我们训练SVM模型用到的是sample_libsvm_data.txt,上传至HDFS:  
 ```
-root@hadoop-master:/usr/local/spark/data/mllib# hadoop fs -put sample_libsvm_data.txt /
-root@hadoop-master:/usr/local/spark/data/mllib# hadoop fs -ls /                        
+root@master:/usr/local/spark/data/mllib# hadoop fs -put sample_libsvm_data.txt /
+root@master:/usr/local/spark/data/mllib# hadoop fs -ls /                        
 Found 1 items
 -rw-r--r--   2 root supergroup     104736 2018-08-15 03:45 /sample_libsvm_data.txt
 ```  
 
 ### 35.4.2 训练SVM模型  
-首先,进入Spark Shell接口:``spark-shell --master spark://hadoop-master:7077`  
+首先,进入Spark Shell接口:``spark-shell --master spark://master:7077`  
 
 进入Spark Shell命令行执行环境后，依次输入下述代码，即完成模型训练:  
 ```
@@ -55,7 +55,7 @@ import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.util.MLUtils  
 
 // 读取样本数据并解析
-val data = MLUtils.loadLibSVMFile(sc, "hdfs://hadoop-master:9000/sample_libsvm_data.txt")  
+val data = MLUtils.loadLibSVMFile(sc, "hdfs://master:9000/sample_libsvm_data.txt")  
 
 // 样本数据划分,训练样本占0.6,测试样本占0.4
 val splits = data.randomSplit(Array(0.6, 0.4), seed = 11L)

@@ -41,12 +41,12 @@ Hive架构与基本组成如图10-1所示：
 `wget http://mirrors.hust.edu.cn/apache/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz`
 
 ```
-root@hadoop-master:~# wget http://mirrors.hust.edu.cn/apache/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz
-root@hadoop-master:~# tar -xzvf apache-hive-1.2.2-bin.tar.gz 
-root@hadoop-master:~# ls
+root@master:~# wget http://mirrors.hust.edu.cn/apache/hive/hive-1.2.2/apache-hive-1.2.2-bin.tar.gz
+root@master:~# tar -xzvf apache-hive-1.2.2-bin.tar.gz 
+root@master:~# ls
 apache-hive-1.2.2-bin         hdfs              start-hadoop.sh
 apache-hive-1.2.2-bin.tar.gz  run-wordcount.sh
-root@hadoop-master:~# mv apache-hive-1.2.2-bin /usr/local/hive
+root@master:~# mv apache-hive-1.2.2-bin /usr/local/hive
 ```
 
 ### 10.4.2 设定HIVE_HOME环境变量,修改/etc/profile:  
@@ -59,8 +59,8 @@ export PATH=$PATH:$HIVE_HOME/bin
 ### 10.4.3 修改Hive配置文件:  
 切换到**HIVE_HOME/conf**目录下，执行以下命令：
 ```
-root@hadoop-master:/usr/local/hive/conf# cp hive-env.sh.template hive-env.sh 
-root@hadoop-master:/usr/local/hive/conf# vi hive-env.sh
+root@master:/usr/local/hive/conf# cp hive-env.sh.template hive-env.sh 
+root@master:/usr/local/hive/conf# vi hive-env.sh
 ```
 
 在hive-env.sh中找到对应位置添加以下内容:
@@ -73,7 +73,7 @@ root@hadoop-master:/usr/local/hive/conf# vi hive-env.sh
 ### 10.4.5 启动Hive
 直接输入命令hive即可启动:
 ```
-root@hadoop-master:/usr/local/hive/conf# hive
+root@master:/usr/local/hive/conf# hive
 
 Logging initialized using configuration in jar:file:/usr/local/hive/lib/hive-common-1.2.2.jar!/hive-log4j.properties
 hive> 
@@ -82,7 +82,7 @@ hive>
 ## 10.5 实验结果
 Hive的一些基本命令:  
 ```
-root@hadoop-master:/usr/local/hive/conf# hive
+root@master:/usr/local/hive/conf# hive
 
 Logging initialized using configuration in jar:file:/usr/local/hive/lib/hive-common-1.2.2.jar!/hive-log4j.properties
 hive> show databases;
@@ -102,7 +102,7 @@ OK
 <
 Time taken: 0.014 seconds, Fetched: 216 row(s)
 hive> quit;
-root@hadoop-master:/usr/local/hive/conf# 
+root@master:/usr/local/hive/conf# 
 ```
 
 命令末尾带**";"**,退出是**quit;**

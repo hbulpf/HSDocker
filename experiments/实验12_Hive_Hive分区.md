@@ -66,7 +66,7 @@ Time taken: 0.067 seconds, Fetched: 8 row(s)
 
 查看HDFS,对应分区目录已成功创建:
 ```
-root@hadoop-master:~# hadoop fs -ls /user/hive/warehouse/parthive
+root@master:~# hadoop fs -ls /user/hive/warehouse/parthive
 Found 2 items
 drwxr-xr-x   - root supergroup      0 2018-07-10 11:23 /user/hive/warehouse/parthive/year=2014
 drwxr-xr-x   - root supergroup      0 2018-07-10 11:23 /user/hive/warehouse/parthive/year=2015
@@ -85,7 +85,7 @@ drwxr-xr-x   - root supergroup      0 2018-07-10 11:23 /user/hive/warehouse/part
 2015-06-01  fff 2015
 2015-07-01  ggg 2015
 ```
-上传数据到HDFS:``root@hadoop-master:~# hadoop fs -put parthive.txt / `
+上传数据到HDFS:``root@master:~# hadoop fs -put parthive.txt / `
 导入数据:  
 ```
 hive> load data inpath '/parthive.txt' into table parthive partition(year='2015');
@@ -121,7 +121,7 @@ In order to limit the maximum number of reducers:
   set hive.exec.reducers.max=<number>
 In order to set a constant number of reducers:
   set mapreduce.job.reduces=<number>
-Starting Job = job_1531206629291_0001, Tracking URL = http://hadoop-master:8088/proxy/application_1531206629291_0001/
+Starting Job = job_1531206629291_0001, Tracking URL = http://master:8088/proxy/application_1531206629291_0001/
 Kill Command = /usr/local/hadoop/bin/hadoop job  -kill job_1531206629291_0001
 Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
 2018-07-10 11:47:13,050 Stage-1 map = 0%,  reduce = 0%

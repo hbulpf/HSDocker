@@ -38,7 +38,7 @@ export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 
 source /etc/profile,测试java -version  
 ```
-root@hadoop-master:~# java -version
+root@master:~# java -version
 java version "1.8.0_171"
 Java(TM) SE Runtime Environment (build 1.8.0_171-b11)
 Java HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode)
@@ -62,7 +62,7 @@ export PATH=$PATH:$SCALA_HOME/bin
 ```  
 source /etc/profile， 输入命令scala检测是否成功安装  
 ```
-root@hadoop-master:~# scala
+root@master:~# scala
 Welcome to Scala 2.12.2 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_171).
 Type in expressions for evaluation. Or try :help.
 
@@ -76,8 +76,8 @@ scala>
 
 **spark-env.sh**:  
 ```
-root@hadoop-master:/usr/local/spark/conf# cp spark-env.sh.template spark-env.sh
-root@hadoop-master:/usr/local/spark/conf# vim spark-env.sh      
+root@master:/usr/local/spark/conf# cp spark-env.sh.template spark-env.sh
+root@master:/usr/local/spark/conf# vim spark-env.sh      
 ```  
 
 在文件末尾添加以下内容:  
@@ -87,7 +87,7 @@ export SCALA_HOME=/usr/local/scala
 export HADOOP_HOME=/usr/local/hadoop
 export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 
-export SPARK_MASTER_IP=hadoop-master
+export SPARK_MASTER_IP=master
 export SPARK_WORKER_MEMORY=1g
 ```  
 **spark_MASTER_IP**,很明显是指定master节点的IP  
@@ -98,8 +98,8 @@ export SPARK_WORKER_MEMORY=1g
 **slaves**:  
 与hadoop的slaves文件效果一致，就是指定worker节点的主机名。  
 ```
-root@hadoop-master:/usr/local/spark/conf# cp slaves.template slaves
-root@hadoop-master:/usr/local/spark/conf# vim slaves  
+root@master:/usr/local/spark/conf# cp slaves.template slaves
+root@master:/usr/local/spark/conf# vim slaves  
 ```
 添加内容:  
 ```
@@ -117,8 +117,8 @@ source /etc/profile
 ### 13.4.5 启动并测试spark
 在启动spark之前，先确保启动了hadoop，进入/usr/local/spark/sbin目录下启动脚本:  
 ```
-root@hadoop-master:/usr/local/spark/sbin# ./start-all.sh 
-starting org.apache.spark.deploy.master.Master, logging to /usr/local/spark/logs/spark-root-org.apache.spark.deploy.master.Master-1-hadoop-master.out
+root@master:/usr/local/spark/sbin# ./start-all.sh 
+starting org.apache.spark.deploy.master.Master, logging to /usr/local/spark/logs/spark-root-org.apache.spark.deploy.master.Master-1-master.out
 hadoop-slave2: Warning: Permanently added 'hadoop-slave2,172.19.0.4' (ECDSA) to the list of known hosts.
 hadoop-slave1: Warning: Permanently added 'hadoop-slave1,172.19.0.3' (ECDSA) to the list of known hosts.
 hadoop-slave2: starting org.apache.spark.deploy.worker.Worker, logging to /usr/local/spark/logs/spark-root-org.apache.spark.deploy.worker.Worker-1-hadoop-slave2.out
@@ -129,7 +129,7 @@ hadoop-slave1: starting org.apache.spark.deploy.worker.Worker, logging to /usr/l
 
 **Master**:  
 ```
-root@hadoop-master:/usr/local/spark/sbin# jps
+root@master:/usr/local/spark/sbin# jps
 1260 Jps
 558 ResourceManager
 383 SecondaryNameNode
@@ -149,7 +149,7 @@ Master节点成功启动Master, Slave节点成功启动Worker,证明spark成功�
 
 进入Spark-shell:  
 ```
-root@hadoop-master:~# spark-shell
+root@master:~# spark-shell
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
 18/07/19 03:29:16 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
@@ -187,8 +187,8 @@ hello bigdata
 ```
 分隔符为空格,接着上传到HDFS,并打开spark-shell:  
 ```
-root@hadoop-master:~# hadoop fs -put wordcount.txt /
-root@hadoop-master:~# spark-shell
+root@master:~# hadoop fs -put wordcount.txt /
+root@master:~# spark-shell
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
 18/07/19 03:56:53 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
@@ -207,8 +207,8 @@ Using Scala version 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_171)
 Type in expressions to have them evaluated.
 Type :help for more information.
 
-scala> val file=sc.textFile("hdfs://hadoop-master:9000/wordcount.txt")
-file: org.apache.spark.rdd.RDD[String] = hdfs://hadoop-master:9000/wordcount.txt MapPartitionsRDD[13] at textFile at <console>:24
+scala> val file=sc.textFile("hdfs://master:9000/wordcount.txt")
+file: org.apache.spark.rdd.RDD[String] = hdfs://master:9000/wordcount.txt MapPartitionsRDD[13] at textFile at <console>:24
 
 scala> val rdd = file.flatMap(line => line.split(" ")).map(word => (word,1)).reduceByKey(_+_)
 rdd: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[16] at reduceByKey at <console>:26
@@ -228,7 +228,7 @@ scala> :quit
 
 实际代码:  
 ```
-val file=sc.textFile("hdfs://hadoop-master:9000/wordcount.txt")  
+val file=sc.textFile("hdfs://master:9000/wordcount.txt")  
 val rdd = file.flatMap(line => line.split(" ")).map(word => (word,1)).reduceByKey(_+_)  
 rdd.collect()  
 rdd.foreach(println)

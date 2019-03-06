@@ -188,12 +188,12 @@ public class WordCountTopo {
 ## 25.5 实验结果  
 提交任务:  
 ```
-root@hadoop-master:/usr/local/storm/bin# ./storm jar wordCount-Storm.jar cproc.word.WordCountTopo wordCount
+root@master:/usr/local/storm/bin# ./storm jar wordCount-Storm.jar cproc.word.WordCountTopo wordCount
 Running: /usr/local/java/bin/java -client -Ddaemon.name= -Dstorm.options= -Dstorm.home=/usr/local/storm -Dstorm.log.dir=/usr/local/storm/logs -Djava.library.path=/usr/local/lib:/opt/local/lib:/usr/lib -Dstorm.conf.file= -cp /usr/local/storm/lib/ring-cors-0.1.5.jar:/usr/local/storm/lib/minlog-1.3.0.jar:/usr/local/storm/lib/servlet-api-2.5.jar:/usr/local/storm/lib/reflectasm-1.10.1.jar:/usr/local/storm/lib/storm-core-1.1.0.jar:/usr/local/storm/lib/log4j-slf4j-impl-2.8.jar:/usr/local/storm/lib/storm-rename-hack-1.1.0.jar:/usr/local/storm/lib/log4j-api-2.8.jar:/usr/local/storm/lib/clojure-1.7.0.jar:/usr/local/storm/lib/asm-5.0.3.jar:/usr/local/storm/lib/log4j-over-slf4j-1.6.6.jar:/usr/local/storm/lib/slf4j-api-1.7.21.jar:/usr/local/storm/lib/kryo-3.0.3.jar:/usr/local/storm/lib/objenesis-2.1.jar:/usr/local/storm/lib/disruptor-3.3.2.jar:/usr/local/storm/lib/log4j-core-2.8.jar:wordCount-Storm.jar:/usr/local/storm/conf:/usr/local/storm/bin -Dstorm.jar=wordCount-Storm.jar -Dstorm.dependency.jars= -Dstorm.dependency.artifacts={} cproc.word.WordCountTopo wordCount
 438  [main] INFO  o.a.s.StormSubmitter - Generated ZooKeeper secret payload for MD5-digest: -8414966403771477221:-7407907154665919134
-522  [main] INFO  o.a.s.u.NimbusClient - Found leader nimbus : hadoop-master:6627
+522  [main] INFO  o.a.s.u.NimbusClient - Found leader nimbus : master:6627
 543  [main] INFO  o.a.s.s.a.AuthUtils - Got AutoCreds []
-545  [main] INFO  o.a.s.u.NimbusClient - Found leader nimbus : hadoop-master:6627
+545  [main] INFO  o.a.s.u.NimbusClient - Found leader nimbus : master:6627
 563  [main] INFO  o.a.s.StormSubmitter - Uploading dependencies - jars...
 565  [main] INFO  o.a.s.StormSubmitter - Uploading dependencies - artifacts...
 566  [main] INFO  o.a.s.StormSubmitter - Dependency Blob keys - jars : [] / artifacts : []
@@ -208,9 +208,9 @@ File 'wordCount-Storm.jar' uploaded to '/usr/local/storm/storm-local/nimbus/inbo
 
 结束任务:  
 ```
-root@hadoop-master:/usr/local/storm/bin# ./storm kill wordCount           
+root@master:/usr/local/storm/bin# ./storm kill wordCount           
 Running: /usr/local/java/bin/java -client -Ddaemon.name= -Dstorm.options= -Dstorm.home=/usr/local/storm -Dstorm.log.dir=/usr/local/storm/logs -Djava.library.path=/usr/local/lib:/opt/local/lib:/usr/lib -Dstorm.conf.file= -cp /usr/local/storm/lib/ring-cors-0.1.5.jar:/usr/local/storm/lib/minlog-1.3.0.jar:/usr/local/storm/lib/servlet-api-2.5.jar:/usr/local/storm/lib/reflectasm-1.10.1.jar:/usr/local/storm/lib/storm-core-1.1.0.jar:/usr/local/storm/lib/log4j-slf4j-impl-2.8.jar:/usr/local/storm/lib/storm-rename-hack-1.1.0.jar:/usr/local/storm/lib/log4j-api-2.8.jar:/usr/local/storm/lib/clojure-1.7.0.jar:/usr/local/storm/lib/asm-5.0.3.jar:/usr/local/storm/lib/log4j-over-slf4j-1.6.6.jar:/usr/local/storm/lib/slf4j-api-1.7.21.jar:/usr/local/storm/lib/kryo-3.0.3.jar:/usr/local/storm/lib/objenesis-2.1.jar:/usr/local/storm/lib/disruptor-3.3.2.jar:/usr/local/storm/lib/log4j-core-2.8.jar:/usr/local/storm/conf:/usr/local/storm/bin org.apache.storm.command.kill_topology wordCount
-1609 [main] INFO  o.a.s.u.NimbusClient - Found leader nimbus : hadoop-master:6627
+1609 [main] INFO  o.a.s.u.NimbusClient - Found leader nimbus : master:6627
 1689 [main] INFO  o.a.s.c.kill-topology - Killed topology: wordCount
 ```  
 

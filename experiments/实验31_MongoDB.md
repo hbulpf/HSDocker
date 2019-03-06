@@ -48,30 +48,30 @@
 
 下载后解压至/usr/local/mongodb目录下:  
 ```
-root@hadoop-master:~# tar -zxvf mongodb-linux-x86_64-ubuntu1404-4.0.1.tgz  
-root@hadoop-master:~# mv mongodb-linux-x86_64-ubuntu1404-4.0.1 /usr/local/mongodb
+root@master:~# tar -zxvf mongodb-linux-x86_64-ubuntu1404-4.0.1.tgz  
+root@master:~# mv mongodb-linux-x86_64-ubuntu1404-4.0.1 /usr/local/mongodb
 ```  
 
 ### 31.4.2 启动MongoDB  
 首先在MongoDB的安装目录下建立一个数据目录 
 ```
-root@hadoop-master:/usr/local/mongodb# mkdir data
+root@master:/usr/local/mongodb# mkdir data
 ```
 
 在**启动前需要安装openssl**， 否则之后无法正常启动:  
 ```
-root@hadoop-master:~# sudo apt-get install libcurl3 openssl
+root@master:~# sudo apt-get install libcurl3 openssl
 ```  
 
 启动mongodb:  
 ```
-root@hadoop-master:/usr/local/mongodb# bin/mongod --dbpath ./data &
+root@master:/usr/local/mongodb# bin/mongod --dbpath ./data &
 [1] 304
 ```  
 
 ### 31.4.3 连接使用MongoDB  
 ```
-root@hadoop-master:/usr/local/mongodb# bin/mongo
+root@master:/usr/local/mongodb# bin/mongo
 ```  
 之后会输出一大串并进入shell  
 

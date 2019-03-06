@@ -62,7 +62,7 @@ agent1.channels.channel1.transactionCapactiy=100
 
 # sink1的配置参数
 agent1.sinks.sink1.type=hdfs
-agent1.sinks.sink1.hdfs.path=hdfs://hadoop-master:9000/flume/data
+agent1.sinks.sink1.hdfs.path=hdfs://master:9000/flume/data
 agent1.sinks.sink1.hdfs.fileType=DataStream
 #时间类型
 agent1.sinks.sink1.hdfs.useLocalTimeStamp=true
@@ -88,15 +88,15 @@ agent1.sinks.sink1.channel=channel1
 
 进入/home目录创建source.log(实际监测变化的文件):  
 ```
-root@hadoop-master:/usr/local/flume/conf# cd /home/
-root@hadoop-master:/home# touch source.log
+root@master:/usr/local/flume/conf# cd /home/
+root@master:/home# touch source.log
 ```
 
 sink将文件写至HDFS,在HDFS创建/flume/data目录:  
 ```
-root@hadoop-master:~# hadoop fs -mkdir /flume
-root@hadoop-master:~# hadoop fs -mkdir /flume/data
-root@hadoop-master:~# hadoop fs -lsr /
+root@master:~# hadoop fs -mkdir /flume
+root@master:~# hadoop fs -mkdir /flume/data
+root@master:~# hadoop fs -lsr /
 lsr: DEPRECATED: Please use 'ls -R' instead.
 drwxr-xr-x   - root supergroup          0 2018-08-06 03:47 /flume
 drwxr-xr-x   - root supergroup          0 2018-08-06 03:47 /flume/data
@@ -104,7 +104,7 @@ drwxr-xr-x   - root supergroup          0 2018-08-06 03:47 /flume/data
 
 ### 26.4.3 启动Flume  
 ```
-root@hadoop-master:/usr/local/flume/bin# ./flume-ng agent --conf conf --conf-file /usr/local/flume/conf/test.conf --name agent1 -Dflume.root.logger=DEBUG,console
+root@master:/usr/local/flume/bin# ./flume-ng agent --conf conf --conf-file /usr/local/flume/conf/test.conf --name agent1 -Dflume.root.logger=DEBUG,console
 ```
 
 看到  
@@ -119,25 +119,25 @@ root@hadoop-master:/usr/local/flume/bin# ./flume-ng agent --conf conf --conf-fil
 
 新开一个终端进入master容器，往/home/source.log文件写入内容:  
 ```
-root@hadoop-master:/home# echo "aa" >> source.log
+root@master:/home# echo "aa" >> source.log
 ```
 
 在另一个终端可观察到:  
 ```
-18/08/06 03:53:06 INFO hdfs.BucketWriter: Creating hdfs://hadoop-master:9000/flume/data/2018-08-06-03-53.1533527586309.tmp
+18/08/06 03:53:06 INFO hdfs.BucketWriter: Creating hdfs://master:9000/flume/data/2018-08-06-03-53.1533527586309.tmp
 18/08/06 03:54:04 INFO hdfs.HDFSDataStream: Serializer = TEXT, UseRawLocalFileSystem = false
-18/08/06 03:54:07 INFO hdfs.BucketWriter: Renaming hdfs://hadoop-master:9000/flume/data/2018-08-06-03-53.1533527586309.tmp to hdfs://hadoop-master:9000/flume/data/2018-08-06-03-53.1533527586309
+18/08/06 03:54:07 INFO hdfs.BucketWriter: Renaming hdfs://master:9000/flume/data/2018-08-06-03-53.1533527586309.tmp to hdfs://master:9000/flume/data/2018-08-06-03-53.1533527586309
 18/08/06 03:54:07 INFO hdfs.HDFSEventSink: Writer callback called.
 
 ```
 
 查看HDFS /flume/data目录:  
 ```
-root@hadoop-master:/home# hadoop fs -ls /flume/data
+root@master:/home# hadoop fs -ls /flume/data
 Found 2 items
 -rw-r--r--   2 root supergroup          3 2018-08-06 03:54 /flume/data/2018-08-06-03-53.1533527586309
 -rw-r--r--   2 root supergroup          3 2018-08-06 03:54 /flume/data/2018-08-06-03-54.1533527644280.tmp
-root@hadoop-master:/home# hadoop fs -cat /flume/data/2018-08-06-03-53.1533527586309
+root@master:/home# hadoop fs -cat /flume/data/2018-08-06-03-53.1533527586309
 aa
 ```
 
@@ -145,24 +145,24 @@ aa
 
 继续测试:  
 ```
-root@hadoop-master:/home# echo "hello" >> source.log 
-root@hadoop-master:/home# echo "hello my" >> source.log 
+root@master:/home# echo "hello" >> source.log 
+root@master:/home# echo "hello my" >> source.log 
 ```
 
 写入后，会先在HDFS中创建tmp文件,一分钟后完成写入:  
 ```
 18/08/06 03:59:34 INFO hdfs.HDFSDataStream: Serializer = TEXT, UseRawLocalFileSystem = false
-18/08/06 03:59:34 INFO hdfs.BucketWriter: Creating hdfs://hadoop-master:9000/flume/data/2018-08-06-03-59.1533527974535.tmp
-18/08/06 04:00:34 INFO hdfs.BucketWriter: Closing hdfs://hadoop-master:9000/flume/data/2018-08-06-03-59.1533527974535.tmp
+18/08/06 03:59:34 INFO hdfs.BucketWriter: Creating hdfs://master:9000/flume/data/2018-08-06-03-59.1533527974535.tmp
+18/08/06 04:00:34 INFO hdfs.BucketWriter: Closing hdfs://master:9000/flume/data/2018-08-06-03-59.1533527974535.tmp
 18/08/06 04:00:34 INFO hdfs.BucketWriter: Close tries incremented
-18/08/06 04:00:34 INFO hdfs.BucketWriter: Renaming hdfs://hadoop-master:9000/flume/data/2018-08-06-03-59.1533527974535.tmp to hdfs://hadoop-master:9000/flume/data/2018-08-06-03-59.1533527974535
+18/08/06 04:00:34 INFO hdfs.BucketWriter: Renaming hdfs://master:9000/flume/data/2018-08-06-03-59.1533527974535.tmp to hdfs://master:9000/flume/data/2018-08-06-03-59.1533527974535
 18/08/06 04:00:34 INFO hdfs.HDFSEventSink: Writer callback called.
 ```
 59:34 创建tmp文件  00:34写入文件  
 
 查看文件:  
 ```
-root@hadoop-master:/home# hadoop fs -cat /flume/data/2018-08-06-03-59.1533527974535
+root@master:/home# hadoop fs -cat /flume/data/2018-08-06-03-59.1533527974535
 hello
 hello my
 ```

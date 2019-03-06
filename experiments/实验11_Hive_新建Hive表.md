@@ -21,7 +21,7 @@ Hive中Table和数据库中Table在概念上是类似的，**每一个Table在Hi
 
 ### 11.4.1 启动hive
 ```
-root@hadoop-master:/usr/local/hive/conf# hive
+root@master:/usr/local/hive/conf# hive
 
 Logging initialized using configuration in jar:file:/usr/local/hive/lib/hive-common-1.2.2.jar!/hive-log4j.properties
 hive> 

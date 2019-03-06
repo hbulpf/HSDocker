@@ -69,13 +69,13 @@
 
 创建测试文件KMeansTest.data,并上传至HDFS: 
 ```
-root@hadoop-master:~# vim KMeansTest.data
-root@hadoop-master:~# hadoop fs -put KMeansTest.data /
+root@master:~# vim KMeansTest.data
+root@master:~# hadoop fs -put KMeansTest.data /
 ```  
 
 ### 34.4.2 进行Spark-Shell，编写代码  
 ```  
-root@hadoop-master:~# spark-shell --master spark://hadoop-master:7077
+root@master:~# spark-shell --master spark://master:7077
 ```  
 
 代码部分(在shell交互里一行一行完成代码即可):  
@@ -84,7 +84,7 @@ import org.apache.spark.mllib.clustering.KMeans
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.{SparkConf, SparkContext}  
 
-val data =sc.textFile("hdfs://hadoop-master:9000/KMeansTest.data")
+val data =sc.textFile("hdfs://master:9000/KMeansTest.data")
 val parsedData =data.map(s => Vectors.dense(s.split(' ').map(_.trim.toDouble))).cache()
 
 //设置簇的个数为3
@@ -192,7 +192,7 @@ object KMeansTest {
 
 ## 1.准备数据集  
 ```
-scala> root@hadoop-master:/usr/local/spark/data/mllib# ls
+scala> root@master:/usr/local/spark/data/mllib# ls
 als              pagerank_data.txt                      sample_isotonic_regression_libsvm_data.txt  sample_linear_regression_data.txt
 derby.log        pic_data.txt                           sample_kmeans_data.txt                      sample_movielens_data.txt
 gmm_data.txt     ridge-data                             sample_lda_data.txt                         sample_multiclass_classification_data.txt
@@ -201,8 +201,8 @@ metastore_db     sample_fpgrowth.txt                    sample_libsvm_data.txt
 ```  
 这次用的是**kmeans_data.txt**,上传至HDFS:  
 ```
-root@hadoop-master:/usr/local/spark/data/mllib# hadoop fs -put kmeans_data.txt /
-root@hadoop-master:/usr/local/spark/data/mllib# hadoop fs -ls /                 
+root@master:/usr/local/spark/data/mllib# hadoop fs -put kmeans_data.txt /
+root@master:/usr/local/spark/data/mllib# hadoop fs -ls /                 
 Found 1 items
 -rw-r--r--   2 root supergroup         72 2018-08-16 01:49 /kmeans_data.txt
 ```  
@@ -210,7 +210,7 @@ Found 1 items
 ## 2.训练模型  
 进入spark-shell:  
 ```
-root@hadoop-master:/usr/local/spark/data/mllib# spark-shell spark://hadoop-master:7077
+root@master:/usr/local/spark/data/mllib# spark-shell spark://master:7077
 ```  
 
 进入spark-shell命令行执行环境后，依次输入下述代码:  

@@ -39,29 +39,29 @@ Storm简介：**Storm是一个分布式的、高容错的基于数据流的实�
 ```
 ########### These MUST be filled in for a storm configuration
  storm.zookeeper.servers:
-     - "hadoop-master"
+     - "master"
      - "hadoop-slave1"
      - "hadoop-slave2"
 # 
- nimbus.seeds: ["hadoop-master"]
+ nimbus.seeds: ["master"]
 # 
 ```
-找到此处修改，要注意的是每个配置项前面必须留有空格，否则会无法识别(即"hadoop-master"跟"-"之前要有空格)  
+找到此处修改，要注意的是每个配置项前面必须留有空格，否则会无法识别(即"master"跟"-"之前要有空格)  
 
 **storm.zookeeper.servers表示配置Zookeeper集群地址**。注意，如果zookeeper集群中使用的不是默认端口，则还需要配置storm.zookeeper.port，**nimbus.seeds表示配置主控节点**，可以配置多个。  
 
 通过scp命令拷贝至slave节点:  
 ```
-root@hadoop-master:~# scp -r /usr/local/storm hadoop-slave1:/usr/local/
-root@hadoop-master:~# scp -r /usr/local/storm hadoop-slave2:/usr/local/
+root@master:~# scp -r /usr/local/storm hadoop-slave1:/usr/local/
+root@master:~# scp -r /usr/local/storm hadoop-slave2:/usr/local/
 ```  
 
 启动storm:(首先要先启动好zookeeper)  
 
 在master节点: 进入bin目录  
 ```
-root@hadoop-master:/usr/local/storm/bin# ./storm nimbus >/dev/null 2>&1 &
-root@hadoop-master:/usr/local/storm/bin# ./storm ui >/dev/null 2>&1 &
+root@master:/usr/local/storm/bin# ./storm nimbus >/dev/null 2>&1 &
+root@master:/usr/local/storm/bin# ./storm ui >/dev/null 2>&1 &
 ```
 **一个是启动nimbus,一个是启动web UI**
 
@@ -76,7 +76,7 @@ root@hadoop-slave1:/usr/local/storm/bin# ./storm supervisor >/dev/null 2>&1 &
 
 master:  
 ```
-root@hadoop-master:/usr/local/storm/bin# jps                             
+root@master:/usr/local/storm/bin# jps                             
 136 nimbus
 137 core
 606 Jps

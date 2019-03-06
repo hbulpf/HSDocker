@@ -63,7 +63,7 @@ HDFS在使用过程中有以下限制：
 
 ### 2.4.1 在master节点上确定存在hadoop安装目录
 ```
-root@hadoop-master:~# find / -name hadoop
+root@master:~# find / -name hadoop
 /usr/local/hadoop
 /usr/local/hadoop/share/doc/hadoop
 /usr/local/hadoop/share/hadoop
@@ -71,8 +71,8 @@ root@hadoop-master:~# find / -name hadoop
 /usr/local/hadoop/share/hadoop/httpfs/tomcat/webapps/webhdfs/WEB-INF/classes/org/apache/hadoop/lib/service/hadoop
 /usr/local/hadoop/bin/hadoop
 /usr/local/hadoop/etc/hadoop
-root@hadoop-master:~# cd /usr/local/hadoop
-root@hadoop-master:/usr/local/hadoop# ls
+root@master:~# cd /usr/local/hadoop
+root@master:/usr/local/hadoop# ls
 LICENSE.txt  README.txt  etc      lib      logs  share
 NOTICE.txt   bin         include  libexec  sbin
 ```
@@ -80,7 +80,7 @@ NOTICE.txt   bin         include  libexec  sbin
 ### 2.4.2 确认各节点之间可SSH免密登录
 使用ssh工具登录到各个节点，执行命令ssh 主机名，确认每个均可SSH免密登录。**(demo2里创建了bridge连接各个容器，每个节点也各自生成了密钥，是可以通过ssh互通的)**
 ```
-root@hadoop-master:/usr/local/hadoop# ssh hadoop-slave1
+root@master:/usr/local/hadoop# ssh hadoop-slave1
 Warning: Permanently added 'hadoop-slave1,172.19.0.3' (ECDSA) to the list of known hosts.
 Welcome to Ubuntu 14.04.4 LTS (GNU/Linux 4.13.0-39-generic x86_64)
 
@@ -92,7 +92,7 @@ root@hadoop-slave1:~#
 
 hadoop的配置文件都在**/usr/local/hadoop/etc/hadoop**目录下:
 ```
-root@hadoop-master:/usr/local/hadoop/etc/hadoop# ls
+root@master:/usr/local/hadoop/etc/hadoop# ls
 capacity-scheduler.xml      httpfs-env.sh            mapred-env.sh
 configuration.xsl           httpfs-log4j.properties  mapred-queues.xml.template
 container-executor.cfg      httpfs-signature.secret  mapred-site.xml
@@ -120,7 +120,7 @@ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 (1) 寻找jdk路径
 ```
-root@hadoop-master:/usr/local/hadoop/etc/hadoop# find / -name java
+root@master:/usr/local/hadoop/etc/hadoop# find / -name java
 /etc/alternatives/java
 /etc/ssl/certs/java
 /var/lib/dpkg/alternatives/java
@@ -128,8 +128,8 @@ root@hadoop-master:/usr/local/hadoop/etc/hadoop# find / -name java
 /usr/bin/java
 /usr/lib/jvm/java-7-openjdk-amd64/bin/java
 /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
-root@hadoop-master:/usr/local/hadoop/etc/hadoop# cd /usr/lib/jvm/java-7-openjdk-amd64/
-root@hadoop-master:/usr/lib/jvm/java-7-openjdk-amd64# ls
+root@master:/usr/local/hadoop/etc/hadoop# cd /usr/lib/jvm/java-7-openjdk-amd64/
+root@master:/usr/lib/jvm/java-7-openjdk-amd64# ls
 ASSEMBLY_EXCEPTION  bin   include  lib  src.zip
 THIRD_PARTY_README  docs  jre      man
 ```
@@ -148,7 +148,7 @@ THIRD_PARTY_README  docs  jre      man
 <configuration>
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://hadoop-master:9000/</value>
+        <value>hdfs://master:9000/</value>
     </property>
     <property>
           <name>io.file.buffer.size</name>
@@ -175,7 +175,7 @@ scp /etc/hosts hadoop-slave2:/etc/hosts
 ### 2.4.4 启动HDFS
 **start-hadoop.sh**可一键启动包括HDFS,yarn在内的各项进程。
 ```
-root@hadoop-master:~# ls
+root@master:~# ls
 hdfs  run-wordcount.sh  start-hadoop.sh
 ```
 将修改后的配置文件拷贝至各节点后，
@@ -196,7 +196,7 @@ slaves文件指定**datanode**,内容根据集群中slave节点的数量填上�
 
 (3)统一启动HDFS：
 ```
-root@hadoop-master:/usr/local/hadoop/sbin# ls
+root@master:/usr/local/hadoop/sbin# ls
 distribute-exclude.sh    start-all.`        stop-balancer.sh
 hadoop-daemon.sh         start-all.sh         stop-dfs.`
 hadoop-daemons.sh        start-balancer.sh    stop-dfs.sh
@@ -207,14 +207,14 @@ kms.sh                   start-yarn.`       yarn-daemon.sh
 mr-jobhistory-daemon.sh  start-yarn.sh        yarn-daemons.sh
 refresh-namenodes.sh     stop-all.`
 slaves.sh                stop-all.sh
-root@hadoop-master:/usr/local/hadoop/sbin# ./start-dfs.sh 
+root@master:/usr/local/hadoop/sbin# ./start-dfs.sh 
 ```
 
 ### 2.4.5 通过查看进程的方式验证HDFS启动成功
 通过jps命令查看各节点是否启动相应服务：  
 master上:
 ```
-root@hadoop-master:~# jps
+root@master:~# jps
 374 SecondaryNameNode
 173 NameNode
 543 ResourceManager
@@ -235,7 +235,7 @@ root@hadoop-slave1:~# jps
 
 在master节点上使用hadoop命令会报错
 ```
-root@hadoop-master:~# hadoop fs -ls
+root@master:~# hadoop fs -ls
 -bash: hadoop: command not found
 ```
 原因是没有配置 hadoop 环境变量,编辑 `/etc/profile` 配置环境变量(该配置也包括了对java Classpath的配置）  
@@ -254,15 +254,15 @@ export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib:$HADOOP_HOME/lib/native
 
 上传文件测试：
 ```
-root@hadoop-master:~# ls
+root@master:~# ls
 hdfs  input.txt  run-wordcount.sh  start-hadoop.sh
-root@hadoop-master:~# cat input.txt 
+root@master:~# cat input.txt 
 test
-root@hadoop-master:~# hadoop fs -put input.txt /
-root@hadoop-master:~# hadoop fs -ls /
+root@master:~# hadoop fs -put input.txt /
+root@master:~# hadoop fs -ls /
 Found 1 items
 -rw-r--r--   2 root supergroup          5 2018-06-23 05:22 /input.txt
-root@hadoop-master:~# hadoop fs -cat /input.txt
+root@master:~# hadoop fs -cat /input.txt
 test
 ```
 

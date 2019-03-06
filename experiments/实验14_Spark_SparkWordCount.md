@@ -119,9 +119,9 @@ ni are my sunshine
 ```  
 上到到HDFS:  
 ```
-root@hadoop-master:~# vim in.txt
-root@hadoop-master:~# hadoop fs -put in.txt /
-root@hadoop-master:~# hadoop fs -ls /        
+root@master:~# vim in.txt
+root@master:~# hadoop fs -put in.txt /
+root@master:~# hadoop fs -ls /        
 Found 2 items
 -rw-r--r--   2 root supergroup         54 2018-07-20 02:12 /in.txt
 drwx-wx-wx   - root supergroup          0 2018-07-20 02:10 /tmp
@@ -129,13 +129,13 @@ drwx-wx-wx   - root supergroup          0 2018-07-20 02:10 /tmp
 
 启动Spark-shell:  
 ```
-root@hadoop-master:/usr/local/spark/jars# spark-shell --master spark://hadoop-master:7077
+root@master:/usr/local/spark/jars# spark-shell --master spark://master:7077
 ```
 
 在spark-shell中写入代码:  
 ```
-scala> val file=sc.textFile("hdfs://hadoop-master:9000/in.txt")
-file: org.apache.spark.rdd.RDD[String] = hdfs://hadoop-master:9000/in.txt MapPartitionsRDD[5] at textFile at <console>:24
+scala> val file=sc.textFile("hdfs://master:9000/in.txt")
+file: org.apache.spark.rdd.RDD[String] = hdfs://master:9000/in.txt MapPartitionsRDD[5] at textFile at <console>:24
 
 scala> val count=file.flatMap(line => line.split(" ")).map(word => (word,1)).reduceByKey(_+_)
 count: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[8] at reduceByKey at <console>:26

@@ -36,11 +36,11 @@ source /etc/profile 使生效
 
 在启动pig前，记得先启动好hadoop集群，**并进入hadoop的sbin目录下启动historyserver**:  
 ```
-root@hadoop-master:/usr/local/hadoop/sbin# ./mr-jobhistory-daemon.sh start historyserver
+root@master:/usr/local/hadoop/sbin# ./mr-jobhistory-daemon.sh start historyserver
 chown: missing operand after '/usr/local/hadoop/logs'
 Try 'chown --help' for more information.
-starting historyserver, logging to /usr/local/hadoop/logs/mapred--historyserver-hadoop-master.out
-root@hadoop-master:/usr/local/hadoop/sbin# jps
+starting historyserver, logging to /usr/local/hadoop/logs/mapred--historyserver-master.out
+root@master:/usr/local/hadoop/sbin# jps
 384 SecondaryNameNode
 179 NameNode
 1443 Jps
@@ -51,18 +51,18 @@ root@hadoop-master:/usr/local/hadoop/sbin# jps
 
 接着上传测试文件至HDFS，为接下来的pig操作作准备:  (创建pig目录,上传的是随意挑选的hadoop目录下的README.txt)
 ```
-root@hadoop-master:/usr/local/hadoop# hadoop fs -mkdir /pig
-root@hadoop-master:/usr/local/hadoop# ls
+root@master:/usr/local/hadoop# hadoop fs -mkdir /pig
+root@master:/usr/local/hadoop# ls
 LICENSE.txt  NOTICE.txt  README.txt  bin  etc  include  lib  libexec  logs  sbin  share
-root@hadoop-master:/usr/local/hadoop# hadoop fs -put README.txt /pig
-root@hadoop-master:/usr/local/hadoop# hadoop fs -ls /pig            
+root@master:/usr/local/hadoop# hadoop fs -put README.txt /pig
+root@master:/usr/local/hadoop# hadoop fs -ls /pig            
 Found 1 items
 -rw-r--r--   2 root supergroup       1366 2018-08-07 07:35 /pig/README.txt
 ```  
 
 上传完成后,直接输入pig命令即可进入交互:  
 ```
-root@hadoop-master:/usr/local/hadoop/sbin# pig
+root@master:/usr/local/hadoop/sbin# pig
 18/08/07 07:38:52 INFO pig.ExecTypeProvider: Trying ExecType : LOCAL
 18/08/07 07:38:52 INFO pig.ExecTypeProvider: Trying ExecType : MAPREDUCE
 18/08/07 07:38:52 INFO pig.ExecTypeProvider: Picked MAPREDUCE as the ExecType
@@ -70,7 +70,7 @@ root@hadoop-master:/usr/local/hadoop/sbin# pig
 2018-08-07 07:38:52,151 [main] INFO  org.apache.pig.Main - Logging error messages to: /usr/local/hadoop/sbin/pig_1533627532150.log
 2018-08-07 07:38:52,182 [main] INFO  org.apache.pig.impl.util.Utils - Default bootup file /root/.pigbootup not found
 2018-08-07 07:38:52,653 [main] INFO  org.apache.hadoop.conf.Configuration.deprecation - mapred.job.tracker is deprecated. Instead, use mapreduce.jobtracker.address
-2018-08-07 07:38:52,653 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://hadoop-master:9000/
+2018-08-07 07:38:52,653 [main] INFO  org.apache.pig.backend.hadoop.executionengine.HExecutionEngine - Connecting to hadoop file system at: hdfs://master:9000/
 2018-08-07 07:38:53,091 [main] INFO  org.apache.pig.PigServer - Pig Script ID for the session: PIG-default-afc57ffa-d349-435c-8939-587686ea5648
 2018-08-07 07:38:53,092 [main] WARN  org.apache.pig.PigServer - ATS is disabled since yarn.timeline-service.enabled set to false
 grunt> 
@@ -125,9 +125,9 @@ wangwu,m,20
 ```  
 上传至HDFS的/pig目录:  
 ```
-root@hadoop-master:~# vim pigdata.txt
-root@hadoop-master:~# hadoop fs -put pigdata.txt /pig
-root@hadoop-master:~# hadoop fs -ls /pig
+root@master:~# vim pigdata.txt
+root@master:~# hadoop fs -put pigdata.txt /pig
+root@master:~# hadoop fs -ls /pig
 Found 2 items
 -rw-r--r--   2 root supergroup       1366 2018-08-07 07:35 /pig/README.txt
 -rw-r--r--   2 root supergroup         36 2018-08-07 08:04 /pig/pigdata.txt

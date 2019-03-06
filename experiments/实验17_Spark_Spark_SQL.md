@@ -45,7 +45,7 @@ DataFrames也可以用于数据的输入与输出，例如利用Spark SQL中的D
 
 ### 17.4.2 启动Spark SQL
 ```
-root@hadoop-master:~# spark-sql --master spark://hadoop-master:7077
+root@master:~# spark-sql --master spark://master:7077
 
 后面会出现一大串的信息
 

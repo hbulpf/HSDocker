@@ -47,7 +47,7 @@ Scala把Erlang风格的基于actor的并发带进了JVM。开发者可以利用S
 
 ### 16.4.1 以集群模式启动spark-shell:  
 ```
-root@hadoop-master:~# spark-shell --master spark://hadoop-master:7077
+root@master:~# spark-shell --master spark://master:7077
 ```
   
 ### 16.4.2 编写并执行scala代码:  
@@ -73,7 +73,7 @@ tempResultRDDBC: org.apache.spark.rdd.RDD[(String, Int)] = MapPartitionsRDD[15] 
 scala> var resultRDDABC = tempResultRDDA.union(tempResultRDDBC)
 resultRDDABC: org.apache.spark.rdd.RDD[(String, Int)] = UnionRDD[16] at union at <console>:35
 
-scala> resultRDDABC.saveAsTextFile("hdfs://hadoop-master:9000/resultRDDABC")
+scala> resultRDDABC.saveAsTextFile("hdfs://master:9000/resultRDDABC")
 ```
 
 最长的那段代码:  
@@ -89,19 +89,19 @@ scala> var tempResultRDDA = rawRDDA.flatMap(line=>line.split("")
 
 ### 16.4.3 查看结果:  
 ```
-root@hadoop-master:~# hadoop fs -ls /
+root@master:~# hadoop fs -ls /
 Found 3 items
 -rw-r--r--   2 root supergroup         54 2018-07-20 02:12 /in.txt
 drwxr-xr-x   - root supergroup          0 2018-07-20 03:06 /resultRDDABC
 drwx-wx-wx   - root supergroup          0 2018-07-20 02:10 /tmp
-root@hadoop-master:~# hadoop fs -ls /resu*
+root@master:~# hadoop fs -ls /resu*
 Found 5 items
 -rw-r--r--   2 root supergroup          0 2018-07-20 03:06 /resultRDDABC/_SUCCESS
 -rw-r--r--   2 root supergroup          0 2018-07-20 03:06 /resultRDDABC/part-00000
 -rw-r--r--   2 root supergroup          0 2018-07-20 03:06 /resultRDDABC/part-00001
 -rw-r--r--   2 root supergroup         16 2018-07-20 03:06 /resultRDDABC/part-00002
 -rw-r--r--   2 root supergroup          0 2018-07-20 03:06 /resultRDDABC/part-00003
-root@hadoop-master:~# hadoop fs -cat /resultRDDABC/p*
+root@master:~# hadoop fs -cat /resultRDDABC/p*
 (xx,99)
 (zz,99)
 ```

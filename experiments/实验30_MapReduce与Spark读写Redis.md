@@ -32,7 +32,7 @@ uuu vvv www nanjing yyy zzz
 
 上传big.txt至HDFS:  
 ```
-root@hadoop-master:~# hadoop fs -put big.txt /
+root@master:~# hadoop fs -put big.txt /
 ```  
 
 #### 30.4.1.2 准备Redis数据
@@ -128,14 +128,14 @@ IDEA打包jar包的步骤前面有提到过，打包完成后上传至master节�
 
 执行jar包，(执行前记得启动hadoop集群):  
 ```
-root@hadoop-master:~# hadoop jar ex30.jar 172.19.0.2 /big.txt /output
+root@master:~# hadoop jar ex30.jar 172.19.0.2 /big.txt /output
 ```
 **!! (IDEA打包的jar包若指定了主类，记得执行hadoop jar的时候千万不要再带上主类名)**
 
 #### 30.4.1.5 查看结果  
 最后我们在/output目录下查看mapreduce的结果:  
 ```
-root@hadoop-master:~# hadoop fs -cat /output/p*
+root@master:~# hadoop fs -cat /output/p*
 nanjing	5
 ```  
 实验成功  
@@ -146,7 +146,7 @@ nanjing	5
 #### 30.4.2.1 准备Redis数据  
 登录Redis，向redis数据库添加数据:  
 ```
-root@hadoop-master:/usr/local/hadoop/share/hadoop/mapreduce# redis-cli -h 172.19.0.2
+root@master:/usr/local/hadoop/share/hadoop/mapreduce# redis-cli -h 172.19.0.2
 172.19.0.2:6379> set chengshi sh,bj,sz,nj,hf
 OK
 172.19.0.2:6379> get chengshi
@@ -156,7 +156,7 @@ OK
 #### 30.4.2.2 启动SparkShell  
 首先启动Spark集群，再启动SparkShell，由于Spark访问Redis时需要Redis客户端jedis，故此处启动Spark时需指定jedis包,启动命令如下: 
 ```
-root@hadoop-master:~# spark-shell --master spark://hadoop-master:7077 --jars jedis-2.1.0.jar
+root@master:~# spark-shell --master spark://master:7077 --jars jedis-2.1.0.jar
 ```  
 记得把jedis-2.1.0.jar上传至master节点  
 

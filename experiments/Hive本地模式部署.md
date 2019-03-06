@@ -18,14 +18,14 @@ sudo apt-get install mysql-server mysql-client
 
 安装完后登录mysql:  
 ```
-root@hadoop-master:~# mysql -u root -p
+root@master:~# mysql -u root -p
 Enter password: 
 ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
 ```  
 会有个莫名奇妙的报错，重启mysql后可以解决:  
 ```
-root@hadoop-master:~# sudo service mysql restart
-root@hadoop-master:~# mysql -u root -p
+root@master:~# sudo service mysql restart
+root@master:~# mysql -u root -p
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 8
@@ -61,7 +61,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 接着以hive用户登录，创建数据库hive:  
 ```
-root@hadoop-master:~# mysql -u hive -p
+root@master:~# mysql -u hive -p
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 45
@@ -94,11 +94,11 @@ mysql> show databases;
 (1) 修改hive-site.xml配置文件:  
 进入/usr/local/hive/conf目录，修改**hive-site.xml**:  
 ```
-root@hadoop-master:/usr/local/hive/conf# ls
+root@master:/usr/local/hive/conf# ls
 beeline-log4j.properties.template  hive-default.xml.template  hive-env.sh.template                 hive-log4j.properties.template  metastore_db
 derby.log                          hive-env.sh                hive-exec-log4j.properties.template  ivysettings.xml
-root@hadoop-master:/usr/local/hive/conf# cp hive-default.xml.template hive-site.xml
-root@hadoop-master:/usr/local/hive/conf# vi hive-site.xml 
+root@master:/usr/local/hive/conf# cp hive-default.xml.template hive-site.xml
+root@master:/usr/local/hive/conf# vi hive-site.xml 
 ```  
 
 hive-site.xml文件内容很多，我们要找到以下内容并修改:  
@@ -185,25 +185,25 @@ I、修改属性hive.querylog.location属性。
 ```
 
 (2)配置hive的log4j配置文件  
-`root@hadoop-master:/usr/local/hive/conf# cp hive-log4j.properties.template hive-log4j.properties`  
+`root@master:/usr/local/hive/conf# cp hive-log4j.properties.template hive-log4j.properties`  
 
 (3)将MySQL的**JDBC驱动包**拷贝到hive的安装目录中。
 [驱动包下载][1] 
 [1]: https://downloads.mysql.com/archives/c-j/  
 这次我下的是5.1.32的版本，下载的压缩包解压后能找到jar包，将jar包拷贝至/usr/local/hive/lib目录下：  
-`sudo docker cp mysql-connector-java-5.1.32-bin.jar hadoop-master:/usr/local/hive/lib`1  
+`sudo docker cp mysql-connector-java-5.1.32-bin.jar master:/usr/local/hive/lib`1  
 这里我是主机将jar包拷贝至master节点  
 
 (4)将hive下的jline-2.12.jar拷贝至**/usr/local/hadoop/share/hadoop/yarn/lib**目录下:  
 jline-2.12.jar在/usr/local/hive/lib目录下:  
 ```
-root@hadoop-master:/usr/local/hive/lib# cp jline-2.12.jar /usr/local/hadoop/share/hadoop/yarn/lib
+root@master:/usr/local/hive/lib# cp jline-2.12.jar /usr/local/hadoop/share/hadoop/yarn/lib
 ```  
 
 ## 5.验证部署是否成功
 先看能不能成功进入hive:  
 ```
-root@hadoop-master:/usr/local/hive/conf# hive              
+root@master:/usr/local/hive/conf# hive              
 
 Logging initialized using configuration in file:/usr/local/hive/conf/hive-log4j.properties
 hive> create table test(a string , b int);
@@ -219,7 +219,7 @@ hive> quit;
 
 接着我们进行mysql查看:  
 ```
-root@hadoop-master:/usr/local/hive/conf# mysql -u hive -p
+root@master:/usr/local/hive/conf# mysql -u hive -p
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 78

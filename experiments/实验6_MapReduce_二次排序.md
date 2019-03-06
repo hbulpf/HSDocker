@@ -1,6 +1,6 @@
 ﻿# 实验六 MapReduce实验：二次排序
 
-**每次实验开始前启动hadoop集群，跟实验五一样先完善好对/etc/profile的配置**
+**每次实验开始前启动hadoop集群，跟实验五一样先完善好对 `/etc/profile` 的配置**
 
 ## 6.1 实验目的
 基于MapReduce思想，编写SecondarySort程序。
@@ -9,7 +9,10 @@
 要能理解MapReduce编程思想，会编写MapReduce版本二次排序程序，然后将其执行并分析执行过程。
 
 ## 6.3 实验原理
-MR默认会对键进行排序，然而有的时候我们也有对值进行排序的需求。满足这种需求一是可以在reduce阶段排序收集过来的values，但是，如果有数量巨大的values可能就会导致内存溢出等问题，这就是二次排序应用的场景——将对值的排序也安排到MR计算过程之中，而不是单独来做。    
+MR默认会对键进行排序，然而有的时候我们也有对值进行排序的需求。
+
+满足这种需求一是可以在reduce阶段收集排序过来的values，但是，如果有数量巨大的values可能就会导致内存溢出等问题，这就是二次排序应用的场景——将对值的排序也安排到MR计算过程之中，而不是单独来做。    
+
 二次排序就是首先按照第一字段排序，然后再对第一字段相同的行按照第二字段排序，注意不能破坏第一次排序的结果
 
 ## 6.4 实验步骤
@@ -185,8 +188,8 @@ public class SecondarySort {
 创建两个java文件Intpair.java, SecondarySort.java,复制上面的代码。
 **同时**编译两个java文件:  
 ```
-root@hadoop-master:~/expriment6# javac IntPair.java SecondarySort.java 
-root@hadoop-master:~/expriment6# ls
+root@master:~/expriment6# javac IntPair.java SecondarySort.java 
+root@master:~/expriment6# ls
 IntPair.class                         SecondarySort$TheMapper.class
 IntPair.java                          SecondarySort$TheReducer.class
 SecondarySort$FirstPartitioner.class  SecondarySort.class
@@ -197,7 +200,7 @@ SecondarySort$KeyComparator.class     SecondarySort.java
 ### 6.4.2 打包代码
 jar命令打包几个.class文件:  
 ```
-root@hadoop-master:~/expriment6# jar -cvf SecondarySort.jar *.class
+root@master:~/expriment6# jar -cvf SecondarySort.jar *.class
 added manifest
 adding: IntPair.class(in = 2171) (out= 990)(deflated 54%)
 adding: SecondarySort$FirstPartitioner.class(in = 871) (out= 460)(deflated 47%)
@@ -210,8 +213,8 @@ adding: SecondarySort.class(in = 1798) (out= 943)(deflated 47%)
 ### 6.4.3 编写输入数据并执行jar包
 创建输入数据文件**secsortdata.txt**，内容如下("\t"作分割):  
 ```
-root@hadoop-master:~/expriment6# vi secsortdata.txt
-root@hadoop-master:~/expriment6# cat secsortdata.txt 
+root@master:~/expriment6# vi secsortdata.txt
+root@master:~/expriment6# cat secsortdata.txt 
 7	444
 3	9999
 7	333
@@ -226,8 +229,8 @@ root@hadoop-master:~/expriment6# cat secsortdata.txt
 
 上传输入文件至HDFS:
 ```
-root@hadoop-master:~/expriment6# hadoop fs -put secsortdata.txt /
-root@hadoop-master:~/expriment6# hadoop fs -ls /
+root@master:~/expriment6# hadoop fs -put secsortdata.txt /
+root@master:~/expriment6# hadoop fs -ls /
 Found 1 items
 -rw-r--r--   2 root supergroup         60 2018-07-06 04:49 /secsortdata.txt
 ```
@@ -235,16 +238,16 @@ Found 1 items
 
 执行mapreduce任务：
 ```
-root@hadoop-master:~/expriment6# hadoop jar SecondarySort.jar SecondarySort /secsortdata.txt /output 1
+root@master:~/expriment6# hadoop jar SecondarySort.jar SecondarySort /secsortdata.txt /output 1
 ```
 
 ## 6.5 实验结果
 ```
-root@hadoop-master:~/expriment6# hadoop fs -ls /output
+root@master:~/expriment6# hadoop fs -ls /output
 Found 2 items
 -rw-r--r--   2 root supergroup          0 2018-07-06 04:50 /output/_SUCCESS
 -rw-r--r--   2 root supergroup         60 2018-07-06 04:50 /output/part-r-00000
-root@hadoop-master:~/expriment6# hadoop fs -cat /output/part-r-00000
+root@master:~/expriment6# hadoop fs -cat /output/part-r-00000
 3	9999
 3	8888
 3	7777

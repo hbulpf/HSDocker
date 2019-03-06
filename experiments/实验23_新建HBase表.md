@@ -65,7 +65,7 @@ public class Main {
         //获得HBase连接
         Configuration configuration = HBaseConfiguration.create();
         Connection connection;
-        configuration.set("hbase.zookeeper.quorum", "hadoop-master:2181,hadoop-slave1:2181,hadoop-slave2:2181");
+        configuration.set("hbase.zookeeper.quorum", "master:2181,hadoop-slave1:2181,hadoop-slave2:2181");
         configuration.set("zookeeper.znode.parent", "/hbase");
 
         try{
@@ -155,7 +155,7 @@ public class Main {
 
 执行jar包:  
 ```
-root@hadoop-master:~# java -jar HbaseTest.jar 
+root@master:~# java -jar HbaseTest.jar 
 log4j:WARN No appenders could be found for logger (org.apache.hadoop.security.Groups).
 log4j:WARN Please initialize the log4j system properly.
 log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
@@ -166,7 +166,7 @@ log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more in
 
 进入hbase shell 查看是否成功创建表并插入数据。  
 ```
-root@hadoop-master:/usr/local/hbase/bin# ./hbase shell
+root@master:/usr/local/hbase/bin# ./hbase shell
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/usr/local/hbase/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
 SLF4J: Found binding in [jar:file:/usr/local/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]

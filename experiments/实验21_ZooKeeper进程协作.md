@@ -40,7 +40,7 @@ public class WriteMsg extends Thread {
     @Override
     public void run(){
         try{
-            ZooKeeper zk = new ZooKeeper("hadoop-master:2181", 500000, null);
+            ZooKeeper zk = new ZooKeeper("master:2181", 500000, null);
             String content = Long.toString(new Date().getTime());
 
             zk.setData("/testZk", content.getBytes(), -1);
@@ -60,7 +60,7 @@ import org.apache.zookeeper.ZooKeeper;
 
 public class ReadMsg {
     public static void main(String[] args) throws Exception{
-        final ZooKeeper zk = new ZooKeeper("hadoop-master:2181", 500000, null);
+        final ZooKeeper zk = new ZooKeeper("master:2181", 500000, null);
 
         Watcher wacher = new Watcher() {
             public void process(WatchedEvent event) {
@@ -90,9 +90,9 @@ public class ReadMsg {
 ### 21.4.4 导出jar包
 IDEA导出jar包可参考实验18,19,不会可自行百度，导出后上传至hadoop-slave1节点。 
 
-看上个步骤编写的代码我们可以发现监控的是**/testZk**，所以我们得像实验20一样**先创建/testZk**(否则在slave1节点上运行jar包无用),在hadoop-master节点上创建
+看上个步骤编写的代码我们可以发现监控的是**/testZk**，所以我们得像实验20一样**先创建/testZk**(否则在slave1节点上运行jar包无用),在master节点上创建
 ```
-[zk: hadoop-master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 1] create /testZk ""
+[zk: master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 1] create /testZk ""
 ```
 
 在hadoop-slave1节点上我们运行jar包:  
@@ -118,9 +118,9 @@ log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more in
 /testZk???: 1532681420344
 /testZk???: 1532681422339
 ```
-我们看到内容都是1532681392282之类的一串数字，我们可以在hadoop-master节点上通过get查看/testZk内容:  
+我们看到内容都是1532681392282之类的一串数字，我们可以在master节点上通过get查看/testZk内容:  
 ```
-[zk: hadoop-master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 8] get /testZk
+[zk: master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 8] get /testZk
 1532681442366
 cZxid = 0x10000008e
 ctime = Fri Jul 27 08:49:41 UTC 2018
@@ -133,7 +133,7 @@ aclVersion = 0
 ephemeralOwner = 0x0
 dataLength = 13
 numChildren = 0
-[zk: hadoop-master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 9] get /testZk
+[zk: master:2181,hadoop-slave1:2181,hadoop-slave2:2181(CONNECTED) 9] get /testZk
 1532681448374
 cZxid = 0x10000008e
 ctime = Fri Jul 27 08:49:41 UTC 2018

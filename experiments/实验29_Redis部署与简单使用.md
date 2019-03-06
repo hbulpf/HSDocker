@@ -58,14 +58,14 @@ sudo apt-get install make
 
 这里下载的是最新的4.0.11版本，下载后解压至/usr/local/redis目录:  
 ```
-root@hadoop-master:~# tar -zxvf redis-4.0.11.tar.gz
-root@hadoop-master:~# mv redis-4.0.11 /usr/local/redis
+root@master:~# tar -zxvf redis-4.0.11.tar.gz
+root@master:~# mv redis-4.0.11 /usr/local/redis
 ```  
 
 进入/usr/local/redis目录，执行make命令进行编译:  
 ```
-root@hadoop-master:/usr/local/redis# make  
-root@hadoop-master:/usr/local/redis# make install
+root@master:/usr/local/redis# make  
+root@master:/usr/local/redis# make install
 ```
 (输出会有很多，已省略)  
 
@@ -74,9 +74,9 @@ root@hadoop-master:/usr/local/redis# make install
 
 最后，使用“redis-server”命令**（启动脚本在src目录下），指定上述配置文件，启动Redis:  
 ```
-root@hadoop-master:/usr/local/redis/src# ./redis-server /usr/local/redis/redis.conf &
+root@master:/usr/local/redis/src# ./redis-server /usr/local/redis/redis.conf &
 [1] 3818
-root@hadoop-master:/usr/local/redis/src# 3818:C 09 Aug 01:02:11.236 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+root@master:/usr/local/redis/src# 3818:C 09 Aug 01:02:11.236 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
 3818:C 09 Aug 01:02:11.236 # Redis version=4.0.11, bits=64, commit=00000000, modified=0, pid=3818, just started
 3818:C 09 Aug 01:02:11.236 # Configuration loaded
                 _._                                                  
@@ -108,7 +108,7 @@ root@hadoop-master:/usr/local/redis/src# 3818:C 09 Aug 01:02:11.236 # oO0OoO0OoO
 ### 29.4.2 使用Redis  
 向redis里写入数据:  
 ```
-root@hadoop-master:/usr/local/redis/src# ./redis-cli -h 172.19.0.2
+root@master:/usr/local/redis/src# ./redis-cli -h 172.19.0.2
 172.19.0.2:6379> set chengshi sh,bj,sz,nj,hf
 OK
 172.19.0.2:6379> get chengshi

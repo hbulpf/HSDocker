@@ -58,24 +58,24 @@ kafka的特性决定它非常适合作为"日志收集中心";application可以�
 
 通过scp命令将传到另外两个节点:  
 ```
-root@hadoop-master:/usr/local# scp -r  kafka hadoop-slave1:/usr/local/
-root@hadoop-master:/usr/local# scp -r  kafka hadoop-slave2:/usr/local/
+root@master:/usr/local# scp -r  kafka hadoop-slave1:/usr/local/
+root@master:/usr/local# scp -r  kafka hadoop-slave2:/usr/local/
 ```  
 
 三个节点分别进入安装目录，在config目录修改server.properties文件，修改内容如下:  
 
-hadoop-master:  
+master:  
 ```
 #broker.id
 broker.id=1
 #broker.port
 port=9092
 #host.name
-host.name=hadoop-master
+host.name=master
 #本地日志文件位置
 log.dirs=/usr/local/kafka/logs
 #Zookeeper地址
-zookeeper.connect=hadoop-master:2181,hadoop-slave1:2181,hadoop-slave2:2181
+zookeeper.connect=master:2181,hadoop-slave1:2181,hadoop-slave2:2181
 ```
 
 hadoop-slave1:  
@@ -89,7 +89,7 @@ host.name=hadoop-slave1
 #本地日志文件位置
 log.dirs=/usr/local/kafka/logs
 #Zookeeper地址
-zookeeper.connect=hadoop-master:2181,hadoop-slave1:2181,hadoop-slave2:2181
+zookeeper.connect=master:2181,hadoop-slave1:2181,hadoop-slave2:2181
 ```
 
 hadoop-slave2:  
@@ -103,14 +103,14 @@ host.name=hadoop-slave2
 #本地日志文件位置
 log.dirs=/usr/local/kafka/logs
 #Zookeeper地址
-zookeeper.connect=hadoop-master:2181,hadoop-slave1:2181,hadoop-slave2:2181
+zookeeper.connect=master:2181,hadoop-slave1:2181,hadoop-slave2:2181
 ```
 
 然后，启动Kafka，并验证Kafka功能:  
 
 打开三个终端进入各个节点,进入安装目录下的bin目录，**三台机器上分别执行以下命令启动各自的Kafka服务**：  
 ```
-root@hadoop-master:/usr/local/kafka/bin# ./kafka-server-start.sh ../config/server.properties &
+root@master:/usr/local/kafka/bin# ./kafka-server-start.sh ../config/server.properties &
 ```  
 
 看到  
@@ -119,7 +119,7 @@ root@hadoop-master:/usr/local/kafka/bin# ./kafka-server-start.sh ../config/serve
 ```
 即成功启动，之后可以ctrl+c退出，通过jps命令可查看到kafka进程:  
 ```
-root@hadoop-master:/usr/local/kafka/bin# jps
+root@master:/usr/local/kafka/bin# jps
 262 QuorumPeerMain
 395 Jps
 319 Kafka
@@ -128,17 +128,17 @@ root@hadoop-master:/usr/local/kafka/bin# jps
 
 在**master**上，执行以下命令创建topic：  
 ```
-root@hadoop-master:/usr/local/kafka/bin# ./kafka-topics.sh --create --zookeeper hadoop-master:2181,hadoop-slave1:2181,hadoop-slave2:2181 --replication-factor 2 --partitions 2 --topic test
+root@master:/usr/local/kafka/bin# ./kafka-topics.sh --create --zookeeper master:2181,hadoop-slave1:2181,hadoop-slave2:2181 --replication-factor 2 --partitions 2 --topic test
 ```  
 
 在**slave1**上，执行以下命令启动模拟producer：（启动后不要退出终端)  
 ```
-root@hadoop-slave1:/usr/local/kafka/bin# ./kafka-console-producer.sh --broker-list hadoop-master:9092,hadoop-slave1:9092,hadoop-slave2:9092 --topic test
+root@hadoop-slave1:/usr/local/kafka/bin# ./kafka-console-producer.sh --broker-list master:9092,hadoop-slave1:9092,hadoop-slave2:9092 --topic test
 ```  
 
 在**slave2**上,执行以下命令启动模拟consumer：（启动后不要退出终端)  
 ```
-root@hadoop-slave2:/usr/local/kafka/bin# ./kafka-console-consumer.sh --zookeeper hadoop-master:2181,hadoop-slave1:2181,hadoop-slave2:2181 --topic test --from-beginning
+root@hadoop-slave2:/usr/local/kafka/bin# ./kafka-console-consumer.sh --zookeeper master:2181,hadoop-slave1:2181,hadoop-slave2:2181 --topic test --from-beginning
 ```
 
 ### 27.4.3 验证消息推送  
@@ -146,7 +146,7 @@ root@hadoop-slave2:/usr/local/kafka/bin# ./kafka-console-consumer.sh --zookeeper
 
 producer:
 ```
-root@hadoop-slave1:/usr/local/kafka/bin# ./kafka-console-producer.sh --broker-list hadoop-master:9092,hadoop-slave1:9092,hadoop-slave2:9092 --topic test
+root@hadoop-slave1:/usr/local/kafka/bin# ./kafka-console-producer.sh --broker-list master:9092,hadoop-slave1:9092,hadoop-slave2:9092 --topic test
 This is Kafka producer
 Hello,Kafka
 test
@@ -154,7 +154,7 @@ test
 
 consumer:
 ```  
-root@hadoop-slave2:/usr/local/kafka/bin# ./kafka-console-consumer.sh --zookeeper hadoop-master:2181,hadoop-slave1:2181,hadoop-slave2:2181 --topic test --from-beginning
+root@hadoop-slave2:/usr/local/kafka/bin# ./kafka-console-consumer.sh --zookeeper master:2181,hadoop-slave1:2181,hadoop-slave2:2181 --topic test --from-beginning
 This is Kafka producer
 Hello,Kafka
 test

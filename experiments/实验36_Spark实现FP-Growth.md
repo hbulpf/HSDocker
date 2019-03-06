@@ -36,7 +36,7 @@ FP-tree子集分割方法:
 ### 36.4.1 准备实验数据  
 这次要用到的数据依旧在/usr/local/spark/data/mllib目录下:  
 ```
-root@hadoop-master:/usr/local/spark/data/mllib# ls
+root@master:/usr/local/spark/data/mllib# ls
 als                ridge-data                                  sample_lda_data.txt                sample_multiclass_classification_data.txt
 gmm_data.txt       sample_binary_classification_data.txt       sample_lda_libsvm_data.txt         sample_svm_data.txt
 kmeans_data.txt    sample_fpgrowth.txt                         sample_libsvm_data.txt             streaming_kmeans_data_test.txt
@@ -45,8 +45,8 @@ pic_data.txt       sample_kmeans_data.txt                      sample_movielens_
 ```  
 这次用的是**sample_fpgrowth.txt**,将其上传至HDFS:  
 ```
-root@hadoop-master:/usr/local/spark/data/mllib# hadoop fs -put sample_fpgrowth.txt /
-root@hadoop-master:/usr/local/spark/data/mllib# hadoop fs -ls /                     
+root@master:/usr/local/spark/data/mllib# hadoop fs -put sample_fpgrowth.txt /
+root@master:/usr/local/spark/data/mllib# hadoop fs -ls /                     
 Found 1 items
 -rw-r--r--   2 root supergroup         68 2018-08-16 01:34 /sample_fpgrowth.txt
 ```  
@@ -54,7 +54,7 @@ Found 1 items
 ### 36.4.2 训练模型  
 进行spark-shell:  
 ```
-root@hadoop-master:/usr/local/spark/data/mllib# spark-shell spark://hadoop-master:7077
+root@master:/usr/local/spark/data/mllib# spark-shell spark://master:7077
 ```  
 
 进入Spark Shell命令行执行环境后，依次输入下述代码:  
@@ -62,7 +62,7 @@ root@hadoop-master:/usr/local/spark/data/mllib# spark-shell spark://hadoop-maste
 import org.apache.spark.mllib.fpm.FPGrowth
 import org.apache.spark.rdd.RDD  
 
-val data = sc.textFile("hdfs://hadoop-master:9000/sample_fpgrowth.txt")
+val data = sc.textFile("hdfs://master:9000/sample_fpgrowth.txt")
 val transactions: RDD[Array[String]] = data.map(s => s.trim.split(' '))  
 val fpg = new FPGrowth().setMinSupport(0.2).setNumPartitions(10)  
 val model = fpg.run(transactions)  
