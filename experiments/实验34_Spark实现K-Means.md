@@ -263,9 +263,9 @@ kPoints.foreach(println)
 ```
 
 部分过程截图:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex34/Screenshot%20from%202018-08-16%2009-59-14.png)  
+![图](./images/ex34/Screenshot%20from%202018-08-16%2009-59-14.png)  
 
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex34/Screenshot%20from%202018-08-16%2009-58-58.png)  
+![图](./images/ex34/Screenshot%20from%202018-08-16%2009-58-58.png)  
 
 ## 3 实验结果  
 代码最后一行便是在控制台上打印中心点:  
