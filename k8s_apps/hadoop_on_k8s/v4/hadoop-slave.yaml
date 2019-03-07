@@ -43,4 +43,4 @@ spec:
       volumes:
         - name: hadoop-config
           configMap:
-            name: hadoop
+            name: hadoop-config
