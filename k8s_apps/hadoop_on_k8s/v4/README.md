@@ -1,4 +1,3 @@
-
 ﻿# Hadoop On K8S 部署 (v4)
 
 ## 获取 Hadoop 镜像
@@ -9,6 +8,12 @@ docker pull 202.116.46.215/hsdocker2019/hs_hadoop:latest
 ```
 
 ## 创建Hadoop 集群
+在当前目录下先创建configmap存储hadoop配置文件:
+```
+kubectl create configmap hadoop --from-file=hadoop  
+```
+
+
 在k8s集群中,使用 yaml 文件创建集群
 1. 使用 [hadoop-master.yaml](./hadoop-master.yaml) 创建 master 节点
 ```
