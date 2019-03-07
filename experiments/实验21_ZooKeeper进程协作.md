@@ -27,8 +27,8 @@ netty-3.10.5.Final.jar
 slf4j-api-1.6.1.jar  
 slf4j-log4j12-1.6.1.jar  
 
-写代码我用的是IDEA，创建项目ZookeeperTest，将6个jar包导入到项目(不会自行百度查）　　
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex21/Screenshot%20from%202018-07-27%2016-56-46.png) 　　
+写代码我用的是IDEA，创建项目ZookeeperTest，将6个jar包导入到项目(不会自行百度查）  
+![图](./images/ex21/Screenshot%20from%202018-07-27%2016-56-46.png) 　　
 
 ### 21.4.3 编写代码
 导入jar包后，创建**类WriteMsg**: (作用是每隔一段时间向/testZk写入一串时间数字,这样就可以监控变化)

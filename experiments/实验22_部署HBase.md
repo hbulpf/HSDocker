@@ -14,7 +14,7 @@
 简介：**HBase是基于Hadoop的开源分布式数据库**，它以Google的BigTable为原型，设计并实现了具有高可靠性、高性能、列存储、可伸缩、实时读写的分布式数据库系统，它是基于列而不是基于行的模式，适合存储非结构化数据。  
 
 体系结构：**HBase是一个分布式的数据库，使用Zookeeper管理集群，使用HDFS作为底层存储**，它**由HMaster和HRegionServer组成**，遵从主从服务器架构。HBase将逻辑上的表划分成多个数据块即HRegion，存储在HRegionServer中。HMaster负责管理所有的HRegionServer，它本身并不存储任何数据，而只是存储数据到HRegionServer的映射关系(元数据)。HBase的基本架构如图22-1所示：  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex22/1.jpg)  
+![图](./images/ex22/1.jpg)  
 
 ## 22.4 实验步骤  
 HBase依赖于HDFS和Zookeeper, 这次实验直接使用spark集成集群安装HBase。
