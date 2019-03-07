@@ -12,13 +12,13 @@
 
 ### 35.3.2 SVM算法原理  
 (1)在n维空间中找到一个分类超平面，将空间上的点分类。下图是线性分类的例子。  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex35/1.png)  
+![图](./images/ex35/1.png)  
 
 (2)一般而言，一个点距离超平面的远近可以表示为分类预测的确信或准确程度。SVM就是要最大化这个间隔值。而在虚线上的点便叫做支持向量Supprot Verctor，如图所示:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex35/2.jpg)  
+![图](./images/ex35/2.jpg)  
 
 (3)实际中，我们会经常遇到线性不可分的样例，此时，我们的常用做法是把样例特征映射到高维空间中去，如图所示:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex35/3.jpg)  
+![图](./images/ex35/3.jpg)  
 
 (4)线性不可分映射到高维空间，可能会导致维度大小高到可怕的(19维乃至无穷维的例子)，导致计算复杂。**核函数的价值在于它虽然也是讲特征进行从低维到高维的转换，但核函数绝就绝在它事先在低维上进行计算，而将实质上的分类效果表现在了高维上**，也就如上文所说的避免了直接在高维空间中的复杂计算。  
 
