@@ -12,7 +12,7 @@
 假定现有一个大为1000G的大表big.txt和一个大小为10G的小表small.txt，请基于MapReduce思想编程实现判断小表中单词在大表中出现次数。也即所谓的“扫描大表、加载小表”。  
 
 为解决上述问题，可开启10个Map。这样，每个Map只需处理总量的1/10，将大大加快处理。而在单独Map内，由于10G的small.txt依旧非常巨大，显然不适宜HashSet加载到内存等措施，此时可借助第三方存储介质（如Redis），在Map阶段先加载部分数据，然后再加载部分数据，甚至，可直接将结果写入Redis如图所示：  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex30/1.png)  
+![图](./images/ex30/1.png)  
 
 ## 30.4 实验步骤  
 主要包括MapReduce读取Redis代码和Spark读取Redis数据代码。  
@@ -121,7 +121,7 @@ public class LargeMemory {
 ```
 
 完整项目如图:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex30/Screenshot%20from%202018-08-09%2013-04-55.png)  
+![图](./images/ex30/Screenshot%20from%202018-08-09%2013-04-55.png)  
 
 #### 30.4.1.4 打包该程序并执行
 IDEA打包jar包的步骤前面有提到过，打包完成后上传至master节点。  
