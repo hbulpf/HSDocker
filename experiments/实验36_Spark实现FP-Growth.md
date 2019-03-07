@@ -15,15 +15,15 @@
 FP的全称是Frequent Pattern，在算法中使用了一种称为频繁模式树（Frequent Pattern Tree）的数据结构。FP-tree是一种特殊的前缀树，由频繁项头表和项前缀树构成。所谓前缀树，是一种存储候选项集的数据结构，树的分支用项名标识，树的节点存储后缀项，路径表示项集。  
 
 FP-tree的生成方法如图所示：  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex36/1.jpg)  
+![图](./images/ex36/1.jpg)  
 
 第二步根据支持度对频繁项进行排序是本算法的关键。第一点是，通过将支持度高的项排在前面，使得生成的FP-tree中，出现频繁的项更可能被共享，从而有效地节省算法运行所需要的空间。另一点是，通过这种排序，可以对FP-tree所包含的频繁模式进行互斥的空间拆分，得到相互独立的子集，而这些子集又组成了完整的信息。  
 
 FP-tree子集分割方法:  
 如上图，求p为前缀的投影数据库：根据头表的指针找到FP-tree的两个p节点，搜索出从这两个节点到树的根节点路径节点信息（包含支持度）。然后累加路径节点信息的支持度，删除非频繁项。对剩下的频繁项按照上一节的方法构建FP-tree。过程如下两图所示:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex36/2.jpg)  
+![图](./images/ex36/2.jpg)  
 
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex36/3.jpg)  
+![图](./images/ex36/3.jpg)  
 
 ### 36.3.2 FP-Growth算法流程  
 基本思路是：不断地迭代FP-tree的构造和投影过程。  
