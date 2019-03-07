@@ -12,7 +12,7 @@
 ## 27.3 实验原理  
 ### 27.3.1 Kafka简介  
 Kafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。它提供了类似于JMS的特性，但是在设计实现上完全不同，此外它并不是JMS规范的实现。**kafka对消息保存时根据Topic进行归类，发送消息者成为Producer,消息接受者成为Consumer,此外kafka集群有多个kafka实例组成，每个实例(server)成为broker**。无论是kafka集群，还是producer和consumer都依赖于zookeeper来保证系统可用性集群保存一些meta信息。如图所示:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex27/1.png)  
+![图](./images/ex27/1.png)  
 
 一个Topic的多个partitions,被分布在kafka集群中的多个server上;每个server(kafka实例)负责partitions中消息的读写操作;此外kafka还可以配置partitions需要备份的个数(replicas),每个partition将会被备份到多台机器上,以提高可用性。  
 
