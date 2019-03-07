@@ -33,7 +33,7 @@
 3.没有内置的C/S架构，但开发者可以使用LevelDB库自己封装一个server。  
 
 整体架构：LevelDB作为存储系统，数据记录的存储介质包括内存以及磁盘文件，如果像上面说的，当LevelDB运行了一段时间，此时我们给LevelDB进行透视拍照，那么您会看到如图所示:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex32/1.jpg)  
+![图](./images/ex32/1.jpg)  
 
 从图中可以看出，构成LevelDB静态结构的包括六个主要部分：**内存中的MemTable和Immutable MemTable以及磁盘上的几种主要文件：Current文件，Manifest文件，log文件以及SSTable文件**。当然，LevelDB除了这六个主要部分还有一些辅助的文件，但是以上六个文件和数据结构是LevelDB的主体构成元素。  
 
@@ -46,7 +46,7 @@ LevelDB的Log文件和Memtable与Bigtable论文中介绍的是一致的，**当�
 SSTable中的文件是Key有序的，就是说在文件中小key记录排在大Key记录之前，各个Level的SSTable都是如此，**但是这里需要注意的一点是：Level 0的SSTable文件（后缀为.sst）和其它Level的文件相比有特殊性：这个层级内的.sst文件，两个文件可能存在key重叠**，比如有两个level 0的sst文件，文件A和文件B，文件A的key范围是：{bar, car}，文件B的Key范围是{blue,samecity}，那么很可能两个文件都存在key=”blood”的记录。对于其它Level的SSTable文件来说，则不会出现同一层级内.sst文件的key重叠现象，就是说Level L中任意两个.sst文件，那么可以保证它们的key值是不会重叠的。这点需要特别注意，后面您会看到很多操作的差异都是由于这个原因造成的。  
 
 SSTable中的某个文件属于特定层级，而且其存储的记录是key有序的，那么必然有文件中的最小key和最大key，这是非常重要的信息，LevelDB应该记下这些信息。**Manifest就是干这个的，它记载了SSTable各个文件的管理信息，比如属于哪个Level，文件名称叫啥，最小key和最大key各自是多少**。如图是Manifest所存储内容的示意：  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex32/2.jpg)  
+![图](./images/ex32/2.jpg)  
 
 图中只显示了两个文件（manifest会记载所有SSTable文件的这些信息），即Level 0的test.sst1和test.sst2文件，同时记载了这些文件各自对应的key范围，比如test.sst1的key范围是“an”到 “banana”，而文件test.sst2的key范围是“baby”到“samecity”，可以看出两者的key范围是有重叠的。  
 
