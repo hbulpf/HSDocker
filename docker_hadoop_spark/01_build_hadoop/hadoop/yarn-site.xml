@@ -14,4 +14,9 @@
         <value>master</value>
         <description> ResourceManager 的主机名</description>
     </property>
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
+        <description>虚拟内存检查</description>
+    </property> 
 </configuration>

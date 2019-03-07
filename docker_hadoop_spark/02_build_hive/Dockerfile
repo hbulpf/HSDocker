@@ -1,7 +1,7 @@
 FROM hs_hbase:v1.0
 COPY hive/* /tmp/
 
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-hive-1.2.2-bin.tar.gz -q -O /tmp/apache-hive-1.2.2-bin.tar.gz && \
+RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-hive-1.2.2-bin.tar.gz -O /tmp/apache-hive-1.2.2-bin.tar.gz && \
 	tar -zxvf /tmp/apache-hive-1.2.2-bin.tar.gz && \
     mv apache-hive-1.2.2-bin /usr/local/hive && \
     rm /tmp/apache-hive-1.2.2-bin.tar.gz
