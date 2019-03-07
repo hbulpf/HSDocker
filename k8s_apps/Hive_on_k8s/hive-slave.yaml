@@ -37,5 +37,5 @@ spec:
       nodeName: node05
       containers:
         - name: hive-slave
-          image: 192.168.56.1:5000/chellyk-hbase:latest
+          image: 192.168.56.1:5000/chellyk-hive:latest
           imagePullPolicy: Always
