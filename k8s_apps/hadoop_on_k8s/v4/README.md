@@ -1,4 +1,5 @@
-# Hadoop On K8S 部署 (v3)
+
+﻿# Hadoop On K8S 部署 (v4)
 
 ## 获取 Hadoop 镜像
 从Harbor上拉取 Hadoop 镜像 `202.116.46.215/hsdocker2019/hs_hadoop:latest`   
@@ -39,3 +40,9 @@ cd ~
 ./start-hadoop.sh
 ```  
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 8aa9f3067a42acd148d86370b8c5b6dac76ff2ed
