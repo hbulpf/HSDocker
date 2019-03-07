@@ -15,7 +15,7 @@ Storm简介：**Storm是一个分布式的、高容错的基于数据流的实�
 体系架构：Storm共有两层体系结构，**第一层采用master/slave架构，第二层为DAG流式处理器**，第一层资源管理器主要负责管理集群资源、响应和调度用户任务，第二层流式处理器则实际执行用户任务。  
 
 集群资源管理层：Storm的集群资源管理器采用master/slave架构，主节点即控制节点(master node)和从节点即工作节点(worker node)。控制节点上面运行一个叫Nimbus后台服务程序,它的作用类似Hadoop里面的JobTracker，**Nimbus负责在集群里面分发代码，分配计算任务给机器，并且监控状态。每一个工作节点上面运行一个叫做Supervisor的服务程序。Supervisor会监听分配给它那台机器的工作，根据需要启动/关闭工作进程worker**。每一个工作进程执行一个topology的一个子集；一个运行的topology由运行在很多机器上的很多工作进程worker组成。(**一个supervisor里面有多个worker，一个worker是一个JVM**。可以配置worker的数量，对应的是conf/storm.yaml中的supervisor.slot的数量），架构图如图所示:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex24/1.gif)  
+![图](./images/ex24/1.gif)  
 
 **称集群信息(Nimbus协议、Supervisor节点位置) 、任务分配信息等关键数据为元数据。Storm使用ZooKeeper集群来共享元数据**，这些元数据对Storm非常重要，比如Nimbus通过这些元数据感知Supervisor节点，Supervisor通过Zookeeper集群感知任务分配情况。Nimbus和Supervisor之间的所有协调工作都是通过Zookeeper集群完成。另外，Nimbus进程和Supervisor进程都是快速失败(fail-fast)和无状态的｡所有的状态要么在zookeeper里面, 要么在本地磁盘上。这也就意味着你可以用kill-9来杀死Nimbus和Supervisor进程,然后再重启它们，就好像什么都没有发生过，这个设计使得Storm异常的稳定。  
 
