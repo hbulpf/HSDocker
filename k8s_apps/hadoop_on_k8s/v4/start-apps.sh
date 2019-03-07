@@ -1,3 +1,4 @@
+kubectl create configmap hadoop-config --from-file=./hadoop_configmap
 kubectl create -f hadoop-master.yaml -n test
 kubectl create -f hadoop-slave.yaml -n test
 
