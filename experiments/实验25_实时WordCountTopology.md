@@ -177,7 +177,7 @@ public class WordCountTopo {
 ```
 
 完整项目如图:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex25/Screenshot%20from%202018-08-03%2015-27-40.png)  
+![图](./images//ex25/Screenshot%20from%202018-08-03%2015-27-40.png)  
 
 然后，将Storm代码打成wordCount-Storm.jar(打包的时候不要包含导入的任何jar，不然会报错的，将无法运行，即：wordCount-Storm.jar中只包含上面三个类的代码)上传到主节点的**/usr/local/storm/bin目录下**，在主节点进入Storm安装目录的bin下面用以下命令提交任务：  
 ``./storm jar wordCount-Storm.jar cproc.word.WordCountTopo wordCount`
