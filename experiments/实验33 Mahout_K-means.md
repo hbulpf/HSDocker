@@ -91,7 +91,7 @@ mahout-examples-0.9-job.jar就是之后我们使用k-means所要用到的jar包�
 ```
 export MAHOUT_HOME=/usr/local/mahout
 export PATH=$PATH:$MAHOUT_HOME/bin
-export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.2.jar:$MAHOUT_HOME/lib
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.7.jar:$MAHOUT_HOME/lib
 ```  
 在CLASSPATH处新增 $MAHOUT_HOME/lib  
 

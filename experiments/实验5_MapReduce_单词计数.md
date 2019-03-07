@@ -190,7 +190,7 @@ export JRE_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64/jre
 export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$HADOOP_HOME/share/hadoop/common
 /*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/ha
-doop-mapreduce-client-core-2.7.2.jar
+doop-mapreduce-client-core-2.7.7.jar
 export PATH=$PATH:$HADOOP_HOME/bin
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib:$HADOOP_HOME/lib/nativee
@@ -198,7 +198,7 @@ export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib:$HADOOP_HOME/lib/native
 ```
 
 就是在CLASSPATH末尾添加一行  
-`$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.2.jar`
+`$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.7.jar`
 
 再次编译:
 ```

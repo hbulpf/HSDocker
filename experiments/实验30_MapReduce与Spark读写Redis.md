@@ -49,8 +49,8 @@ OK
 
 编写一般的mapreduce,其实至只用导入两个常用jar包:  
 ```
-hadoop-common-2.7.2.jar  
-hadoop-mapreduce-client-core-2.7.2.jar
+hadoop-common-2.7.7.jar  
+hadoop-mapreduce-client-core-2.7.7.jar
 ```
 common jar包在**/usr/local/hadoop/share/hadoop/common/**目录下  
 mapreduce jar包在**/usr/local/hadoop/share/hadoop/mapreduce/**目录下  

@@ -61,7 +61,7 @@ Hadoop基础实验，没有太大问题，比较不好理解的是实验4的 Dis
 都是mapreduce实验，都是需要实际进行代码编写,如果用javac命令进行编译要注意修改/etc/profile的CLASSPATH部分，实验中也有讲到。  
 
 如果用开发工具的话，注意要导入hadoop里的一些jar包,一直只要用到两个jar包:  
-hadoop-common-2.7.2.jar, hadoop-mapreduce-client-core-2.7.2.jar  
+hadoop-common-2.7.7.jar, hadoop-mapreduce-client-core-2.7.7.jar  
 **common jar包在/usr/local/hadoop/share/hadoop/common/目录下  
 mapreduce jar包在/usr/local/hadoop/share/hadoop/mapreduce/目录下**  
 

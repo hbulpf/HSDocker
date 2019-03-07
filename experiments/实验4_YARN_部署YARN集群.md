@@ -106,14 +106,14 @@ distributedshell，可以看做YARN编程中的 “hello world” ，它的主�
 
 ```
 [root@master]# /usr/local/hadoop/bin/yarn org.apache.hadoop.yarn.applications.distributedshell.Client && \
- -jar /usr/local/hadoop/share/hadoop/yarn/hadoop-yarn-applications-distributedshell-2.7.2.jar && \
+ -jar /usr/local/hadoop/share/hadoop/yarn/hadoop-yarn-applications-distributedshell-2.7.7.jar && \
  -shell_command  uptime
 ```
 
 ### 4.4.6 提交MapReduce任务
 (1) 指定在YARN上运行MapReduce任务
 
-编辑 `/usr/local/hadoop/etc/hadoop/**mapred-site.xml**` ，贴入以下内容：
+编辑 `/usr/local/hadoop/etc/hadoop/mapred-site.xml` ，贴入以下内容：
 ```xml
 <?xml version="1.0"?>
 <configuration>
@@ -130,19 +130,19 @@ distributedshell，可以看做YARN编程中的 “hello world” ，它的主�
 `/usr/local/hadoop/share/hadoop/mapreduce` 目录下有多个已经写好的可供测试jar包
 ```
 root@master:/usr/local/hadoop/share/hadoop/mapreduce# ls
-hadoop-mapreduce-client-app-2.7.2.jar
-hadoop-mapreduce-client-common-2.7.2.jar
-hadoop-mapreduce-client-core-2.7.2.jar
-hadoop-mapreduce-client-hs-2.7.2.jar
-hadoop-mapreduce-client-hs-plugins-2.7.2.jar
-hadoop-mapreduce-client-jobclient-2.7.2-tests.jar
-hadoop-mapreduce-client-jobclient-2.7.2.jar
-hadoop-mapreduce-client-shuffle-2.7.2.jar
-hadoop-mapreduce-examples-2.7.2.jar
+hadoop-mapreduce-client-app-2.7.7.jar
+hadoop-mapreduce-client-common-2.7.7.jar
+hadoop-mapreduce-client-core-2.7.7.jar
+hadoop-mapreduce-client-hs-2.7.7.jar
+hadoop-mapreduce-client-hs-plugins-2.7.7.jar
+hadoop-mapreduce-client-jobclient-2.7.7-tests.jar
+hadoop-mapreduce-client-jobclient-2.7.7.jar
+hadoop-mapreduce-client-shuffle-2.7.7.jar
+hadoop-mapreduce-examples-2.7.7.jar
 lib
 lib-examples
 sources
-root@master:/usr/local/hadoop/share/hadoop/mapreduce# hadoop jar hadoop-mapreduce-examples-2.7.2.jar pi 2 10
+root@master:/usr/local/hadoop/share/hadoop/mapreduce# hadoop jar hadoop-mapreduce-examples-2.7.7.jar pi 2 10
 ```
 命令最后两个两个参数的含义：
 + 第一个参数是指要运行map的次数，这里是2次
@@ -157,7 +157,7 @@ Pi Estimator使用Monte Carlo方法计算Pi值的。
 
 (2) 提交PI Estinmator后终端的内容：
 ```
-root@master:/usr/local/hadoop/share/hadoop/mapreduce# hadoop jar hadoop-mapreduce-examples-2.7.2.jar pi 2 10
+root@master:/usr/local/hadoop/share/hadoop/mapreduce# hadoop jar hadoop-mapreduce-examples-2.7.7.jar pi 2 10
 Number of Maps  = 2
 Samples per Map = 10
 Wrote input for Map #0
