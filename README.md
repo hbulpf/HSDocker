@@ -37,11 +37,15 @@
 <table>
 <tr> 
 <td> 容器云厂商 </td><td> <a href='http://www.alauda.cn/product/detail/id/68.html'>灵雀云</a></td>
-<td> <a href='https://www.qiniu.com/products/kirk'>七牛云</td>
-<td> <a href='https://www.shurenyun.com/scene-bigdata.html'>数人云</td>
-<td> <a href='https://www.qingcloud.com'>青云</td>
+<td> <a href='https://www.qiniu.com/products/kirk'>七牛云</a></td>
+<td> <a href='https://www.shurenyun.com/scene-bigdata.html'>数人云</a></td>
+<td> <a href='https://www.qingcloud.com'>青云</a></td>
+<td> <a href='https://caicloud.io/'>才云</a></td>
 </tr>
-<tr><td> 容器云教育 </td><td><a href='http://www.cstor.cn/'>云创大数据</td></td></tr>
+<tr><td> 容器云教育 </td>
+<td><a href='http://www.cstor.cn/'>云创大数据</a></td>
+<td><a href='https://www.aliyun.com/solution/eductione1000?from=timeline&isappinstalled=0'>阿里云</a></td>
+</tr>
 </table>
 
 ### 2. 开源项目
@@ -53,6 +57,8 @@
 + 	**[kubeflow](https://github.com/kubeflow/kubeflow)** 
 	- 说明: 机器学习/深度学习平台的容器化
 
++ **[XLearning](https://github.com/Qihoo360/XLearning/blob/master/README_CN.md)**
+    - 说明: 一款支持多种机器学习、深度学习框架的调度系统。基于Hadoop Yarn完成了对TensorFlow、MXNet、Caffe、Theano、PyTorch、Keras、XGBoost等常用框架的集成，同时具备良好的扩展性和兼容性。
 
 ## 贡献者
 
