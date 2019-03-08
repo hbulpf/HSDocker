@@ -29,12 +29,12 @@ spec:
     volumeMounts:
     - name: hadoop-config
       mountPath: /etc/config/hadoop
-    - name: hadoopm-root
-      mountPath: /root   
+    - name: hadoopm
+      mountPath: /work  
   volumes:
     - name: hadoop-config
       configMap:
         name: hadoop-config
-    - name: hadoopm-root
+    - name: hadoopm
       persistentVolumeClaim:
         claimName: hadoop-pvc    
