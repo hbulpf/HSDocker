@@ -69,9 +69,9 @@ root@master:/usr/local/hive/conf# vi hive-env.sh
 
 在hive-env.sh中找到对应位置添加以下内容:
 ```
-# HADOOP_HOME=/usr/local/hadoop
-# export HIVE_CONF_DIR=/usr/local/hive/conf
-# export HIVE_AUX_JARS_PATH=/usr/local/hive/lib
+HADOOP_HOME=/usr/local/hadoop
+export HIVE_CONF_DIR=/usr/local/hive/conf
+export HIVE_AUX_JARS_PATH=/usr/local/hive/lib
 ```
 
 ### 10.4.5 启动Hive
