@@ -1,5 +1,5 @@
 FROM hs_hadoop:v1.0
-COPY hive/* /tmp/
+COPY hive_config/* /tmp/
 
 RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-hive-1.2.2-bin.tar.gz -O /tmp/apache-hive-1.2.2-bin.tar.gz && \
 	tar -zxvf /tmp/apache-hive-1.2.2-bin.tar.gz && \
@@ -13,7 +13,3 @@ RUN mv /tmp/hive-env.sh $HIVE_HOME/conf && \
     mv /tmp/hive-site.xml $HIVE_HOME/conf && \
     mv /tmp/hive-log4j.properties $HIVE_HOME/conf && \
     mv /tmp/mysql-connector-java-5.1.32-bin.jar $HIVE_HOME/lib
-
-
-
-

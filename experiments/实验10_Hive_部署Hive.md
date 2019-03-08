@@ -53,7 +53,7 @@ root@master:~# mv apache-hive-1.2.2-bin /usr/local/hive
 
 ### 10.4.2 设定HIVE_HOME环境变量
 
-修改/etc/profile:  
+修改 `/etc/profile`:  
 ```
 export HIVE_HOME=/usr/local/hive
 export PATH=$PATH:$HIVE_HOME/bin
@@ -67,7 +67,7 @@ root@master:/usr/local/hive/conf# cp hive-env.sh.template hive-env.sh
 root@master:/usr/local/hive/conf# vi hive-env.sh
 ```
 
-在hive-env.sh中找到对应位置添加以下内容:
+在 `hive-env.sh` 中找到对应位置添加以下内容:
 ```
 HADOOP_HOME=/usr/local/hadoop
 export HIVE_CONF_DIR=/usr/local/hive/conf

@@ -45,10 +45,10 @@
 
 
 # Set HADOOP_HOME to point to a specific hadoop install directory
-# HADOOP_HOME=/usr/local/hadoop
+export HADOOP_HOME=/usr/local/hadoop
 
 # Hive Configuration Directory can be controlled by:
-# export HIVE_CONF_DIR=/usr/local/hive/conf
+export HIVE_CONF_DIR=/usr/local/hive/conf
 
 # Folder containing extra ibraries required for hive compilation/execution can be controlled by:
-# export HIVE_AUX_JARS_PATH=/usr/local/hive/lib
+export HIVE_AUX_JARS_PATH=/usr/local/hive/lib
