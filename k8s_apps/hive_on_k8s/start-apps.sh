@@ -1,3 +1,4 @@
+kubectl create -f mysql.yaml -n test
 kubectl create -f hive-master.yaml -n test
 kubectl create -f hive-slave.yaml -n test
 
