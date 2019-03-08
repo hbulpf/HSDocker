@@ -1,14 +1,9 @@
-# hive On K8S 部署
-
-特性：
-- 带 configmap 
-- 带 nfs 永久卷挂载
+**hive On K8S 部署**
 
 # 快速使用
 快速建立容器的过程
 ```
 kubectl create ns test
-kubectl create -f ./nfs/
 sh start-apps.sh
 ```
 

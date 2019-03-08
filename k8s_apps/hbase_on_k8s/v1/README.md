@@ -1,13 +1,14 @@
-# HBase On K8S 部署
+**HBase On K8S 部署**
 
-## 获取docker镜像
-[HBase Docker镜像](../../hadoopspark/demo_5-new_images/hbase/) 已上传至本地Docker Registry:
+# 快速使用
+快速建立容器的过程
 ```
-192.168.56.1:5000/chellyk-hbase:latest  
+kubectl create ns test
+sh start-apps.sh
 ```
-获取方式
+其中，获取docker镜像方式
 ```
-docker pull 192.168.56.1:5000/chellyk-hbase:latest  
+docker pull 202.116.46.215/hsdocker2019/hs_hbase:v1.0 
 ```
 
 ## 创建Spark集群  

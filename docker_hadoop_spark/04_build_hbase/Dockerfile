@@ -1,6 +1,6 @@
 FROM hs_hadoop:v1.0
 
-COPY hbase-config/* /tmp/
+COPY hbase_config/* /tmp/
 
 RUN wget http://50125.hnbdata.cn:81/common/hsdocker/hbase-1.2.6-bin.tar.gz -O /tmp/hbase-1.2.6-bin.tar.gz && \
 	tar -zxvf /tmp/hbase-1.2.6-bin.tar.gz && \
