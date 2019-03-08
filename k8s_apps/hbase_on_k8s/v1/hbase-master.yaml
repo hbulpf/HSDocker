@@ -24,6 +24,6 @@ metadata:
     app: hbase-master
 spec:
   containers:
-    - image: 192.168.56.1:5000/chellyk-hbase:latest
+    - image: 202.116.46.215/hsdocker2019/hs_hbase:v1.0
       name: hbase-master
       imagePullPolicy: Always
