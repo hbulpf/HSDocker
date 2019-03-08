@@ -29,6 +29,9 @@ spec:
     volumeMounts:
     - name: hadoop-config
       mountPath: /etc/config/hadoop
+    env:
+    - name: JAVA_TOOL_OPTIONS
+      value: "-Dfile.encoding=UTF8"    
   volumes:
     - name: hadoop-config
       configMap:

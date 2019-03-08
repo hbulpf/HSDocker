@@ -24,6 +24,7 @@ do
 done
 
 rm hosts_tmp
+kubectl exec master -n test -- source /etc/profile
 # ssh首次连接不出现yes/no提示
 # kubectl exec slave-0 -n test -- sh -c 'echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config'
 # kubectl exec slave-1 -n test -- sh -c 'echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config'
