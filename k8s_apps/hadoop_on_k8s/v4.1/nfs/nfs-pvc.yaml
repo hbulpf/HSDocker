@@ -2,7 +2,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: nfs-pvc
+  name: hadoop-pvc
   namespace: test
 spec:
   accessModes:
