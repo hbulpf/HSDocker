@@ -121,17 +121,19 @@ public static void main(String[] args) throws Exception {
 ```
 创建BigAndSmallTable.java，复制代码并编译。　
 
-打包成jar包:  
-`root@master:~/experiment8# jar -cvf BigAndSmallTable.jar *.class`
-
+打包成jar包: 
+```
+root@master:~/experiment9# javac BigAndSmallTable.java 
+root@master:~/experiment9# jar -cvf BigAndSmallTable.jar *.class
+```
 ### 9.3.4 执行代码
 ```
-root@master:~/experiment8# hadoop jar BigAndSmallTable.jar BigAndSmallTable /big.txt /small.txt /output
+root@master:~/experiment9# hadoop jar BigAndSmallTable.jar BigAndSmallTable /big.txt /small.txt /out9
 ```
 
 ## 9.4 实验结果
 ```
-root@master:~/experiment8# hadoop fs -cat /output/p*
+root@master:~/experiment8# hadoop fs -cat /out9/p*
 555	1
 eee	1
 sss	1
