@@ -172,7 +172,7 @@ OK
 Time taken: 4.041 seconds
 hive> show tables;
 OK
-3koobecaf
+events
 invites
 Time taken: 0.026 seconds, Fetched: 2 row(s)
 ```
