@@ -1,6 +1,5 @@
-kubectl create configmap hadoop-config -n test --from-file=./hadoop_configmap
-kubectl create -f hadoop-master.yaml -n test
-kubectl create -f hadoop-slave.yaml -n test
+kubectl create -f hive-master.yaml -n test
+kubectl create -f hive-slave.yaml -n test
 
 #write to /etc/hosts on master
 hoststr=$(kubectl get pod -o wide -n test | grep -i "slave" | awk '{print $6"\t"$1}')
