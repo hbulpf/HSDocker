@@ -1,5 +1,17 @@
 ﻿# Hadoop On K8S 部署 (v4)
+特性：
+- 带 configmap 
 
+# 快速使用
+快速建立容器的过程
+```
+kubectl create ns test
+kubectl create -f ./nfs/
+sh start-apps.sh
+```
+
+# 一般使用
+一般的配置使用过程
 ## 获取 Hadoop 镜像
 从Harbor上拉取 Hadoop 镜像 `202.116.46.215/hsdocker2019/hs_hadoop:latest`   
 拉取方式
@@ -10,7 +22,7 @@ docker pull 202.116.46.215/hsdocker2019/hs_hadoop:latest
 ## 创建Hadoop 集群
 在当前目录下先创建configmap存储hadoop配置文件:
 ```
-kubectl create configmap hadoop --from-file=hadoop  
+kubectl create configmap hadoop --from-file=./hadoop_configmap
 ```
 
 
@@ -44,10 +56,3 @@ scp /etc/hosts slave-1:/etc/hosts
 cd ~
 ./start-hadoop.sh
 ```  
-
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 8aa9f3067a42acd148d86370b8c5b6dac76ff2ed
