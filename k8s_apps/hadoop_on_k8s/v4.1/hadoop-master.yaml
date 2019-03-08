@@ -29,12 +29,12 @@ spec:
     volumeMounts:
     - name: hadoop-config
       mountPath: /etc/config/hadoop
-    - name: hadoopM-root
+    - name: hadoopm-root
       mountPath: /root   
   volumes:
     - name: hadoop-config
       configMap:
         name: hadoop-config
-    - name: hadoopM-root
+    - name: hadoopm-root
       persistentVolumeClaim:
-        claimName: nfs-pvc    
+        claimName: hadoop-pvc    

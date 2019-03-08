@@ -40,7 +40,12 @@ spec:
           volumeMounts:
           - name: hadoop-config
             mountPath: /etc/config/hadoop
+          - name: hadoops-root
+            mountPath: /root   
       volumes:
         - name: hadoop-config
           configMap:
             name: hadoop-config
+        - name: hadoops-root
+          persistentVolumeClaim:
+            claimName: hadoop-pvc    

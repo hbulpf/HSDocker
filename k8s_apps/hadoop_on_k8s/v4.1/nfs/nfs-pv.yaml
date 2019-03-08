@@ -1,11 +1,11 @@
-##创建nfs-PV
+##创建hadoop-pv
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-pv
+  name: hadoop-pv
   namespace: test
   labels:
-    pv: nfs-pv
+    pv: hadoop-pv
 spec:
   capacity:
     storage: 10Gi
