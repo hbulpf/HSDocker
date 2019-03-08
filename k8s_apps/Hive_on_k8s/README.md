@@ -1,23 +1,30 @@
 # hive On K8S 部署
 
-## 获取docker镜像
-[hive Docker镜像](../../hadoopspark/demo_5-new_images/hive/) 已上传至本地Docker Registry:
+特性：
+- 带 configmap 
+- 带 nfs 永久卷挂载
+
+# 快速使用
+快速建立容器的过程
 ```
-192.168.56.1:5000/chellyk-hive:latest  
-```
-获取方式
-```
-docker pull 192.168.56.1:5000/chellyk-hive:latest  
+kubectl create ns test
+kubectl create -f ./nfs/
+sh start-apps.sh
 ```
 
 ## 创建集群  
+
 在k8s集群中,使用 yaml 文件创建集群
+
 1. 使用 [hive-master.yaml](./hive-master.yaml) 创建 master 节点
-```
+
+```bash
 kubectl create -f ./hive-master.yaml
 ```
+
 2. 使用 [hive-slave.yaml](./hive-slave.yaml) 创建 slave 节点
-```
+
+```bash
 kubectl create -f ./hive-slave.yaml  
 ```
 
@@ -47,5 +54,5 @@ scp /etc/hosts slave-1:/etc/hosts
 ```
 hive
 ```  
-6. hive的具体使用请见[大数据实验10-12](../experiments)
+6. hive的具体使用请见[大数据实验10-12](../../experiments)
 

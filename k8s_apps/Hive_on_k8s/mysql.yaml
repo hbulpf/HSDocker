@@ -17,7 +17,7 @@ metadata:
     app: mysql
 spec:
   containers:
-    - image: 192.168.56.1:5000/mysql:5.7.21
+    - image: 202.116.46.215/hsdocker2019/mysql:5.7.21
       name: mysql
       imagePullPolicy: Always
       env:
