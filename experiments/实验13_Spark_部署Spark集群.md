@@ -176,7 +176,7 @@ scala>
 ```
 
 Master节点ip为172.19.0.2,主机浏览器访问172.19.0.2:8080访问web界面:  
-![图](https://raw.githubusercontent.com/chellyk/Bigdata-experiment/master/ex13/Screenshot%20from%202018-07-19%2015-37-13.png)  
+![图](./images/ex13/Screenshot%20from%202018-07-19%2015-37-13.png)  
 
 ## 13.5 实验结果
 ### 13.5.1 通过spark-shell执行单词计数
