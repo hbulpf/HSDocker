@@ -1,6 +1,6 @@
 FROM hs_hadoop:v1.0
 
-COPY spark/*  /tmp/
+COPY spark_config/*  /tmp/
 
 #install spark
 RUN wget http://50125.hnbdata.cn:81/common/hsdocker/spark-2.1.0-bin-without-hadoop.tgz -O /tmp/spark-2.1.0-bin-without-hadoop.tgz && \
