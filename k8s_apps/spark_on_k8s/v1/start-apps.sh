@@ -23,7 +23,7 @@ do
 done
 
 rm hosts_tmp
-kubectl exec master -n test -- source /etc/profile
+kubectl exec master -n test -- sh -c "source /etc/profile"
 kubectl exec master -n test -- export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 # ssh首次连接不出现yes/no提示
 # kubectl exec slave-0 -n test -- sh -c 'echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config'

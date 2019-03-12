@@ -8,6 +8,11 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/spark-2.1.0-bin-without-hado
     mv spark-2.1.0-bin-without-hadoop /usr/local/spark &&\
     rm /tmp/spark-2.1.0-bin-without-hadoop.tgz
 
+RUN wget http://50125.hnbdata.cn:81/common/hsdocker/scala-2.12.2.tgz -O /tmp/scala-2.12.2.tgz && \
+	tar -xzvf /tmp/scala-2.12.2.tgz &&\
+    mv scala-2.12.2 /usr/local/scala &&\
+    rm /tmp/scala-2.12.2.tgz
+
 ENV SPARK_HOME=/usr/local/spark
 ENV PATH=$PATH:/usr/local/spark/bin
 

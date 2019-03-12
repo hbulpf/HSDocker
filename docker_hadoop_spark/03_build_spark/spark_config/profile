@@ -36,3 +36,5 @@ export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib:$HADOOP_HOME/lib/native"
 export SPARK_HOME=/usr/local/spark
 export PATH=$PATH:$SPARK_HOME/bin
+export SCALA_HOME=/usr/local/scala
+export PATH=$PATH:$SCALA_HOME/bin

@@ -1,6 +1,5 @@
 ﻿# 实验十三 Spark实验：部署Spark集群
 
-标签： 大数据实验
 ## 13.1 实验目的
 能够理解Spark存在的原因，了解Spark的生态圈，理解Spark体系架构并理解Spark计算模型。学会部署Spark集群并启动Spark集群，能够配置Spark集群使用HDFS。
 
@@ -39,7 +38,7 @@ export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 
 `source /etc/profile` 生效环境变量后测试
 ```
-root@hadoop-master:~# java -version
+root@master:~# java -version
 java version "1.8.0_171"
 Java(TM) SE Runtime Environment (build 1.8.0_171-b11)
 Java HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode)
@@ -47,7 +46,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode)
 即完成JDK的安装
 
 ### 13.4.2 安装hadoop
-保留demo2的hadoop 2.7.7，省略该步骤  
+使用原来 hadoop 2.7.7
 
 
 ### 13.4.3 安装scala
@@ -56,7 +55,7 @@ JDK,hadoop,scala,spark 的版本肯定存在**版本兼容问题**，hadoop是2.
 安装过程跟JDK相似，官网下载tar包，解压，注册环境变量即可。
 [下载链接](https://www.scala-lang.org/download/all.html)
 
-这里我解压到 `/usr/local/scala` 路径下, `vim /etc/profile` ,添加以下内容  
+解压到 `/usr/local/scala` 路径下, `vim /etc/profile` ,添加以下内容  
 ```
 export SCALA_HOME=/usr/local/scala
 export PATH=$PATH:$SCALA_HOME/bin
@@ -64,7 +63,7 @@ export PATH=$PATH:$SCALA_HOME/bin
   
 `source /etc/profile`， 生效环境变量后输入命令scala检测是否成功安装  
 ```
-root@hadoop-master:~# scala
+root@master:~# scala
 Welcome to Scala 2.12.2 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_171).
 Type in expressions for evaluation. Or try :help.
 
@@ -74,12 +73,24 @@ scala>
 
 ### 13.4.4 安装spark
 首先是官网下载2.1.0版本的spark，[下载链接](http://spark.apache.org/downloads.html)  
-这里我解压到路径 `/usr/local/spark` 目录下，进入 `/usr/local/spark/conf` 目录下，我们要修改的配置文件是 `spark-env.sh` 和`slaves`,与hadoop部署相似。  
+解压到路径 `/usr/local/spark` 目录下，
+
+添加spark的环境变量, `vim /etc/profile` ,添加以下内容  
+```
+export SPARK_HOME=/usr/local/spark
+export PATH=$PATH:$SPARK_HOME/bin
+```
+然后生效环境变量
+```
+source /etc/profile  
+```
+进入 `/usr/local/spark/conf` 目录下，
+修改配置文件 `spark-env.sh` 和`slaves`,与hadoop部署相似。  
 
 **spark-env.sh**:  
 ```
-root@hadoop-master:/usr/local/spark/conf# cp spark-env.sh.template spark-env.sh
-root@hadoop-master:/usr/local/spark/conf# vim spark-env.sh      
+root@master:/usr/local/spark/conf# cp spark-env.sh.template spark-env.sh
+root@master:/usr/local/spark/conf# vim spark-env.sh      
 ```  
 
 在文件末尾添加以下内容:  
@@ -89,7 +100,7 @@ export SCALA_HOME=/usr/local/scala
 export HADOOP_HOME=/usr/local/hadoop
 export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 
-export SPARK_MASTER_IP=hadoop-master
+export SPARK_MASTER_IP=master
 export SPARK_WORKER_MEMORY=1g
 ```  
 + SPARK_MASTER_IP : 指定master节点的IP  
@@ -100,27 +111,20 @@ export SPARK_WORKER_MEMORY=1g
 **slaves**:  
 与hadoop的slaves文件效果一致，就是指定worker节点的主机名。  
 ```
-root@hadoop-master:/usr/local/spark/conf# cp slaves.template slaves
-root@hadoop-master:/usr/local/spark/conf# vim slaves  
+root@master:/usr/local/spark/conf# cp slaves.template slaves
+root@master:/usr/local/spark/conf# vim slaves  
 ```
 添加内容:  
 ```
-hadoop-slave1
-hadoop-slave2
+slave-0
+slave-1
 ```
-
-最后我们添加spark的环境变量, vim  /etc/profile  
-```
-export SPARK_HOME=/usr/local/spark
-export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
-```  
-source /etc/profile  
 
 ### 13.4.5 启动并测试spark
 在启动spark之前，先确保启动了hadoop，进入 `/usr/local/spark/sbin` 目录下启动脚本:  
 ```
-root@hadoop-master:/usr/local/spark/sbin# ./start-all.sh 
-starting org.apache.spark.deploy.master.Master, logging to /usr/local/spark/logs/spark-root-org.apache.spark.deploy.master.Master-1-hadoop-master.out
+root@master:/usr/local/spark/sbin# ./start-all.sh 
+starting org.apache.spark.deploy.master.Master, logging to /usr/local/spark/logs/spark-root-org.apache.spark.deploy.master.Master-1-master.out
 hadoop-slave2: Warning: Permanently added 'hadoop-slave2,172.19.0.4' (ECDSA) to the list of known hosts.
 hadoop-slave1: Warning: Permanently added 'hadoop-slave1,172.19.0.3' (ECDSA) to the list of known hosts.
 hadoop-slave2: starting org.apache.spark.deploy.worker.Worker, logging to /usr/local/spark/logs/spark-root-org.apache.spark.deploy.worker.Worker-1-hadoop-slave2.out
@@ -131,7 +135,7 @@ hadoop-slave1: starting org.apache.spark.deploy.worker.Worker, logging to /usr/l
 
 **Master**:  
 ```
-root@hadoop-master:/usr/local/spark/sbin# jps
+root@master:/usr/local/spark/sbin# jps
 1260 Jps
 558 ResourceManager
 383 SecondaryNameNode
@@ -151,7 +155,7 @@ Master节点成功启动Master, Slave节点成功启动Worker,证明spark成功�
 
 进入Spark-shell:  
 ```
-root@hadoop-master:~# spark-shell
+root@master:~# spark-shell
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
 18/07/19 03:29:16 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
@@ -189,8 +193,8 @@ hello bigdata
 ```
 分隔符为空格,接着上传到 HDFS,并打开 spark-shell:  
 ```
-root@hadoop-master:~# hadoop fs -put wordcount.txt /
-root@hadoop-master:~# spark-shell
+root@master:~# hadoop fs -put wordcount.txt /
+root@master:~# spark-shell
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
 18/07/19 03:56:53 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
@@ -209,8 +213,8 @@ Using Scala version 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_171)
 Type in expressions to have them evaluated.
 Type :help for more information.
 
-scala> val file=sc.textFile("hdfs://hadoop-master:9000/wordcount.txt")
-file: org.apache.spark.rdd.RDD[String] = hdfs://hadoop-master:9000/wordcount.txt MapPartitionsRDD[13] at textFile at <console>:24
+scala> val file=sc.textFile("hdfs://master:9000/wordcount.txt")
+file: org.apache.spark.rdd.RDD[String] = hdfs://master:9000/wordcount.txt MapPartitionsRDD[13] at textFile at <console>:24
 
 scala> val rdd = file.flatMap(line => line.split(" ")).map(word => (word,1)).reduceByKey(_+_)
 rdd: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[16] at reduceByKey at <console>:26
@@ -230,7 +234,7 @@ scala> :quit
 
 实际代码:  
 ```
-val file=sc.textFile("hdfs://hadoop-master:9000/wordcount.txt")  
+val file=sc.textFile("hdfs://master:9000/wordcount.txt")  
 val rdd = file.flatMap(line => line.split(" ")).map(word => (word,1)).reduceByKey(_+_)  
 rdd.collect()  
 rdd.foreach(println)
