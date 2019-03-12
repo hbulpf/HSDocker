@@ -22,6 +22,6 @@ RUN  mv /tmp/slaves  $SPARK_HOME/conf/ && \
      mv /tmp/spark-env.sh $SPARK_HOME/conf/ && \
      mv /tmp/start-spark.sh ~/start-spark.sh && \
      mv /tmp/profile /etc/ && \
-     source /etc/profile
+     . /etc/profile
 
 RUN chmod +x ~/start-spark.sh
