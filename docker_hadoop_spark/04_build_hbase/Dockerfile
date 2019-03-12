@@ -8,10 +8,11 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/hbase-1.2.6-bin.tar.gz -O /t
     rm /tmp/hbase-1.2.6-bin.tar.gz
 
 ENV HBASE_HOME=/usr/local/hbase
-ENV PATH=$PATH:/usr/local/hbase/bin
+ENV PATH=$PATH:$HBASE_HOME/bin
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 RUN mv /tmp/hbase-env.sh $HBASE_HOME/conf && \
     mv /tmp/hbase-site.xml $HBASE_HOME/conf && \
-    mv /tmp/regionservers $HBASE_HOME/conf 
+    mv /tmp/regionservers $HBASE_HOME/conf && \
+    . /etc/profile
 

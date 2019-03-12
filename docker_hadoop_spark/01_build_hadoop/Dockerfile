@@ -14,7 +14,7 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/hadoop-2.7.7.tar.gz -O /tmp/
     rm /tmp/hadoop-2.7.7.tar.gz
 
 ENV HADOOP_HOME=/usr/local/hadoop 
-ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin 
+ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin 
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 # ssh without key
@@ -34,7 +34,8 @@ RUN mv /tmp/ssh_config ~/.ssh/config && \
     mv /tmp/yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml && \
     mv /tmp/slaves $HADOOP_HOME/etc/hadoop/slaves && \
     mv /tmp/start-hadoop.sh ~/start-hadoop.sh && \
-    mv /tmp/profile /etc/
+    mv /tmp/profile /etc/ && \
+    . /etc/profile
 
 RUN chmod +x ~/start-hadoop.sh && \
     chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \
