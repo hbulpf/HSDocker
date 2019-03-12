@@ -7,11 +7,11 @@
 1. 创建/删除目录
 1. 上传/下载文件
 1. 删除文件
-1. 写速度测试，读文件速度测试 [参考](https://blog.csdn.net/flygoa/article/details/52127382)
+1. 写读文件 [参考](https://blog.csdn.net/flygoa/article/details/52127382)
 1. 单词统计测试
 
 ### 基准性能测试
-1. I/O 性能性能测试: TestDFSIO
+1. I/O 性能测试: TestDFSIO
 1. 计算性能测试: TeraSort
 1. nnbench
 1. mrbench
