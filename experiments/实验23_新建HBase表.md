@@ -61,11 +61,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-        
+
         //获得HBase连接
         Configuration configuration = HBaseConfiguration.create();
         Connection connection;
-        configuration.set("hbase.zookeeper.quorum", "master:2181,slave1:2181,slave2:2181");
+        configuration.set("hbase.zookeeper.quorum", "master:2181,slave-0:2181,slave-1:2181");
         configuration.set("zookeeper.znode.parent", "/hbase");
 
         try{
@@ -90,17 +90,17 @@ public class Main {
             }
 
             admin.close();
-            
+
             //获得table接口
             Table table = connection.getTable(TableName.valueOf("mytable"));
-            
+
             //添加的数据对象集合
             List<Put> putList = new ArrayList<Put>();
             for(int i=0 ; i<10 ; i++){
                 String rowkey = "mykey" + i;
                 Put put = new Put(rowkey.getBytes());
-                
-                //列簇 , 列名, 值
+
+                //列簇 , 列名, 值
                 put.addColumn("c1".getBytes(), "c1tofamily1".getBytes(), ("aaa"+i).getBytes());
                 put.addColumn("c1".getBytes(), "c2tofamily1".getBytes(), ("bbb"+i).getBytes());
                 put.addColumn("c2".getBytes(), "c1tofamily2".getBytes(), ("ccc"+i).getBytes());
@@ -110,18 +110,18 @@ public class Main {
             table.close();
 
             //查询数据，代码实现
-            //Scan 对象
+            //Scan 对象
             Scan scan = new Scan();
             //限定rowkey查询范围
             scan.setStartRow("mykey0".getBytes());
             scan.setStopRow("mykey9".getBytes());
-            
+
             //只查询c1：c1tofamily1列
             scan.addColumn("c1".getBytes(), "c1tofamily1".getBytes());
-            
+
             //过滤器集合
             FilterList filterList = new FilterList();
-            
+
             //查询符合条件c1：c1tofamily1==aaa7的记录
             Filter filter1 = new SingleColumnValueFilter("c1".getBytes(), "c1tofamily1".getBytes(),CompareFilter.CompareOp.EQUAL, "aaa7".getBytes());
             filterList.addFilter(filter1);

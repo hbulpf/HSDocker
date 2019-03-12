@@ -21,12 +21,6 @@ HBase依赖于HDFS和Zookeeper, 这次实验直接使用spark集成集群安装H
 
 ### 22.4.1 启动集群  
 ```
-ykk@ykk-TN15S:~/team/docker-hadoop/hadoop-cluster-docker$ ./start-container.sh 
-[sudo] password for ykk: 
-start master container...
-start slave1 container...
-start slave2 container...
-
 root@master:~# ./start-hadoop.sh 
 ```  
 
