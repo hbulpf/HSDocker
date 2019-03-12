@@ -66,6 +66,7 @@ scala> import org.apache.spark.HashPartitioner
 import org.apache.spark.HashPartitioner
 
 scala> var tempResultRDDA = rawRDDA.flatMap(line=>line.split("")).filter(allWord=>{allWord.contains("aa") || allWord.contains("bb")}).map(word=>(word, 1)).partitionBy(new HashPartitioner(2)).groupByKey().map((P:(String, Iterable[Int]))=>(P._1, P._2.sum))
+
 tempResultRDDA: org.apache.spark.rdd.RDD[(String, Int)] = MapPartitionsRDD[8] at map at <console>:27
 
 scala> var tempResultRDDBC = rawRDDB.distinct.subtract(rawRDDC)
