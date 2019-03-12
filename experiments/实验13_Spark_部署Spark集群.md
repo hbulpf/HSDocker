@@ -123,7 +123,7 @@ slave-1
 ### 13.4.5 启动并测试spark
 在启动spark之前，先确保启动了hadoop，进入 `/usr/local/spark/sbin` 目录下启动脚本:  
 ```
-root@master:/usr/local/spark/sbin# ./start-all.sh 
+root@master:/usr/local/spark/sbin# ./start-spark.sh 
 starting org.apache.spark.deploy.master.Master, logging to /usr/local/spark/logs/spark-root-org.apache.spark.deploy.master.Master-1-master.out
 hadoop-slave2: Warning: Permanently added 'hadoop-slave2,172.19.0.4' (ECDSA) to the list of known hosts.
 hadoop-slave1: Warning: Permanently added 'hadoop-slave1,172.19.0.3' (ECDSA) to the list of known hosts.
@@ -244,9 +244,11 @@ rdd.foreach(println)
 `/usr/local/spark/examples/jars/` 路径下示例代码，可直接运行 wordcount 执行单词计数
 ```
 root@master:/usr/local/spark# hadoop fs -put README.md /  
-root@master:/usr/local/spark# spark-submit --master spark://master:7077 \
-> --class org.apache.spark.examples.JavaWordCount \
-> examples/jars/spark-examples_2.11-2.1.0.jar hdfs://master:9000/README.md
+root@master:/usr/local/spark# spark-submit \
+--master spark://master:7077 \
+--class org.apache.spark.examples.JavaWordCount \
+examples/jars/spark-examples_2.11-2.1.0.jar \
+hdfs://master:9000/README.md
 ```  
 
 得到单词计数结果(部分):  
