@@ -130,4 +130,5 @@ Hibench作为一个测试hadoop的基准测试框架，提供了对于hive：（
 1. Hadoop自带benchmark运行与测试. https://blog.51cto.com/7543154/1243883
 1. Benchmarking and Stress Testing an Hadoop Cluster with TeraSort, TestDFSIO & Co. http://www.michael-noll.com/blog/2011/04/09/benchmarking-and-stress-testing-an-hadoop-cluster-with-terasort-testdfsio-nnbench-mrbench/
 1. Apache Hadoop Gridmix . https://hadoop.apache.org/docs/r2.7.7/hadoop-gridmix/GridMix.html
+1. hadoop基本测试方法 . https://blog.csdn.net/qq_30408111/article/details/78742336
 1. 进行集群的 I/O 性能测试、计算性能测试 . https://www.itcodemonkey.com/article/7594.html
