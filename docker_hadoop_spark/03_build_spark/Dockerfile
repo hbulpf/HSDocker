@@ -3,10 +3,10 @@ FROM hs_hadoop:v1.0
 COPY spark_config/*  /tmp/
 
 #install spark
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/spark-2.1.0-bin-without-hadoop.tgz -O /tmp/spark-2.1.0-bin-without-hadoop.tgz && \
-	tar -xzvf /tmp/spark-2.1.0-bin-without-hadoop.tgz &&\
-    mv spark-2.1.0-bin-without-hadoop /usr/local/spark &&\
-    rm /tmp/spark-2.1.0-bin-without-hadoop.tgz
+RUN wget http://50125.hnbdata.cn:81/common/hsdocker/spark-2.2.3-bin-hadoop2.7.tgz -O /tmp/spark-2.2.3-bin-hadoop2.7.tgz && \
+	tar -xzvf /tmp/spark-2.2.3-bin-hadoop2.7.tgz &&\
+    mv spark-2.2.3-bin-hadoop2.7 /usr/local/spark &&\
+    rm /tmp/spark-2.2.3-bin-hadoop2.7.tgz
 
 RUN wget http://50125.hnbdata.cn:81/common/hsdocker/scala-2.12.2.tgz -O /tmp/scala-2.12.2.tgz && \
 	tar -xzvf /tmp/scala-2.12.2.tgz &&\
