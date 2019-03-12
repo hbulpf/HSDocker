@@ -20,25 +20,24 @@ Spark是一个高速的**通用型集群计算框架**，其内部内嵌了一�
 
 ## 13.4 安装部署Spark
 这次我们在hadoop集群demo2的基础上改装部署spark, 安装spark的步骤大体可分为:  
-(1)安装JDK(demo2集群装的jdk版本太旧，这里我们更换为jdk1.8)
-(2)安装hadoop(demo2已装有hadoop 2.7.2,这步可以省略)  
+(1)安装JDK
+(2)安装hadoop
 (3)安装scala  
 (4)安装spark并修改配置文件
 
 部署一遍后修改定制新的镜像来完成一键部署。
 
 ### 13.4.1 安装JDK
-demo2里的JDK是1.7的版本，版本太旧不能正常安装scala跟spark，这里我们安装新的jdk.  
-jdk自己从官网下载，我下载的是:**jdk-8u171-linux-x64.tar.gz**，安装过程很简单，解压，修改环境变量即可,我安装的路径在**/usr/local/java**  
+修改JDK环境变量即可,我安装的路径在 `/usr/local/java`
 
-vim /etc/profile，添加下面内容
+`vim /etc/profile`，添加下面内容
 ```
 export JAVA_HOME=/usr/local/java
 export JRE_HOME=/usr/local/java/jre
 export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 ```
 
-source /etc/profile,测试java -version  
+`source /etc/profile` 生效环境变量后测试
 ```
 root@hadoop-master:~# java -version
 java version "1.8.0_171"
@@ -48,21 +47,22 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode)
 即完成JDK的安装
 
 ### 13.4.2 安装hadoop
-保留demo2的hadoop 2.7.2，省略该步骤  
+保留demo2的hadoop 2.7.7，省略该步骤  
 
 
 ### 13.4.3 安装scala
-首先要明确,JDK,hadoop,scala,spark之前的版本肯定存在**版本兼容问题**，hadoop是2.7.2的版本，不算太新也不算太旧，在网上找了spark2.1的版本（2016年发布）的安装文档，对应使用的scala版本是2.12.2.具体的版本兼容还要仔细调研才知道。
+JDK,hadoop,scala,spark 的版本肯定存在**版本兼容问题**，hadoop是2.7.7的版本，不算太新也不算太旧，在网上找spark2.1的版本（2016年发布）的安装文档，对应使用的scala版本是2.12.2。
 
 安装过程跟JDK相似，官网下载tar包，解压，注册环境变量即可。
 [下载链接](https://www.scala-lang.org/download/all.html)
 
-这里我解压到/usr/local/scala路径下,接着注册环境变量,vim /etc/profile,添加以下内容  
+这里我解压到 `/usr/local/scala` 路径下, `vim /etc/profile` ,添加以下内容  
 ```
 export SCALA_HOME=/usr/local/scala
 export PATH=$PATH:$SCALA_HOME/bin
-```  
-source /etc/profile， 输入命令scala检测是否成功安装  
+```
+  
+`source /etc/profile`， 生效环境变量后输入命令scala检测是否成功安装  
 ```
 root@hadoop-master:~# scala
 Welcome to Scala 2.12.2 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_171).
@@ -74,7 +74,7 @@ scala>
 
 ### 13.4.4 安装spark
 首先是官网下载2.1.0版本的spark，[下载链接](http://spark.apache.org/downloads.html)  
-这里我解压到路径/usr/local/spark目录下，进入/usr/local/spark/conf目录下，我们要修改的配置文件是**spark-env.sh**和**slaves**,与hadoop部署相似。  
+这里我解压到路径 `/usr/local/spark` 目录下，进入 `/usr/local/spark/conf` 目录下，我们要修改的配置文件是 `spark-env.sh` 和`slaves`,与hadoop部署相似。  
 
 **spark-env.sh**:  
 ```
@@ -92,10 +92,10 @@ export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 export SPARK_MASTER_IP=hadoop-master
 export SPARK_WORKER_MEMORY=1g
 ```  
-**spark_MASTER_IP**,很明显是指定master节点的IP  
-**SPARK_WORK_MEMORY** 决定在每一个Worker节点上可用的最大内存，增加这个数可以在内存中缓存更多数据，但一定要给Slave的操作系统和其他服务预留足够内存  
++ SPARK_MASTER_IP : 指定master节点的IP  
++ SPARK_WORK_MEMORY : 定在每一个Worker节点上可用的最大内存，增加这个数可以在内存中缓存更多数据，但一定要给Slave的操作系统和其他服务预留足够内存  
 
-根据各个节点的配置还有很多可以补充的配置设定都可以在这里调整（像是指定worker节点cpu的运行cores数），很多都没有添加进去。  
+根据各个节点的配置还有很多可以补充的配置设定都可以在这里调整（如指定worker节点cpu的运行cores数），很多没有添加进去。  
 
 **slaves**:  
 与hadoop的slaves文件效果一致，就是指定worker节点的主机名。  
@@ -117,7 +117,7 @@ export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 source /etc/profile  
 
 ### 13.4.5 启动并测试spark
-在启动spark之前，先确保启动了hadoop，进入/usr/local/spark/sbin目录下启动脚本:  
+在启动spark之前，先确保启动了hadoop，进入 `/usr/local/spark/sbin` 目录下启动脚本:  
 ```
 root@hadoop-master:/usr/local/spark/sbin# ./start-all.sh 
 starting org.apache.spark.deploy.master.Master, logging to /usr/local/spark/logs/spark-root-org.apache.spark.deploy.master.Master-1-hadoop-master.out
@@ -180,14 +180,14 @@ Master节点ip为172.19.0.2,主机浏览器访问172.19.0.2:8080访问web界面:
 
 ## 13.5 实验结果
 ### 13.5.1 通过spark-shell执行单词计数
-使用spark-shell测试一个wordcount:  
-首先创建一个测试文件wordcount.txt,内容  
+使用 spark-shell 测试一个 wordcount:  
+首先创建一个测试文件 wordcount.txt,内容  
 ```
 Hello hadoop
 hello spark
 hello bigdata
 ```
-分隔符为空格,接着上传到HDFS,并打开spark-shell:  
+分隔符为空格,接着上传到 HDFS,并打开 spark-shell:  
 ```
 root@hadoop-master:~# hadoop fs -put wordcount.txt /
 root@hadoop-master:~# spark-shell
@@ -237,7 +237,7 @@ rdd.foreach(println)
 ```  
 
 ### 13.5.2 通过spark-submit提交（单词计数）任务：
-/usr/local/spark/examples/jars/路径下示例代码，可直接运行wordcount执行单词计数
+`/usr/local/spark/examples/jars/` 路径下示例代码，可直接运行 wordcount 执行单词计数
 ```
 root@master:/usr/local/spark# hadoop fs -put README.md /  
 root@master:/usr/local/spark# spark-submit --master spark://master:7077 \
