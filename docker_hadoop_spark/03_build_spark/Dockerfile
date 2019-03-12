@@ -13,12 +13,15 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/scala-2.12.2.tgz -O /tmp/sca
     mv scala-2.12.2 /usr/local/scala &&\
     rm /tmp/scala-2.12.2.tgz
 
+ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 ENV SPARK_HOME=/usr/local/spark
-ENV PATH=$PATH:/usr/local/spark/bin
+ENV SCALA_HOME=/usr/local/scala
+ENV PATH=$PATH:$SPARK_HOME/bin:$SCALA_HOME/bin
 
 RUN  mv /tmp/slaves  $SPARK_HOME/conf/ && \
      mv /tmp/spark-env.sh $SPARK_HOME/conf/ && \
      mv /tmp/start-spark.sh ~/start-spark.sh && \
-     mv /tmp/profile /etc/
+     mv /tmp/profile /etc/ && \
+     source /etc/profile
 
 RUN chmod +x ~/start-spark.sh

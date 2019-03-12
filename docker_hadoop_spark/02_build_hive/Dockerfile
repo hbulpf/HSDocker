@@ -8,6 +8,7 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-hive-1.2.2-bin.tar.gz
 
 ENV HIVE_HOME=/usr/local/hive
 ENV PATH=$PATH:/usr/local/hive/bin
+ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 RUN mv /tmp/hive-env.sh $HIVE_HOME/conf && \
     mv /tmp/hive-site.xml $HIVE_HOME/conf && \

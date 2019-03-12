@@ -15,6 +15,7 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/hadoop-2.7.7.tar.gz -O /tmp/
 
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin 
+ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 # ssh without key
 RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \

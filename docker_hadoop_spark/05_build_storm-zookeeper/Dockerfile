@@ -27,6 +27,7 @@ RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/
 ENV ZOOKEEPER_HOME=/usr/local/zookeeper
 ENV STORM_HOME=/usr/local/storm
+ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 #move config
 RUN mv /tmp/ssh_config ~/.ssh/config && \
