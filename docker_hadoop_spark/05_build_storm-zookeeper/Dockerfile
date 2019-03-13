@@ -31,7 +31,7 @@ RUN mv /tmp/ssh_config ~/.ssh/config && \
     mv /tmp/profile /etc/  && \
     mv /tmp/storm.yaml $STORM_HOME/conf && \
     mv /tmp/start-storm.sh ~/ &&\
-    mv /usr/bin/python2.7 /usr/bin/python && \
+    ln -s /usr/bin/python2.7 /usr/bin/python && \
      . /etc/profile
     
 RUN chmod +x ~/start-zookeeper.sh  && \
