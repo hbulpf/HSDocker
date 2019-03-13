@@ -1,4 +1,4 @@
-FROM hs_base:latest
+FROM 202.116.46.215/hsdocker2019/hs_base:latest
 
 WORKDIR /root
 COPY zookeeper_config/* /tmp/
