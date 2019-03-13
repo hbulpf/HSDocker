@@ -8,10 +8,10 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/spark-2.2.3-bin-hadoop2.7.tg
     mv spark-2.2.3-bin-hadoop2.7 /usr/local/spark &&\
     rm /tmp/spark-2.2.3-bin-hadoop2.7.tgz
 
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/scala-2.12.2.tgz -O /tmp/scala-2.12.2.tgz && \
-	tar -xzvf /tmp/scala-2.12.2.tgz &&\
-    mv scala-2.12.2 /usr/local/scala &&\
-    rm /tmp/scala-2.12.2.tgz
+RUN wget http://50125.hnbdata.cn:81/common/hsdocker/scala-2.11.8.tar.gz -O /tmp/scala-2.11.8.tar.gz && \
+	tar -xzvf /tmp/scala-2.11.8.tar.gz &&\
+    mv scala-2.11.8 /usr/local/scala &&\
+    rm /tmp/scala-2.11.8.tar.gz
 
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 ENV SPARK_HOME=/usr/local/spark

@@ -20,10 +20,8 @@ ZooKeeper选取leader的核心算法思想：如果某服务器获得N/2 + 1票�
 ## 20.4 实验步骤
 本实验主要介绍ZooKeeper的部署，ZooKeeper一般部署奇数个节点，部署方法包主要含安装JDK、修改配置文件、启动测试三个步骤。  
 
-这次实验在最新修改的spark集成镜像里直接部署zookeeper。
-
 ### 20.4.1 安装JDK
-下载安装JDK。因为**ZooKeeper服务器在JVM上运行**。集成镜像里已装有，省略该步骤。
+下载安装JDK。因为**ZooKeeper服务器在JVM上运行**。
 
 ### 20.4.2 安装zookeeper
 主机去官网下载zookeeper,这次实验选择的版本是**zookeeper-3.4.10**。解压在目录/usr/local/zookeeper下。  
