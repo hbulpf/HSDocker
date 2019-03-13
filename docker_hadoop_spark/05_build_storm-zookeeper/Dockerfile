@@ -4,8 +4,8 @@ WORKDIR /root
 
 RUN apt-get update && apt-get install -y python2.7 openssh-server wget vim openjdk-8-jdk
 
-COPY zookeeper/* /tmp/
-COPY storm/* /tmp/
+COPY zookeeper_config/* /tmp/
+COPY storm_config/* /tmp/
 
 #install zookeeper
 RUN wget http://50125.hnbdata.cn:81/common/hsdocker/zookeeper-3.4.10.tar.gz -O /tmp/zookeeper-3.4.10.tar.gz &&\
