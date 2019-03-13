@@ -20,7 +20,7 @@ metadata:
     app: storm-master
 spec:
   containers:
-    - image: 202.116.46.215/hsdocker2019/chellyk-storm-zookeeper:v1.0
+    - image: 202.116.46.215/hsdocker2019/hs_storm:v1.0
       name: storm-master
       imagePullPolicy: Always
       volumeMounts:
