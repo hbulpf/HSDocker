@@ -1,5 +1,8 @@
 FROM ubuntu:17.10
 
+
+RUN apt-get install -y python2.7 wget
+
 WORKDIR /root
 COPY zookeeper_config/* /tmp/
 COPY storm_config/* /tmp/
@@ -23,8 +26,6 @@ ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/
 ENV ZOOKEEPER_HOME=/usr/local/zookeeper
 ENV STORM_HOME=/usr/local/storm
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
-
-RUN apt-get install -y python2.7
 
 #move config
 RUN mv /tmp/ssh_config ~/.ssh/config && \
