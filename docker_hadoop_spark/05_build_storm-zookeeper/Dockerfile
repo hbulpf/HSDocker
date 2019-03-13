@@ -1,33 +1,30 @@
 FROM ubuntu:17.10
 
 WORKDIR /root
-
-RUN apt-get update && apt-get install -y python2.7 openssh-server wget vim openjdk-8-jdk
-
 COPY zookeeper_config/* /tmp/
 COPY storm_config/* /tmp/
 
-#install zookeeper
+#install zookeeper 和 storm
 RUN wget http://50125.hnbdata.cn:81/common/hsdocker/zookeeper-3.4.10.tar.gz -O /tmp/zookeeper-3.4.10.tar.gz &&\
     tar -xzvf /tmp/zookeeper-3.4.10.tar.gz &&\
     mv zookeeper-3.4.10 /usr/local/zookeeper &&\
-    rm /tmp/zookeeper-3.4.10.tar.gz 
-
-#install storm
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-storm-1.1.0.tar.gz -O /tmp/apache-storm-1.1.0.tar.gz &&\
+    rm /tmp/zookeeper-3.4.10.tar.gz  &&\
+    wget http://50125.hnbdata.cn:81/common/hsdocker/apache-storm-1.1.0.tar.gz -O /tmp/apache-storm-1.1.0.tar.gz &&\
     tar -zxvf /tmp/apache-storm-1.1.0.tar.gz  &&\
     mv apache-storm-1.1.0  /usr/local/storm && \
     rm /tmp/apache-storm-1.1.0.tar.gz
 
 #ssh key
 RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
-    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys 
 
 # set environment variable
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/
 ENV ZOOKEEPER_HOME=/usr/local/zookeeper
 ENV STORM_HOME=/usr/local/storm
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
+
+RUN apt-get install -y python2.7
 
 #move config
 RUN mv /tmp/ssh_config ~/.ssh/config && \
