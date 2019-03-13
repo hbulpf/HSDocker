@@ -28,13 +28,14 @@ IDEA中创建Empty project,model选择Scala输入module name “sparkgraphx”�
 ### 19.4.3 添加maven依赖
 在pom.xml文件中添加以下依赖:  
 ```xml
- <dependencies>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-graphx -->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-graphx_2.10</artifactId>
-            <version>1.5.1</version>
+            <artifactId>spark-graphx_2.11</artifactId>
+            <version>2.2.3</version>
         </dependency>
-</dependencies>
+    </dependencies>
 ``` 
 等待依赖导入  
 
