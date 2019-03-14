@@ -1,4 +1,4 @@
-package cproc.word;
+package test;
 
 import org.apache.storm.Config;
 import org.apache.storm.StormSubmitter;

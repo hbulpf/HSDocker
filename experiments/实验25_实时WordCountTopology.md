@@ -64,7 +64,7 @@ storm-core-1.1.0.jar
 
 Spout随机发送单词，代码实现:  
 ```java
-package cproc.word;
+package test;
 
 import java.util.Map;
 import java.util.Random;
@@ -99,7 +99,7 @@ public class WordReaderSpout extends BaseRichSpout{
 
 Bolt单词计数，并每隔一秒打印一次，代码实现:  
 ```java
-package cproc.word;
+package test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -156,7 +156,7 @@ public class WordCounterBolt extends BaseBasicBolt{
 
 构建Topology并提交到集群主函数，代码实现:  
 ```java
-package cproc.word;
+package test;
 
 import org.apache.storm.Config;
 import org.apache.storm.StormSubmitter;
