@@ -34,7 +34,9 @@ RUN mv /tmp/ssh_config ~/.ssh/config && \
     ln -s /usr/bin/python2.7 /usr/bin/python && \
      . /etc/profile
     
-RUN chmod +x ~/start-zookeeper.sh  && \
+RUN mkdir $ZOOKEEPER_HOME/data && \
+    echo '1' > $ZOOKEEPER_HOME/data/myid && \
+    chmod +x ~/start-zookeeper.sh  && \
     chmod +x ~/start-storm.sh
     
 CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
