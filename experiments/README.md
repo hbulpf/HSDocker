@@ -42,7 +42,7 @@
 1. [实验30_MapReduce与Spark读写Redis](./实验30_MapReduce与Spark读写Redis.md)
 1. [实验31_MongoDB](./实验31_MongoDB.md)
 1. [实验32_LevelDB读写](./实验32_LevelDB读写.md)
-1. [实验33?Mahout_K-means](./实验33?Mahout_K-means.md)
+1. [实验33_Mahout_K-means.md](./实验33_Mahout_K-means.md)
 1. [实验34_Spark实现K-Means](./实验34_Spark实现K-Means.md)
 1. [实验35_Spark实现SVM](./实验35_Spark实现SVM.md)
 1. [实验36_Spark实现FP-Growth](./实验36_Spark实现FP-Growth.md)
