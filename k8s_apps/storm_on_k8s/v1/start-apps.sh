@@ -29,9 +29,7 @@ kubectl exec master -n test -- export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 kubectl exec master -n test -- scp /etc/hosts slave-0:/etc/hosts
 kubectl exec master -n test -- scp /etc/hosts slave-1:/etc/hosts
 
-kubectl exec master -n test -- mkdir -p /usr/local/zookeeper/data
+
 kubectl exec master -n test -- /bin/sh -c 'echo "1" > /usr/local/zookeeper/data/myid'
-kubectl exec slave-0 -n test -- mkdir -p /usr/local/zookeeper/data
 kubectl exec slave-0 -n test -- /bin/sh -c 'echo "2" > /usr/local/zookeeper/data/myid'
-kubectl exec slave-1 -n test -- mkdir -p /usr/local/zookeeper/data
 kubectl exec slave-1 -n test -- /bin/sh -c 'echo "3" > /usr/local/zookeeper/data/myid'
