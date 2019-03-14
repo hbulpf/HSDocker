@@ -36,4 +36,6 @@ RUN mv /tmp/ssh_config ~/.ssh/config && \
     
 RUN chmod +x ~/start-zookeeper.sh  && \
     chmod +x ~/start-storm.sh
+    
+CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
 
