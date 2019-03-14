@@ -11,7 +11,7 @@ Storm集群和Hadoop集群表面上看很类似。但是Hadoop上运行的是Map
 
 ### 25.3.1 Topologies  
 **一个topology是spouts和bolts组成的图**，通过stream groupings将图中的spouts和bolts连接起来,如图所示:  
-![图]()  
+![图](./images/ex25/1.jpg)  
 
 一个topology会一直运行直到你手动kill掉，Storm自动重新分配执行失败的任务， 并且Storm可以保证你不会有数据丢失（如果开启了高可靠性的话）。如果一些机器意外停机它上面的所有任务会被转移到其他机器上。  
 
@@ -24,7 +24,7 @@ Topology的定义是一个Thrift结构，并且Nimbus就是一个Thrift服务，
 ### 25.3.2 Spouts  
 **消息源spout是Storm里面一个topology里面的消息生产者**。一般来说消息源会从一个外部源读取数据并且向topology里面发出消息：tuple。Spout可以是可靠的也可以是不可靠的。如果这个tuple没有被storm成功处理，可靠的消息源spouts可以重新发射一个tuple， 但是不可靠的消息源spouts一旦发出一个tuple就不能重发了。  
 
-消息源可以发射多条消息流stream。使用OutputFieldsDeclarer.declareStream来定义多个stream，然后使用SpoutOutputCollector来发射指定的stream。  
+消息源可以发射多条消息流stream。使用 `OutputFieldsDeclarer.declareStream` 来定义多个stream，然后使用SpoutOutputCollector 来发射指定的stream。  
 
 **Spout类里面最重要的方法是nextTuple**。要么发射一个新的tuple到topology里面或者简单的返回如果已经没有新的tuple。要注意的是nextTuple方法不能阻塞，因为storm在同一个线程上面调用所有消息源spout的方法。  
 
@@ -35,7 +35,7 @@ Topology的定义是一个Thrift结构，并且Nimbus就是一个Thrift服务，
 
 Bolts可以简单的做消息流的传递。复杂的消息流处理往往需要很多步骤，从而也就需要经过很多bolts。比如算出一堆图片里面被转发最多的图片就至少需要两步：第一步算出每个图片的转发数量。第二步找出转发最多的前10个图片。(如果要把这个过程做得更具有扩展性那么可能需要更多的步骤)。  
 
-Bolts可以发射多条消息流，使用OutputFieldsDeclarer.declareStream定义stream，使用OutputCollector.emit来选择要发射的stream。  
+Bolts可以发射多条消息流，使用 `OutputFieldsDeclarer.declareStream` 定义stream，使用 OutputCollector.emit 来选择要发射的stream。  
 
 **Bolts的主要方法是execute, 它以一个tuple作为输入，bolts使用OutputCollector来发射tuple，bolts必须要为它处理的每一个tuple调用OutputCollector的ack方法，以通知Storm这个tuple被处理完成了，从而通知这个tuple的发射者spouts**。一般的流程是：bolts处理一个输入tuple, 发射0个或者多个tuple,然后调用ack通知storm自己已经处理过这个tuple了。storm提供了一个IBasicBolt会自动调用ack。  
 
@@ -179,11 +179,11 @@ public class WordCountTopo {
 完整项目如图:  
 ![图](./images/ex25/Screenshot%20from%202018-08-03%2015-27-40.png)  
 
-然后，将Storm代码打成wordCount-Storm.jar(打包的时候不要包含导入的任何jar，不然会报错的，将无法运行，即：wordCount-Storm.jar中只包含上面三个类的代码)上传到主节点的**/usr/local/storm/bin目录下**，在主节点进入Storm安装目录的bin下面用以下命令提交任务：  
-``./storm jar wordCount-Storm.jar cproc.word.WordCountTopo wordCount`
+然后，将Storm代码打成wordCount-Storm.jar(打包的时候不要包含导入的任何jar，不然会报错的，将无法运行，即：wordCount-Storm.jar 中只包含上面三个类的代码)上传到主节点的 `/usr/local/storm/bin` 目录下，在主节点进入Storm安装目录的bin下面用以下命令提交任务：  
+`/usr/local/storm/bin/storm jar wordCount-Storm.jar cproc.word.WordCountTopo wordCount`
 
 使用以下命令结束storm任务:  
-``./storm kill wordCount `
+`/usr/local/storm/bin/storm kill wordCount `
 
 ## 25.5 实验结果  
 提交任务:  
@@ -214,7 +214,7 @@ Running: /usr/local/java/bin/java -client -Ddaemon.name= -Dstorm.options= -Dstor
 1689 [main] INFO  o.a.s.c.kill-topology - Killed topology: wordCount
 ```  
 
-Storm任务执行时，可以查看Storm 日志文件，日志里面打印了统计的单词结果，**运行日志保存在worker.log里，该文件只存在于从节点**，进入从节点的**/usr/local/storm/logs/workers-artifacts/wordCount-1-1533279993/6700**目录:  
+Storm任务执行时，可以查看Storm 日志文件，日志里面打印了统计的单词结果，**运行日志保存在worker.log里，该文件只存在于从节点**，进入从节点的`/usr/local/storm/logs/workers-artifacts/wordCount-1-1533279993/6700` 目录:  
 ```
 root@slave1:/usr/local/storm/logs/workers-artifacts/wordCount-1-1533279993/6700# ls
 gc.log.0.current  worker.log  worker.log.err  worker.log.metrics  worker.log.out  worker.pid  worker.yaml

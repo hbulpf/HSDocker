@@ -139,13 +139,13 @@ Mode: follower
 ## 20.5 基本操作  
 在其中一台机器上执行客户端脚本,这里我们选择master节点:  
 ```
-root@master:/usr/local/zookeeper/bin# ./zkCli.sh -server master:2181,slave1:2181,slave2:2181
+root@master:/usr/local/zookeeper/bin# ./zkCli.sh -server master:2181,slave-0:2181,slave-1:2181
 ```
 后面出现一大串，成功进入客户端后可输入其他指令。
 
 在客户端shell下执行创建目录命令：  
 ```
-create /testZK ""
+[zk: master:2181,slave-0:2181,slave-1:2181(CONNECTED) 0]create /testZK ""
 Created /testZK
 [zk: master:2181,slave1:2181,slave2:2181(CONNECTED) 1] ls /
 [zookeeper, testZK]

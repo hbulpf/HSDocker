@@ -18,16 +18,18 @@
 启动ZooKeeper集群。具体步骤可以参考实验20。
 
 ### 21.4.2 导入jar包
-从ZooKeeper安装目录下(/usr/local/zookeeper/)将**zookeeper-3.4.10.jar**导出到主机  
+从ZooKeeper安装目录下 `/usr/local/zookeeper/` 将**zookeeper-3.4.10.jar**导出到主机  
 
 其次，从ZooKeeper安装包的lib目录下，将如下jar包导出到主机：  
+```
 jline-0.9.94.jar  
 log4j-1.2.16.jar  
 netty-3.10.5.Final.jar  
 slf4j-api-1.6.1.jar  
 slf4j-log4j12-1.6.1.jar  
+```
 
-写代码我用的是IDEA，创建项目ZookeeperTest，将6个jar包导入到项目(不会自行百度查）  
+用IDEA创建项目ZookeeperTest，将6个jar包导入到项目(不会可百度）  
 ![图](./images/ex21/Screenshot%20from%202018-07-27%2016-56-46.png) 　　
 
 ### 21.4.3 编写代码
@@ -88,10 +90,10 @@ public class ReadMsg {
 ```
 
 ### 21.4.4 导出jar包
-IDEA导出jar包可参考实验18,19,不会可自行百度，导出后上传至slave1节点。 
-
-看上个步骤编写的代码我们可以发现监控的是**/testZk**，所以我们得像实验20一样**先创建/testZk**(否则在slave1节点上运行jar包无用),在master节点上创建
+IDEA导出jar包可参考实验18,19，导出后上传至任一节点。 
+实验需要监控 **/testZk**，所以需像实验20一样**先创建/testZk** ,在master节点上创建
 ```
+root@master:/usr/local/zookeeper/bin# ./zkCli.sh -server master:2181,slave-0:2181,slave-1:2181
 [zk: master:2181,slave1:2181,slave2:2181(CONNECTED) 1] create /testZk ""
 ```
 
