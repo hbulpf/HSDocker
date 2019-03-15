@@ -1,10 +1,11 @@
-FROM hs_flume:v1.0
+FROM hs_storm:v1.0
 
-WORKDIR /root
+COPY kafka_2.10-0.9.0.1.tgz /tmp/
 
-# install hadoop 2.7.7
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-flume-1.5.2-bin.tar.gz -O /tmp/apache-flume-1.5.2-bin.tar.gz && \
-	tar -xzvf /tmp/apache-flume-1.5.2-bin.tar.gz && \
-    mv apache-flume-1.5.2-bin /usr/local/flume && \
-    rm /tmp/apache-flume-1.5.2-bin.tar.gz
-CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
+RUN wget http://frp.hnbdata.cn:25081/common/hsdocker/kafka_2.10-0.9.0.1.tgz -O /tmp/kafka_2.10-0.9.0.1.tgz &&\
+    tar -zxvf /tmp/kafka_2.10-0.9.0.1.tgz && \
+    mv kafka_2.10-0.9.0.1 /usr/local/kafka && \
+    rm /tmp/kafka_2.10-0.9.0.1.tgz
+
+ENV KAFKA_HOME=/usr/local/kafka
+ENV PATH=$PATH:$KAFKA_HOME/bin
