@@ -23,8 +23,6 @@ do
 done
 
 rm hosts_tmp
-kubectl exec master -n test -- . /etc/profile
-kubectl exec master -n test -- export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 # scp /etc/hosts to slaves
 kubectl exec master -n test -- scp /etc/hosts slave-0:/etc/hosts
 kubectl exec master -n test -- scp /etc/hosts slave-1:/etc/hosts
