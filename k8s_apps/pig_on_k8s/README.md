@@ -13,11 +13,17 @@ sh start-apps.sh
 
 # 一般使用
 一般的配置使用过程
-## 获取 Hadoop 镜像
+## 获取 Hadoop 和 Pig 镜像
 从Harbor上拉取 Hadoop 镜像 `202.116.46.215/hsdocker2019/hs_hadoop:latest`   
 拉取方式
 ```
-docker pull 202.116.46.215/hsdocker2019/hs_hadoop:latest  
+docker pull 202.116.46.215/hsdocker2019/hs_hadoop:latest    
+```
+
+从Harbor上拉取 Pig 镜像 `202.116.46.215/hsdocker2019/hs_pig:latest`   
+拉取方式
+```
+docker pull 202.116.46.215/hsdocker2019/hs_pig:latest    
 ```
 
 ## 创建Hadoop 集群
