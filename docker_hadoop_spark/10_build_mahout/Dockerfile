@@ -1,4 +1,4 @@
-FROM hs_spark:v1.0
+FROM hs_hadoop:v1.0
 
 RUN wget http://frp.hnbdata.cn:25081/common/hsdocker/mahout-distribution-0.9.tar.gz -O /tmp/mahout-distribution-0.9.tar.gz &&\
     tar -zxvf /tmp/mahout-distribution-0.9.tar.gz && \
