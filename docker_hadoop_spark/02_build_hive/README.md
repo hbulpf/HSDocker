@@ -5,7 +5,7 @@
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build -t hs_hive:v1.0  .
+docker build --no-cache -t hs_hive:v1.0  .
 ```
 
 ## 2.获取 hive-1.2.2 安装包    

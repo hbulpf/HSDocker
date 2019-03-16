@@ -4,7 +4,7 @@
 ## 1. 构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build -t hs_spark:v1.0 .
+docker build --no-cache -t hs_spark:v1.0 .
 ```
 
 ## 2. 如需获取hspark2.1.0 安装包    
