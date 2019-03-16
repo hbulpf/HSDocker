@@ -1,10 +1,10 @@
-FROM hs_flume:v1.0
+FROM hs_spark:v1.0
 
-WORKDIR /root
+RUN wget http://frp.hnbdata.cn:25081/common/hsdocker/mahout-distribution-0.9.tar.gz -O /tmp/mahout-distribution-0.9.tar.gz &&\
+    tar -zxvf /tmp/mahout-distribution-0.9.tar.gz && \
+    mv mahout-distribution-0.9 /usr/local/mahout && \
+    rm /tmp/mahout-distribution-0.9.tar.gz
 
-# install hadoop 2.7.7
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-flume-1.5.2-bin.tar.gz -O /tmp/apache-flume-1.5.2-bin.tar.gz && \
-	tar -xzvf /tmp/apache-flume-1.5.2-bin.tar.gz && \
-    mv apache-flume-1.5.2-bin /usr/local/flume && \
-    rm /tmp/apache-flume-1.5.2-bin.tar.gz
-CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
+ENV MAHOUT_HOME=/usr/local/mahout
+ENV PATH=$PATH:$MAHOUT_HOME/bin
+ENV CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.2.jar:$MAHOUT_HOME/lib

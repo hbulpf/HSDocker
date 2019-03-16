@@ -1,10 +1,9 @@
-FROM hs_flume:v1.0
+FROM hs_hadoop:v1.0
 
-WORKDIR /root
+RUN wget http://frp.hnbdata.cn:25081/common/hsdocker/pig-0.17.0.tar.gz -O /tmp/pig-0.17.0.tar.gz &&\
+    tar -zxvf /tmp/pig-0.17.0.tar.gz && \
+    mv pig-0.17.0 /usr/local/pig && \
+    rm /tmp/pig-0.17.0.tar.gz
 
-# install hadoop 2.7.7
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-flume-1.5.2-bin.tar.gz -O /tmp/apache-flume-1.5.2-bin.tar.gz && \
-	tar -xzvf /tmp/apache-flume-1.5.2-bin.tar.gz && \
-    mv apache-flume-1.5.2-bin /usr/local/flume && \
-    rm /tmp/apache-flume-1.5.2-bin.tar.gz
-CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
+ENV PIG_HOME=/usr/local/pig
+ENV PATH=$PATH:$PIG_HOME/bin

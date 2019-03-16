@@ -1,10 +1,14 @@
-FROM hs_flume:v1.0
+FROM hs_spark:v1.0
 
-WORKDIR /root
+RUN apt-get update && apt-get install -y gcc make
 
-# install hadoop 2.7.7
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-flume-1.5.2-bin.tar.gz -O /tmp/apache-flume-1.5.2-bin.tar.gz && \
-	tar -xzvf /tmp/apache-flume-1.5.2-bin.tar.gz && \
-    mv apache-flume-1.5.2-bin /usr/local/flume && \
-    rm /tmp/apache-flume-1.5.2-bin.tar.gz
-CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
+RUN wget http://frp.hnbdata.cn:25081/common/hsdocker/redis-4.0.13.tar.gz -O /tmp/redis-4.0.13.tar.gz &&\
+    tar -zxvf /tmp/redis-4.0.13.tar.gz && \
+    mv redis-4.0.13 /usr/local/redis && \
+    rm /tmp/redis-4.0.13.tar.gz &&\
+    cd /usr/local/redis &&\
+    make &&\
+    make install
+
+ENV REDIS_HOME=/usr/local/redis
+ENV PATH=$PATH:$REDIS_HOME/bin
