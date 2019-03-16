@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-slave-service
+  labels:
+    app: kafka-slave
+spec:
+  ports:
+    - port: 2181
+      name: zookeeper
+  clusterIP: None
+  selector:
+    app: kafka-slave
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: slave
+spec:
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: kafka-slave
+  serviceName: kafka-slave-service
+  template:
+    metadata:
+      labels:
+        app: kafka-slave
+    spec:
+      containers:
+        - name: kafka-slave
+          image: 202.116.46.215/hsdocker2019/hs_kafka:v1.0
+          imagePullPolicy: Always
+
