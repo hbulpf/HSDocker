@@ -1,7 +1,7 @@
-﻿# Storm On K8S 部署
+﻿# Kafka On K8S 部署
 
 ## 获取docker镜像
-[Storm Docker镜像](../../docker_hadoop_spark/07_build_kafka/) 已上传至本地Docker Registry:
+[Kafka Docker镜像](../../docker_hadoop_spark/07_build_kafka/) 已上传至本地Docker Registry:
 ```
  
 ```
@@ -22,11 +22,11 @@ kubectl create -f ./kafka-slave.yaml
 ```
 
 3. 修改 hosts  
-查看各storm节点的ip
+查看各节点的ip
 ```
 kubectl get pod -o wide
 ```
-在storm-master所在的 pod 修改storm节点的IP
+在master所在的 pod 修改storm节点的IP
 ```
 ##1.进入 master所在的 pod
 kubectl exec -it master bash
