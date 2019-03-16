@@ -1,6 +1,6 @@
 FROM hs_hadoop:v1.0
 
-RUN wget http://frp.hnbdata.cn:25081/common/hsdocker/mahout-distribution-0.9.tar.gz -O /tmp/mahout-distribution-0.9.tar.gz &&\
+RUN wget http://50125.hnbdata.cn:81/common/hsdocker/mahout-distribution-0.9.tar.gz -O /tmp/mahout-distribution-0.9.tar.gz &&\
     tar -zxvf /tmp/mahout-distribution-0.9.tar.gz && \
     mv mahout-distribution-0.9 /usr/local/mahout && \
     rm /tmp/mahout-distribution-0.9.tar.gz

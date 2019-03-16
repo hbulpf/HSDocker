@@ -3,12 +3,12 @@
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build -t hs_mahout:v1.0 .
+docker build --no-cache -t hs_mongodb:v1.0 .
 ```
 
 ## 2. 如需获取hadoop-2.7.7安装包    
 ```
-wget -O download/mahout-distribution-0.9.tar.gz http://frp.hnbdata.cn:25081/common/hsdocker/mahout-distribution-0.9.tar.gz
+wget -O download/mahout-distribution-0.9.tar.gz http://50125.hnbdata.cn:81/common/hsdocker/mahout-distribution-0.9.tar.gz
 ```   
 会下载 apache-flume-1.5.2-bin.tar.gz 安装包并存储在 download 文件夹下
 

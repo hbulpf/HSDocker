@@ -8,7 +8,7 @@ docker build --no-cache -t hs_pig:v1.0 .
 
 ## 2. 如需获取hadoop-2.7.7安装包    
 ```
-wget -O download/pig-0.17.0.tar.gz http://frp.hnbdata.cn:25081/common/hsdocker/pig-0.17.0.tar.gz
+wget -O download/pig-0.17.0.tar.gz http://50125.hnbdata.cn:81/common/hsdocker/pig-0.17.0.tar.gz
 ```   
 会下载 pig-0.17.0.tar.gz 安装包并存储在 download 文件夹下
 
