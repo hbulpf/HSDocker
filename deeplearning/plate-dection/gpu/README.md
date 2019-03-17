@@ -1,12 +1,14 @@
-﻿**构建车牌识别镜像**
+﻿**构建车牌识别镜像** 使用GPU版本
 
 ## 构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
 docker build --no-cache -t hs_plate-dection:v1.0  .
 ```
+> 系统使用python2.7
 
 ## 使用
+> 在使用前请确保已经安装好相应的[显卡驱动](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)#prerequisites)
 ```
 PWD=~/tmp
 docker run --restart=always -v $PWD:/root -w /tmp -m 8g --memory-swap 16g --name=hs_plate-dection hs_plate-dection:v1.0
