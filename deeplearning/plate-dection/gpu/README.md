@@ -20,6 +20,7 @@ docker exec -it hs_plate-dection_py2_gpu-v1.0 bash
 
 进入容器后可以做基本测试，会输出识别字牌的结果
 ```
+cd HyperLPR
 python demo.py --detect_path ./dataset/1.jpg
 ```
 
