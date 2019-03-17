@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y wget vim libopencv-dev python-numpy pyt
 RUN pip install pillow -i https://pypi.tuna.tsinghua.edu.cn/simple && \
     pip install scikit-image -i https://pypi.tuna.tsinghua.edu.cn/simple && \
     pip install opencv-python -i https://pypi.tuna.tsinghua.edu.cn/simple && \
-    pip install keras -i https://pypi.tuna.tsinghua.edu.cn/simple
+    pip install keras -i https://pypi.tuna.tsinghua.edu.cn/simple && \
+    pip install tensorflow -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"

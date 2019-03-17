@@ -9,17 +9,18 @@ docker build -t hs_plate-dection:py2_cpu-v1.0  .
 
 ## 使用
 ```
-PWD=~/tmp
+PWD=~/tensorflow_space
 JUPYTER_PORT="64011"
-docker run --restart=always --runtime=nvidia -d -p $JUPYTER_PORT:8888 -v $PWD:/root -w /tmp -m 8g --memory-swap=16g --name=hs_plate-dection_py2_cpu-v1.0 hs_plate-dection:py2_cpu-v1.0
+mkdir -p $PWD
+docker run --restart=always --runtime=nvidia -d -p $JUPYTER_PORT:8888 -v $PWD:/root -w /root -m 8g --memory-swap=16g --name=hs_plate-dection_py2_cpu-v1.0 hs_plate-dection:py2_cpu-v1.0
 cd $PWD
-git clone https://github.com/hbulpf/HyperLPR.git #如果已经拉取该库，可忽略此步骤
+# git clone https://github.com/hbulpf/HyperLPR.git #如果已经拉取该库，可忽略此步骤
 docker exec -it hs_plate-dection_py2_cpu-v1.0  bash
 ```
 
 进入容器后可以做基本测试，会输出识别字牌的结果
 ```
-python demo.py --detect_path ./HyperLPR/dataset/1.jpg
+python demo.py --detect_path /dataset/1.jpg
 ```
 
 注：
