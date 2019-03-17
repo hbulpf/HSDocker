@@ -3,14 +3,15 @@
 ## 构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build --no-cache -t hs_plate-dection:py2_cpu-v1.0  .
+docker build -t hs_plate-dection:py2_cpu-v1.0  .
 ```
 > 系统使用python2.7
 
 ## 使用
 ```
 PWD=~/tmp
-docker run --restart=always -v $PWD:/root -w /tmp -m 8g --memory-swap 16g --name=hs_plate-dection_py2_cpu-v1.0 hs_plate-dection:py2_cpu-v1.0
+JUPYTER_PORT="64011"
+docker run --restart=always --runtime=nvidia -d -p $JUPYTER_PORT:8888 -v $PWD:/root -w /tmp -m 8g --memory-swap=16g --name=hs_plate-dection_py2_cpu-v1.0 hs_plate-dection:py2_cpu-v1.0
 cd $PWD
 git clone https://github.com/hbulpf/HyperLPR.git #如果已经拉取该库，可忽略此步骤
 docker exec -it hs_plate-dection_py2_cpu-v1.0  bash

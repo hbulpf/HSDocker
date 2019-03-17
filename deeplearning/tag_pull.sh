@@ -14,3 +14,10 @@ docker tag 202.116.46.215/hsdocker2019/tensorflow:1.12.0-gpu tensorflow/tensorfl
 docker pull 202.116.46.215/hsdocker2019/tensorflow:1.12.0
 docker tag 202.116.46.215/hsdocker2019/tensorflow:1.12.0 tensorflow/tensorflow:1.12.0 
 
+#hs_plate-dection:py2_cpu-v1.0
+docker pull 202.116.46.215/hsdocker2019/hs_plate-dection:py2_cpu-v1.0
+docker tag 202.116.46.215/hsdocker2019/hs_plate-dection:py2_cpu-v1.0 hs_plate-dection:py2_cpu-v1.0
+
+#hs_plate-dection:py2_gpu-v1.0
+docker pull 202.116.46.215/hsdocker2019/hs_plate-dection:py2_gpu-v1.0
+docker tag 202.116.46.215/hsdocker2019/hs_plate-dection:py2_gpu-v1.0 hs_plate-dection:py2_gpu-v1.0
