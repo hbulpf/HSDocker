@@ -52,6 +52,10 @@
 +   **[Big Data Europe](https://www.big-data-europe.eu/)**  
     - github: [https://github.com/big-data-europe](https://github.com/big-data-europe)  
 	- 说明: Integrating Big Data, software & communicaties for addressing Europe's societal challenges
+   
++   **[SequenceIQ](http://www.sequenceiq.com/)**
+    *  github: https://github.com/sequenceiq
+ 
 +   **[kubernetes](https://https://github.com/kubernetes/kubernetes)**
 
 + 	**[kubeflow](https://github.com/kubeflow/kubeflow)** 
