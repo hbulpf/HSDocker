@@ -38,7 +38,4 @@ RUN chmod +x ~/start-hadoop.sh && \
     chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \
     chmod +x $HADOOP_HOME/sbin/start-yarn.sh 
 
-# format namenode
-RUN /usr/local/hadoop/bin/hdfs namenode -format
-
 CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"

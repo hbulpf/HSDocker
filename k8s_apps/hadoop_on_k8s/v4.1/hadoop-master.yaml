@@ -37,6 +37,7 @@ spec:
       cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && \
       rm /usr/local/hadoop/etc/hadoop/profile && \
       service ssh start && \
+      $HADOOP_HOME/bin/hdfs namenode -format && \
       trap : TERM INT; sleep infinity & wait"    
     volumeMounts:
     - name: hadoop-config
