@@ -37,7 +37,7 @@ spec:
     volumeMounts:
     - name: hadoop-config
       mountPath: /etc/config/hadoop
-    - name: hadoopMwork
+    - name: hadoopm-work
       mountPath: /root  
     env:
     - name: JAVA_TOOL_OPTIONS
@@ -46,6 +46,6 @@ spec:
     - name: hadoop-config
       configMap:
         name: hadoop-config
-    - name: hadoopMwork
+    - name: hadoopm-work
       persistentVolumeClaim:
         claimName: hadoop-pvc    
