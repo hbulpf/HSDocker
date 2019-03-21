@@ -53,7 +53,7 @@ spec:
           - name: hadoop-config
             mountPath: /etc/config/hadoop
           - name: slavedata
-            mountPath: /work  
+            mountPath: /root  
           env:
           - name: JAVA_TOOL_OPTIONS
             value: "-Dfile.encoding=UTF8"             
