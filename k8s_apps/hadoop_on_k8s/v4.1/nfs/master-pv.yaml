@@ -1,17 +1,16 @@
-##创建hadoop-pv
+##创建master-pv
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: hadoop-pv
-  namespace: test
+  name: master-pv
   labels:
-    pv: hadoop-pv
+    pv: master-pv
 spec:
   capacity:
-    storage: 10Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    path: /data/k8s/hadoop
+    path: /data/k8s/hadoop/master
     server: 202.116.46.215
