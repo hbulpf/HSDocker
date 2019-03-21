@@ -24,6 +24,7 @@ spec:
   replicas: 2
   revisionHistoryLimit: 10
   selector:
+    app: hadoop-slave   
   serviceName: hadoop-dn-service
   template:
     metadata:
