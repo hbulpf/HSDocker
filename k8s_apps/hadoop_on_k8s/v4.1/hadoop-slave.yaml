@@ -29,6 +29,8 @@ spec:
   serviceName: hadoop-dn-service
   template:
     metadata:
+      labels:
+        app: hadoop-slave
     spec:
       containers:
         - name: hadoop-slave
