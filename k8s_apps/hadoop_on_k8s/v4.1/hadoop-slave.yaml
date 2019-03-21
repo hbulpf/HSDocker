@@ -36,6 +36,10 @@ spec:
         - name: hadoop-slave
           image: 202.116.46.215/hsdocker2019/hs_hadoop:v1.0
           imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "0.5"
           command: 
           - sh
           - -c
@@ -48,7 +52,7 @@ spec:
           volumeMounts:
           - name: hadoop-config
             mountPath: /etc/config/hadoop
-          - name: hadoopswork
+          - name: slavedata
             mountPath: /work  
           env:
           - name: JAVA_TOOL_OPTIONS
@@ -56,7 +60,12 @@ spec:
       volumes:
         - name: hadoop-config
           configMap:
-            name: hadoop-config
-        - name: hadoopswork
-          persistentVolumeClaim:
-            claimName: hadoop-pvc    
+            name: hadoop-config  
+  volumeClaimTemplates:
+  - metadata:
+      name: slavedata
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
