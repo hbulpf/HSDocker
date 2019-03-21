@@ -38,7 +38,7 @@ spec:
     - name: hadoop-config
       mountPath: /etc/config/hadoop
     - name: hadoopm-work
-      mountPath: /root  
+      mountPath: /work  
     env:
     - name: JAVA_TOOL_OPTIONS
       value: "-Dfile.encoding=UTF8"
