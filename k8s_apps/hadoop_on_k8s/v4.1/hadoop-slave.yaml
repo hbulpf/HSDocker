@@ -36,11 +36,19 @@ spec:
         - name: hadoop-slave
           image: 202.116.46.215/hsdocker2019/hs_hadoop:v1.0
           imagePullPolicy: Always
-          command: ["bash", "-c", "cp /etc/config/hadoop/profile /etc/profile && source /etc/profile && cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && rm /usr/local/hadoop/etc/hadoop/profile && service ssh start && trap : TERM INT; sleep infinity & wait"]
+          command: 
+          - sh
+          - -c
+          - "cp /etc/config/hadoop/profile /etc/profile && \
+            source /etc/profile && \
+            cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && \
+            rm /usr/local/hadoop/etc/hadoop/profile && \
+            service ssh start && \
+            trap : TERM INT; sleep infinity & wait"
           volumeMounts:
           - name: hadoop-config
             mountPath: /etc/config/hadoop
-          - name: hadoops-work
+          - name: hadoopswork
             mountPath: /work  
           env:
           - name: JAVA_TOOL_OPTIONS
@@ -49,6 +57,6 @@ spec:
         - name: hadoop-config
           configMap:
             name: hadoop-config
-        - name: hadoops-work
+        - name: hadoopswork
           persistentVolumeClaim:
             claimName: hadoop-pvc    
