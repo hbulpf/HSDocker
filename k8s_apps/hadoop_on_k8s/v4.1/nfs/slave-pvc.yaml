@@ -9,10 +9,10 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
   selector:
     matchLabels:
-      pv: hadoop-pv
+      pv: hadoop-pv-0
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -24,8 +24,8 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
   selector:
     matchLabels:
-      pv: hadoop-pv
+      pv: hadoop-pv-1
 

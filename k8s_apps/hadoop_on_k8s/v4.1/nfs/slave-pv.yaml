@@ -1,0 +1,35 @@
+##创建hadoop-pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hadoop-pv-0
+  namespace: test
+  labels:
+    pv: hadoop-pv-0
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /data/k8s/hadoop
+    server: 202.116.46.215
+---
+##创建hadoop-pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hadoop-pv-1
+  namespace: test
+  labels:
+    pv: hadoop-pv-1
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /data/k8s/hadoop
+    server: 202.116.46.215
