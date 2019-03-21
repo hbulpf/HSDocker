@@ -1,4 +1,4 @@
-##创建hadoop-pv
+##创建slave-pv
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -15,7 +15,7 @@ spec:
     path: /data/k8s/hadoop/slave-0
     server: 202.116.46.215
 ---
-##创建hadoop-pv
+##创建slave-pv
 apiVersion: v1
 kind: PersistentVolume
 metadata:

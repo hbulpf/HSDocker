@@ -48,4 +48,4 @@ spec:
         name: hadoop-config
     - name: hadoopmwork
       persistentVolumeClaim:
-        claimName: hadoop-pvc    
+        claimName: master-pvc    

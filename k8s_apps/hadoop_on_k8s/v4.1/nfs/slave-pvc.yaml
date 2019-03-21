@@ -12,7 +12,7 @@ spec:
       storage: 2Gi
   selector:
     matchLabels:
-      pv: hadoop-pv-0
+      pv: slave-pv-0
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -27,5 +27,5 @@ spec:
       storage: 2Gi
   selector:
     matchLabels:
-      pv: hadoop-pv-1
+      pv: slave-pv-1
 
