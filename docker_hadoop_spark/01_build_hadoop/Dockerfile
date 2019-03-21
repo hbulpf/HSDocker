@@ -1,10 +1,7 @@
-FROM ubuntu:17.10
+FROM hs_base:v1.0
 
 WORKDIR /root
 	
-# install openssh-server wget
-RUN apt-get update && apt-get install -y openssh-server wget openjdk-8-jdk vim
-
 COPY hadoop_config/* /tmp/
 
 # install hadoop 2.7.7
