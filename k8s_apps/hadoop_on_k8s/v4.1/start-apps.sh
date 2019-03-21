@@ -1,9 +1,13 @@
+kubectl delete -f ./nfs/hadoop-pv.yaml
+kubectl delete -f ./nfs/slave-pvc.yaml
 kubectl delete -f . -n test
 kubectl delete configmap hadoop-config -n test
 kubectl create configmap hadoop-config -n test --from-file=./hadoop_configmap
 kubectl create -f hadoop-master.yaml -n test
 kubectl create -f hadoop-slave.yaml -n test
 
+kubectl create -f ./nfs/hadoop-pv.yaml
+kubectl create -f ./nfs/slave-pvc.yaml
 #write to /etc/hosts on master
 hoststr=$(kubectl get pod -o wide -n test | grep -i "slave" | awk '{print $6"\t"$1}')
 host0="slave-0"
