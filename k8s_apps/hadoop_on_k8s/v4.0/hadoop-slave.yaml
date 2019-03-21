@@ -37,7 +37,7 @@ spec:
           image: 202.116.46.215/hsdocker2019/hs_hadoop:v1.0
           imagePullPolicy: Always
           command: 
-          - sh
+          - bash
           - -c
           - "cp /etc/config/hadoop/profile /etc/profile && \
             source /etc/profile && \

@@ -41,14 +41,14 @@ spec:
               memory: "1Gi"
               cpu: "0.5"
           command: 
-          - sh
+          - bash
           - -c
           - "cp /etc/config/hadoop/profile /etc/profile && \
             source /etc/profile && \
             cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && \
             rm /usr/local/hadoop/etc/hadoop/profile && \
             service ssh start && \
-            trap : TERM INT; sleep infinity & wait"
+            trap : TERM INT; sleep infinity & wait"   
           volumeMounts:
           - name: hadoop-config
             mountPath: /etc/config/hadoop
