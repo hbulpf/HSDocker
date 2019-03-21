@@ -24,8 +24,6 @@ spec:
   replicas: 2
   revisionHistoryLimit: 10
   selector:
-    matchLabels:
-      app: hadoop-slave
   serviceName: hadoop-dn-service
   template:
     metadata:
@@ -40,15 +38,15 @@ spec:
           - sh
           - -c
           - "cp /etc/config/hadoop/profile /etc/profile && \
-           source /etc/profile && \
-           cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && \
-           rm /usr/local/hadoop/etc/hadoop/profile && \
-           service ssh start && \
-           trap : TERM INT; sleep infinity & wait"
+            source /etc/profile && \
+            cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && \
+            rm /usr/local/hadoop/etc/hadoop/profile && \
+            service ssh start && \
+            trap : TERM INT; sleep infinity & wait"
           volumeMounts:
           - name: hadoop-config
             mountPath: /etc/config/hadoop
-          - name: hadoopwork
+          - name: hadoopSwork
             mountPath: /root  
           env:
           - name: JAVA_TOOL_OPTIONS
@@ -57,6 +55,6 @@ spec:
         - name: hadoop-config
           configMap:
             name: hadoop-config
-        - name: hadoopwork
+        - name: hadoopSwork
           persistentVolumeClaim:
             claimName: hadoop-pvc    

@@ -11,7 +11,7 @@
 	</property>
 	<property>
 	       <name>hadoop.tmp.dir</name>
-	       <value>file:///root/hdfs/tmp</value>
+	       <value>file:/tmp/hd2.7</value>
 	       <description> 存放临时文件的目录 </description>
 	</property> 
 	<property>
