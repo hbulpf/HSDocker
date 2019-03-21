@@ -1,10 +1,9 @@
 kubectl delete -f . -n test
 kubectl delete configmap hadoop-config -n test
-kubectl delete -f ./nfs/kubectl delete -f ./nfs/hadoop-pv.yaml
-kubectl delete -f ./nfs/slave-pvc.yaml-pv.yaml
+kubectl delete -f ./nfs/slave-pv.yaml
 kubectl delete -f ./nfs/slave-pvc.yaml
 
-kubectl create -f ./nfs/hadoop-pv.yaml
+kubectl create -f ./nfs/slave-pv.yaml
 kubectl create -f ./nfs/slave-pvc.yaml
 kubectl create configmap hadoop-config -n test --from-file=./hadoop_configmap
 kubectl create -f hadoop-master.yaml -n test
