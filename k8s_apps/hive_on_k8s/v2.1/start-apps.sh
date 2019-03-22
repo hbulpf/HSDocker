@@ -6,7 +6,6 @@ kubectl delete -f . -n $NS
 kubectl delete -f ./nfs/
 #create resources
 kubectl create -f ./nfs/
-kubectl create configmap hadoop-config -n $NS --from-file=./hadoop_configmap
 kubectl create -f mysql.yaml -n $NS
 kubectl create -f hive-master.yaml -n $NS
 kubectl create -f hive-slave.yaml -n $NS
