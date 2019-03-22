@@ -3,7 +3,7 @@
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build --no-cache -t hs_hbase:v1.0 .
+docker build --no-cache -t hbase-zk-hadoop:v1.0 .
 ```
 
 ## 2. 如需获取 hbase-1.2.6 安装包        

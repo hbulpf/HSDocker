@@ -7,3 +7,4 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/kafka_2.10-0.9.0.1.tgz -O /t
 
 ENV KAFKA_HOME=/usr/local/kafka
 ENV PATH=$PATH:$KAFKA_HOME/bin
+CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"

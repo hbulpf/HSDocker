@@ -15,4 +15,4 @@ RUN mv /tmp/hbase-env.sh $HBASE_HOME/conf && \
     mv /tmp/hbase-site.xml $HBASE_HOME/conf && \
     mv /tmp/regionservers $HBASE_HOME/conf && \
     . /etc/profile
-
+CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
