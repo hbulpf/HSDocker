@@ -1,7 +1,6 @@
 **hive On K8S 部署**
 
 特性：
-- 带 configmap 
 - 带 nfs 永久卷挂载
 
 # 快速使用

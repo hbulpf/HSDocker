@@ -1,0 +1,33 @@
+##创建slave-pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: slave-pv-0
+  labels:
+    pv: slave-pv-0
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /data/k8s/hadoop/slave-0
+    server: 202.116.46.215
+---
+##创建slave-pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: slave-pv-1
+  labels:
+    pv: slave-pv-1
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /data/k8s/hadoop/slave-1
+    server: 202.116.46.215

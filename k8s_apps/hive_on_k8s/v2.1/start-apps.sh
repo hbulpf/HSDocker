@@ -1,9 +1,12 @@
-#delete resources if exists
+#get parameters
 NS=$1
 SlaveNum=$2
+#delete resources if exists
 kubectl delete -f . -n $NS
 kubectl delete -f ./nfs/
 #create resources
+kubectl create -f ./nfs/
+kubectl create configmap hadoop-config -n $NS --from-file=./hadoop_configmap
 kubectl create -f mysql.yaml -n $NS
 kubectl create -f hive-master.yaml -n $NS
 kubectl create -f hive-slave.yaml -n $NS
@@ -27,10 +30,8 @@ do
 	echo "$count s:$hoststr"
 	hoststr=$(kubectl get pod -o wide -n $NS | grep -i "slave" | awk '{print $6"\t"$1}')
 done
-
 rm hosts_tmp
 kubectl exec master -n $NS -- scp /etc/hosts slave-0:/etc/hosts
 kubectl exec master -n $NS -- scp /etc/hosts slave-1:/etc/hosts
-
 # start
 kubectl exec master -n $NS -- start-all.sh

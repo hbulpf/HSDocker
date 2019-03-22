@@ -36,3 +36,26 @@ spec:
         - name: hive-slave
           image: 202.116.46.215/hsdocker2019/hs_hive:v1.0
           imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "0.5"
+            limits:
+              memory: "1Gi"
+              cpu: "0.5"                  
+          volumeMounts:
+          - name: hadoop-config
+            mountPath: /etc/config/hadoop
+          - name: slavedata
+            mountPath: /root/hdfs 
+          env:
+          - name: JAVA_TOOL_OPTIONS
+            value: "-Dfile.encoding=UTF8"        
+  volumeClaimTemplates:
+  - metadata:
+      name: slavedata
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi            

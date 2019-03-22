@@ -1,5 +1,7 @@
-#delete resources if exists
+#get parameters
 NS=$1
+SlaveNum=$2
+#delete resources if exists
 kubectl delete -f . -n $NS
 kubectl delete -f ./nfs/
 #create resources
