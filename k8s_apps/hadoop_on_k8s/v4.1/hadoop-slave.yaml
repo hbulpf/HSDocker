@@ -40,6 +40,9 @@ spec:
             requests:
               memory: "1Gi"
               cpu: "0.5"
+            limits:
+              memory: "1Gi"
+              cpu: "0.5"             
           command: 
           - bash
           - -c
