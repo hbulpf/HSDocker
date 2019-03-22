@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hbase-ui-service
+  name: hive-ui-service
 spec:
   ports:
     - port: 8088
@@ -9,5 +9,5 @@ spec:
     - port: 50070
       name: name-node
   selector:
-    app: hbase-master
+    app: hive-master
   type: NodePort
