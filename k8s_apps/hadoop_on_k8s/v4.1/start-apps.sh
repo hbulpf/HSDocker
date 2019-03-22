@@ -1,10 +1,11 @@
+#delete resources if exists
 kubectl delete -f . -n test
 kubectl delete configmap hadoop-config -n test
 kubectl delete -f ./nfs/slave-pv.yaml
 kubectl delete -f ./nfs/slave-pvc.yaml
 kubectl delete -f ./nfs/master-pv.yaml
 kubectl delete -f ./nfs/master-pvc.yaml
-
+#create resources
 kubectl create -f ./nfs/master-pv.yaml
 kubectl create -f ./nfs/master-pvc.yaml
 kubectl create -f ./nfs/slave-pv.yaml
@@ -12,6 +13,7 @@ kubectl create -f ./nfs/slave-pvc.yaml
 kubectl create configmap hadoop-config -n test --from-file=./hadoop_configmap
 kubectl create -f hadoop-master.yaml -n test
 kubectl create -f hadoop-slave.yaml -n test
+kubectl create -f hadoop-web.yaml -n test
 #write to /etc/hosts on master
 hoststr=$(kubectl get pod -o wide -n test | grep -i "slave" | awk '{print $6"\t"$1}')
 host0="slave-0"
@@ -32,14 +34,8 @@ do
 	echo "$count s:$hoststr"
 	hoststr=$(kubectl get pod -o wide -n test | grep -i "slave" | awk '{print $6"\t"$1}')
 done
-
 rm hosts_tmp
-# ssh首次连接不出现yes/no提示
-# kubectl exec slave-0 -n test -- sh -c 'echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config'
-# kubectl exec slave-1 -n test -- sh -c 'echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config'
-# scp /etc/hosts to slaves
 kubectl exec master -n test -- scp /etc/hosts slave-0:/etc/hosts
 kubectl exec master -n test -- scp /etc/hosts slave-1:/etc/hosts
-
 # start hadoop
 kubectl exec master -n test -- start-all.sh
