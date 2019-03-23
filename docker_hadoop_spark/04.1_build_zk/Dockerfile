@@ -7,6 +7,7 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/zookeeper-3.4.10.tar.gz -O /
     mv zookeeper-3.4.10 /usr/local/zookeeper &&\
     rm /tmp/zookeeper-3.4.10.tar.gz
 ENV ZOOKEEPER_HOME=/usr/local/zookeeper
+ENV PATH=$PATH:$ZOOKEEPER_HOME/bin
 RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys 
 RUN mv /tmp/ssh_config ~/.ssh/config && \

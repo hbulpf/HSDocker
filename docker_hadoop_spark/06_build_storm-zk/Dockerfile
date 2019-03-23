@@ -8,6 +8,7 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-storm-1.1.0.tar.gz -O
     rm /tmp/apache-storm-1.1.0.tar.gz
 # set environment variable
 ENV STORM_HOME=/usr/local/storm
+ENV PATH=$PATH:$STORM_HOME/bin
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 #move config
 RUN mv /tmp/storm.yaml $STORM_HOME/conf && \
