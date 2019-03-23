@@ -37,5 +37,5 @@ spec:
       nodeName: node05
       containers:
         - name: hbase-slave
-          image: 202.116.46.215/hsdocker2019/hs_hbase:v1.0
+          image: 202.116.46.215/hsdocker2019/hbase-zk-hadoop:v1.0
           imagePullPolicy: Always

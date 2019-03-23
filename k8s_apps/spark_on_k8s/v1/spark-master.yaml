@@ -22,6 +22,6 @@ metadata:
     app: spark-master
 spec:
   containers:
-    - image: 202.116.46.215/hsdocker2019/hs_spark:v1.0  
+    - image: 202.116.46.215/hsdocker2019/hs_spark-hadoop:v1.0
       name: spark-master
       imagePullPolicy: Always

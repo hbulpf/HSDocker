@@ -22,7 +22,7 @@ metadata:
     app: hive-master
 spec:
   containers:
-    - image: 202.116.46.215/hsdocker2019/hs_hive:v1.0
+    - image: 202.116.46.215/hsdocker2019/hs_hive-hadoop:v1.0
       name: hive-master
       imagePullPolicy: Always
       resources:

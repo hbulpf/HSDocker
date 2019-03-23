@@ -20,7 +20,7 @@ metadata:
     app: kafka-master
 spec:
   containers:
-    - image: 202.116.46.215/hsdocker2019/hs_kafka:v1.0
+    - image: 202.116.46.215/hsdocker2019/hs_kafka-zk:v1.0
       name: kafka-master
       imagePullPolicy: Always
 

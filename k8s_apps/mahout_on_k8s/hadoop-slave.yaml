@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
         - name: hadoop-slave
-          image: 202.116.46.215/hsdocker2019/hs_hadoop:v1.0
+          image: 202.116.46.215/hsdocker2019/mahout-hadoop:v1.0
           imagePullPolicy: Always
           command: ["bash", "-c", "cp /etc/config/hadoop/profile /etc/profile && source /etc/profile && cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && rm /usr/local/hadoop/etc/hadoop/profile && service ssh start && trap : TERM INT; sleep infinity & wait"]
           volumeMounts:

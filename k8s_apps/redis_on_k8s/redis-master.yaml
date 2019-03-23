@@ -22,7 +22,7 @@ metadata:
     app: spark-master
 spec:
   containers:
-  - image: 202.116.46.215/hsdocker2019/hs_pig:v1.0
+  - image: 202.116.46.215/hsdocker2019/hs_redis-spark:v1.0
     name: spark-master
     imagePullPolicy: Always
     command: ["bash", "-c", "cp /etc/config/hadoop/profile /etc/profile && source /etc/profile && cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && rm /usr/local/hadoop/etc/hadoop/profile && service ssh start && trap : TERM INT; sleep infinity & wait"]
