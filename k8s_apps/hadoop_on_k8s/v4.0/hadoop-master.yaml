@@ -24,7 +24,7 @@ spec:
   containers:
   - image: 202.116.46.215/hsdocker2019/hs_hadoop:v1.0
     name: hadoop-master
-    imagePullPolicy: Always
+    imagePullPolicy: IfNotPresent
     resources:
       requests:
         memory: "1Gi"
