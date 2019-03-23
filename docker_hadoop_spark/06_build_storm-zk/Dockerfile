@@ -15,4 +15,3 @@ RUN mv /tmp/storm.yaml $STORM_HOME/conf && \
     mv /tmp/start-storm.sh ~/ 
 RUN chmod +x ~/start-storm.sh
 CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
-

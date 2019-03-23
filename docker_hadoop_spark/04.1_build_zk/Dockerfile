@@ -20,4 +20,3 @@ RUN mkdir $ZOOKEEPER_HOME/data && \
     echo '1' > $ZOOKEEPER_HOME/data/myid && \
     chmod +x ~/start-zookeeper.sh
 CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
-
