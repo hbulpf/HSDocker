@@ -3,14 +3,5 @@
     <property>
         <name>fs.defaultFS</name>
         <value>hdfs://master:9000/</value>
-    </property>
-	<property>
-	      <name>io.file.buffer.size</name>
-	      <value>131072</value>
-	<description> 设置缓存大小 </description>
-	</property>
-	<property>
-	  <name>hadoop.security.authorization</name>
-	  <value>false</value>
-	</property>      
+    </property> 
 </configuration>
