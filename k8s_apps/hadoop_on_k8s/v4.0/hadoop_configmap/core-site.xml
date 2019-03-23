@@ -10,11 +10,6 @@
 	<description> 设置缓存大小 </description>
 	</property>
 	<property>
-	       <name>hadoop.tmp.dir</name>
-	       <value>file:/root/hdfs/tmp</value>
-	       <description> 存放临时文件的目录 </description>
-	</property> 
-	<property>
 	  <name>hadoop.security.authorization</name>
 	  <value>false</value>
 	</property>      
