@@ -2,12 +2,12 @@
 <configuration>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file://hdfs/namenode</value>
+        <value>file:///tmp/hdfs/namenode</value>
         <description>NameNode directory for namespace and transaction logs storage.</description>
     </property>
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///hdfs/datanode</value>
+        <value>file:///tmp/hdfs/datanode</value>
         <description>DataNode directory</description>
     </property>
     <property>

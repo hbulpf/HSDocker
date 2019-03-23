@@ -34,11 +34,5 @@ rm hosts_tmp
 kubectl exec master -n $NS -- scp /etc/hosts slave-0:/etc/hosts
 kubectl exec master -n $NS -- scp /etc/hosts slave-1:/etc/hosts
 # start hadoop
-kubectl exec master -n $NS -- mkdir -p /root/hdfs/datanode
-kubectl exec master -n $NS -- mkdir -p /root/hdfs/namenode
-kubectl exec $host0 -n $NS -- mkdir -p /root/hdfs/datanode
-kubectl exec $host1 -n $NS -- mkdir -p /root/hdfs/namenode
-kubectl exec $host0 -n $NS -- mkdir -p /root/hdfs/datanode
-kubectl exec $host1 -n $NS -- mkdir -p /root/hdfs/namenode
 kubectl exec master -n $NS -- hdfs namenode -format
 kubectl exec master -n $NS -- start-all.sh
