@@ -1,4 +1,4 @@
-﻿# 构建 storm-1.1.0 镜像
+﻿# 构建 zookeeper-3.4.10 ， Hadoop 镜像
 
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  

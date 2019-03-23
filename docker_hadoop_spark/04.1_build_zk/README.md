@@ -1,9 +1,9 @@
-﻿# 构建 zookeeper-3.4.10 , Hadoop 镜像
+﻿# 构建 zookeeper-3.4.10镜像
 
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build --no-cache  -t hs_zk-hadoop:v1.0  .
+docker build --no-cache  -t hs_zk:v1.0  .
 ```
 
 ## 2.获取 zookeeper-3.4.10 安装包    
