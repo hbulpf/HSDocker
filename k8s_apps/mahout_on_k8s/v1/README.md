@@ -1,7 +1,6 @@
-﻿# mathout On K8S 部署 (v4.1)
+﻿# mathout On K8S 部署 (v4)
 特性：
 - 带 configmap 
-- 带 nfs 永久卷挂载
 
 # 快速使用
 快速建立容器的过程
@@ -20,12 +19,6 @@ sh start-apps.sh
 docker pull 202.116.46.215/hsdocker2019/hs_hadoop:latest  
 ```
 
-从Harbor上拉取 Mahout 镜像 `202.116.46.215/hsdocker2019/hs_mahout:latest`   
-拉取方式
-```
-docker pull 202.116.46.215/hsdocker2019/hs_mahout:latest  
-```
-
 ## 创建Hadoop 集群
 在当前目录下先创建configmap存储hadoop配置文件:
 ```
@@ -34,7 +27,7 @@ kubectl create configmap hadoop --from-file=./hadoop_configmap
 
 
 在k8s集群中,使用 yaml 文件创建集群
-1. 使用 [mahout-master.yaml](./mahout-master.yaml) 创建 master 节点
+1. 使用 [hadoop-master.yaml](./hadoop-master.yaml) 创建 master 节点
 ```
 kubectl create -f ./hadoop-master.yaml
 ```

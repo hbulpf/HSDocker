@@ -2,13 +2,13 @@
 NS=$1
 SlaveNum=$2
 #delete resources if exists
-kubectl delete -f hbase-slave.yaml -n $NS
-kubectl delete -f hbase-master.yaml -n $NS
+kubectl delete -f pig-slave.yaml -n $NS
+kubectl delete -f pig-master.yaml -n $NS
 kubectl delete -f ./nfs/
 #create resources
 kubectl create -f ./nfs/
-kubectl create -f hbase-master.yaml -n $NS
-kubectl create -f hbase-slave.yaml -n $NS
+kubectl create -f pig-master.yaml -n $NS
+kubectl create -f pig-slave.yaml -n $NS
 #write to /etc/hosts on master
 hoststr=$(kubectl get pod -o wide -n $NS | grep -i "slave" | awk '{print $6"\t"$1}')
 host0="slave-0"

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hadoop-nn-service
+  name: spark-nn-service
   labels:
-    app: hadoop-nn
+    app: spark-nn
 spec:
   ports:
     - port: 9000
@@ -12,18 +12,18 @@ spec:
       name: name-node
   clusterIP: None
   selector:
-    app: hadoop-master
+    app: spark-master
 ---
 apiVersion: v1
 kind: Pod
 metadata:
   name: master
   labels:
-    app: hadoop-master
+    app: spark-master
 spec:
   containers:
-  - image: 202.116.46.215/hsdocker2019/hs_hadoop:v1.0
-    name: hadoop-master
+  - image: 202.116.46.215/hsdocker2019/hs_spark-spark:v1.0
+    name: spark-master
     imagePullPolicy: Always
     resources:
       requests:
@@ -31,7 +31,7 @@ spec:
         cpu: "0.5"
       limits:
         memory: "1Gi"
-        cpu: "0.5"      
+        cpu: "0.5"  
     command: 
     - bash
     - -c
@@ -40,14 +40,20 @@ spec:
       cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && \
       rm /usr/local/hadoop/etc/hadoop/profile && \
       service ssh start && \
-      trap : TERM INT; sleep infinity & wait"
+      $HADOOP_HOME/bin/hdfs namenode -format && \
+      trap : TERM INT; sleep infinity & wait"    
     volumeMounts:
     - name: hadoop-config
       mountPath: /etc/config/hadoop
+    - name: hadoopmwork
+      mountPath: /root/hdfs  
     env:
     - name: JAVA_TOOL_OPTIONS
-      value: "-Dfile.encoding=UTF8"    
+      value: "-Dfile.encoding=UTF8"
   volumes:
     - name: hadoop-config
       configMap:
         name: hadoop-config
+    - name: hadoopmwork
+      persistentVolumeClaim:
+        claimName: master-pvc    

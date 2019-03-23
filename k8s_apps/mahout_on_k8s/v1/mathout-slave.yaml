@@ -42,18 +42,7 @@ spec:
               cpu: "0.5"
             limits:
               memory: "1Gi"
-              cpu: "0.5"            
-          volumeMounts:
-          - name: slavedata
-            mountPath: /root/hdfs 
+              cpu: "0.5"  
           env:
           - name: JAVA_TOOL_OPTIONS
-            value: "-Dfile.encoding=UTF8"             
-  volumeClaimTemplates:
-  - metadata:
-      name: slavedata
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 1Gi
+            value: "-Dfile.encoding=UTF8"              

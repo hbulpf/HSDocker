@@ -23,4 +23,11 @@ spec:
     - image: 202.116.46.215/hsdocker2019/hs_kafka-zk:v1.0
       name: kafka-master
       imagePullPolicy: Always
+      resources:
+        requests:
+          memory: "1Gi"
+          cpu: "0.5"
+        limits:
+          memory: "1Gi"
+          cpu: "0.5"          
 
