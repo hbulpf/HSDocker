@@ -1,8 +1,14 @@
-kubectl create -f hadoop-master.yaml -n test
-kubectl create -f hadoop-slave.yaml -n test
-
+#get parameters
+NS=$1
+SlaveNum=$2
+#delete resources if exists
+kubectl delete -f . -n $NS
+#create resources
+kubectl create -f hadoop-master.yaml -n $NS
+kubectl create -f hadoop-slave.yaml -n $NS
+kubectl create -f hadoop-web.yaml -n $NS
 #write to /etc/hosts on master
-hoststr=$(kubectl get pod -o wide -n test | grep -i "slave" | awk '{print $6"\t"$1}')
+hoststr=$(kubectl get pod -o wide -n $NS | grep -i "slave" | awk '{print $6"\t"$1}')
 host0="slave-0"
 host1="slave-1"
 count=0
@@ -23,12 +29,8 @@ do
 done
 
 rm hosts_tmp
-# ssh首次连接不出现yes/no提示
-# kubectl exec slave-0 -n test -- sh -c 'echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config'
-# kubectl exec slave-1 -n test -- sh -c 'echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config'
-# scp /etc/hosts to slaves
-kubectl exec master -n test -- scp /etc/hosts slave-0:/etc/hosts
-kubectl exec master -n test -- scp /etc/hosts slave-1:/etc/hosts
-
+kubectl exec master -n $NS -- scp /etc/hosts slave-0:/etc/hosts
+kubectl exec master -n $NS -- scp /etc/hosts slave-1:/etc/hosts
 # start hadoop
-kubectl exec master -n test -- start-all.sh
+kubectl exec master -n $NS -- hdfs namenode -format
+kubectl exec master -n $NS -- start-all.sh
