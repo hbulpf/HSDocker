@@ -2,7 +2,7 @@ FROM 202.116.46.215/hsdocker2019/hs_base:v1.0
 RUN apt-get update && apt-get install -y g++ make
 RUN wget http://50125.hnbdata.cn:81/common/hsdocker/leveldb_v1.20.tar.gz -O /tmp/leveldb_v1.20.tar.gz &&\
     tar -zxvf /tmp/leveldb_v1.20.tar.gz && \
-    mv leveldb-v1.20 /usr/local/leveldb && \
+    mv leveldb-1.20 /usr/local/leveldb && \
     rm /tmp/leveldb_v1.20.tar.gz  &&\
     cd /usr/local/leveldb &&\
     make && \
