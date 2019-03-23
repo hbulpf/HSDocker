@@ -4,9 +4,7 @@ SlaveNum=$2
 #delete resources if exists
 kubectl delete -f storm-slave.yaml -n $NS
 kubectl delete -f storm-master.yaml -n $NS
-kubectl delete -f ./nfs/
 #create resources
-kubectl create -f ./nfs/
 kubectl create -f storm-master.yaml -n $NS
 kubectl create -f storm-slave.yaml -n $NS
 #write to /etc/hosts on master

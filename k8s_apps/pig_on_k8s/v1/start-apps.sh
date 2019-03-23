@@ -4,9 +4,7 @@ SlaveNum=$2
 #delete resources if exists
 kubectl delete -f pig-slave.yaml -n $NS
 kubectl delete -f pig-master.yaml -n $NS
-kubectl delete -f ./nfs/
 #create resources
-kubectl create -f ./nfs/
 kubectl create -f pig-master.yaml -n $NS
 kubectl create -f pig-slave.yaml -n $NS
 #write to /etc/hosts on master

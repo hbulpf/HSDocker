@@ -5,9 +5,7 @@ SlaveNum=$2
 kubectl delete -f hive-slave.yaml -n $NS
 kubectl delete -f hive-master.yaml -n $NS
 kubectl delete -f mysql.yaml -n $NS
-kubectl delete -f ./nfs/
 #create resources
-kubectl create -f ./nfs/
 kubectl create -f mysql.yaml -n $NS
 kubectl create -f hive-master.yaml -n $NS
 kubectl create -f hive-slave.yaml -n $NS
