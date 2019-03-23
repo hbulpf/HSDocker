@@ -5,8 +5,7 @@ RUN wget http://50125.hnbdata.cn:81/common/hsdocker/redis-4.0.13.tar.gz -O /tmp/
     mv redis-4.0.13 /usr/local/redis && \
     rm /tmp/redis-4.0.13.tar.gz &&\
     cd /usr/local/redis &&\
-    make &&\
-    make install
+    make && make install
 ENV REDIS_HOME=/usr/local/redis
 ENV PATH=$PATH:$REDIS_HOME/bin
 CMD exec /bin/bash -c "service ssh start;trap : TERM INT; sleep infinity & wait"
