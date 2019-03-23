@@ -32,28 +32,13 @@ spec:
       limits:
         memory: "1Gi"
         cpu: "0.5"  
-    command: 
-    - bash
-    - -c
-    - "cp /etc/config/hadoop/profile /etc/profile && \
-      source /etc/profile && \
-      cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && \
-      rm /usr/local/hadoop/etc/hadoop/profile && \
-      service ssh start && \
-      $HADOOP_HOME/bin/hdfs namenode -format && \
-      trap : TERM INT; sleep infinity & wait"    
     volumeMounts:
-    - name: hadoop-config
-      mountPath: /etc/config/hadoop
     - name: hadoopmwork
       mountPath: /root/hdfs  
     env:
     - name: JAVA_TOOL_OPTIONS
       value: "-Dfile.encoding=UTF8"
   volumes:
-    - name: hadoop-config
-      configMap:
-        name: hadoop-config
     - name: hadoopmwork
       persistentVolumeClaim:
         claimName: master-pvc    

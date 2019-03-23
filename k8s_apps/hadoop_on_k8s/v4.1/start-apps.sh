@@ -4,6 +4,7 @@ SlaveNum=$2
 #delete resources if exists
 kubectl delete -f . -n $NS
 kubectl delete -f ./nfs/
+kubectl delete configmap hadoop-config -n $NS
 #create resources
 kubectl create -f ./nfs/
 kubectl create configmap hadoop-config -n $NS --from-file=./hadoop_configmap

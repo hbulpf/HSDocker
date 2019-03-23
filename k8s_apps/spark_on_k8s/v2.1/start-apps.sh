@@ -3,6 +3,7 @@ NS=$1
 SlaveNum=$2
 #delete resources if exists
 kubectl delete -f . -n $NS
+kubectl delete configmap hadoop-config -n $NS
 #create resources
 kubectl create configmap hadoop-config -n $NS --from-file=./hadoop_configmap
 kubectl create -f spark-master.yaml -n $NS
