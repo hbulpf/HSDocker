@@ -1,4 +1,4 @@
-FROM hs_base:v1.0
+FROM 202.116.46.215/hsdocker2019/hs_base:v1.0
 WORKDIR /root
 COPY hadoop_config/* /tmp/
 # install hadoop 2.7.7
