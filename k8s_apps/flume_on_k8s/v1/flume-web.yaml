@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hbase-ui-service
+  name: flume-ui-service
 spec:
   ports:
     - port: 8088
@@ -11,7 +11,7 @@ spec:
     - port: 8080
       name: spark
     - port: 16010
-      name: hbase
+      name: flume
   selector:
-    app: hbase-master
+    app: flume-master
   type: NodePort

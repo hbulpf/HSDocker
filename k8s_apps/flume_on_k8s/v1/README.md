@@ -1,4 +1,4 @@
-**HBase On K8S 部署**
+**flume On K8S 部署**
 
 # 快速使用
 快速建立容器的过程
@@ -8,18 +8,18 @@ sh start-apps.sh
 ```
 其中，获取docker镜像方式
 ```
-docker pull 202.116.46.215/hsdocker2019/hs_hbase:v1.0 
+docker pull 202.116.46.215/hsdocker2019/hs_flume-hadoop:v1.0
 ```
 
 ## 创建Spark集群  
 在k8s集群中,使用 yaml 文件创建集群
-1. 使用 [hbase-master.yaml](./hbase-master.yaml) 创建 master 节点
+1. 使用 [flume-master.yaml](./flume-master.yaml) 创建 master 节点
 ```
-kubectl create -f ./hbase-master.yaml
+kubectl create -f ./flume-master.yaml
 ```
-2. 使用 [hbase-slave.yaml](./hbase-slave.yaml) 创建 slave 节点
+2. 使用 [flume-slave.yaml](./flume-slave.yaml) 创建 slave 节点
 ```
-kubectl create -f ./hbase-slave.yaml  
+kubectl create -f ./flume-slave.yaml  
 ```
 
 3. 修改 hosts  
@@ -46,7 +46,7 @@ scp /etc/hosts slave-1:/etc/hosts
 
 5. 在master所在pod启动HBase集群  
 ```
-/usr/local/hbase/bin/start-hbase.sh
+/usr/local/flume/bin/start-flume.sh
 ```  
 6. HBase的具体使用请见[大数据实验22-23](../experiments)
 

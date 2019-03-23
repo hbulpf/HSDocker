@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hadoop-dn-service
+  name: spark-slave-service
   labels:
-    app: hadoop-dn
+    app: spark-slave-service
 spec:
   ports:
     - port: 9000
@@ -14,7 +14,7 @@ spec:
       name: data-node-http
   clusterIP: None
   selector:
-    app: hadoop-slave
+    app: spark-slave
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -25,30 +25,35 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: hadoop-slave
-  serviceName: hadoop-dn-service
+      app: spark-slave
+  serviceName: spark-slave-service
   template:
     metadata:
       labels:
-        app: hadoop-slave
+        app: spark-slave
     spec:
       containers:
-        - name: hadoop-slave
-          image: 202.116.46.215/hsdocker2019/hs_mahout-hadoop:v1.0
+        - name: spark-slave
+          image: 202.116.46.215/hsdocker2019/hs_redis-spark:v1.0
           imagePullPolicy: Always
           command: ["bash", "-c", "cp /etc/config/hadoop/profile /etc/profile && source /etc/profile && cp /etc/config/hadoop/* /usr/local/hadoop/etc/hadoop/ && rm /usr/local/hadoop/etc/hadoop/profile && service ssh start && trap : TERM INT; sleep infinity & wait"]
           volumeMounts:
           - name: hadoop-config
             mountPath: /etc/config/hadoop
-          - name: hadoops
-            mountPath: /work  
+          - name: slavedata
+            mountPath: /root/hdfs 
           env:
           - name: JAVA_TOOL_OPTIONS
             value: "-Dfile.encoding=UTF8"             
       volumes:
         - name: hadoop-config
           configMap:
-            name: hadoop-config
-        - name: hadoops
-          persistentVolumeClaim:
-            claimName: hadoop-pvc    
+            name: hadoop-config  
+  volumeClaimTemplates:
+  - metadata:
+      name: slavedata
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

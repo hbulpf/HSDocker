@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hbase-slave-service
+  name: flume-slave-service
   labels:
-    app: hbase-slave
+    app: flume-slave
 spec:
   ports:
     - port: 9000
@@ -16,7 +16,7 @@ spec:
       name: zookeeper
   clusterIP: None
   selector:
-    app: hbase-slave
+    app: flume-slave
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -27,15 +27,15 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: hbase-slave
-  serviceName: hbase-slave-service
+      app: flume-slave
+  serviceName: flume-slave-service
   template:
     metadata:
       labels:
-        app: hbase-slave
+        app: flume-slave
     spec:
       nodeName: node05
       containers:
-        - name: hbase-slave
-          image: 202.116.46.215/hsdocker2019/hs_hbase:v1.0
+        - name: flume-slave
+          image: 202.116.46.215/hsdocker2019/hs_flume-hadoop:v1.0
           imagePullPolicy: Always

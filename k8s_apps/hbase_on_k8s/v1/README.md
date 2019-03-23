@@ -8,7 +8,7 @@ sh start-apps.sh
 ```
 其中，获取docker镜像方式
 ```
-docker pull 202.116.46.215/hsdocker2019/hs_hbase:v1.0 
+docker pull 202.116.46.215/hsdocker2019/hs_hbase-zk-hadoop:v1.0 
 ```
 
 ## 创建Spark集群  
