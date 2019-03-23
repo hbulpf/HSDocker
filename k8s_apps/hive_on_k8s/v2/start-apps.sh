@@ -32,4 +32,5 @@ kubectl exec master -n test -- scp /etc/hosts slave-0:/etc/hosts
 kubectl exec master -n test -- scp /etc/hosts slave-1:/etc/hosts
 
 # start hadoop
+kubectl exec master -n $NS -- hdfs namenode -format
 kubectl exec master -n test -- start-all.sh

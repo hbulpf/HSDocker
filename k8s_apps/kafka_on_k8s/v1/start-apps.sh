@@ -33,6 +33,7 @@ kubectl exec master -n $NS -- scp /etc/hosts slave-1:/etc/hosts
 kubectl exec $host0 -n $NS -- sh -c "echo '2' > /usr/local/zookeeper/data/myid"
 kubectl exec $host1 -n $NS -- sh -c "echo '3' > /usr/local/zookeeper/data/myid"
 # start
+kubectl exec master -n $NS -- hdfs namenode -format
 kubectl exec master -n $NS -- start-all.sh
 kubectl exec master -n $NS -- start-zookeeper.sh
 kubectl exec master -n $NS -- start-hbase.sh
