@@ -5,7 +5,7 @@
         <value>hdfs://master:9000/</value>
     </property>
 	<property>
-	  <name>hadoop.security.authorization</name>
-	  <value>false</value>
+		<name>hadoop.security.authorization</name>
+		<value>false</value>
 	</property>      
 </configuration>
