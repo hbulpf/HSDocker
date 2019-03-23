@@ -33,4 +33,5 @@ rm hosts_tmp
 kubectl exec master -n $NS -- scp /etc/hosts slave-0:/etc/hosts
 kubectl exec master -n $NS -- scp /etc/hosts slave-1:/etc/hosts
 # start
+kubectl exec master -n $NS -- hdfs namenode -format
 kubectl exec master -n $NS -- start-all.sh
