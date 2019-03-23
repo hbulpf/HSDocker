@@ -1,4 +1,4 @@
-FROM hs_hadoop:v1.0
+FROM 202.116.46.215/hsdocker2019/hs_hadoop:v1.0
 COPY spark_config/*  /tmp/
 #install spark
 RUN wget http://50125.hnbdata.cn:81/common/hsdocker/spark-2.2.3-bin-hadoop2.7.tgz -O /tmp/spark-2.2.3-bin-hadoop2.7.tgz && \

@@ -1,9 +1,9 @@
-﻿**构建 redis-4.0.13 镜像**
+﻿**构建 redis-4.0.13 , Spark 镜像**
 
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build --no-cache -t hs_redis:v1.0 .
+docker build --no-cache -t hs_redis-spark:v1.0 .
 ```
 
 ## 2. 如需获取redis安装包    

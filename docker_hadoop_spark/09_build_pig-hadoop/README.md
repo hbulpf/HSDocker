@@ -3,7 +3,7 @@
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build --no-cache -t hs_pig:v1.0 .
+docker build --no-cache -t pig-hadoop:v1.0 .
 ```
 
 ## 2. 如需获取hadoop-2.7.7安装包    

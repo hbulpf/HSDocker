@@ -7,4 +7,3 @@ Host 0.0.0.0
 Host *
    StrictHostKeyChecking no
    UserKnownHostsFile=/dev/null
-

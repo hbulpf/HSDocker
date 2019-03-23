@@ -1,9 +1,9 @@
-﻿**构建kafka镜像**
+﻿**构建kafka-2.10-0.9.0.1镜像**
 
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build --no-cache  -t hs_kafka:v1.0 .
+docker build --no-cache  -t hs_kafka-zk:v1.0 .
 ```
 
 ## 2. 如需获取kafka安装包    
