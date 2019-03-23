@@ -3,7 +3,7 @@
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build --no-cache  -t hs_storm:v1.0  .
+docker build --no-cache  -t hs_storm-zk:v1.0  .
 ```
 
 ## 2.获取 storm-1.1.0 安装包    
