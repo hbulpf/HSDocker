@@ -34,3 +34,6 @@ docker push 202.116.46.215/hsdocker2019/python-conda-2.7:v1.0
 docker tag python-conda-3:v1.0 202.116.46.215/hsdocker2019/python-conda-3:v1.0
 docker push 202.116.46.215/hsdocker2019/python-conda-3:v1.0
 
+#nvidia-9.0-base-ubuntu16.04:v1.0
+docker tag nvidia-cuda:9.0-base-ubuntu16.04  202.116.46.215/hsdocker2019/nvidia-cuda:9.0-base-ubuntu16.04
+docker push 202.116.46.215/hsdocker2019/nvidia-cuda:9.0-base-ubuntu16.04
