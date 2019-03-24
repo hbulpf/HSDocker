@@ -1,3 +1,7 @@
+#hs_base:ubuntu-16.04
+docker tag hs_base:ubuntu-16.04 202.116.46.215/hsdocker2019/hs_base:ubuntu-16.04
+docker push 202.116.46.215/hsdocker2019/hs_base:ubuntu-16.04
+
 #tensorflow:1.12.0-gpu-py3
 docker tag tensorflow/tensorflow:1.12.0-gpu-py3 202.116.46.215/hsdocker2019/tensorflow:1.12.0-gpu-py3 
 docker push 202.116.46.215/hsdocker2019/tensorflow:1.12.0-gpu-py3
@@ -34,6 +38,10 @@ docker push 202.116.46.215/hsdocker2019/python-conda-2.7:v1.0
 docker tag python-conda-3:v1.0 202.116.46.215/hsdocker2019/python-conda-3:v1.0
 docker push 202.116.46.215/hsdocker2019/python-conda-3:v1.0
 
-#nvidia-9.0-base-ubuntu16.04:v1.0
-docker tag nvidia-cuda:9.0-base-ubuntu16.04  202.116.46.215/hsdocker2019/nvidia-cuda:9.0-base-ubuntu16.04
-docker push 202.116.46.215/hsdocker2019/nvidia-cuda:9.0-base-ubuntu16.04
+#hs_nvidia-cuda:9.0-base-ubuntu16.04
+docker tag hs_nvidia-cuda:9.0-base-ubuntu16.04  202.116.46.215/hsdocker2019/hs_nvidia-cuda:9.0-base-ubuntu16.04
+docker push 202.116.46.215/hsdocker2019/hs_nvidia-cuda:9.0-base-ubuntu16.04
+
+#hs_tensorflow:1.12.0-gpu-py3
+docker tag hs_tensorflow:1.12.0-gpu-py3 202.116.46.215/hsdocker2019/hs_tensorflow:1.12.0-gpu-py3
+docker push 202.116.46.215/hsdocker2019/hs_tensorflow:1.12.0-gpu-py3

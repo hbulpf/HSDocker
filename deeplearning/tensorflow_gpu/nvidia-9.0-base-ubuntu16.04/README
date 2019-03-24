@@ -3,7 +3,7 @@
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build -t nvidia-cuda:9.0-base-ubuntu16.04 .
+docker build -t hs_nvidia-cuda:9.0-base-ubuntu16.04 .
 ```
 
 ## 参考
