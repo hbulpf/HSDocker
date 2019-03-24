@@ -3,8 +3,8 @@
 ## 1.构建镜像
 在 [Dockerfile](./Dockerfile) 所在目录下:  
 ```
-docker build -t hs_pytorc:1.0.0-py36 .
+docker build -t hs_pytorch:1.0.0-py36 .
 ```
 
 ## 参考
-1. https://github.com/tensorflow/tensorflow/blob/r1.12/tensorflow/tools/dockerfiles/dockerfiles/nvidia-jupyter.Dockerfile
+1. https://github.com/anibali/docker-pytorch/blob/master/cuda-9.0/Dockerfile

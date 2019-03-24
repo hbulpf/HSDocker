@@ -45,3 +45,7 @@ docker push 202.116.46.215/hsdocker2019/hs_nvidia-cuda:9.0-base-ubuntu16.04
 #hs_tensorflow:1.12.0-gpu-py3
 docker tag hs_tensorflow:1.12.0-gpu-py3 202.116.46.215/hsdocker2019/hs_tensorflow:1.12.0-gpu-py3
 docker push 202.116.46.215/hsdocker2019/hs_tensorflow:1.12.0-gpu-py3
+
+#hs_pytorch:1.0.0-py36
+docker tag hs_pytorch:1.0.0-py36 202.116.46.215/hsdocker2019/hs_pytorch:1.0.0-py36
+docker push 202.116.46.215/hsdocker2019/hs_pytorch:1.0.0-py36
