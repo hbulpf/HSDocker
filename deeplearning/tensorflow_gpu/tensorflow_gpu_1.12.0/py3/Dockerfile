@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-base-ubuntu16.04
+FROM 202.116.46.215/hsdocker2019/hs_nvidia-cuda:9.0-base-ubuntu16.04
 
 # Pick up some TF dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
