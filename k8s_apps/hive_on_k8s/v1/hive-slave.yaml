@@ -12,8 +12,6 @@ spec:
       name: data-node-trans
     - port: 50075
       name: data-node-http
-    - port: 2181
-      name: zookeeper
   clusterIP: None
   selector:
     app: hive-slave
