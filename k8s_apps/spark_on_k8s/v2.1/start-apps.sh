@@ -34,4 +34,5 @@ kubectl exec master -n $NS -- scp /etc/hosts slave-0:/etc/hosts
 kubectl exec master -n $NS -- scp /etc/hosts slave-1:/etc/hosts
 # start hadoop
 kubectl exec master -n $NS -- hdfs namenode -format
-kubectl exec master -n $NS -- start-all.sh
+kubectl exec master -n $NS -- /root/start-all.sh
+kubectl exec master -n $NS -- /root/start-spark.sh

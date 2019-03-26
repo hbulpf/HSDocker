@@ -6,6 +6,7 @@ kubectl delete -f . -n $NS
 #create resources
 kubectl create -f hbase-master.yaml -n $NS
 kubectl create -f hbase-slave.yaml -n $NS
+kubectl create -f hbase-web.yaml -n $NS
 #write to /etc/hosts on master
 hoststr=$(kubectl get pod -o wide -n $NS | grep -i "slave" | awk '{print $6"\t"$1}')
 host0="slave-0"
@@ -34,5 +35,5 @@ kubectl exec $host1 -n $NS -- sh -c "echo '3' > /usr/local/zookeeper/data/myid"
 # start
 kubectl exec master -n $NS -- hdfs namenode -format
 kubectl exec master -n $NS -- start-all.sh
-kubectl exec master -n $NS -- start-zookeeper.sh
-kubectl exec master -n $NS -- start-hbase.sh
+kubectl exec master -n $NS -- /root/start-zookeeper.sh
+kubectl exec master -n $NS -- /root/start-hbase.sh
