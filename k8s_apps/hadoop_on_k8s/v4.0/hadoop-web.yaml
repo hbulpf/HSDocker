@@ -5,8 +5,10 @@ metadata:
 spec:
   ports:
     - port: 8088
+      targetPort: 8088
       name: resource-manager
     - port: 50070
+      targetPort: 50070
       name: name-node
   selector:
     app: hadoop-master
