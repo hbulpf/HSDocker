@@ -8,8 +8,8 @@ spec:
   ports:
     - port: 9000
       name: hdfs
-    - port: 50070
-      name: name-node
+    - port: 2181
+      name: zookeeper            
   clusterIP: None
   selector:
     app: hive-master
