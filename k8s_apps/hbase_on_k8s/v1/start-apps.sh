@@ -2,8 +2,7 @@
 NS=$1
 SlaveNum=$2
 #delete resources if exists
-kubectl delete -f hbase-slave.yaml -n $NS
-kubectl delete -f hbase-master.yaml -n $NS
+kubectl delete -f . -n $NS
 #create resources
 kubectl create -f hbase-master.yaml -n $NS
 kubectl create -f hbase-slave.yaml -n $NS
