@@ -27,6 +27,6 @@ spec:
     spec:
       containers:
       - name: py2-conda
-        image: 202.116.46.215/hsdocker2019/python-conda-2.7:v1.0
+        image: 202.116.46.215/hsdocker2019/python-conda:2.7
         ports:
         - containerPort: 8888

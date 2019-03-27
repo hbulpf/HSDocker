@@ -5,3 +5,7 @@
 ```
 docker build -t python-conda-3:v1.0 .
 ```
+
+
+## 参考
+1. https://hub.docker.com/r/publicisworldwide/python-conda

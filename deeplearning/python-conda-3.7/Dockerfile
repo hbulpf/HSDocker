@@ -21,5 +21,3 @@ RUN cd /tmp && \
        | cut -d\< -f1 ) "Miniconda3-latest-Linux-x86_64.sh" | md5sum -c - && \    
     /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p $CONDA_DIR && \
     rm Miniconda3-latest-Linux-x86_64.sh
-
-
