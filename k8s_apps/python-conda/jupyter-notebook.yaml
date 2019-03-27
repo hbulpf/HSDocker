@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyter-notebook
+  labels:
+    app: jupyter-notebook
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8888
+    protocol: TCP
+    name: jupyter
+  selector:
+    app: jupyter-notebook
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: jupyter-notebook
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jupyter-notebook
+    spec:
+      containers:
+      - name: jupyter-notebook
+        image: 202.116.46.215/hsdocker2019/hs_base-notebook:v1.0
+        ports:
+        - containerPort: 8888
