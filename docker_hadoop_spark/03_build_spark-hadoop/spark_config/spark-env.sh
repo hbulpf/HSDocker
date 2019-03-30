@@ -65,11 +65,15 @@
 # - SPARK_NICENESS      The scheduling priority for daemons. (Default: 0)
 # - SPARK_NO_DAEMONIZE  Run the proposed command in the foreground. It will not output a PID file.
 
-export SPARK_DIST_CLASSPATH=$(/usr/local/hadoop/bin/hadoop classpath)
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export SCALA_HOME=/usr/local/scala
 export HADOOP_HOME=/usr/local/hadoop
-export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
-
-export SPARK_MASTER_IP=hadoop-master
+export HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
+export SPARK_HOME=/usr/local/spark
+export SPARK_MASTER_IP=master
 export SPARK_WORKER_MEMORY=1g
+export SPARK_WORKER_CORES=2
+export SPARK_WORKER_INSTANCES=1
+export SPARK_WORKER_DIR=/data/spark/worker
+export SPARK_DIST_CLASSPATH=$(/usr/local/hadoop/bin/hadoop classpath)
 
