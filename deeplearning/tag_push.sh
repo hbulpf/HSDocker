@@ -3,8 +3,7 @@ docker tag hs_base:ubuntu-16.04 202.116.46.215/hsdocker2019/hs_base:ubuntu-16.04
 docker push 202.116.46.215/hsdocker2019/hs_base:ubuntu-16.04
 
 #hs_base:base-notebook
-docker tag jupyter/base-notebook:59b402ce701d 202.116.46.215/hsdocker2019/
-hs_base-notebook:py3
+docker tag jupyter/base-notebook:59b402ce701d 202.116.46.215/hsdocker2019/hs_base-notebook:py3
 docker push 202.116.46.215/hsdocker2019/hs_base-notebook:py3
 
 #tensorflow:1.12.0-gpu-py3
