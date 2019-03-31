@@ -4,9 +4,9 @@ USERNS=$1
 sed hadoop-master.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS  -f -
 sed hadoop-slave.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS  -f -
 sed hadoop-web.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS -f -
-kubectl delete USERNS $USERNS
+kubectl delete $USERNS
 #create resources
-kubectl create USERNS $USERNS
+kubectl create $USERNS
 sed hadoop-master.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl create -n $USERNS  -f -
 sed hadoop-slave.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl create -n $USERNS  -f -
 sed hadoop-web.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl create -n $USERNS -f -
@@ -19,10 +19,10 @@ while :
 do
 	if [[ $hoststr =~ $host0 && $hoststr =~ $host1 && ! $hoststr =~ "<none>" ]]; then
 		echo "write to /etc/hosts"
-		kubectl get pod -o wide -n test | grep -i "slave" | awk '{print $6"\t"$1}' > hosts_tmp && \
-			kubectl cp hosts_tmp master:/tmp/hosts_tmp -n test && \
+		kubectl get pod -o wide -n test | grep -i "slave" | awk '{print $6"\t"$1}' > ${USERNS}_hosts_tmp && \
+			kubectl cp ${USERNS}_hosts_tmp master:/tmp/hosts_tmp -n test && \
 			kubectl exec master -n test -- /bin/sh -c "cat /tmp/hosts_tmp >> /etc/hosts"	
-		cat hosts_tmp	
+		cat ${USERNS}_hosts_tmp	
 		break
 	fi
 	sleep 1
@@ -31,7 +31,7 @@ do
 	hoststr=$(kubectl get pod -o wide -n test | grep -i "slave" | awk '{print $6"\t"$1}')
 done
 
-rm hosts_tmp
+rm ${USERNS}_hosts_tmp
 kubectl exec master -n $USERNS -- scp /etc/hosts slave-0:/etc/hosts
 kubectl exec master -n $USERNS -- scp /etc/hosts slave-1:/etc/hosts
 # start hadoop
