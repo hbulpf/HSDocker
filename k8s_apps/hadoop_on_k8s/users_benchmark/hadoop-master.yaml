@@ -28,8 +28,8 @@ spec:
       resources:
         requests:
           memory: "0.5Gi"
-          cpu: 1000ms
+          cpu: "800ms"
         limits:
-          memory: 1.6Gi
-          cpu: 1800ms           
+          memory: "1.6Gi"
+          cpu: "1800ms"           
 
