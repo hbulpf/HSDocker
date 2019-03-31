@@ -5,9 +5,9 @@ USERNS=$1
 sed hadoop-master.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS  -f -
 sed hadoop-slave.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS  -f -
 sed hadoop-web.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS -f -
-kubectl delete $USERNS
+kubectl delete ns $USERNS
 #create resources
-kubectl create $USERNS
+kubectl create ns $USERNS
 sed hadoop-master.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl create -n $USERNS  -f -
 sed hadoop-slave.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl create -n $USERNS  -f -
 sed hadoop-web.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl create -n $USERNS -f -
