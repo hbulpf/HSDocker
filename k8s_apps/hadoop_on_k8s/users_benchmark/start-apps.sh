@@ -1,3 +1,4 @@
+echo "Working Dir: $(pwd)"
 #get parameters
 USERNS=$1
 #delete resources if exists
