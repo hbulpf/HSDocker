@@ -3,7 +3,7 @@
 hadoop自带有性能测试程序，jar包位于$HADOOP_HOME/share/hadoop/mapreduce/路径下  
 不带参数的运行jar包可查看所有测试程序:  
 ```
-[root@node04 mapreduce]# hadoop jar hadoop-mapreduce-client-jobclient-2.7.7-tests.jar 
+hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-jobclient-2.7.7-tests.jar
 An example program must be given as the first argument.
 Valid program names are:
   DFSCIOTest: Distributed i/o benchmark of libhdfs.
@@ -40,7 +40,7 @@ Valid program names are:
 ### 1.1 写测试    
 两个文件，一个50MB
 ```
-[root@node04 mapreduce]# hadoop jar hadoop-mapreduce-client-jobclient-2.7.7-tests.jar TestDFSIO -write -nrFiles 2 -size 50  
+hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-jobclient-2.7.7-tests.jar TestDFSIO -write -nrFiles 2 -size 50  
 ```  
 输出:  
 ```
@@ -56,7 +56,7 @@ Valid program names are:
 
 ### 1.2 读测试  
 ```
-[root@node04 mapreduce]# hadoop jar hadoop-mapreduce-client-jobclient-2.7.7-tests.jar TestDFSIO -read -nrFiles 2 -size 50  
+hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-jobclient-2.7.7-tests.jar TestDFSIO -read -nrFiles 2 -size 50  
 ```  
 输出:  
 ```
@@ -77,7 +77,7 @@ Valid program names are:
 ### 1.3 测试后清除数据  
 删除历史数据，避免之前测试的影响  
 ``` 
-[root@node04 mapreduce]# hadoop jar hadoop-mapreduce-client-jobclient-2.7.7-tests.jar TestDFSIO -clean
+hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-jobclient-2.7.7-tests.jar TestDFSIO -clean
 ```  
 
 ### 1.4 原理(参考别人博客)  
@@ -99,17 +99,17 @@ TestDFSIO程序原理：使用多个Map Task模拟多路的并发读写。通过
 ### 2.1 测试数据生成
 测试数据量为100M，于 100 字节一行，则设定行数为 1000000  
 ```
-[root@node04 mapreduce]# hadoop jar hadoop-mapreduce-examples-2.7.7.jar teragen 1000000 /input
+hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar teragen 1000000 /input
 ```  
 ### 2.2 运行TeraSort测试程序  
 ```
-[root@node04 mapreduce]# hadoop jar hadoop-mapreduce-examples-2.7.7.jar terasort /input /output
+hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar terasort /input /output
 ```  
 
 ### 2.3 结果校验  
 TeraSort 自带校验程序 TeraValidate，用来检验排序输出结果是否是有序的： 
 ```
-[root@node04 mapreduce]# hadoop jar hadoop-mapreduce-examples-2.7.7.jar teravalidate /output /validate
+hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar teravalidate /output /validate
 ```  
 
 ### 2.4 原理  
