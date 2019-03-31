@@ -1,5 +1,5 @@
-count=1
-while(( $count<=10 ))
+count=16
+while(( $count<=20 ))
 do
     echo ">>> $count USER NS"
     sh start-apps.sh "user$count"
