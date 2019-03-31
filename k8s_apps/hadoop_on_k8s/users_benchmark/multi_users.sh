@@ -1,4 +1,4 @@
-count=1
+count=2
 while(( $count<=5 ))
 do
     echo ">>> $count USER NS"

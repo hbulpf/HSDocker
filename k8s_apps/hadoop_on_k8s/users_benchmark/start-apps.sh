@@ -1,9 +1,10 @@
-echo "Working Dir: $(pwd)"
+WORKDIR=$(pwd)/
+echo "Working Dir: ${WORKDIR}"
 #get parameters
 USERNS=$1
 #delete resources if exists
-sed hadoop-master.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS  -f -
-sed hadoop-slave.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS  -f -
+sed ${WORKDIR}hadoop-master.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS  -f -
+sed ${WORKDIR}hadoop-slave.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS  -f -
 sed hadoop-web.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS -f -
 kubectl delete ns $USERNS
 #create resources
