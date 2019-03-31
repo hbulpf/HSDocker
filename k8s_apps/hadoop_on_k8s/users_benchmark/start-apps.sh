@@ -1,5 +1,5 @@
 #get parameters
-${USERNS}=$1
+USERNS=$1
 WORKDIR=$(pwd)/
 echo "Working Dir: ${WORKDIR}"
 #delete resources if exists
