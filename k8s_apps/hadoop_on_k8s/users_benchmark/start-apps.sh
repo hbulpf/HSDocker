@@ -1,14 +1,17 @@
 #get parameters
-NS=$1
-SlaveNum=$2
+USERNS=$1
 #delete resources if exists
-kubectl delete -f . -n $NS
+sed hadoop-master.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS  -f -
+sed hadoop-slave.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS  -f -
+sed hadoop-web.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl delete -n $USERNS -f -
+kubectl delete USERNS $USERNS
 #create resources
-kubectl create -f -n $NS hadoop-master.yaml 
-kubectl create -f -n $NS hadoop-slave.yaml
-kubectl create -f -n $NS hadoop-web.yaml
+kubectl create USERNS $USERNS
+sed hadoop-master.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl create -n $USERNS  -f -
+sed hadoop-slave.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl create -n $USERNS  -f -
+sed hadoop-web.yaml -e "s/hadoop-/$USERNS-hadoop-/g" | kubectl create -n $USERNS -f -
 #write to /etc/hosts on master
-hoststr=$(kubectl get pod -o wide -n $NS | grep -i "slave" | awk '{print $6"\t"$1}')
+hoststr=$(kubectl get pod -o wide -n $USERNS | grep -i "slave" | awk '{print $6"\t"$1}')
 host0="slave-0"
 host1="slave-1"
 count=0
@@ -29,8 +32,10 @@ do
 done
 
 rm hosts_tmp
-kubectl exec master -n $NS -- scp /etc/hosts slave-0:/etc/hosts
-kubectl exec master -n $NS -- scp /etc/hosts slave-1:/etc/hosts
+kubectl exec master -n $USERNS -- scp /etc/hosts slave-0:/etc/hosts
+kubectl exec master -n $USERNS -- scp /etc/hosts slave-1:/etc/hosts
 # start hadoop
-kubectl exec master -n $NS -- hdfs namenode -format
-kubectl exec master -n $NS -- start-all.sh
+kubectl exec master -n $USERNS -- hdfs namenode -format
+kubectl exec master -n $USERNS -- start-all.sh
+
+exit 0
