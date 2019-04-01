@@ -24,12 +24,5 @@ spec:
   containers:
     - image: 202.116.46.215/hsdocker2019/hs_hadoop:v1.0
       name: hadoop-master
-      imagePullPolicy: IfNotPresent
-      resources:
-        requests:
-          memory: "0.5Gi"
-          cpu: "800m"
-        limits:
-          memory: "1.6Gi"
-          cpu: "1800m"           
+      imagePullPolicy: IfNotPresent      
 

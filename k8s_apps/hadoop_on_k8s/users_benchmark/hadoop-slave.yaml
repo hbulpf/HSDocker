@@ -35,4 +35,11 @@ spec:
       containers:
         - name: hadoop-slave
           image: 202.116.46.215/hsdocker2019/hs_hadoop:v1.0
-          imagePullPolicy: IfNotPresent   
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "1.7Gi"
+              cpu: "1100m"
+            limits:
+              memory: "3.2Gi"
+              cpu: "2500m"         
