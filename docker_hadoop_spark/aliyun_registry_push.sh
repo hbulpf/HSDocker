@@ -45,3 +45,6 @@ docker push registry.cn-shenzhen.aliyuncs.com/hsdocker2019/hs_mongodb:v1.0
 
 docker tag hs_leveldb:v1.0 registry.cn-shenzhen.aliyuncs.com/hsdocker2019/hs_leveldb:v1.0
 docker push registry.cn-shenzhen.aliyuncs.com/hsdocker2019/hs_leveldb:v1.0
+
+docker tag hs_hibench:v1.0 registry.cn-shenzhen.aliyuncs.com/hsdocker2019/hs_hibench:v1.0
+docker push registry.cn-shenzhen.aliyuncs.com/hsdocker2019/hs_hibench:v1.0

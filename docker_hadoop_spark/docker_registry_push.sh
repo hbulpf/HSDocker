@@ -4,11 +4,11 @@ docker push hsdocker2019/hs_base:v1.0
 docker tag hs_hadoop:v1.0 hsdocker2019/hs_hadoop:v1.0 
 docker push hsdocker2019/hs_hadoop:v1.0 
 
-docker tag hs_hive-hadoop:v1.0 hsdocker2019/hs_hive-hadoop:v1.0  
-docker push hsdocker2019/hs_hive-hadoop:v1.0  
-
 docker tag hs_spark-hadoop:v1.0  hsdocker2019/hs_spark-hadoop:v1.0  
 docker push hsdocker2019/hs_spark-hadoop:v1.0
+
+docker tag hs_hive-hadoop:v1.0 hsdocker2019/hs_hive-hadoop:v1.0  
+docker push hsdocker2019/hs_hive-hadoop:v1.0  
 
 docker tag hs_zk-hadoop:v1.0  hsdocker2019/hs_zk-hadoop:v1.0  
 docker push hsdocker2019/hs_zk-hadoop:v1.0
@@ -45,3 +45,6 @@ docker push hsdocker2019/hs_mongodb:v1.0
 
 docker tag hs_leveldb:v1.0 hsdocker2019/hs_leveldb:v1.0
 docker push hsdocker2019/hs_leveldb:v1.0
+
+docker tag hs_hibench:v1.0 hsdocker2019/hs_hibench:v1.0
+docker push hsdocker2019/hs_hibench:v1.0
