@@ -1,38 +1,38 @@
-# 容器化 Hadoop Spark 实战 #
-## 一、整体思路 ##
-1. 研究Springboot部署微服务的过程；研究Kubernetes（简称K8S）,Mesos调度容器的过程。最终实现基于Springboot,Docker,K8S,Mesos等开源工具快速搭建一套微服务架构的容器群。
-2. 研发基于daocloud等开源工具建立支持容器的可视化管理和监控的系统。
-3. 熟悉Hadoop，Spark集群的搭建过程，并抽取关键的配置参数作为大数据平台容器的启动参数。
-4. 实现基于容器的自定义大数据平台管理与监控系统。其核心功能为：
-	- 基本的容器监控与管理系统：
-        - Kubernetes DashBoard : [内网访问](https://50126.hnbdata.cn:8343)  [外网访问](https://frp.hnbdata.cn:26343)
-        - Kubernetes集群与应用监控 : [内网访问](http://50126.hnbdata.cn:8081)  [外网访问](http://frp.hnbdata.cn:26381) 管理员/密码: admin/admin
-	- 支持半自动化的大数据集群搭建,
-	- 封装hadoop和spark大数据平台组件并能组装为大数据集群
-	- 大数据集群的较强的动态伸缩能力
+# HSDocker : Hadoop Spark On Docker #
+基于容器面向大数据与人工智能的数据平台。其核心功能为：
+- 基于Kubernetes的容器编排与与监控系统
+- 半自动化的大数据集群搭建
+- 将hadoop和spark等大数据平台封装为容器并启动为大数据集群
+- 大数据集群具有较强的动态伸缩能力
+
+## 一、[Hadoop Or AI on Kubernetes](./k8s_apps/README.md)
+### [Hadoop on Kubernetes]()
+1. [Hadoop集群 部署到 Kubernetes](./k8s_apps/hadoop_on_k8s/)
+1. [Spark集群 部署到 Kubernetes](./k8s_apps/spark_on_k8s/)
+1. [HBase 集群 部署到 Kubernetes](./k8s_apps/hbase_on_k8s/)
+1. [Hive 集群 部署到 Kubernetes](./k8s_apps/hive_on_k8s/)
+1. [Storm 集群 部署到 Kubernetes](./k8s_apps/storm_on_k8s/)
+1. [Kafka 集群 部署到 Kubernetes](./k8s_apps/kafka_on_k8s/)
+1. [Pig 集群 部署到 Kubernetes](./k8s_apps/pig_on_k8s/)
+1. [Flume 集群 部署到 Kubernetes](./k8s_apps/flume_on_k8s/)
+
+### ML/DL on Kubernetes
+1. [Tensorflow 1.12](./k8s_apps/tf1.12.0_on_k8s/)
+1. [车牌识别实验](./k8s_apps/plate-dection/)
+
+## 二、[系统实验](./experiments/README.md)
+
+1. [大数据平台实验](./experiments/README.md)
+
+2. CI/CD实验
+    1. [HelloWorld:使用springboot构建docker容器第一个demo](./springboot_docker/docker-spring-boot)
 
 
-
-## 二、大数据实验
-### 1. springboot与docker
-1. [HelloWorld:使用springboot构建docker容器第一个demo](./springboot_docker/docker-spring-boot)
-
-### 2. [大数据组件系列实验](./experiments/README.md)
-
-### 3. 容器化大数据组件
+## 三、[大数据组件容器制作](https://github.com/hbulpf/bigdata_on_docker)
 1. [使用Hadoop-2.7.2在Docker中部署Hadoop集群](./hadoopspark/demo_1-HadoopClusterRaw)
 2. [基于Docker搭建定制版Hadoop集群](./hadoopspark/demo_2-docker-cluster)
 
-
-### 4. Hadoop on Kubernetes
-1. [ Hadoop集群 部署到 Kubernetes 上](./k8s_apps/hadoop_on_k8s/)
-1. [ Spark集群 部署到 Kubernetes 上](./k8s_apps/spark_on_k8s/)
-
-## 四、 深度学习
-### 1. 基本实验
-### 2. 容器化深度学习
-
-## 五、 其他
+## 四、 其他研究
 ### 1. 容器云相关企业
 <table>
 <tr> 
@@ -49,20 +49,29 @@
 </table>
 
 ### 2. 开源项目
+
++   **[Kubernetes](https://https://github.com/kubernetes/kubernetes)**
+    - 说明: Kubernetes官方开源项目
+
 +   **[Big Data Europe](https://www.big-data-europe.eu/)**  
     - github: [https://github.com/big-data-europe](https://github.com/big-data-europe)  
 	- 说明: Integrating Big Data, software & communicaties for addressing Europe's societal challenges
    
 +   **[SequenceIQ](http://www.sequenceiq.com/)**
     *  github: https://github.com/sequenceiq
- 
-+   **[kubernetes](https://https://github.com/kubernetes/kubernetes)**
 
 + 	**[kubeflow](https://github.com/kubeflow/kubeflow)** 
 	- 说明: 机器学习/深度学习平台的容器化
 
 + **[XLearning](https://github.com/Qihoo360/XLearning/blob/master/README_CN.md)**
     - 说明: 一款支持多种机器学习、深度学习框架的调度系统。基于Hadoop Yarn完成了对TensorFlow、MXNet、Caffe、Theano、PyTorch、Keras、XGBoost等常用框架的集成，同时具备良好的扩展性和兼容性。
+
++ **[horovod](https://github.com/horovod/horovod)
+    - 说明: Distributed training framework for TensorFlow, Keras, PyTorch, and Apache MXNet.
+    
+### 五、实验系统访问
+- Kubernetes DashBoard : [内网访问](https://50126.hnbdata.cn:8343)  [外网访问](https://frp.hnbdata.cn:26343)
+- Kubernetes集群与应用监控 : [内网访问](http://50126.hnbdata.cn:8081)  [外网访问](http://frp.hnbdata.cn:26381)  管理员/密码: admin/admin
 
 ## 贡献者
 
