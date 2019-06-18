@@ -66,7 +66,7 @@
 + **[XLearning](https://github.com/Qihoo360/XLearning/blob/master/README_CN.md)**
     - 说明: 一款支持多种机器学习、深度学习框架的调度系统。基于Hadoop Yarn完成了对TensorFlow、MXNet、Caffe、Theano、PyTorch、Keras、XGBoost等常用框架的集成，同时具备良好的扩展性和兼容性。
 
-+ **[horovod](https://github.com/horovod/horovod)
++ **[horovod](https://github.com/horovod/horovod)**
     - 说明: Distributed training framework for TensorFlow, Keras, PyTorch, and Apache MXNet.
     
 ### 五、实验系统访问
