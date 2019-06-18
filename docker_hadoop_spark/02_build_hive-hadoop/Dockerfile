@@ -1,9 +1,9 @@
 FROM hs_hadoop:v1.0
 COPY hive_config/* /tmp/
-RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-hive-1.2.2-bin.tar.gz -O /tmp/apache-hive-1.2.2-bin.tar.gz && \
-	tar -zxvf /tmp/apache-hive-1.2.2-bin.tar.gz && \
-    mv apache-hive-1.2.2-bin /usr/local/hive && \
-    rm /tmp/apache-hive-1.2.2-bin.tar.gz
+RUN wget http://50125.hnbdata.cn:81/common/hsdocker/apache-hive-2.3.4-bin.tar.gz -O /tmp/apache-hive-2.3.4-bin.tar.gz && \
+	tar -zxvf /tmp/apache-hive-2.3.4-bin.tar.gz && \
+    mv apache-hive-2.3.4-bin /usr/local/hive && \
+    rm /tmp/apache-hive-2.3.4-bin.tar.gz
 ENV HIVE_HOME=/usr/local/hive
 ENV PATH=$PATH:$HIVE_HOME/bin
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
