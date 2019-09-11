@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flume-ui-service
+spec:
+  ports:
+    - port: 8088
+      name: resource-manager
+    - port: 50070
+      name: name-node
+    - port: 8080
+      name: spark
+    - port: 16010
+      name: flume
+  selector:
+    app: flume-master
+  type: NodePort

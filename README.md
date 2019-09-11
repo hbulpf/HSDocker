@@ -1,96 +1,80 @@
-# 容器化 Hadoop Spark 实战 #
-## 一、整体思路 ##
-1. 研究Springboot部署微服务的过程；研究Kubernetes（简称K8S）,Mesos调度容器的过程。最终实现基于Springboot,Docker,K8S,Mesos等开源工具快速搭建一套微服务架构的容器群。
-2. 研发基于daocloud等开源工具建立支持容器的可视化管理和监控的系统。
-3. 熟悉Hadoop，Spark集群的搭建过程，并抽取关键的配置参数作为大数据平台容器的启动参数。
-4. 实现基于容器的自定义大数据平台管理与监控系统。其核心功能为：
-	- 基本的容器监控与管理系统，
-	- 支持半自动化的大数据集群搭建,
-	- 封装hadoop和spark大数据平台组件并能组装为大数据集群
-	- 大数据集群的较强的动态伸缩能力
+# HSDocker : Hadoop Spark On Docker #
+基于容器面向大数据与人工智能的数据平台。其核心功能为：
+- 基于Kubernetes的容器编排与与监控系统
+- 半自动化的大数据集群搭建
+- 将hadoop和spark等大数据平台封装为容器并启动为大数据集群
+- 大数据集群具有较强的动态伸缩能力
 
-## 二、docker调容器平台实验 ##
-### 2.1 springboot与docker ###
-1. [HelloWorld:使用springboot构建docker容器第一个demo](./springboot_docker/docker-spring-boot)
+## 一、[Hadoop Or AI on Kubernetes](./k8s_apps/README.md)
+### [Hadoop on Kubernetes]()
+1. [Hadoop集群 部署到 Kubernetes](./k8s_apps/hadoop_on_k8s/)
+1. [Spark集群 部署到 Kubernetes](./k8s_apps/spark_on_k8s/)
+1. [HBase 集群 部署到 Kubernetes](./k8s_apps/hbase_on_k8s/)
+1. [Hive 集群 部署到 Kubernetes](./k8s_apps/hive_on_k8s/)
+1. [Storm 集群 部署到 Kubernetes](./k8s_apps/storm_on_k8s/)
+1. [Kafka 集群 部署到 Kubernetes](./k8s_apps/kafka_on_k8s/)
+1. [Pig 集群 部署到 Kubernetes](./k8s_apps/pig_on_k8s/)
+1. [Flume 集群 部署到 Kubernetes](./k8s_apps/flume_on_k8s/)
 
-### 2.2 kubernetes 实验 ###
+### ML/DL on Kubernetes
+1. [Tensorflow 1.12](./k8s_apps/tf1.12.0_on_k8s/)
+1. [车牌识别实验](./k8s_apps/plate-dection/)
 
-### 2.3 mesos 实验 ###
+## 二、[系统实验](./experiments/README.md)
 
-## 三、大数据平台实验 ##
-### 1. 实验开发环境  ###
-1. jdk1.7.0_79 
-1. hadoop2.7.1 
-1. Eclipse oxegen
-2. eclipse-hadoop-plugin（基于Eclipse的Hadoop插件）
-1. bigdata相关插件（包含Hadoop、HBase、 Hive、Spark、Scala、Storm、ZooKeeper、Redis、MongoDB、LevelDB在内的大数据组件。）
->     下载地址： 
->     链接：https://pan.baidu.com/s/1OriXAXZENZyO-YdFrJrFEw
->     密码：kn7j
+1. [大数据平台实验](./experiments/README.md)
 
-### 2. 实验过程 ###
-
-1. 实验1-基本操作实验
-1. 实验2-HDFS实验_部署HDFS
-1. 实验3-HDFS实验_读写HDFS文件
-1. 实验4-YARN实验：部署YARN集群
-1. 实验5-MapReduce实验：单词计数
-1. 实验6-MapReduce实验：二次排序
-1. 实验7-MapReduce实验：计数器
-1. 实验8-MapReduce实验：Join操作
-1. 实验9-MapReduce实验：分布式缓存
-1. 实验10-Hive实验：部署Hive
-1. 实验11-Hive实验：新建Hive表
-1. 实验12-Hive实验：Hive分区
-1. 实验13-Spark实验：部署Spark集群
-1. 实验14-Spark实验：SparkWordCount
-1. 实验15-Spark实验：RDD综合实验
-1. 实验16-Spark实验：Spark综例
-1. 实验17-Spark实验：SparkSQL
-1. 实验18-Spark实验：SparkStreaming
-1. 实验19-Spark实验：GraphX
-1. 实验20-部署ZooKeeper
-1. 实验21-ZooKeeper进程协作
-1. 实验22-部署HBase
-1. 实验23-新建HBase表
-1. 实验24-部署Storm
-1. 实验25-实时WordCountTopology
-1. 实验26-文件数据Flume至HDFS
-1. 实验27-Kafka订阅推送示例
-1. 实验28-Pig版WordCount
+2. CI/CD实验
+    1. [HelloWorld:使用springboot构建docker容器第一个demo](./springboot_docker/docker-spring-boot)
 
 
-## 四、 容器化大数据平台实验 ###
+## 三、[大数据组件容器制作](https://github.com/hbulpf/bigdata_on_docker)
 1. [使用Hadoop-2.7.2在Docker中部署Hadoop集群](./hadoopspark/demo_1-HadoopClusterRaw)
 2. [基于Docker搭建定制版Hadoop集群](./hadoopspark/demo_2-docker-cluster)
 
-## 五、 容器化深度学习实验 ###
+## 四、 其他研究
+### 1. 容器云相关企业
+<table>
+<tr> 
+<td> 容器云厂商 </td><td> <a href='http://www.alauda.cn/product/detail/id/68.html'>灵雀云</a></td>
+<td> <a href='https://www.qiniu.com/products/kirk'>七牛云</a></td>
+<td> <a href='https://www.shurenyun.com/scene-bigdata.html'>数人云</a></td>
+<td> <a href='https://www.qingcloud.com'>青云</a></td>
+<td> <a href='https://caicloud.io/'>才云</a></td>
+</tr>
+<tr><td> 容器云教育 </td>
+<td><a href='http://www.cstor.cn/'>云创大数据</a></td>
+<td><a href='https://www.aliyun.com/solution/eductione1000?from=timeline&isappinstalled=0'>阿里云</a></td>
+</tr>
+</table>
 
+### 2. 开源项目
 
-## 六、 其他 ##
-### 1. [ 容器云相关企业](./casestudy) ###
-| 容器云厂商 | 容器云教育 |
-| :---------- | :---------- |
-|1. [灵雀云](http://www.alauda.cn/product/detail/id/68.html)|1. [云创大数据](http://www.cstor.cn/) |
-|2. [七牛云](https://www.qiniu.com/products/kirk)| |
-|3. [数人云](https://www.shurenyun.com/scene-bigdata.html)| | 
-|4. [青云](https://www.qingcloud.com)| |
-### 2. 相关项目 ###
++   **[Kubernetes](https://https://github.com/kubernetes/kubernetes)**
+    - 说明: Kubernetes官方开源项目
 
--   **[Big Data Europe](https://www.big-data-europe.eu/)**  
++   **[Big Data Europe](https://www.big-data-europe.eu/)**  
+    - github: [https://github.com/big-data-europe](https://github.com/big-data-europe)  
+	- 说明: Integrating Big Data, software & communicaties for addressing Europe's societal challenges
    
-	> [https://github.com/big-data-europe](https://github.com/big-data-europe)  
-	> Integrating Big Data, software & communicaties for addressing Europe's societal challenges
-	
--   容器调度相关 
-	* **[kubernetes](https://https://github.com/kubernetes/kubernetes)**  
++   **[SequenceIQ](http://www.sequenceiq.com/)**
+    *  github: https://github.com/sequenceiq
 
-- 	容器化机器学习 
-   * **[kubeflow](https://github.com/kubeflow/kubeflow)**  
++ 	**[kubeflow](https://github.com/kubeflow/kubeflow)** 
+	- 说明: 机器学习/深度学习平台的容器化
 
++ **[XLearning](https://github.com/Qihoo360/XLearning/blob/master/README_CN.md)**
+    - 说明: 一款支持多种机器学习、深度学习框架的调度系统。基于Hadoop Yarn完成了对TensorFlow、MXNet、Caffe、Theano、PyTorch、Keras、XGBoost等常用框架的集成，同时具备良好的扩展性和兼容性。
 
-## 贡献者 ##
++ **[horovod](https://github.com/horovod/horovod)**
+    - 说明: Distributed training framework for TensorFlow, Keras, PyTorch, and Apache MXNet.
+    
+### 五、实验系统访问
+- Kubernetes DashBoard : [内网访问](https://50126.hnbdata.cn:8343)  [外网访问](https://frp.hnbdata.cn:26343)
+- Kubernetes集群与应用监控 : [内网访问](http://50126.hnbdata.cn:8081)  [外网访问](http://frp.hnbdata.cn:26381)  管理员/密码: admin/admin
 
-@[**chellyk**](https://github.com/chellyk) @[**RunAtWorld**](http://www.github.com/RunAtWorld) @[**icepoint666**](https://www.github.com/icepoint666) @[**Missice**](https://github.com/Missice)  
+## 贡献者
+
+@[**chellyk**](https://github.com/chellyk) @[**RunAtWorld**](http://www.github.com/RunAtWorld) @[**icepoint666**](https://www.github.com/icepoint666) 
 GitHub : [https://github.com/hbulpf/HSDocker](https://github.com/hbulpf/HSDocker)
 

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hive-master-service
+  labels:
+    app: hive-master
+spec:
+  ports:
+    - port: 9000
+      name: hdfs    
+  clusterIP: None
+  selector:
+    app: hive-master
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: master
+  labels:
+    app: hive-master
+spec:
+  containers:
+    - image: 202.116.46.215/hsdocker2019/hs_hive-hadoop:v1.0  
+      name: hive-master
+      imagePullPolicy: Always

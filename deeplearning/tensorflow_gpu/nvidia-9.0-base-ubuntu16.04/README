@@ -1,0 +1,10 @@
+**构建 nvidia_9.0-base-ubuntu16.04 镜像**
+
+## 1.构建镜像
+在 [Dockerfile](./Dockerfile) 所在目录下:  
+```
+docker build -t hs_nvidia-cuda:9.0-base-ubuntu16.04 .
+```
+
+## 参考
+1. https://gitlab.com/nvidia/cuda/blob/ubuntu16.04/9.0/base/Dockerfile

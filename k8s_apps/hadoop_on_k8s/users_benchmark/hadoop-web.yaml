@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hadoop-ui-service
+spec:
+  ports:
+    - port: 8088
+      name: resource-manager
+    - port: 50070
+      name: name-node
+  selector:
+    app: hadoop-master
+  type: NodePort

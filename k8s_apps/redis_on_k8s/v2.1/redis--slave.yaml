@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-dn-service
+  labels:
+    app: spark-dn
+spec:
+  ports:
+    - port: 9000
+      name: hdfs
+    - port: 50010
+      name: data-node-trans
+    - port: 50075
+      name: data-node-http
+  clusterIP: None
+  selector:
+    app: spark-slave
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: slave
+spec:
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: spark-slave
+  serviceName: spark-dn-service
+  template:
+    metadata:
+      labels:
+        app: spark-slave
+    spec:
+      containers:
+        - name: spark-slave
+          image: 202.116.46.215/hsdocker2019/hs_redis-spark:v1.0
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "0.5"
+            limits:
+              memory: "1Gi"
+              cpu: "0.5"             
+          volumeMounts:
+          - name: slavedata
+            mountPath: /root/hdfs 
+          env:
+          - name: JAVA_TOOL_OPTIONS
+            value: "-Dfile.encoding=UTF8"             
+  volumeClaimTemplates:
+  - metadata:
+      name: slavedata
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

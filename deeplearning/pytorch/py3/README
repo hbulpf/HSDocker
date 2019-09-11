@@ -1,0 +1,10 @@
+**构建 nvidia_9.0-base-ubuntu16.04 镜像**
+
+## 1.构建镜像
+在 [Dockerfile](./Dockerfile) 所在目录下:  
+```
+docker build -t hs_pytorch:1.0.0-py36 .
+```
+
+## 参考
+1. https://github.com/anibali/docker-pytorch/blob/master/cuda-9.0/Dockerfile

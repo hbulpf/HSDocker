@@ -1,0 +1,31 @@
+##创建 hadoop-pvc
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: slavedata-slave-0
+  namespace: test
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    matchLabels:
+      pv: slave-pv-0
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: slavedata-slave-1
+  namespace: test
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    matchLabels:
+      pv: slave-pv-1
+

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: storm-ui-service
+spec:
+  ports:
+    - port: 8080
+      name: storm
+  selector:
+    app: storm-master
+  type: NodePort

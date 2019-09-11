@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-py2
+  labels:
+    app: py2-conda
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8888
+    protocol: TCP
+    name: jupyter
+  selector:
+    app: py2-conda
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: py2-conda
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: py2-conda
+    spec:
+      containers:
+      - name: py2-conda
+        image: 202.116.46.215/hsdocker2019/python-conda:2.7
+        ports:
+        - containerPort: 8888

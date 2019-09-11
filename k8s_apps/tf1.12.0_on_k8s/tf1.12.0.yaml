@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tfsvc
+  labels:
+    app: tf1-12-0-py3
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8888
+    protocol: TCP
+    name: jupyter
+  selector:
+    app: tf1-12-0-py3
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: tf1-12-0-py3
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tf1-12-0-py3
+    spec:
+      containers:
+      - name: tf1-12-0-py3
+        image: 202.116.46.215/hsdocker2019/tensorflow:1.12.0-py3
+        ports:
+        - containerPort: 8888

@@ -1,0 +1,10 @@
+**构建 nvidia_9.0-base-ubuntu16.04 镜像**
+
+## 1.构建镜像
+在 [Dockerfile](./Dockerfile) 所在目录下:  
+```
+docker build -t hs_tensorflow:1.12.0-gpu-py3 .
+```
+
+## 参考
+1. https://github.com/tensorflow/tensorflow/blob/r1.12/tensorflow/tools/dockerfiles/dockerfiles/nvidia-jupyter.Dockerfile

@@ -1,0 +1,56 @@
+**hive On K8S 部署**
+
+特性：
+- 带 nfs 永久卷挂载
+
+# 快速使用
+快速建立容器的过程
+```
+kubectl create ns test
+sh start-apps.sh
+```
+
+## 创建集群  
+
+在k8s集群中,使用 yaml 文件创建集群
+
+1. 使用 [hive-master.yaml](./hive-master.yaml) 创建 master 节点
+
+```bash
+kubectl create -f ./hive-master.yaml
+```
+
+2. 使用 [hive-slave.yaml](./hive-slave.yaml) 创建 slave 节点
+
+```bash
+kubectl create -f ./hive-slave.yaml  
+```
+
+3. 修改 hosts  
+查看各节点的ip
+```
+kubectl get pod -o wide
+```
+在master所在的 pod 修改节点的IP
+```
+##1.进入 master所在的 pod
+kubectl exec -it master bash
+##2.修改/etc/hosts文件  
+echo "172.30.8.4 slave-0" >> /etc/hosts
+echo "172.30.7.4 slave-1" >> /etc/hosts
+##3.将/hosts文件分发到slave节点
+scp /etc/hosts slave-0:/etc/hosts
+scp /etc/hosts slave-1:/etc/hosts
+```
+
+4. 启动hadoop  
+```
+/root/start-hadoop.sh
+```  
+
+5. 在master所在pod启动hive,直接键入hive命令即可
+```
+hive
+```  
+6. hive的具体使用请见[大数据实验10-12](../../experiments)
+
