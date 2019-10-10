@@ -80,5 +80,6 @@
 
 @[**chellyk**](https://github.com/chellyk) @[**RunAtWorld**](http://www.github.com/RunAtWorld) @[**icepoint666**](https://www.github.com/icepoint666) 
 
+---
 [GitHub](https://github.com/hbulpf/HSDocker)
 
