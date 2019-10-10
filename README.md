@@ -69,6 +69,9 @@
 + **[horovod](https://github.com/horovod/horovod)**
     - 说明: Distributed training framework for TensorFlow, Keras, PyTorch, and Apache MXNet.
     
++ **[volcano](https://github.com/volcano-sh/volcano)**
+   - 说明:  a batch system built on Kubernetes
+
 ### 五、实验系统访问
 - Kubernetes DashBoard : [内网访问](https://50126.hnbdata.cn:8343)  [外网访问](https://frp.hnbdata.cn:26343)
 - Kubernetes集群与应用监控 : [内网访问](http://50126.hnbdata.cn:8081)  [外网访问](http://frp.hnbdata.cn:26381)  管理员/密码: admin/admin
