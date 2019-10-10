@@ -1,9 +1,8 @@
 # HSDocker : Hadoop Spark On Docker #
 基于容器面向大数据与人工智能的数据平台。其核心功能为：
 - 基于Kubernetes的容器编排与与监控系统
-- 半自动化的大数据集群搭建
-- 将hadoop和spark等大数据平台封装为容器并启动为大数据集群
-- 大数据集群具有较强的动态伸缩能力
+- 将hadoop和spark等大数据平台封装为容器集群并在kubernetes上运行
+- 将诸多机器学习/深度学习平台封装为容器集群并在kubernetes上运行
 
 ## 一、[Hadoop Or AI on Kubernetes](./k8s_apps/README.md)
 ### [Hadoop on Kubernetes]()
