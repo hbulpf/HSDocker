@@ -79,5 +79,6 @@
 ## 贡献者
 
 @[**chellyk**](https://github.com/chellyk) @[**RunAtWorld**](http://www.github.com/RunAtWorld) @[**icepoint666**](https://www.github.com/icepoint666) 
-GitHub : [https://github.com/hbulpf/HSDocker](https://github.com/hbulpf/HSDocker)
+
+[GitHub](https://github.com/hbulpf/HSDocker)
 
