@@ -73,8 +73,18 @@
 - Kubernetes DashBoard : [内网访问](https://50126.hnbdata.cn:8343)  [外网访问](https://frp.hnbdata.cn:26343)
 - Kubernetes集群与应用监控 : [内网访问](http://50126.hnbdata.cn:8081)  [外网访问](http://frp.hnbdata.cn:26381)  管理员/密码: admin/admin
 
-## 贡献者
 
-@[**chellyk**](https://github.com/chellyk) @[**RunAtWorld**](http://www.github.com/RunAtWorld) @[**icepoint666**](https://www.github.com/icepoint666) 
-GitHub : [https://github.com/hbulpf/HSDocker](https://github.com/hbulpf/HSDocker)
+
+
+
+
+----------------------------------------
+
+**项目规范**
+
+本文使用 [`Markdown`](https://www.markdownguide.org/basic-syntax) 编写, 排版符合[`中文技术文档写作规范`](https://github.com/hbulpf/document-style-guide)。Find Me On [**Github**](https://github.com/hbulpf/HSDocker) , [**Gitee**](https://gitee.com/sifangcloud/HSDocker)
+
+**友情贡献**
+
+@[**chellyk**](https://github.com/chellyk)  &nbsp;  @[**RunAtWorld**](http://www.github.com/RunAtWorld)   &nbsp;  @[**icepoint666**](https://www.github.com/icepoint666) 
 
