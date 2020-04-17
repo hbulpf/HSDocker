@@ -91,7 +91,7 @@
 
 **友情贡献**
 
-@[**chellyk**](https://github.com/chellyk)  &nbsp;  @[**RunAtWorld**](http://www.github.com/RunAtWorld)   &nbsp;  @[**icepoint666**](https://www.github.com/icepoint666) 
+@[**chellyk**](https://github.com/chellyk)  &nbsp;  @[**RunAtWorld**](http://www.github.com/RunAtWorld)   &nbsp;  @[**icepoint666**](https://www.github.com/icepoint666) &nbsp;  @[**Clock966**](http://www.github.com/Clock966) 
 
 
 
