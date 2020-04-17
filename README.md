@@ -92,3 +92,9 @@
 **友情贡献**
 
 @[**chellyk**](https://github.com/chellyk)  &nbsp;  @[**RunAtWorld**](http://www.github.com/RunAtWorld)   &nbsp;  @[**icepoint666**](https://www.github.com/icepoint666) 
+
+
+
+#### 关注公众号 『四方云和』 获取更多优质文章 ~
+
+![sfyh_qrcode](sfyh_qrcode.jpg)
